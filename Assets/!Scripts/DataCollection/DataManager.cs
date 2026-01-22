@@ -9,8 +9,7 @@ namespace Capstone
 {
     public class DataManager : MonoBehaviour
     {
-        public static Data data = new Data();
-        public UnityEvent<string> DataUpdated;
+        public Data data = new Data();
         
         public static DatabaseReference database;
     
@@ -24,17 +23,8 @@ namespace Capstone
 
         private void OnApplicationQuit()
         {
+            data.NewSection("Quit");
             data.Save();
-        }
-
-        private void Update()
-        {
-            data.UpdateFramerate();
-        }
-
-        public void UpdateData()
-        {
-            DataUpdated.Invoke(data.ToString());
         }
     }
 }

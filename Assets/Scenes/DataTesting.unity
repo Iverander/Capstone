@@ -148,22 +148,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1be58c6ce85e1298ba60bb1e9f639d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.DataManager
-  usrID: 001
-  DataUpdated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1552965019}
-        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  data:
+    name: 
+    section: 
+    OS: 
+    CPU: 
+    GPU: 
+    RAM: 0
+    averageFramerate: 0
+    DataUpdated:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1552965019}
+          m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+          m_MethodName: set_text
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &322114734
 Transform:
   m_ObjectHideFlags: 0
