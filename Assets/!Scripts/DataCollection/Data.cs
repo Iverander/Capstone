@@ -35,6 +35,7 @@ namespace Capstone
         public SerializedDictionary<string, Section> Sections = new();
         
         //public List<float> framerate = new List<float>();
+        [JsonIgnore]
         public UnityEvent<string> DataUpdated;
         
         string json => JsonUtility.ToJson(this);
