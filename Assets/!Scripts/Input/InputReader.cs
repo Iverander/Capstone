@@ -1,0 +1,59 @@
+using System;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+
+namespace Capstone
+{
+    [Serializable]
+    public class InputReader : InputSystem_Actions.IPlayerActions
+    {
+        InputSystem_Actions actions;
+        public void Enable()
+        {
+            actions = new InputSystem_Actions();
+            actions.Player.SetCallbacks(this);
+            actions.Enable();
+        }
+
+        public void Disable()
+        {
+            actions.Player.RemoveCallbacks(this);
+            actions.Disable();
+        }
+
+        public UnityEvent<Vector2> onMove;
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            if(!context.started) return;
+            onMove?.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public UnityEvent onAttack;
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if(!context.started)return;
+            onAttack?.Invoke();
+        }
+
+        public UnityEvent onInteract;
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+        }
+
+        public UnityEvent onCrouch;
+        public void OnCrouch(InputAction.CallbackContext context)
+        {
+        }
+
+        public UnityEvent onJump;
+        public void OnJump(InputAction.CallbackContext context)
+        {
+        }
+        
+        public UnityEvent onSprint;
+        public void OnSprint(InputAction.CallbackContext context)
+        {
+        }
+    }
+}
