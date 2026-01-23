@@ -65,7 +65,7 @@ namespace Capstone
 
         public IEnumerator FaceCameraDirection(bool basedOnMovement)
         {
-            if (isTurning == true) yield break;
+            if (isTurning) yield break;
             
             isTurning = true;
 
