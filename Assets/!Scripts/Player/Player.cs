@@ -8,7 +8,7 @@ namespace Capstone
     {
         public static Player instance;
         public static InputReader input => instance.inputReader;
-        public InputReader inputReader = new InputReader();
+        public InputReader inputReader = new();
 
         public Rigidbody rb { get; private set; }
         
@@ -17,6 +17,8 @@ namespace Capstone
         {
             instance = this;
             inputReader.Enable();
+            
+            Cursor.lockState = CursorLockMode.Locked;
             
             rb = GetComponent<Rigidbody>();
         }

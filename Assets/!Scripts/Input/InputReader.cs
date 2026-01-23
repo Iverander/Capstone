@@ -25,7 +25,6 @@ namespace Capstone
         public UnityEvent<Vector2> onMove;
         public void OnMove(InputAction.CallbackContext context)
         {
-            if(!context.started) return;
             onMove?.Invoke(context.ReadValue<Vector2>());
         }
 
@@ -54,6 +53,8 @@ namespace Capstone
         public UnityEvent onSprint;
         public void OnSprint(InputAction.CallbackContext context)
         {
+            if(!context.started)return;
+            onSprint?.Invoke();
         }
     }
 }
