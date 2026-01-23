@@ -10,6 +10,7 @@ namespace Capstone
         public static InputReader input => instance.inputReader;
         public InputReader inputReader = new();
 
+        public Camera cam { get; private set; }
         public Rigidbody rb { get; private set; }
         
         
@@ -21,6 +22,7 @@ namespace Capstone
             Cursor.lockState = CursorLockMode.Locked;
             
             rb = GetComponent<Rigidbody>();
+            cam = GetComponentInChildren<Camera>();
         }
 
         private void OnDestroy()
