@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -11,27 +12,56 @@ namespace Capstone
         [SerializeField] Vector2 speed = new Vector2(5, 10);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         [SerializeField, ReadOnly] private bool sprinting;
+        
         Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
         float currentSpeed => sprinting ? speed.y : speed.x;
         
-        [Header("Rotation")]
+        [Header("Jumping")]
+        [SerializeField] float jumpForce;
+        [SerializeField, ReadOnly] bool jumping;
+        
+        [Header("Turning")]
         [SerializeField] float rotationSpeed;
-        [SerializeField, ReadOnly] bool isTurning;
+        [SerializeField, ReadOnly] float rotationVelocity;
+        [SerializeField, ReadOnly] bool turning;
         
         Rigidbody rb => Player.instance.rb;
         Camera cam => Player.instance.cam;
         
-        float rotationVelocity;
-        
         private void Start()
         {
             Player.input.onMove.AddListener(UpdateMovement);
-            Player.input.onSprint.AddListener(ToggleSpring);
+            Player.input.onSprint.AddListener(ToggleSprint);
+            Player.input.onJump.AddListener(StartJump);
         }
 
-        private void ToggleSpring()
+        private void StartJump()
+        {
+            StartCoroutine(Jump());
+        }
+
+        private IEnumerator Jump()
+        {
+            jumping = true;
+            rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
+            
+            yield return new WaitForFixedUpdate();
+            
+            while (rb.linearVelocity.y != 0)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+            
+            jumping = false;
+        }
+
+        private void ToggleSprint()
         {
             sprinting = !sprinting;
+        }
+        void UpdateMovement(Vector2 value)
+        {
+            moveDirection = new Vector3(value.x, 0, value.y).normalized;
         }
 
         private void FixedUpdate()
@@ -40,17 +70,12 @@ namespace Capstone
             
             LimitSpeed();
             
-            if(moveDirection != Vector3.zero)
+            if(!turning)
             {
                 StartCoroutine(FaceCameraDirection(true));
             }
         }
         
-
-        void UpdateMovement(Vector2 value)
-        {
-            moveDirection = new Vector3(value.x, 0, value.y).normalized;
-        }
         
         void LimitSpeed()
         {
@@ -65,9 +90,7 @@ namespace Capstone
 
         public IEnumerator FaceCameraDirection(bool basedOnMovement)
         {
-            if (isTurning) yield break;
-            
-            isTurning = true;
+            turning = true;
 
             while(Mathf.Abs(transform.eulerAngles.y - cam.transform.eulerAngles.y) > 10f)
             {
@@ -86,7 +109,7 @@ namespace Capstone
                 yield return null;
             }
 
-            isTurning = false;
+            turning = false;
         }
     }
 }

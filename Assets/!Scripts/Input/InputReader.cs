@@ -38,6 +38,8 @@ namespace Capstone
         public UnityEvent onInteract;
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if(!context.started)return;
+            onInteract?.Invoke();
         }
 
         public UnityEvent onCrouch;
@@ -48,6 +50,8 @@ namespace Capstone
         public UnityEvent onJump;
         public void OnJump(InputAction.CallbackContext context)
         {
+            if(!context.started)return;
+            onJump?.Invoke();
         }
         
         public UnityEvent onSprint;
