@@ -7,7 +7,7 @@ namespace Capstone
     [Flags]
     public enum State
     {
-        None = 0 << 0,
+        None = 0,
         Sprinting = 1 << 0,
         Jumping = 1 << 1,
         Turning = 1 << 2,
@@ -58,12 +58,14 @@ namespace Capstone
 
         private void FixedUpdate()
         {
-            if (rb.linearVelocity.y < 0 && !state.HasFlag(State.Falling))
+            if (!state.HasFlag(State.Falling))
             {
+                if(rb.linearVelocity.y > -.5) return;
                 AddState(State.Falling);
             }
             else
             {
+                if(rb.linearVelocity.y <= -.5) return;
                 RemoveState(State.Falling);
             }
         }
