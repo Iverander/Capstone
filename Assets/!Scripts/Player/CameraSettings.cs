@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Capstone
@@ -15,10 +16,10 @@ namespace Capstone
         
         [HideInInspector] public Camera activeCamera; 
         
-        [Header("ThirdPerson")]
-        [SerializeField] GameObject thirdPersonCamera;
-        [Header("Isometric")]
-        [SerializeField] GameObject isometricCamera;
+        [Header("Thirdperson Settings")]
+        [SerializeField, ShowIf(nameof(cameraType), CameraType.ThirdPerson)] GameObject thirdPersonCamera;
+        [Header("Isometric Settings")]
+        [SerializeField, ShowIf(nameof(cameraType), CameraType.Isometric)] GameObject isometricCamera;
         
         private void Start()
         {

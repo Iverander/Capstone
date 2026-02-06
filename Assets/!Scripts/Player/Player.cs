@@ -56,6 +56,18 @@ namespace Capstone
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (rb.linearVelocity.y < 0 && !state.HasFlag(State.Falling))
+            {
+                AddState(State.Falling);
+            }
+            else
+            {
+                RemoveState(State.Falling);
+            }
+        }
+
         private void OnDestroy()
         {
             inputReader.Disable();
