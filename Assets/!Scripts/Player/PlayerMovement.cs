@@ -35,7 +35,8 @@ namespace Capstone
         }
 
         private void StartJump()
-        {
+        {            
+            if (Player.state.HasFlag(State.Jumping) || Player.state.HasFlag(State.Falling)) return;
             StartCoroutine(Jump());
         }
 
