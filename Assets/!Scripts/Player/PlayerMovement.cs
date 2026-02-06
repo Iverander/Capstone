@@ -14,7 +14,6 @@ namespace Capstone
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
         
-        protected Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
         protected float currentSpeed => sprinting ? speed.y : speed.x;
         
         [Header("Jumping")]

@@ -22,19 +22,13 @@ namespace Capstone
         
         private void Start()
         {
-            thirdPersonCamera.SetActive(false);
-            isometricCamera.SetActive(false);
-
-            
             switch (cameraType)
             {
                 case CameraType.ThirdPerson:
-                    thirdPersonCamera.SetActive(true);
-                    activeCamera = thirdPersonCamera.GetComponentInChildren<Camera>();
+                    activeCamera = Instantiate(thirdPersonCamera, transform).GetComponentInChildren<Camera>();
                     break;
                 case CameraType.Isometric:
-                    isometricCamera.SetActive(true);
-                    activeCamera = isometricCamera.GetComponentInChildren<Camera>();
+                    activeCamera = Instantiate(isometricCamera, transform).GetComponentInChildren<Camera>();
                     break;
             }
         }
