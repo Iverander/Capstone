@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -13,23 +15,45 @@ namespace Capstone
     {
         
         public CameraType cameraType;
+
+        private GameObject current;
         
         [HideInInspector] public Camera activeCamera; 
         
-        [Header("Thirdperson Settings")]
+        [Header("ThirdPerson Settings")]
         [SerializeField, ShowIf(nameof(cameraType), CameraType.ThirdPerson)] GameObject thirdPersonCamera;
         [Header("Isometric Settings")]
         [SerializeField, ShowIf(nameof(cameraType), CameraType.Isometric)] GameObject isometricCamera;
         
         private void Start()
         {
+            ChangeCamera(cameraType);
+        }
+/*
+        private async void OnValidate()
+        {
+            await Task.Delay(10);
+            ChangeCamera(cameraType);
+        }*/
+
+        public void ChangeCamera(CameraType type)
+        {
+            cameraType = type;
+
+            if (current != null)
+            {
+                DestroyImmediate(current);
+            }
+            
             switch (cameraType)
             {
                 case CameraType.ThirdPerson:
-                    activeCamera = Instantiate(thirdPersonCamera, transform).GetComponentInChildren<Camera>();
+                    current = Instantiate(thirdPersonCamera, transform);
+                    activeCamera = current.GetComponentInChildren<Camera>();
                     break;
                 case CameraType.Isometric:
-                    activeCamera = Instantiate(isometricCamera, transform).GetComponentInChildren<Camera>();
+                    current = Instantiate(isometricCamera, transform);
+                    activeCamera = current.GetComponentInChildren<Camera>();
                     break;
             }
         }

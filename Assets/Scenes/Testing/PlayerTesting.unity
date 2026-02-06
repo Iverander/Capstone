@@ -435,6 +435,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ca9f82d453c5e61b8c4b586ea27183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.PlayerCombat
+  abilities:
+  - rid: 4020644797962518715
+  references:
+    version: 2
+    RefIds:
+    - rid: 4020644797962518715
+      type: {class: Push, ns: Capstone, asm: Capstone}
+      data:
+        <ShowGizmos>k__BackingField: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
