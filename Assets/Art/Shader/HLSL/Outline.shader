@@ -1,8 +1,9 @@
-Shader "HLSLTesting/Testing"
+Shader "HLSLTesting/Outline"
 {
     Properties
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
+        [Size] _Size("Outline Size", Float) = 1
     }
 
     SubShader
@@ -11,7 +12,10 @@ Shader "HLSLTesting/Testing"
 
         Pass
         {
+            Cull Front
+            
             HLSLPROGRAM
+            
             #pragma vertex vert
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -30,6 +34,7 @@ Shader "HLSLTesting/Testing"
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
+                float _Size;
             CBUFFER_END
             
             
@@ -50,6 +55,7 @@ Shader "HLSLTesting/Testing"
             Varyings vert(MeshData IN)
             {
                 Varyings OUT;
+                IN.positionOS.xyz *= _Size;
                 OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
                 return OUT;
             }
@@ -57,3 +63,4 @@ Shader "HLSLTesting/Testing"
         }
     }
 }
+
