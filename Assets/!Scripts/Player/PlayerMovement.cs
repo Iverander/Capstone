@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Capstone
 {
-    [DisallowMultipleComponent]
+    //[DisallowMultipleComponent]
     public abstract class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]

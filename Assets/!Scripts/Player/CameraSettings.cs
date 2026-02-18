@@ -13,7 +13,6 @@ namespace Capstone
     }
     public class CameraSettings : MonoBehaviour
     {
-        
         public CameraType cameraType;
 
         private GameObject current;
@@ -24,12 +23,28 @@ namespace Capstone
         [SerializeField, ShowIf(nameof(cameraType), CameraType.ThirdPerson)] GameObject thirdPersonCamera;
         [Header("Isometric Settings")]
         [SerializeField, ShowIf(nameof(cameraType), CameraType.Isometric)] GameObject isometricCamera;
+
+        public Action CameraChanged;
         
         private void Start()
         {
             ChangeCamera(cameraType);
+
+            Player.input.onCameraChange.AddListener(SwapCamera);
         }
-/*
+
+        private void SwapCamera()
+        {
+            CameraType newCameraType = cameraType + 1;
+
+            if ((int)newCameraType > Enum.GetValues(typeof(CameraType)).Length - 1)
+            {
+                newCameraType = 0;
+            }
+            
+            ChangeCamera(newCameraType);
+        }
+        /*
         private async void OnValidate()
         {
             await Task.Delay(10);
@@ -56,6 +71,8 @@ namespace Capstone
                     activeCamera = current.GetComponentInChildren<Camera>();
                     break;
             }
+            
+            CameraChanged?.Invoke();
         }
     }
 }

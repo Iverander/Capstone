@@ -33,6 +33,7 @@ namespace Capstone
         public Camera cam => cameraSettings.activeCamera;
         public Rigidbody rb { get; private set; }
         public CameraSettings cameraSettings { get; private set; }
+        public PlayerMovement movement { get; private set; }
         
         
         void Start()
@@ -44,16 +45,24 @@ namespace Capstone
             
             rb = GetComponent<Rigidbody>();
             cameraSettings = GetComponent<CameraSettings>();
+            cameraSettings.CameraChanged += CameraChanged;
+        }
 
+        private void CameraChanged()
+        {
+            if(movement != null) Destroy(movement);
+            
             switch (cameraType)
             {
                 case CameraType.ThirdPerson:
-                    gameObject.AddComponent<ThirdpersonMovement>();
+                    movement = gameObject.AddComponent<ThirdpersonMovement>();
                     break;
                 case CameraType.Isometric:
-                    gameObject.AddComponent<IsometricMovement>();
+                    movement = gameObject.AddComponent<IsometricMovement>();
                     break;
             }
+
+            playerState = 0;
         }
 
         private void FixedUpdate()

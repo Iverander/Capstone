@@ -60,5 +60,12 @@ namespace Capstone
             if(!context.started)return;
             onAbility?.Invoke((int)context.ReadValue<float>());
         }
+
+        public UnityEvent onCameraChange;
+        public void OnChangeCamera(InputAction.CallbackContext context)
+        {
+            if(!context.started)return;
+            onCameraChange?.Invoke();
+        }
     }
 }
