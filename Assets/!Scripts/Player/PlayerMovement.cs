@@ -6,29 +6,28 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public class PlayerMovement : MonoBehaviour
+    //[DisallowMultipleComponent]
+    public abstract class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [SerializeField] Vector2 speed = new Vector2(5, 10);
+        [SerializeField] protected Vector2 speed = new Vector2(5, 10);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
-        [SerializeField, ReadOnly] private bool sprinting;
+        protected bool sprinting => Player.state.HasFlag(State.Sprinting);
         
-        Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
-        float currentSpeed => sprinting ? speed.y : speed.x;
+        protected float currentSpeed => sprinting ? speed.y : speed.x;
         
         [Header("Jumping")]
-        [SerializeField] float jumpForce;
-        [SerializeField, ReadOnly] bool jumping;
+        [SerializeField] protected float jumpForce = 7;
         
         [Header("Turning")]
-        [SerializeField] float rotationSpeed;
-        [SerializeField, ReadOnly] float rotationVelocity;
-        [SerializeField, ReadOnly] bool turning;
+        [SerializeField] protected float rotationSpeed = 7;
+        [SerializeField, ReadOnly] protected float rotationVelocity;
+        protected bool turning => Player.state.HasFlag(State.Turning);
         
-        Rigidbody rb => Player.instance.rb;
-        Camera cam => Player.instance.cam;
+        protected Rigidbody rb => Player.instance.rb;
+        protected Camera cam => Player.instance.cam;
         
-        private void Start()
+        protected virtual void Start()
         {
             Player.input.onMove.AddListener(UpdateMovement);
             Player.input.onSprint.AddListener(ToggleSprint);
@@ -36,13 +35,14 @@ namespace Capstone
         }
 
         private void StartJump()
-        {
+        {            
+            if (Player.state.HasFlag(State.Jumping) || Player.state.HasFlag(State.Falling)) return;
             StartCoroutine(Jump());
         }
 
         private IEnumerator Jump()
         {
-            jumping = true;
+            Player.AddState(State.Jumping);
             rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
             
             yield return new WaitForFixedUpdate();
@@ -52,12 +52,19 @@ namespace Capstone
                 yield return new WaitForFixedUpdate();
             }
             
-            jumping = false;
+            Player.RemoveState(State.Jumping);
         }
 
         private void ToggleSprint()
         {
-            sprinting = !sprinting;
+            if (!sprinting)
+            {
+                Player.AddState(State.Sprinting);
+            }
+            else
+            {
+                Player.RemoveState(State.Sprinting);
+            }
         }
         void UpdateMovement(Vector2 value)
         {
@@ -66,18 +73,13 @@ namespace Capstone
 
         private void FixedUpdate()
         {
-            rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
-            
-            LimitSpeed();
-            
-            if(!turning)
-            {
-                StartCoroutine(FaceCameraDirection(true));
-            }
+            Movement();
         }
+
+        protected abstract void Movement();
         
         
-        void LimitSpeed()
+        protected void LimitSpeed()
         {
             Vector3 maxVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
@@ -86,30 +88,6 @@ namespace Capstone
                 Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
                 rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
             }
-        }
-
-        public IEnumerator FaceCameraDirection(bool basedOnMovement)
-        {
-            turning = true;
-
-            while(Mathf.Abs(transform.eulerAngles.y - cam.transform.eulerAngles.y) > 10f)
-            {
-                if(basedOnMovement)
-                {
-                    if (moveDirection == Vector3.zero)
-                    {
-                        rb.angularVelocity = Vector3.zero;
-                        break;
-                    }
-                }
-                    
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.transform.eulerAngles.y, ref rotationVelocity, 1 / rotationSpeed);
-                transform.eulerAngles = new Vector3(0, rotation, 0);
-
-                yield return null;
-            }
-
-            turning = false;
         }
     }
 }
