@@ -17,7 +17,7 @@ namespace Capstone
         // Update is called once per frame
         void Update()
         {
-            agent.nextPosition = player.transform.position;
+            agent.destination = player.transform.position;
         }
     }
 }
