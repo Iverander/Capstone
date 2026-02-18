@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3068350418005798795}
   - component: {fileID: 1075573937082332685}
   - component: {fileID: 2031065405232868160}
+  - component: {fileID: 5360483366724408332}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -163,3 +164,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6d3b5f28b483943b426bf293f97cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.EnemyMovement
+--- !u!114 &5360483366724408332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158182164762022613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4820f66d928d7c4269bf63bf31706120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.Health
+  <health>k__BackingField: 0
+  <maxHealth>k__BackingField: 100
+  destroyOnDeath: 1
+  Damaged:
+    m_PersistentCalls:
+      m_Calls: []
+  Killed:
+    m_PersistentCalls:
+      m_Calls: []
