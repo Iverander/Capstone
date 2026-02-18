@@ -1,0 +1,12 @@
+:root {
+}
+
+.MenuButton {
+    font-size: 100px;
+    width: 625px;
+    height: 200px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}

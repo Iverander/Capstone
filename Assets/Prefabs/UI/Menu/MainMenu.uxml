@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Prefabs/UI/Menu/MenuStyle.uss?fileID=7433441132597879392&amp;guid=8cb9214734bef1e1a8d77e23b75f39ae&amp;type=3#MenuStyle"/>
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; width: 50%; align-self: center; height: 50%; justify-content: center; align-items: center;">
+        <ui:Label text="Main Menu" style="color: rgb(255, 255, 255); font-size: 127px;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-items: center; width: 100%; max-height: 25%;">
+            <ui:Button text="Game Scene" name="GameScene" class="MenuButton"/>
+            <ui:Button text="Showcase " name="Showcase" class="MenuButton"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
