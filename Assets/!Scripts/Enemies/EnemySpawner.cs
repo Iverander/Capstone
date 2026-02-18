@@ -5,12 +5,11 @@ namespace Capstone
 {
     public class EnemySpawner : MonoBehaviour
     {
-        Enemy enemy;
+        [SerializeField] Enemy enemy;
         int amountToSpawn = 2;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            enemy = FindAnyObjectByType<Enemy>();
             StartCoroutine(Spawning());
         }
         
@@ -19,7 +18,7 @@ namespace Capstone
             for (int i = 0; i < amountToSpawn; i++)
             {
                 yield return new WaitForSeconds(1);
-                Instantiate(enemy);
+                Instantiate(enemy.gameObject, transform.position, transform.rotation);
             }
         }
     }
