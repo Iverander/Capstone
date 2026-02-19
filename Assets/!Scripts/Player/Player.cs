@@ -14,7 +14,7 @@ namespace Capstone
         Falling = 1 << 3,
     }
     [DefaultExecutionOrder(-10000)]
-    public class Player : MonoBehaviour
+    public class Player : Creature
     {
         
         public static Player instance;
@@ -31,7 +31,6 @@ namespace Capstone
         }
 
         public Camera cam => cameraSettings.activeCamera;
-        public Rigidbody rb { get; private set; }
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
         
@@ -43,7 +42,6 @@ namespace Capstone
             
             Cursor.lockState = CursorLockMode.Locked;
             
-            rb = GetComponent<Rigidbody>();
             cameraSettings = GetComponent<CameraSettings>();
             cameraSettings.CameraChanged += CameraChanged;
         }

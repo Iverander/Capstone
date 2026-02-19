@@ -27,8 +27,8 @@ namespace Capstone
         {
             foreach (var ability in abilities.Values)
             {
-                if (ability == null) continue;
-                ability.ability.Initialize(transform);
+                if (ability.ability == null) continue;
+                ability.ability.Initialize(Player.instance);
             }
 
             Player.input.onAbility.AddListener(UseAbility);
@@ -38,7 +38,7 @@ namespace Capstone
         {
             foreach (var ability in abilities.Values)
             {
-                if (ability == null) continue;
+                if (ability.ability == null) continue;
                 if (!ability.ability.ShowGizmos) continue;
 
                 ability.ability.Gizmos(transform);
@@ -48,7 +48,7 @@ namespace Capstone
         void UseAbility(int abilityIndex)
         {
             Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex].ability);
-            abilities[(AbilityKeys)abilityIndex].ability.Preform();
+            abilities[(AbilityKeys)abilityIndex].ability.Perform<Enemy>();
         }
     }
 }
