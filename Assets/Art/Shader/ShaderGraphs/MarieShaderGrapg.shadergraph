@@ -290,9 +290,9 @@
     "m_ShaderOutputName": "BaseColor",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 0.5,
-        "y": 0.5,
-        "z": 0.5
+        "x": 0.4842766523361206,
+        "y": 0.23909252882003785,
+        "z": 0.23909252882003785
     },
     "m_DefaultValue": {
         "x": 0.5,
