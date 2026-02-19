@@ -49,12 +49,17 @@ Shader "HLSLTesting/Testing"
                 Varyings OUT;
                 
                 float _OcilatingTime = (1+_SinTime.w)/2;
-                OUT.position = TransformObjectToHClip(IN.positionOS.xyz * ((_MinSize + _OcilatingTime * (_MaxSize - _MinSize))));
+                //OUT.position = TransformObjectToHClip(IN.positionOS.xyz * ((_MinSize + _OcilatingTime * (_MaxSize - _MinSize))));
+                
+                //float4 finalPosition = IN.positionOS + float4(_SinTime.w / 10 / IN.positionOS.y, 0, 0, 0);
+                
+                OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
                 
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 return OUT;
             }
             
+
             float4 frag(Varyings IN) : SV_Target
             {
                 float2 uv = IN.position.xy * 2  / _ScreenSize.xy;
@@ -64,13 +69,21 @@ Shader "HLSLTesting/Testing"
                 {
                     uv = float2(0,0);
                 }*/
+
+                for (float i = -100; i < 100; ++i)
+                {
+                    if (IN.position.y > i / 100)
+                    {
+                        float4 color = float4((i+100)/200 , 1, 1, 1);
+                        
+                        return  color;
+                    }
+                }
                 
-                float _OcilatingTime = (1+_SinTime.w)/2;
+                return  float4(0,0,0,1);
                 
-                float4 color = float4(_SinTime.w, -_SinTime.w, 1, 1);
-                
-                
-                return  color;
+                //float _OcilatingTime = (1+_SinTime.w)/2;
+                //float4 color = float4(_SinTime.w, -_SinTime.w, 1, 1);
             }
             ENDHLSL
         }
