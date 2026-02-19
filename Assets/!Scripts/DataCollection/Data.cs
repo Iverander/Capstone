@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using Firebase.Database;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine.Events;
 
 namespace Capstone
@@ -13,19 +9,9 @@ namespace Capstone
     public class Data
     {
         [Serializable]
-        public class Section
+        public struct Section
         {
             public int averageFramerate;
-            
-            public Section()
-            {
-                if (Time.frameCount == 0)
-                {
-                    averageFramerate = -1;
-                    return;
-                }
-                averageFramerate = Mathf.RoundToInt(Time.frameCount / Time.time);
-            }
         }
         public string OS;
         public string CPU;
@@ -34,27 +20,34 @@ namespace Capstone
         
         public SerializedDictionary<string, Section> Sections = new();
         
-        //public List<float> framerate = new List<float>();
-        [JsonIgnore]
         public UnityEvent<string> DataUpdated;
         
         string json => JsonUtility.ToJson(this);
 
         public void Initialize()
         {
-            Sections.Add("Initilization", new Section());
-            
             OS = SystemInfo.operatingSystem;
             CPU = SystemInfo.processorType;
             GPU = SystemInfo.graphicsDeviceName;
             RAM = SystemInfo.systemMemorySize;
 
             DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
+            
+            NewSection("Initilization");
             UpdateData();
         }
 
         public void NewSection(string sectionName)
         {
+            Section section = new Section();
+            
+            if (Time.frameCount == 0)
+            {
+                section.averageFramerate = -1;
+                return;
+            }
+            section.averageFramerate = Mathf.RoundToInt(Time.frameCount / Time.time);
+            
             Sections.Add(sectionName, new Section());
         }
         
