@@ -1,19 +1,19 @@
-using System;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Capstone
 {
+    [DefaultExecutionOrder(-100)] //Marie did this btw she's so good at programming and she understands what she's doing completely
     public class Health : MonoBehaviour
     {
-        [field: SerializeField, ReadOnly]public float health { get; private set; }
+        [field: SerializeField, ReadOnly] public float health { get; private set; }
         [field: SerializeField] public float maxHealth { get; private set; } = 100;
-        
+
         [SerializeField] bool destroyOnDeath;
 
         [Space]
-        public UnityEvent Damaged;
+        public UnityEvent<float> Damaged;
         public UnityEvent Killed;
 
         private void Start()
@@ -24,13 +24,13 @@ namespace Capstone
         public void Damage(float amount)
         {
             health -= amount;
-            Damaged?.Invoke();
-            
+            Damaged?.Invoke(health);
+
             if (health <= 0)
             {
                 Killed?.Invoke();
-                
-                if(destroyOnDeath)
+
+                if (destroyOnDeath)
                     Destroy(gameObject);
             }
         }

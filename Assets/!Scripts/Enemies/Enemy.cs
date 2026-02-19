@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +8,14 @@ namespace Capstone
     {
         Player player;
         NavMeshAgent agent;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        int abilityToPreform;
+        int coolDown;
+        bool canAttack;
+
+        [SerializeReference, SubclassSelector] public List<CombatAbility> abilities = new List<CombatAbility>();
+
+
         void Start()
         {
             player = Player.instance;
@@ -18,6 +26,17 @@ namespace Capstone
         void Update()
         {
             agent.destination = player.transform.position;
+
+            if (Vector3.Distance(player.transform.position, agent.transform.position) < 1)
+            {
+                Attack();
+            }
+        }
+
+        void Attack()
+        {
+            abilityToPreform = Random.Range(0, abilities.Count);
+            abilities[abilityToPreform].Preform();
         }
     }
 }
