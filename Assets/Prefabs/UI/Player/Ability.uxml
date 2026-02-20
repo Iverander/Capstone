@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Prefabs/UI/Player/PlayerStyle.uss?fileID=7433441132597879392&amp;guid=420fd6425aa6785a782bbd332497d06e&amp;type=3#PlayerStyle"/>
+    <ui:VisualElement class="Ability" style="min-width: 300px; max-width: 500px;">
+        <ui:Label text="Punch" style="overflow: hidden; white-space: normal;"/>
+        <ui:ProgressBar value="100" title=""/>
+    </ui:VisualElement>
+</ui:UXML>

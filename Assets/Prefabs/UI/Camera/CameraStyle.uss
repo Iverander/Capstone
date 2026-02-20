@@ -1,8 +1,0 @@
-:root {
-}
-
-.Text {
-    font-size: 100px;
-    -unity-text-outline-width: 2px;
-    color: rgb(255, 255, 255);
-}
