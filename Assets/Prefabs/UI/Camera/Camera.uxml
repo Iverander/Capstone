@@ -6,7 +6,7 @@
             <ui:Label text="Spring: Shift" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
             <ui:Label text="Jump: Sprint&#10;" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         </ui:VisualElement>
-        <ui:Label text="Abilities: M1/Q" name="Abilities" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+        <ui:Label text="Punch/Push: M1/Q" name="Abilities" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px;"/>
     </ui:VisualElement>
 </ui:UXML>

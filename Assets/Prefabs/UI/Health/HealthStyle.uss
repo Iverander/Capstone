@@ -1,0 +1,9 @@
+:root {
+}
+
+.unity-progress-bar {
+}
+
+.unity-progress-bar__progress {
+    background-color: rgb(213, 41, 6);
+}

@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
+using System;
 using UnityEngine;
-using MackySoft.SerializeReferenceExtensions.Editor;
 
 namespace Capstone
 {
@@ -14,25 +12,25 @@ namespace Capstone
         E = 3,
         F = 4
     }
-    
+
     public class PlayerCombat : MonoBehaviour
     {
         [Serializable]
-        public class Ability //workaround lol
+        public class Ability //workaround lol - lol
         {
             [SerializeReference, SubclassSelector] public CombatAbility ability;
         }
-        
+
         [SerializedDictionary] public SerializedDictionary<AbilityKeys, Ability> abilities;
 
         private void Start()
         {
             foreach (var ability in abilities.Values)
             {
-                if(ability == null) continue;
-                ability.ability.Initialize(transform);
+                if (ability.ability == null) continue;
+                ability.ability.Initialize(Player.instance);
             }
-            
+
             Player.input.onAbility.AddListener(UseAbility);
         }
 
@@ -40,9 +38,9 @@ namespace Capstone
         {
             foreach (var ability in abilities.Values)
             {
-                if(ability == null) continue;
+                if (ability.ability == null) continue;
                 if (!ability.ability.ShowGizmos) continue;
-                
+
                 ability.ability.Gizmos(transform);
             }
         }
@@ -50,7 +48,7 @@ namespace Capstone
         void UseAbility(int abilityIndex)
         {
             Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex].ability);
-            abilities[(AbilityKeys)abilityIndex].ability.Preform();
+            abilities[(AbilityKeys)abilityIndex].ability.Perform<Enemy>();
         }
     }
 }
