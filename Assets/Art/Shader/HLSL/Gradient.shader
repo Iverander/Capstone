@@ -1,9 +1,9 @@
-Shader "HLSLTesting2/Gradient"
+Shader "HLSLTesting/Gradient"
 {
     Properties
     {
-        [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        [MainTexture] _BaseMap("Base Map", 2D) = "white"
+        _Color("Base Color", Color) = (1, 1, 1, 1)
+        _TransitionColor("Transition Color", Color) = (1, 1, 1, 1)
     }
 
     SubShader
@@ -28,37 +28,27 @@ Shader "HLSLTesting2/Gradient"
             {
                 float4 position : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                half4 color : TEXCOORD1;
             };
             
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-            
             CBUFFER_START(UnityPerMaterial)
-                half4 _BaseColor;
-                float4 _BaseMap_ST;
-                float _MinSize;
-                float _MaxSize;
+                half4 _Color;
+                half4 _TransitionColor;
             CBUFFER_END
-            
-            //float _OcilatingTime;
             
             Varyings vert(MeshData IN)
             {
                 Varyings OUT;
                 
                 OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
-                
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.uv = IN.uv;
+                OUT.color = lerp(_Color, _TransitionColor, IN.uv.x);
                 return OUT;
             }
 
             half4 frag(Varyings IN) : SV_Target
             {
-
-                half4 color = _BaseColor * IN.position.y / 1000;
-                        
-                return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * color;
-                
+                return IN.color;
             }
             ENDHLSL
         }

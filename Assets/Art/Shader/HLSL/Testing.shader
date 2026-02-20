@@ -30,6 +30,7 @@ Shader "HLSLTesting/Testing"
             {
                 float4 position : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float4 Color : TEXCOORD1;
             };
             
             TEXTURE2D(_BaseMap);
@@ -42,25 +43,20 @@ Shader "HLSLTesting/Testing"
                 float _MaxSize;
             CBUFFER_END
             
-            //float _OcilatingTime;
-            
             Varyings vert(MeshData IN)
             {
                 Varyings OUT;
                 
                 float _OcilatingTime = (1+_SinTime.w)/2;
-                OUT.position = TransformObjectToHClip(IN.positionOS.xyz * ((_MinSize + _OcilatingTime * (_MaxSize - _MinSize))));
-                
+                OUT.position = TransformObjectToHClip(IN.positionOS.xyz * (_MinSize + _OcilatingTime * (_MaxSize - _MinSize)));
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.Color = float4(_SinTime.w, -_SinTime.w, 1, 1);
                 return OUT;
             }
 
             half4 frag(Varyings IN) : SV_Target
             {
-                float _OcilatingTime = (1+_SinTime.w)/2;
-                float4 color = float4(_SinTime.w, -_SinTime.w, 1, 1);
-                
-                return color;
+                return IN.Color;
             }
             ENDHLSL
         }
