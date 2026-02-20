@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Capstone
@@ -22,8 +24,12 @@ namespace Capstone
         protected Vector3 trueCenter => origin.transform.rotation * center + origin.transform.position;
         
         [Space]
-        [SerializeField] protected float damage;
-        [SerializeField] protected float knockbackForce;
+        [SerializeField] protected float damage = 10;
+        [SerializeField] protected float knockbackForce = 5;
+        [SerializeField] public float cooldown = .2f;
+        [field: SerializeField] public bool onCooldown { get; private set; }
+
+        public Action<float> performed;
 
         public void Initialize(Creature origin)
         {
@@ -36,6 +42,7 @@ namespace Capstone
         /// <typeparam name="T">The type of creature to hit</typeparam>
         public virtual void Perform<T>(bool includeSelf = false) where T : Creature
         {
+            if(onCooldown) return;
             List<Collider> colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation).ToList();
             if(colliders.Count <= 0) return;
             
@@ -64,16 +71,28 @@ namespace Capstone
                     Knockback(creature.rb, knockbackForce);
                 }   
             }
+
+            performed?.Invoke(cooldown);
+            _=Cooldown();
         }
-        
-        public virtual void Hurt(Health creature)
+        protected virtual void Hurt(Health creature)
         {
             creature.Damage(damage);   
         }
-        public virtual void Knockback(Rigidbody rb, float force)
+        protected virtual void Knockback(Rigidbody rb, float force)
         {
             rb.AddForce((rb.transform.position - origin.transform.position) * (force * 10), ForceMode.Force);
         }
+
+        async Task Cooldown()
+        {
+            onCooldown = true;
+            
+            await Task.Delay(Mathf.RoundToInt(cooldown * 1000));
+            
+            onCooldown = false;
+        }
+        
         
         public virtual void Gizmos(Transform origin)
         {

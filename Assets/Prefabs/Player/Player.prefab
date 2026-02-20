@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3235235956221215346}
   - {fileID: 5750757743199086728}
   - {fileID: 2627809336265696482}
   m_Father: {fileID: 0}
@@ -104,6 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Capstone::Capstone.PlayerCombat
   abilities:
     _serializedList:
+    - Key: 0
+      Value:
+        ability:
+          rid: -2
     - Key: 1
       Value:
         ability:
@@ -112,29 +117,43 @@ MonoBehaviour:
       Value:
         ability:
           rid: 4020644931395387658
+    - Key: 3
+      Value:
+        ability:
+          rid: -2
+    - Key: 4
+      Value:
+        ability:
+          rid: -2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4020644931395387657
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Punch
-        ShowGizmos: 0
+        ShowGizmos: 1
         <gizmosColor>k__BackingField: {r: 0.079197645, g: 1, b: 0, a: 1}
         size: {x: 2, y: 1, z: 1}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         damage: 25
         knockbackForce: 5
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
     - rid: 4020644931395387658
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Push
-        ShowGizmos: 0
+        ShowGizmos: 1
         <gizmosColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
         size: {x: 2, y: 1, z: 1}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         damage: 0
         knockbackForce: 10
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
 --- !u!114 &2088548381072869104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,3 +475,72 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8465611985474715059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3235235956221215346}
+  - component: {fileID: 2691829541326275145}
+  - component: {fileID: 5009417330747393624}
+  m_Layer: 5
+  m_Name: PlayerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3235235956221215346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465611985474715059}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 17345156514348565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2691829541326275145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465611985474715059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 706be95256ed429e98bcc69e01042219, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 917aa99d7e562b517b2ef56031efee4c, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &5009417330747393624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465611985474715059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb55f6446c2fa3c05b37006bb7d8175b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  abilityDocument: {fileID: 9197481963319205126, guid: 0347b64b2cfdab5ea986e4f5aac0e926, type: 3}

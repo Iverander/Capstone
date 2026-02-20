@@ -1,0 +1,13 @@
+:root {
+}
+
+.Ability {
+    flex-grow: 1;
+    justify-content: flex-end;
+    font-size: 50px;
+    -unity-text-align: lower-center;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    white-space: normal;
+}

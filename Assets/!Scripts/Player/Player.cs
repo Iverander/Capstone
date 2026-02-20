@@ -33,6 +33,7 @@ namespace Capstone
         public Camera cam => cameraSettings.activeCamera;
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
+        public PlayerCombat combat { get; private set; }
         
         
         void Start()
@@ -43,6 +44,7 @@ namespace Capstone
             Cursor.lockState = CursorLockMode.Locked;
             
             cameraSettings = GetComponent<CameraSettings>();
+            combat = GetComponent<PlayerCombat>();
             cameraSettings.CameraChanged += CameraChanged;
         }
 
