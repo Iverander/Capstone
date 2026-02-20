@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Capstone
@@ -7,19 +7,31 @@ namespace Capstone
     {
         [SerializeField] Enemy enemy;
         int amountToSpawn = 2;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        
+
+        RoundManager roundManager;
+
         void Start()
         {
-            StartCoroutine(Spawning());
+            roundManager = GetComponent<RoundManager>();
+            roundManager.newRound.AddListener(SpawnEnemies);
+
         }
-        
-        IEnumerator Spawning()
+
+        async void SpawnEnemies()
         {
             for (int i = 0; i < amountToSpawn; i++)
             {
-                yield return new WaitForSeconds(1);
+                await Task.Delay(1000);
                 Instantiate(enemy.gameObject, transform.position, transform.rotation);
             }
+            CalculateAmount();
+        }
+
+        void CalculateAmount()
+        {
+            amountToSpawn = amountToSpawn * 2;
         }
     }
 }
