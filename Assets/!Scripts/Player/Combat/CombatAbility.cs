@@ -71,9 +71,11 @@ namespace Capstone
                     Knockback(creature.rb, knockbackForce);
                 }   
             }
-
+            
             performed?.Invoke(cooldown);
-            _=Cooldown();
+            
+            if(cooldown > 0)
+                _=Cooldown();
         }
         protected virtual void Hurt(Health creature)
         {

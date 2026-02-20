@@ -30,12 +30,12 @@ namespace Capstone
                 
                 ProgressBar bar = uiAbility.Q<ProgressBar>();
                 bar.highValue = ability.Value.ability.cooldown;
-                bar.value = 0;
+                bar.value = bar.highValue;
 
                 ability.Value.ability.performed += async (cooldown) =>
                 {
                     bar.value = 0;
-                    for (int i = 0; i < cooldown * 100; i++)
+                    for (int i = 0; i < Mathf.RoundToInt(cooldown * 100); i++)
                     {
                         await Task.Delay(10); 
                         bar.value += .01f;
