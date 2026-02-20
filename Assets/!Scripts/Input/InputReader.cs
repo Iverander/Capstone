@@ -67,5 +67,12 @@ namespace Capstone
             if(!context.started)return;
             onCameraChange?.Invoke();
         }
+
+        public UnityEvent onMenu;
+        public void OnMenu(InputAction.CallbackContext context)
+        {
+            if(!context.started) return;
+            onMenu?.Invoke();
+        }
     }
 }

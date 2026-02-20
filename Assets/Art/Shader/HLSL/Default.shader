@@ -1,26 +1,25 @@
-Shader "HLSLTesting/Testing"
+Shader "Custom/Default"
 {
     Properties
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        
-        [MinSize] _MinSize("Min Size", Float) = 1
-        [MaxSize] _MaxSize("Max Size", Float) = 2
+        [MainTexture] _BaseMap("Base Map", 2D) = "white"
     }
 
     SubShader
     {
-        Tags { "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" }
+        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
 
         Pass
         {
             HLSLPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            
 
-            struct MeshData
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes
             {
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
@@ -28,38 +27,29 @@ Shader "HLSLTesting/Testing"
 
             struct Varyings
             {
-                float4 position : SV_POSITION;
+                float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
-            
+
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
-            
+
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
-                float _MinSize;
-                float _MaxSize;
             CBUFFER_END
-            
-            //float _OcilatingTime;
-            
-            Varyings vert(MeshData IN)
+
+            Varyings vert(Attributes IN)
             {
                 Varyings OUT;
-                
-                float _OcilatingTime = (1+_SinTime.w)/2;
-                OUT.position = TransformObjectToHClip(IN.positionOS.xyz * ((_MinSize + _OcilatingTime * (_MaxSize - _MinSize))));
-                
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 return OUT;
             }
 
             half4 frag(Varyings IN) : SV_Target
             {
-                float _OcilatingTime = (1+_SinTime.w)/2;
-                float4 color = float4(_SinTime.w, -_SinTime.w, 1, 1);
-                
+                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
                 return color;
             }
             ENDHLSL

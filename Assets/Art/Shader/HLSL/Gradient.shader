@@ -1,11 +1,9 @@
-Shader "HLSLTesting/Testing"
+Shader "HLSLTesting2/Gradient"
 {
     Properties
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        
-        [MinSize] _MinSize("Min Size", Float) = 1
-        [MaxSize] _MaxSize("Max Size", Float) = 2
+        [MainTexture] _BaseMap("Base Map", 2D) = "white"
     }
 
     SubShader
@@ -48,8 +46,7 @@ Shader "HLSLTesting/Testing"
             {
                 Varyings OUT;
                 
-                float _OcilatingTime = (1+_SinTime.w)/2;
-                OUT.position = TransformObjectToHClip(IN.positionOS.xyz * ((_MinSize + _OcilatingTime * (_MaxSize - _MinSize))));
+                OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
                 
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 return OUT;
@@ -57,10 +54,11 @@ Shader "HLSLTesting/Testing"
 
             half4 frag(Varyings IN) : SV_Target
             {
-                float _OcilatingTime = (1+_SinTime.w)/2;
-                float4 color = float4(_SinTime.w, -_SinTime.w, 1, 1);
+
+                half4 color = _BaseColor * IN.position.y / 1000;
+                        
+                return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * color;
                 
-                return color;
             }
             ENDHLSL
         }

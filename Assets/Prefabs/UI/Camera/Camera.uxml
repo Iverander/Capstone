@@ -1,12 +1,15 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Prefabs/UI/Camera/CameraStyle.uss?fileID=7433441132597879392&amp;guid=420fd6425aa6785a782bbd332497d06e&amp;type=3#CameraStyle"/>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end;">
-        <ui:VisualElement style="flex-grow: 1;">
-            <ui:Label text="Move: W/A/S/D" name="Movement" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
-            <ui:Label text="Spring: Shift" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
-            <ui:Label text="Jump: Sprint&#10;" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: space-between;">
+        <ui:VisualElement>
+            <ui:Label text="Move: W/A/S/D" name="Movement" class="Text"/>
+            <ui:Label text="Spring: Shift" name="Sprint" class="Text"/>
+            <ui:Label text="Jump: Sprint&#10;" name="Jump" class="Text"/>
+            <ui:Label text="Punch/Push: M1/Q" name="Abilities" class="Text"/>
         </ui:VisualElement>
-        <ui:Label text="Punch/Push: M1/Q" name="Abilities" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
-        <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: column; align-items: flex-end;">
+            <ui:Label text="Change Camera: Tab" name="Camera" class="Text"/>
+            <ui:Label text="Menu: Escape" name="Menu" class="Text"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
