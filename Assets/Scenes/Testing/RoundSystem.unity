@@ -246,6 +246,51 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &586047991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+  m_PrefabInstance: {fileID: 749509569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &586047992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586047991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a9c85a610e6114b913d14ef024b50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.RoundManager
+  roundNr: 0
+  newRound:
+    m_PersistentCalls:
+      m_Calls: []
+  nextRound: 0
+--- !u!114 &586047995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586047991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 706be95256ed429e98bcc69e01042219, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 6727034fde04da44cb3d5f110aea610e, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1001 &622772498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -409,7 +454,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2285151321904138786, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.04967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2285151321904138786, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -417,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2285151321904138786, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.00218
+      value: 8.49
       objectReference: {fileID: 0}
     - target: {fileID: 2285151321904138786, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -447,6 +492,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.data[1].time
+      value: 0.998291
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.data[1].value
+      value: 0.9878006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.data[1].inSlope
+      value: 0.19754769
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.data[1].inWeight
+      value: 0.35987428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: animation.m_Curve.Array.data[1].outSlope
+      value: 0.19754769
+      objectReference: {fileID: 0}
     - target: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_Name
       value: RoundManager
@@ -454,7 +527,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 586047992}
+    - targetCorrespondingSourceObject: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 586047995}
   m_SourcePrefab: {fileID: 100100000, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
 --- !u!1001 &828418408
 PrefabInstance:
