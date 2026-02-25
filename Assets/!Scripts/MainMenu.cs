@@ -21,6 +21,7 @@ namespace Capstone
         Label descriptionLabel;
         private void Start()
         {
+            UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             root = mainMenu.rootVisualElement;
             
             gameSceneButton = root.Q<Button>("GameScene");
