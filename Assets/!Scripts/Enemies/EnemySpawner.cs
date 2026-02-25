@@ -7,7 +7,7 @@ namespace Capstone
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] Enemy enemy;
-        int amountToSpawn = 2;
+        [SerializeField] int amountToSpawn = 2;
 
         void Start()
         {

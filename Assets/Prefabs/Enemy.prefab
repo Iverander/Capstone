@@ -223,8 +223,10 @@ MonoBehaviour:
         <gizmosColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
         size: {x: 1, y: 1, z: 1}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
-        damage: 25
+        damage: 10
         knockbackForce: 0
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
 --- !u!114 &2031065405232868160
 MonoBehaviour:
   m_ObjectHideFlags: 0

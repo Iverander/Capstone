@@ -38,7 +38,7 @@ namespace Capstone
             //EnemySpawner, 
             newRound?.Invoke();
             StartCoroutine(UserInterface());
-            Debug.Log("Starting round " + roundNr);
+            Debug.Log("Starting round " + roundNr );
         }
 
         private void Update()
@@ -54,7 +54,7 @@ namespace Capstone
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             //Should update UI with text like roundNr Spawning enemies..
-            UIText.text = "Starting round " + roundNr;
+            UIText.text = "Starting round " + (roundNr - 1);
             yield return new WaitForSeconds(2.5f);
             UIText.style.visibility = new StyleEnum<Visibility> (Visibility.Hidden);
         }
