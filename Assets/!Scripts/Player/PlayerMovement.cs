@@ -47,7 +47,7 @@ namespace Capstone
             
             yield return new WaitForFixedUpdate();
             
-            while (rb.linearVelocity.y != 0)
+            while (rb.linearVelocity.y >= .5)
             {
                 yield return new WaitForFixedUpdate();
             }

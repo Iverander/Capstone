@@ -43,6 +43,10 @@ namespace Capstone
         public virtual void Perform<T>(bool includeSelf = false) where T : Creature
         {
             if(onCooldown) return;
+            performed?.Invoke(cooldown);
+            if(cooldown > 0)
+                _=Cooldown();
+            
             List<Collider> colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation).ToList();
             if(colliders.Count <= 0) return;
             
@@ -71,11 +75,6 @@ namespace Capstone
                     Knockback(creature.rb, knockbackForce);
                 }   
             }
-            
-            performed?.Invoke(cooldown);
-            
-            if(cooldown > 0)
-                _=Cooldown();
         }
         protected virtual void Hurt(Health creature)
         {

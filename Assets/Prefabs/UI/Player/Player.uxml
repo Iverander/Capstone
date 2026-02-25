@@ -1,13 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Prefabs/UI/Player/PlayerStyle.uss?fileID=7433441132597879392&amp;guid=420fd6425aa6785a782bbd332497d06e&amp;type=3#PlayerStyle"/>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; display: none;">
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-start; display: flex;">
         <ui:VisualElement style="flex-grow: 1;">
             <ui:Label text="Move: W/A/S/D" name="Movement" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
             <ui:Label text="Spring: Shift" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
             <ui:Label text="Jump: Sprint&#10;" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         </ui:VisualElement>
-        <ui:Label text="Punch/Push: M1/Q" name="Abilities" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
-        <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px;"/>
+        <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
     </ui:VisualElement>
     <ui:VisualElement name="AbilityContainer" style="flex-grow: 1; flex-direction: row; height: 300px; position: absolute; bottom: 5%; width: 100%; justify-content: space-around;"/>
 </ui:UXML>
