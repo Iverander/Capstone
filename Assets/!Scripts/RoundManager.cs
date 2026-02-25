@@ -1,6 +1,8 @@
+using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 namespace Capstone
@@ -11,32 +13,43 @@ namespace Capstone
          * This script controls the rounds and spawning in the game.
          */
 
+        [SerializeField] UIDocument UIObject;
         Label UIText;
-        UIDocument UIDoc;
 
-        public int roundNr = 0;
+        [ReadOnly]public int roundNr = 0;
 
-        [HideInInspector] public UnityEvent newRound;
-
-        [SerializeField] bool nextRound;
+        public static UnityEvent newRound = new();
+        bool enemiesAlive;
 
         private void Start()
         {
-            UIText = GetComponent<UIDocument>().rootVisualElement.Q<Label>();
+            UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+
+            NewRound();
         }
 
+
+        //Starts rounds + is the one they're subscribed to
         [ContextMenu("Start New Round")]
         public void NewRound()
         {
             roundNr++;
+            //EnemySpawner, 
+            newRound?.Invoke();
             StartCoroutine(UserInterface());
             Debug.Log("Starting round " + roundNr);
-            newRound?.Invoke();
         }
 
+        private void Update()
+        {
+            if (transform.childCount == 0) enemiesAlive = false;
+            else enemiesAlive = true;
 
-  
+            if (!enemiesAlive) NewRound();
+        }
+
+        //Handles screenUI for game phases
         IEnumerator UserInterface()
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);

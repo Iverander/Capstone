@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Capstone
 {
@@ -8,30 +9,25 @@ namespace Capstone
         [SerializeField] Enemy enemy;
         int amountToSpawn = 2;
 
-        
-
-        RoundManager roundManager;
-
         void Start()
         {
-            roundManager = GetComponent<RoundManager>();
-            roundManager.newRound.AddListener(SpawnEnemies);
-
+            RoundManager.newRound.AddListener(SpawnEnemies);
         }
 
         async void SpawnEnemies()
         {
+            Debug.Log("whatever the fuvk");
             for (int i = 0; i < amountToSpawn; i++)
             {
+                Instantiate(enemy.gameObject, transform.position, transform.rotation, transform);
                 await Task.Delay(1000);
-                Instantiate(enemy.gameObject, transform.position, transform.rotation);
             }
             CalculateAmount();
         }
 
         void CalculateAmount()
         {
-            amountToSpawn = amountToSpawn * 2;
+            amountToSpawn *= 2;
         }
     }
 }
