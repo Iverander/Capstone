@@ -6,7 +6,10 @@
             <ui:Label text="Spring: Shift" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
             <ui:Label text="Jump: Sprint&#10;" name="Sprint" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         </ui:VisualElement>
-        <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+        <ui:VisualElement style="flex-grow: 1; align-items: flex-end;">
+            <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+            <ui:Label text="Exit to Menu: Esc" name="Menu" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="AbilityContainer" style="flex-grow: 1; flex-direction: row; height: 300px; position: absolute; bottom: 5%; width: 100%; justify-content: space-around;"/>
 </ui:UXML>
