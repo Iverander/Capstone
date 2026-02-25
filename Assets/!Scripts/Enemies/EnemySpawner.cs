@@ -1,5 +1,6 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Capstone
 {
@@ -7,19 +8,26 @@ namespace Capstone
     {
         [SerializeField] Enemy enemy;
         int amountToSpawn = 2;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
-            StartCoroutine(Spawning());
+            RoundManager.newRound.AddListener(SpawnEnemies);
         }
-        
-        IEnumerator Spawning()
+
+        async void SpawnEnemies()
         {
+            Debug.Log("whatever the fuvk");
             for (int i = 0; i < amountToSpawn; i++)
             {
-                yield return new WaitForSeconds(1);
-                Instantiate(enemy.gameObject, transform.position, transform.rotation);
+                Instantiate(enemy.gameObject, transform.position, transform.rotation, transform);
+                await Task.Delay(1000);
             }
+            CalculateAmount();
+        }
+
+        void CalculateAmount()
+        {
+            amountToSpawn *= 2;
         }
     }
 }

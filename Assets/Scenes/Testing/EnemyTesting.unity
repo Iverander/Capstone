@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &213354192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5658394751932895130, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+  m_PrefabInstance: {fileID: 593412044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &593412044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418,35 +423,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046474360 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5360483366724408332, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-  m_PrefabInstance: {fileID: 4521519178412310475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4820f66d928d7c4269bf63bf31706120, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Capstone::Capstone.Health
---- !u!1 &2095623907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9189600592062954612, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-  m_PrefabInstance: {fileID: 4521519178412310475}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2095623910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095623907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 307d83f4793b33d4c875bd5a05ae7093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Capstone::Capstone.HealthBar
-  health: {fileID: 2046474360}
 --- !u!1001 &4521519178412310475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -455,78 +431,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: abilities.Array.size
+    - target: {fileID: 153114148692422316, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: 'managedReferences[-2]'
+      propertyPath: playerArt
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: 'abilities.Array.data[0]'
-      value: 1790762933070856472
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: 'managedReferences[1790762933070856472]'
-      value: Capstone Capstone.CombatAbility
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].damage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].size.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].ShowGizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].knockbackForce
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<name>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<center>k__BackingField.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<center>k__BackingField.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<center>k__BackingField.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<gizmosColor>k__BackingField.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<gizmosColor>k__BackingField.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<gizmosColor>k__BackingField.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: managedReferences[1790762933070856472].<gizmosColor>k__BackingField.r
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 213354192}
     - target: {fileID: 1158182164762022613, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -537,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2334260274710485370, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2334260274710485370, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -571,17 +483,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9189600592062954612, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      propertyPath: m_Name
-      value: HealthBar
+    - target: {fileID: 3068350418005798795, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720570422749066615, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112704699058717784, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+      propertyPath: m_Center.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9189600592062954612, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2095623910}
     - targetCorrespondingSourceObject: {fileID: 9189600592062954612, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -634,9 +551,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
     - target: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_Name
       value: EnemyManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
