@@ -1,4 +1,4 @@
-Shader "Custom/WaterRipple"
+Shader "Custom/Water"
 {
     Properties
     {
@@ -8,7 +8,10 @@ Shader "Custom/WaterRipple"
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+        Tags { "RenderType" = "Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
+        LOD 200
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
 
         Pass
         {
@@ -91,12 +94,12 @@ Shader "Custom/WaterRipple"
                 return OUT;
             }
 
-            float3 frag(Varyings IN) : SV_Target
+            float4 frag(Varyings IN) : SV_Target
             {
                 float Out;
                 float3 Normal;
                 Ripples(IN.uv, 3, 10, _Time.w, 1, Out, Normal);
-                return InverseLerp(-1, 1, Normal); //* _BaseColor;
+                return InverseLerp(-1, 1, Normal) * _BaseColor;
             }
             ENDHLSL
         }
