@@ -13,6 +13,8 @@ namespace Capstone
         bool oneSpawn = false;
         Transform currentSpawn;
 
+        [SerializeField] int spawnCalc = 1;
+
         void Start()
         {
             RoundManager.newRound.AddListener(SpawnEnemies);
@@ -45,7 +47,11 @@ namespace Capstone
 
         void CalculateAmount()
         {
-            amountToSpawn *= 2;
+            if (spawnCalc == 1)
+            {
+                amountToSpawn *= 2;
+            }
+            if (spawnCalc == 2) { amountToSpawn++; }
         }
 
         void CalculateSpawnPoint()
