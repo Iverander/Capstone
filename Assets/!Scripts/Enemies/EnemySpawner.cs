@@ -13,7 +13,7 @@ namespace Capstone
         bool oneSpawn = false;
         Transform currentSpawn;
 
-        [SerializeField] int spawnCalc = 1;
+        [SerializeField] int spawnCalc;
 
         void Start()
         {
@@ -51,7 +51,7 @@ namespace Capstone
             {
                 amountToSpawn *= 2;
             }
-            if (spawnCalc == 2) { amountToSpawn++; }
+            else { amountToSpawn++; }
         }
 
         void CalculateSpawnPoint()
