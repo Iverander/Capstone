@@ -46,6 +46,7 @@ namespace Capstone
             cameraSettings = GetComponent<CameraSettings>();
             combat = GetComponent<PlayerCombat>();
             cameraSettings.CameraChanged += CameraChanged;
+            
         }
 
         private void CameraChanged()
