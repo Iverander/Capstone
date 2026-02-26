@@ -1,0 +1,14 @@
+﻿<Solution>
+  <Project Path="Capstone.csproj" />
+  <Project Path="NaughtyAttributes.Test.csproj" />
+  <Project Path="NaughtyAttributes.Core.csproj" />
+  <Project Path="AYellowpaper.SerializedCollections.csproj" />
+  <Project Path="NaughtyAttributes.Editor.csproj" />
+  <Project Path="MackySoft.SerializeReferenceExtensions.Editor.csproj" />
+  <Project Path="MackySoft.SerializeReferenceExtensions.csproj" />
+  <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
+  <Project Path="MackySoft.SerializeReferenceExtensions.Tests.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+</Solution>
