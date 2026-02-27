@@ -13,7 +13,8 @@ namespace Capstone
 
         void Update()
         {
-            transform.localPosition = Player.instance.cam.transform.position;
+            if(Player.instance != null)
+                transform.localPosition = Player.instance.cam.transform.position;
         }
     }
 }

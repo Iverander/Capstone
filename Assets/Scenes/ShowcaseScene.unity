@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42e295856eb06698b12f493e796ab4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.WeatherManager
-  weatherOverride: 0
+  weatherOverride: 1
   weatherPrefabs:
     _serializedList:
     - Key: 0
