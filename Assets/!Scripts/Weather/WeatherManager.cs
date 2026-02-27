@@ -11,11 +11,11 @@ namespace Capstone
 
         void Start()
         {
-            if (LevelSettings.CurrentWeatherType == WeatherType.None)
+            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.None)
             {
                 LevelSettings.ChangeCurrentWeather(weatherTypeOverride);
             }
-            Instantiate(weatherPrefabs[LevelSettings.CurrentWeatherType].gameObject, Vector3.zero, Quaternion.identity);
+            Instantiate(weatherPrefabs[LevelSettings.CurrentMapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
         }
     }
 }

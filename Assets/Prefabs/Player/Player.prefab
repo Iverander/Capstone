@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9d4a8320fdbef82bbed3bf71e72c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.FPSSetter
-  fps: 60
+  fps: 0
 --- !u!1 &153122180645486381
 GameObject:
   m_ObjectHideFlags: 0

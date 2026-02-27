@@ -12,10 +12,17 @@ namespace Capstone
         {
             waterRenderer = GetComponent<Renderer>();
 
-            RippleUpdated += (ripple) =>
-            {
-                waterRenderer.material.SetFloat("_RippleStrength", ripple);
-            };
+            RippleUpdated += UpdateRipple;
+        }
+
+        private void OnDestroy()
+        {
+            RippleUpdated -= UpdateRipple;
+        }
+
+        private void UpdateRipple(float ripple)
+        {
+            waterRenderer.material.SetFloat("_RippleStrength", ripple);
         }
 
         public static void SetRippleStrength(float value)

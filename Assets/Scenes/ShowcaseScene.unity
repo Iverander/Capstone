@@ -1025,14 +1025,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1292326624328648717, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
-      propertyPath: weatherPrefabs._serializedList.Array.data[0].Value
-      value: 
-      objectReference: {fileID: 9171272992362412109, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
-    - target: {fileID: 1292326624328648717, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
-      propertyPath: weatherPrefabs._serializedList.Array.data[1].Value
-      value: 
-      objectReference: {fileID: 531889727527567108, guid: 742312a489a4747ec8f0981366e19f6b, type: 3}
     - target: {fileID: 2939753162401493780, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
       propertyPath: m_Name
       value: WeatherManager
@@ -1132,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5886149347113776361, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5969275265667958413, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}
       propertyPath: m_Name

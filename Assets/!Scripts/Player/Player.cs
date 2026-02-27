@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Capstone
 {
@@ -38,13 +39,14 @@ namespace Capstone
         
         void Start()
         {
+            DataManager.StartNewSession(SceneManager.GetActiveScene().name);
+            
             instance = this;
             inputReader.Enable();
             
             cameraSettings = GetComponent<CameraSettings>();
             combat = GetComponent<PlayerCombat>();
             cameraSettings.CameraChanged += CameraChanged;
-            
         }
 
         private void CameraChanged()
