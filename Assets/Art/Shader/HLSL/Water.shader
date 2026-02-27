@@ -4,6 +4,7 @@ Shader "Custom/Water"
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
+        [RippleStrength] _RippleStrength("RippleStrength", Float) = 0
     }
 
     SubShader
@@ -40,6 +41,7 @@ Shader "Custom/Water"
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
+                float _RippleStrength;
             CBUFFER_END
             
             float2 voronoi_randomVector(float2 uv, float offset)
@@ -96,10 +98,11 @@ Shader "Custom/Water"
 
             float4 frag(Varyings IN) : SV_Target
             {
-                float Out;
-                float3 Normal;
-                Ripples(IN.uv, 3, 10, _Time.w, 1, Out, Normal);
-                return InverseLerp(-1, 1, Normal) * _BaseColor;
+                       float Out;
+                    float3 Normal;
+                    Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
+                
+                    return InverseLerp(-1, 1, Normal) * _BaseColor;
             }
             ENDHLSL
         }

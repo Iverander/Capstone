@@ -1,20 +1,21 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Capstone
 {
     public class WeatherManager : MonoBehaviour
     {
-        [SerializeField] Weather weatherOverride;
-        [SerializedDictionary, SerializeField] SerializedDictionary<Weather, GameObject> weatherPrefabs;
+        [FormerlySerializedAs("weatherOverride")] [SerializeField] WeatherType weatherTypeOverride;
+        [SerializedDictionary, SerializeField] SerializedDictionary<WeatherType, Weather> weatherPrefabs;
 
         void Start()
         {
-            if (LevelSettings.CurrentWeather == Weather.None)
+            if (LevelSettings.CurrentWeatherType == WeatherType.None)
             {
-                LevelSettings.ChangeCurrentWeather(weatherOverride);
+                LevelSettings.ChangeCurrentWeather(weatherTypeOverride);
             }
-            Instantiate(weatherPrefabs[LevelSettings.CurrentWeather], Vector3.zero, Quaternion.identity);
+            Instantiate(weatherPrefabs[LevelSettings.CurrentWeatherType].gameObject, Vector3.zero, Quaternion.identity);
         }
     }
 }

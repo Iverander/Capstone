@@ -50,7 +50,7 @@ namespace Capstone
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                LevelSettings.ChangeCurrentWeather((Weather)changeEvent.newValue);
+                LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
             });
         }
 

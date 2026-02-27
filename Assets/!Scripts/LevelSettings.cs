@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public enum Weather
+    public enum WeatherType
     {
         None,
         Raining,
@@ -10,12 +10,12 @@ namespace Capstone
     
     public static class LevelSettings
     {
-        public static Weather CurrentWeather { get; private set; } = Weather.None;
+        public static WeatherType CurrentWeatherType { get; private set; } = WeatherType.None;
 
-        public static void ChangeCurrentWeather(Weather weather)
+        public static void ChangeCurrentWeather(WeatherType weatherType)
         {
-            Debug.Log($"Changing weather to {weather}");
-            CurrentWeather = weather;
+            Debug.Log($"Changing weather to {weatherType}");
+            CurrentWeatherType = weatherType;
         }
     }
 }
