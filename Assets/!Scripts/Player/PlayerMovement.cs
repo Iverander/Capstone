@@ -29,6 +29,7 @@ namespace Capstone
         
         protected virtual void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             Player.input.onMove.AddListener(UpdateMovement);
             Player.input.onSprint.AddListener(ToggleSprint);
             Player.input.onJump.AddListener(StartJump);

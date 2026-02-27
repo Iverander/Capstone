@@ -74,5 +74,11 @@ namespace Capstone
             if(!context.started) return;
             onMenu?.Invoke();
         }
+
+        public UnityEvent<Vector2> onMousePosition;
+        public void OnMousePosition(InputAction.CallbackContext context)
+        {
+            onMousePosition?.Invoke(context.ReadValue<Vector2>());
+        }
     }
 }

@@ -41,8 +41,6 @@ namespace Capstone
             instance = this;
             inputReader.Enable();
             
-            Cursor.lockState = CursorLockMode.Locked;
-            
             cameraSettings = GetComponent<CameraSettings>();
             combat = GetComponent<PlayerCombat>();
             cameraSettings.CameraChanged += CameraChanged;
