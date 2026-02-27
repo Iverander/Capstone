@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2088548381072869104}
   - component: {fileID: 195890739875289452}
   - component: {fileID: 1193891074316816883}
+  - component: {fileID: 7922217572380646346}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -75,6 +76,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     onMenu:
+      m_PersistentCalls:
+        m_Calls: []
+    onMousePosition:
       m_PersistentCalls:
         m_Calls: []
   playerState: 0
@@ -228,6 +232,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7922217572380646346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101182429259731174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9d4a8320fdbef82bbed3bf71e72c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.FPSSetter
+  fps: 60
 --- !u!1 &153122180645486381
 GameObject:
   m_ObjectHideFlags: 0

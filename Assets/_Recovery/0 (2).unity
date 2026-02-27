@@ -257,7 +257,6 @@ GameObject:
   - component: {fileID: 1831338786}
   - component: {fileID: 1831338785}
   - component: {fileID: 1831338787}
-  - component: {fileID: 1831338788}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -318,19 +317,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1831338785}
   gameScene: GameScene
   showcaseScene: ShowcaseScene
---- !u!114 &1831338788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831338784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9d4a8320fdbef82bbed3bf71e72c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Capstone::Capstone.FPSSetter
-  fps: 60
 --- !u!1 &1923283253
 GameObject:
   m_ObjectHideFlags: 0
