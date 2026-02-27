@@ -93,16 +93,19 @@ Shader "Custom/Water"
                 Varyings OUT;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                
                 return OUT;
             }
 
             float4 frag(Varyings IN) : SV_Target
             {
-                       float Out;
-                    float3 Normal;
-                    Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
+                float Out;
+                float3 Normal;
+                Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
                 
-                    return InverseLerp(-1, 1, Normal) * _BaseColor;
+                float3 rippleNormal = InverseLerp(-1, 1, Normal);
+                
+                return float4(rippleNormal, 1) * _BaseColor;
             }
             ENDHLSL
         }
