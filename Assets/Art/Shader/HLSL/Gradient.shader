@@ -42,7 +42,15 @@ Shader "HLSLTesting/Gradient"
                 
                 OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = IN.uv;
-                OUT.color = lerp(_Color, _TransitionColor, IN.uv.x);
+                OUT.color = lerp(_Color, _TransitionColor, IN.positionOS.y);
+                
+                /*
+                OUT.color = _Color;
+                
+                if (IN.positionOS.y > 0)
+                {
+                    OUT.color = _TransitionColor;
+                }*/
                 return OUT;
             }
 
