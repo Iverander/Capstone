@@ -1,18 +1,22 @@
 using System.Collections;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Capstone
 {
     public class IsometricMovement : PlayerMovement
     {
-        //protected Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
-        protected Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
+        protected Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
+        //protected Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
         private Vector3 worldMousePosition;
+        
+        [Layer,SerializeField] int groundLayer = 6;
         
 
         protected override void Start()
         {
             base.Start();
+            groundLayer = LayerMask.NameToLayer("Ground");
             Cursor.lockState = CursorLockMode.Confined;
             Player.input.onMousePosition.AddListener(GetMousePosition);
         }
@@ -21,8 +25,9 @@ namespace Capstone
         {
             Ray ray = Player.instance.cam.ScreenPointToRay(arg0);
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100, groundLayer))
             {
+                Debug.Log("update");
                 worldMousePosition = hit.point;
             }
         }

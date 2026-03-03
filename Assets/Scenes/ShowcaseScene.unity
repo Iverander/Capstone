@@ -848,6 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d408a29e52a6c469bf81e174780d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Water
+  defaultRippleStrength: 0
 --- !u!1 &1931072360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1026,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1292326624328648717, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
+      propertyPath: weatherTypeOverride
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1292326624328648717, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
       propertyPath: weatherPrefabs._serializedList.Array.data[0].Value
       value: 
