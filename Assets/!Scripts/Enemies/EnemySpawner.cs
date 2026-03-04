@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Capstone
@@ -6,20 +6,58 @@ namespace Capstone
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] Enemy enemy;
-        int amountToSpawn = 2;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        [SerializeField] int amountToSpawn = 2;
+
+        [SerializeField] Transform spawnPoints;
+        int spawnPlace;
+        bool oneSpawn = false;
+        Transform currentSpawn;
+
+        [SerializeField] int spawnCalc;
+
         void Start()
         {
-            StartCoroutine(Spawning());
+            RoundManager.newRound.AddListener(SpawnEnemies);
+            if (spawnPoints == null) oneSpawn = true;
+            else oneSpawn = false;
         }
-        
-        IEnumerator Spawning()
+
+        //called from RoundManager
+        async void SpawnEnemies()
         {
+            //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
             for (int i = 0; i < amountToSpawn; i++)
             {
-                yield return new WaitForSeconds(1);
-                Instantiate(enemy.gameObject, transform.position, transform.rotation);
+                //for only one spawnPoint - spawns from itself :-)
+                if (oneSpawn)
+                {
+                    Instantiate(enemy.gameObject, transform.position, transform.rotation, transform);
+                }
+                //for multiple spawnPoints - spawns from gameobjects that u pick :-)
+                else
+                {
+                    CalculateSpawnPoint();
+                    if (transform == null || currentSpawn == null) return;
+                    Instantiate(enemy.gameObject, currentSpawn.position, currentSpawn.rotation, transform);
+                }
+                await Task.Delay(1000);
             }
+            CalculateAmount();
+        }
+
+        void CalculateAmount()
+        {
+            if (spawnCalc == 1)
+            {
+                amountToSpawn *= 2;
+            }
+            else { amountToSpawn++; }
+        }
+
+        void CalculateSpawnPoint()
+        {
+            spawnPlace = Random.Range(0, spawnPoints.childCount);
+            currentSpawn = spawnPoints.GetChild(spawnPlace);
         }
     }
 }

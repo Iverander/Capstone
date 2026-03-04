@@ -1,9 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Capstone
 {
+    public enum EnemyState
+    {
+        Chase,
+        Attack
+    }
+
     public class Enemy : Creature
     {
         Player player;
@@ -12,41 +19,100 @@ namespace Capstone
         int abilityToPreform;
         int coolDown;
         bool canAttack;
+        EnemyState enemyState;
 
         [SerializeReference, SubclassSelector] public List<CombatAbility> abilities = new();
+
+        /*
+         * State machine enum (thingy with chase and attack)
+         * Depending on state, it acts differently, chase walks towards the player, attack chooses attack
+         * AI should be predictable, default enemy walk towards you and try to punch you, other types of enemies can have different AI cus long range
+         * Not every enemy will be in your face but this is like a zombie
+         * To be fair I don't know how you wanna do it, whether or not you wanna emulate senses for the enemies or whatever - Torje
+         */
 
 
         void Start()
         {
             player = Player.instance;
             agent = GetComponent<NavMeshAgent>();
-            
+
             foreach (var ability in abilities) //i forgot we have to initialize the abilities lol
             {
                 if (ability == null) continue;
                 ability.Initialize(this);
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
             agent.destination = player.transform.position;
 
-            if (Vector3.Distance(player.transform.position, agent.transform.position) < 1)
+            canAttack = true;
+            //chase
+            enemyState = EnemyState.Chase;
+        }
+
+        // Update is called once per frame, unless it is called twice, but then something is wrong
+        void Update()
+        {
+
+            //Debug.Log(Vector3.Distance(player.transform.position, agent.transform.position));
+            //Debug.Log (agent.destination);
+
+            switch (enemyState)
             {
-                Attack();
+                case EnemyState.Chase:
+                    Chase();
+                    break;
+                case EnemyState.Attack:
+                    StartCoroutine(Attack());
+                    break;
+            }
+        }
+        //i remember time.Deltatime btw:)
+
+        IEnumerator Attack()
+        {if (!canAttack) yield break;
+            transform.LookAt(player.transform.position);
+
+            canAttack = false;
+            abilityToPreform = Random.Range(0, abilities.Count);
+            abilities[abilityToPreform].Perform<Player>(); //preforms chosen ability, towards player creature
+            Debug.Log("attack happened");
+            yield return new WaitForSeconds(5);
+            canAttack = true;
+
+            enemyState = EnemyState.Chase; //back to chase
+        }
+
+        void Chase()
+        {
+            //newPos
+
+            if (Vector3.Distance(agent.destination, transform.position) < 2)
+            {
+                NewDestination();
+            }
+            agent.isStopped = false;
+
+            //tryAttack
+            if (Vector3.Distance(player.transform.position, agent.transform.position) < 2)
+            {
+                agent.isStopped = true;
+
+                if (canAttack)
+                {
+                    enemyState = EnemyState.Attack;
+                }
             }
         }
 
-        void Attack()
+        private void NewDestination()
         {
-            abilityToPreform = Random.Range(0, abilities.Count);
-            abilities[abilityToPreform].Perform<Player>();
+            Debug.Log(player.transform.position);
+            agent.destination = player.transform.position;
         }
-        
-        
-        private void OnDrawGizmosSelected() //Just to visualize the hitbox for the abilities
+
+
+        //Just to visualize the hitbox for the abilities
+        private void OnDrawGizmosSelected()
         {
             foreach (var ability in abilities)
             {

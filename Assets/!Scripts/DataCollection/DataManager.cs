@@ -14,6 +14,7 @@ namespace Capstone
         public static DatabaseReference database;
         
         public static DataManager instance;
+        
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -28,8 +29,19 @@ namespace Capstone
 
         private void OnApplicationQuit()
         {
-            data.NewSection("Quit");
+            //data.NewSection("Quit");
             data.Save();
+        }
+
+        public static void StartNewSession(string sessionName)
+        {
+            if (instance == null) return;
+            instance.data.StartNewSession(sessionName);
+        }
+        public static void NewSection(string sectionName)
+        {
+            if (instance == null) return;
+            instance.data.NewSection(sectionName);
         }
     }
 }

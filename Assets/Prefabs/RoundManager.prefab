@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2285151321904138786}
   - component: {fileID: 4520432571151437763}
+  - component: {fileID: 3960691288283501574}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: RoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89132d65fb8764247911c0621f6293db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.EnemySpawner
+  enemy: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
+  amountToSpawn: 2
+--- !u!114 &3960691288283501574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758461676757679321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a9c85a610e6114b913d14ef024b50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.RoundManager
+  UIObject: {fileID: 0}
+  roundNr: 0
