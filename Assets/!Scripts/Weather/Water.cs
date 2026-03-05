@@ -8,9 +8,12 @@ namespace Capstone
         Renderer waterRenderer;
         private static Action<float> RippleUpdated;
         
+        [SerializeField] float defaultRippleStrength = 0;
+        
         void Start()
         {
             waterRenderer = GetComponent<Renderer>();
+            waterRenderer.material.SetFloat("_RippleStrength", defaultRippleStrength);
 
             RippleUpdated += UpdateRipple;
         }
