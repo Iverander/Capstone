@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +23,7 @@ namespace Capstone
         bool canAttack;
         EnemyState enemyState;
 
-        [SerializeReference, SubclassSelector] public List<CombatAbility> abilities = new();
+        [Expandable] public List<Ability> abilities = new(); //things has been simplified, you're welcome
 
         /*
          * State machine enum (thingy with chase and attack)
@@ -76,7 +77,7 @@ namespace Capstone
 
             canAttack = false;
             abilityToPreform = Random.Range(0, abilities.Count);
-            abilities[abilityToPreform].Perform<Player>(); //preforms chosen ability, towards player creature
+            abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature
             Debug.Log("attack happened");
             yield return new WaitForSeconds(5);
             canAttack = true;

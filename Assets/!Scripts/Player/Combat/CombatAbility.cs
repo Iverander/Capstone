@@ -8,41 +8,41 @@ using UnityEngine;
 namespace Capstone
 {
     [Serializable]
+    [CreateAssetMenu(fileName = "CombatAbility", menuName = "Scriptable Objects/CombatAbility")]
     public class CombatAbility : Ability
     {
         
-        [Header("Stats")] 
+        [Header("Targeting")] 
         [SerializeField] protected Vector3 size = Vector3.one;
         [field: SerializeField] protected Vector3 center { get; private set; } = Vector3.up + Vector3.forward;
         protected Vector3 trueCenter => origin.transform.rotation * center + origin.transform.position;
-
-        [Space] [SerializeField] protected bool includeSelf = false;
+        [Space]
+        [SerializeField, Layer] private int layerToHit;
+        [SerializeField] protected bool includeSelf = false;
+        
+        [Header("Stats")]
         [SerializeField] protected float damage = 10;
         [SerializeField] protected float knockbackForce = 5;
         [SerializeField] protected float duration = .3f;
-
-        /// <summary>
-        /// Perform the ability
-        /// </summary>
-        /// <typeparam name="T">The type of creature to hit</typeparam>
-        public override void Action<T>()
+        
+        public override void Action()
         {
             if(size == Vector3.zero) return;
             
-            List<Collider> colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation).ToList();
-            if(colliders.Count <= 0) return;
+            var colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation, layerToHit);
+            Debug.Log(colliders.Length);
+            if(colliders.Length <= 0) return;
             
-            List<T> hit = new();
+            List<Creature> hit = new();
 
             foreach (var col in colliders)
             {
-                if(col.TryGetComponent(out T c))
-                    hit.Add(c);
-            }
-
-            if (!includeSelf && origin is T origin1)
-            {
-                hit.Remove(origin1);  
+                if (col.TryGetComponent(out Creature c))
+                {
+                    if(includeSelf && c == origin)
+                        continue;
+                    hit.Add(c);   
+                }
             }
 
             foreach (var creature in hit)

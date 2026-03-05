@@ -1,22 +1,21 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Capstone
 {
     [Serializable]
-    public abstract class Ability 
+    public abstract class Ability : ScriptableObject
     {
         protected Creature origin;
         
-        [field: SerializeField] public string name { get; private set; }
-        
         [Space, SerializeField] public float cooldown = .2f;
         [field: SerializeField] public bool onCooldown { get; private set; }
+        [field: SerializeField] protected Color color { get; private set; } = Color.red;
 
         [Header("Gizmos")]
         public bool ShowGizmos;
-        [field: SerializeField] protected Color gizmosColor { get; private set; } = Color.red;
         
         public Action<float> performed;
         
@@ -24,17 +23,17 @@ namespace Capstone
         {
             this.origin = origin;
         }
-
-        public void Perform<T>() where T : Creature
+        
+        public void Perform() 
         {
             if(onCooldown) return;
             performed?.Invoke(cooldown);
             if(cooldown > 0)
                 _=Cooldown();
             
-            Action<T>();
+            Action();
         }
-        public abstract void Action<T>() where T : Creature;
+        public abstract void Action();
 
         protected async Task Cooldown()
         {
@@ -50,7 +49,7 @@ namespace Capstone
         {
             if(origin == null) return;
             UnityEngine.Gizmos.matrix = origin.localToWorldMatrix;
-            UnityEngine.Gizmos.color = gizmosColor;
+            UnityEngine.Gizmos.color = color;
         }
     }
 }
