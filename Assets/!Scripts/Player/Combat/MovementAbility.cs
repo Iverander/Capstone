@@ -6,9 +6,12 @@ namespace Capstone
     [Serializable]
     public class MovementAbility : Ability
     {
-        public override void Perform<T>(bool includeSelf = false)
+        [Header("Stats")]
+        [SerializeField] protected float distance;
+        [SerializeField] protected float time;
+        public override void Action<T>()
         {
-            throw new System.NotImplementedException();
+            //origin.Knockback(-origin.transform.forward + origin.transform.position, strength, 5f);
         }
     }
 }

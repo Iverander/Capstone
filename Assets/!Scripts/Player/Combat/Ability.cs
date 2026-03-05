@@ -25,7 +25,16 @@ namespace Capstone
             this.origin = origin;
         }
 
-        public abstract void Perform<T>(bool includeSelf = false) where T : Creature;
+        public void Perform<T>() where T : Creature
+        {
+            if(onCooldown) return;
+            performed?.Invoke(cooldown);
+            if(cooldown > 0)
+                _=Cooldown();
+            
+            Action<T>();
+        }
+        public abstract void Action<T>() where T : Creature;
 
         protected async Task Cooldown()
         {

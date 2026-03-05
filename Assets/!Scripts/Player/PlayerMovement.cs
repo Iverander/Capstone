@@ -37,7 +37,7 @@ namespace Capstone
 
         private void StartJump()
         {            
-            if (Player.state.HasFlag(State.Jumping) || Player.state.HasFlag(State.Falling)) return;
+            if (Player.state.HasFlag(State.Falling) || !Player.state.HasFlag(State.Grounded)) return;
             StartCoroutine(Jump());
         }
 
@@ -70,6 +70,11 @@ namespace Capstone
         void UpdateMovement(Vector2 value)
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
+            
+            if(moveDirection.magnitude > .1f)
+                Player.AddState(State.Walking);
+            else
+                Player.RemoveState(State.Walking);
         }
 
         private void FixedUpdate()

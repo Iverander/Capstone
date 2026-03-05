@@ -10,9 +10,11 @@ namespace Capstone
     {
         None = 0,
         Sprinting = 1 << 0,
-        Jumping = 1 << 1,
+        Grounded = 1 << 1,
         Turning = 1 << 2,
         Falling = 1 << 3,
+        Jumping = 1 << 4,
+        Walking = 1 << 5,
     }
     [DefaultExecutionOrder(-10000)]
     public class Player : Creature
@@ -35,7 +37,6 @@ namespace Capstone
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
         public PlayerCombat combat { get; private set; }
-        
         
         void Start()
         {
@@ -65,9 +66,19 @@ namespace Capstone
 
             playerState = 0;
         }
-
+        
         private void FixedUpdate()
-        {
+        {            
+            Ray groundRay = new Ray(transform.position + -Vector3.down*.1f, Vector3.down);
+            Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
+            if (Physics.Raycast(groundRay, .2f))
+            {
+                AddState(State.Grounded);
+            }
+            else
+            {
+                RemoveState(State.Grounded);
+            }
             if (!state.HasFlag(State.Falling))
             {
                 if(rb.linearVelocity.y > -.5) return;
@@ -94,9 +105,9 @@ namespace Capstone
             Player.state &= ~state;
         }
 
-        public override void Knockbacked(Vector3 origin, float knockback, float duration)
+        public override void Knockback(Vector3 origin, float knockback, float duration)
         {
-            throw new NotImplementedException();
+            rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
         }
     }
 }

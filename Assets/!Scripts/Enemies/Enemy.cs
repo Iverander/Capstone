@@ -108,7 +108,7 @@ namespace Capstone
 
         private void NewDestination()
         {
-            Debug.Log(player.transform.position);
+            //Debug.Log(player.transform.position);
             agent.destination = player.transform.position;
         }
 
@@ -126,7 +126,7 @@ namespace Capstone
         }
 
         //for knockback
-        public override async void Knockbacked(Vector3 origin, float knockback, float duration)
+        public override async void Knockback(Vector3 origin, float knockback, float duration)
         {
             agent.enabled = false;
             rb.isKinematic = false;

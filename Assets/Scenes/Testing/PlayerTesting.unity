@@ -674,6 +674,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].strength
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: managedReferences[4020644931395387657].duration
       value: 0
       objectReference: {fileID: 0}

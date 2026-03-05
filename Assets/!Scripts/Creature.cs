@@ -16,6 +16,6 @@ namespace Capstone
             rb = GetComponent<Rigidbody>();
         }
 
-        public abstract void Knockbacked(Vector3 origin, float knockback, float duration);
+        public abstract void Knockback(Vector3 origin, float knockback, float duration);
     }
 }

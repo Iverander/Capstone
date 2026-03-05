@@ -15,8 +15,8 @@ namespace Capstone
         [SerializeField] protected Vector3 size = Vector3.one;
         [field: SerializeField] protected Vector3 center { get; private set; } = Vector3.up + Vector3.forward;
         protected Vector3 trueCenter => origin.transform.rotation * center + origin.transform.position;
-        
-        [Space]
+
+        [Space] [SerializeField] protected bool includeSelf = false;
         [SerializeField] protected float damage = 10;
         [SerializeField] protected float knockbackForce = 5;
         [SerializeField] protected float duration = .3f;
@@ -25,13 +25,8 @@ namespace Capstone
         /// Perform the ability
         /// </summary>
         /// <typeparam name="T">The type of creature to hit</typeparam>
-        public override void Perform<T>(bool includeSelf = false)
+        public override void Action<T>()
         {
-            if(onCooldown) return;
-            performed?.Invoke(cooldown);
-            if(cooldown > 0)
-                _=Cooldown();
-            
             if(size == Vector3.zero) return;
             
             List<Collider> colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation).ToList();
@@ -59,7 +54,7 @@ namespace Capstone
 
                 if (knockbackForce > 0)
                 {
-                    creature.Knockbacked(origin.transform.position, knockbackForce, duration);
+                    creature.Knockback(origin.transform.position, knockbackForce, duration);
                 }   
             }
         }
