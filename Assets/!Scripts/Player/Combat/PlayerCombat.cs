@@ -16,12 +16,12 @@ namespace Capstone
     public class PlayerCombat : MonoBehaviour
     {
         [Serializable]
-        public class Ability //workaround lol - lol
+        public class AbilityWorkaround //workaround lol - lol
         {
-            [SerializeReference, SubclassSelector] public CombatAbility ability;
+            [SerializeReference, SubclassSelector] public Ability ability;
         }
 
-        [SerializedDictionary] public SerializedDictionary<AbilityKeys, Ability> abilities;
+        [SerializedDictionary] public SerializedDictionary<AbilityKeys, AbilityWorkaround> abilities;
 
         private void Start()
         {

@@ -666,8 +666,48 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: 'managedReferences[1974661435259879496]'
+      value: Capstone Capstone.MovementAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].cooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: managedReferences[4020644931395387657].duration
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].ShowGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: abilities._serializedList.Array.data[4].Value.ability
+      value: 1974661435259879496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<name>k__BackingField
+      value: 'Dash [WIP]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<onCooldown>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<gizmosColor>k__BackingField.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<gizmosColor>k__BackingField.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<gizmosColor>k__BackingField.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: managedReferences[1974661435259879496].<gizmosColor>k__BackingField.r
+      value: 0.63621235
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
