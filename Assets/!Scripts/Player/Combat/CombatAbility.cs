@@ -13,6 +13,9 @@ namespace Capstone
         protected Creature origin;
         
         [field: SerializeField] public string name { get; private set; }
+        
+        [Space, SerializeField] public float cooldown = .2f;
+        [field: SerializeField] public bool onCooldown { get; private set; }
 
         [Header("Gizmos")]
         public bool ShowGizmos;
@@ -26,8 +29,7 @@ namespace Capstone
         [Space]
         [SerializeField] protected float damage = 10;
         [SerializeField] protected float knockbackForce = 5;
-        [SerializeField] public float cooldown = .2f;
-        [field: SerializeField] public bool onCooldown { get; private set; }
+        [SerializeField] protected float duration = .3f;
 
         public Action<float> performed;
 
@@ -67,22 +69,14 @@ namespace Capstone
             {
                 if (damage > 0)
                 {
-                    Hurt(creature.health);
+                    creature.health.Damage(damage);
                 }
 
                 if (knockbackForce > 0)
                 {
-                    Knockback(creature.rb, knockbackForce);
+                    creature.Knockbacked(origin.transform.position, knockbackForce, duration);
                 }   
             }
-        }
-        protected virtual void Hurt(Health creature)
-        {
-            creature.Damage(damage);   
-        }
-        protected virtual void Knockback(Rigidbody rb, float force)
-        {
-            rb.AddForce((rb.transform.position - origin.transform.position) * (force * 10), ForceMode.Force);
         }
 
         async Task Cooldown()

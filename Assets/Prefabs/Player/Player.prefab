@@ -127,40 +127,68 @@ MonoBehaviour:
     - Key: 3
       Value:
         ability:
-          rid: -2
+          rid: 1974661432389664845
     - Key: 4
       Value:
         ability:
-          rid: -2
+          rid: 1974661432389664846
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1974661432389664845
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: Kick
+        cooldown: 1
+        <onCooldown>k__BackingField: 0
+        ShowGizmos: 1
+        <gizmosColor>k__BackingField: {r: 0, g: 1, b: 0.9286413, a: 1}
+        size: {x: 2, y: 1, z: 2}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        damage: 40
+        knockbackForce: 10
+        duration: 2
+    - rid: 1974661432389664846
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: 'Dash [WIP]'
+        cooldown: 0.5
+        <onCooldown>k__BackingField: 0
+        ShowGizmos: 0
+        <gizmosColor>k__BackingField: {r: 0.63621235, g: 0, b: 1, a: 1}
+        size: {x: 1, y: 1, z: 1}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        damage: 0
+        knockbackForce: 0
+        duration: 0.3
     - rid: 4020644931395387657
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Punch
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
         ShowGizmos: 1
         <gizmosColor>k__BackingField: {r: 0.079197645, g: 1, b: 0, a: 1}
         size: {x: 2, y: 1, z: 1}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
-        damage: 25
+        damage: 15
         knockbackForce: 5
-        cooldown: 0.2
-        <onCooldown>k__BackingField: 0
+        duration: 0.1
     - rid: 4020644931395387658
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Push
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
         ShowGizmos: 1
         <gizmosColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
         size: {x: 2, y: 1, z: 1}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         damage: 0
-        knockbackForce: 10
-        cooldown: 0.2
-        <onCooldown>k__BackingField: 0
+        knockbackForce: 20
+        duration: 0.3
 --- !u!114 &2088548381072869104
 MonoBehaviour:
   m_ObjectHideFlags: 0

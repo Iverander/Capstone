@@ -9,10 +9,13 @@ namespace Capstone
     {
         public Health health { get; private set; }
         public Rigidbody rb { get; private set; }
+        protected bool knockbacked;
         private void Awake()
         {
             health = GetComponent<Health>();
             rb = GetComponent<Rigidbody>();
         }
+
+        public abstract void Knockbacked(Vector3 origin, float knockback, float duration);
     }
 }

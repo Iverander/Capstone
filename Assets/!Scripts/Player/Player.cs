@@ -93,5 +93,10 @@ namespace Capstone
         {
             Player.state &= ~state;
         }
+
+        public override void Knockbacked(Vector3 origin, float knockback, float duration)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
