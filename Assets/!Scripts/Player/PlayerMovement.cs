@@ -12,6 +12,7 @@ namespace Capstone
         [Header("Movement")]
         [SerializeField] protected Vector2 speed = new Vector2(5, 10);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
+        protected abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
         
         protected float currentSpeed => sprinting ? speed.y : speed.x;
@@ -67,7 +68,7 @@ namespace Capstone
                 Player.RemoveState(State.Sprinting);
             }
         }
-        void UpdateMovement(Vector2 value)
+        protected void UpdateMovement(Vector2 value)
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
             
@@ -80,6 +81,7 @@ namespace Capstone
         private void FixedUpdate()
         {
             Movement();
+            Player.instance.dash.direction = ConvertedDirection;
         }
 
         protected abstract void Movement();
