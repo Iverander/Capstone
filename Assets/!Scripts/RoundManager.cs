@@ -16,13 +16,17 @@ namespace Capstone
         [SerializeField] UIDocument UIObject;
         Label UIText;
 
+        public static RoundManager instance; //makes it accessible from everywhere
+
         [ReadOnly]public int roundNr = 0;
+        public static int round => instance.roundNr; //shortcut for the round number
 
         public static UnityEvent newRound = new();
         bool enemiesAlive;
 
         private void Start()
         {
+            instance = this;
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
 
