@@ -7,16 +7,15 @@ namespace Capstone
     public class IsometricMovement : PlayerMovement
     {
         protected override Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
-        //protected Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
         private Vector3 worldMousePosition;
         
-        [Layer,SerializeField] int groundLayer = 6;
+        [SerializeField] LayerMask groundLayer = 6;
         
 
         protected override void Start()
         {
             base.Start();
-            groundLayer = LayerMask.NameToLayer("Ground");
+            groundLayer = 1<<6; //bitshift '1' 6 times to the left: 0000000000000001 => 000000000100000
             Cursor.lockState = CursorLockMode.Confined;
             Player.input.onMousePosition.AddListener(GetMousePosition);
         }
@@ -27,7 +26,6 @@ namespace Capstone
 
             if (Physics.Raycast(ray, out RaycastHit hit, 100, groundLayer))
             {
-                Debug.Log("update");
                 worldMousePosition = hit.point;
             }
         }
