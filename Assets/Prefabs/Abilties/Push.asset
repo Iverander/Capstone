@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Capstone::Capstone.CombatAbility
   cooldown: 0.2
   <onCooldown>k__BackingField: 0
-  <color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <color>k__BackingField: {r: 0.39488173, g: 1, b: 0, a: 1}
   ShowGizmos: 0
   size: {x: 1, y: 1, z: 1}
   <center>k__BackingField: {x: 0, y: 1, z: 1}
-  layerToHit: 0
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 1
   includeSelf: 0
   damage: 5
   knockbackForce: 15

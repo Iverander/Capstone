@@ -17,7 +17,7 @@ namespace Capstone
         [field: SerializeField] protected Vector3 center { get; private set; } = Vector3.up + Vector3.forward;
         protected Vector3 trueCenter => origin.transform.rotation * center + origin.transform.position;
         [Space]
-        [SerializeField, Layer] private int layerToHit;
+        [SerializeField] private LayerMask layerToHit;
         [SerializeField] protected bool includeSelf = false;
         
         [Header("Stats")]
@@ -30,13 +30,13 @@ namespace Capstone
             if(size == Vector3.zero) return;
             
             var colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation, layerToHit);
-            Debug.Log(colliders.Length);
             if(colliders.Length <= 0) return;
             
             List<Creature> hit = new();
 
             foreach (var col in colliders)
             {
+                Debug.Log(col.gameObject.name);
                 if (col.TryGetComponent(out Creature c))
                 {
                     if(includeSelf && c == origin)

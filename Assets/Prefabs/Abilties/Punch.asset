@@ -18,7 +18,9 @@ MonoBehaviour:
   ShowGizmos: 1
   size: {x: 1, y: 1, z: 1}
   <center>k__BackingField: {x: 0, y: 1, z: 1}
-  layerToHit: 0
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 1
   includeSelf: 0
   damage: 15
   knockbackForce: 5
