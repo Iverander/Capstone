@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Capstone
 {
@@ -9,9 +10,11 @@ namespace Capstone
     {
         None = 0,
         Sprinting = 1 << 0,
-        Jumping = 1 << 1,
+        Grounded = 1 << 1,
         Turning = 1 << 2,
         Falling = 1 << 3,
+        Jumping = 1 << 4,
+        Walking = 1 << 5,
     }
     [DefaultExecutionOrder(-10000)]
     public class Player : Creature
@@ -34,17 +37,19 @@ namespace Capstone
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
         public PlayerCombat combat { get; private set; }
+        public MovementAbility dash;
         
         
         void Start()
         {
+            DataManager.StartNewSession(SceneManager.GetActiveScene().name);
+            
             instance = this;
             inputReader.Enable();
             
             cameraSettings = GetComponent<CameraSettings>();
             combat = GetComponent<PlayerCombat>();
             cameraSettings.CameraChanged += CameraChanged;
-            
         }
 
         private void CameraChanged()
@@ -63,18 +68,28 @@ namespace Capstone
 
             playerState = 0;
         }
-
+        
         private void FixedUpdate()
-        {
-            if (!state.HasFlag(State.Falling))
+        {            
+            Ray groundRay = new Ray(transform.position + -Vector3.down*.1f, Vector3.down);
+            Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
+            if (Physics.Raycast(groundRay, .2f))
             {
-                if(rb.linearVelocity.y > -.5) return;
-                AddState(State.Falling);
+                AddState(State.Grounded);
             }
             else
             {
-                if(rb.linearVelocity.y <= -.5) return;
-                RemoveState(State.Falling);
+                RemoveState(State.Grounded);
+            }
+            if (!state.HasFlag(State.Falling))
+            {
+                if(rb.linearVelocity.y <= -.5) 
+                    AddState(State.Falling);
+            }
+            else
+            {
+                if(rb.linearVelocity.y > -.5)
+                    RemoveState(State.Falling);
             }
         }
 
@@ -90,6 +105,11 @@ namespace Capstone
         public static void RemoveState(State state)
         {
             Player.state &= ~state;
+        }
+
+        public override void Knockback(Vector3 origin, float knockback, float duration)
+        {
+            rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
         }
     }
 }

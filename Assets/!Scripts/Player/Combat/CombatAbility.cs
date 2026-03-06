@@ -8,98 +8,61 @@ using UnityEngine;
 namespace Capstone
 {
     [Serializable]
-    public class CombatAbility
+    [CreateAssetMenu(fileName = "CombatAbility", menuName = "Scriptable Objects/CombatAbility")]
+    public class CombatAbility : Ability
     {
-        protected Creature origin;
         
-        [field: SerializeField] public string name { get; private set; }
-
-        [Header("Gizmos")]
-        public bool ShowGizmos;
-        [field: SerializeField] protected Color gizmosColor { get; private set; } = Color.red;
-        
-        [Header("Stats")] 
+        [Header("Targeting")] 
         [SerializeField] protected Vector3 size = Vector3.one;
         [field: SerializeField] protected Vector3 center { get; private set; } = Vector3.up + Vector3.forward;
         protected Vector3 trueCenter => origin.transform.rotation * center + origin.transform.position;
-        
         [Space]
+        [SerializeField] private LayerMask layerToHit;
+        [SerializeField] protected bool includeSelf = false;
+        
+        [Header("Stats")]
         [SerializeField] protected float damage = 10;
         [SerializeField] protected float knockbackForce = 5;
-        [SerializeField] public float cooldown = .2f;
-        [field: SerializeField] public bool onCooldown { get; private set; }
-
-        public Action<float> performed;
-
-        public void Initialize(Creature origin)
+        [SerializeField] protected float duration = .3f;
+        
+        public override void Action()
         {
-            this.origin = origin;
-        }
-
-        /// <summary>
-        /// Perform the ability
-        /// </summary>
-        /// <typeparam name="T">The type of creature to hit</typeparam>
-        public virtual void Perform<T>(bool includeSelf = false) where T : Creature
-        {
-            if(onCooldown) return;
-            performed?.Invoke(cooldown);
-            if(cooldown > 0)
-                _=Cooldown();
+            if(size == Vector3.zero) return;
             
-            List<Collider> colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation).ToList();
-            if(colliders.Count <= 0) return;
+            var colliders = Physics.OverlapBox(trueCenter, size / 2, origin.transform.rotation, layerToHit);
+            if(colliders.Length <= 0) return;
             
-            List<T> hit = new();
+            List<Creature> hit = new();
 
             foreach (var col in colliders)
             {
-                if(col.TryGetComponent(out T c))
-                    hit.Add(c);
-            }
-
-            if (!includeSelf && origin is T origin1)
-            {
-                hit.Remove(origin1);  
+                Debug.Log(col.gameObject.name);
+                if (col.TryGetComponent(out Creature c))
+                {
+                    if(includeSelf && c == origin)
+                        continue;
+                    hit.Add(c);   
+                }
             }
 
             foreach (var creature in hit)
             {
                 if (damage > 0)
                 {
-                    Hurt(creature.health);
+                    creature.health.Damage(damage);
                 }
 
                 if (knockbackForce > 0)
                 {
-                    Knockback(creature.rb, knockbackForce);
+                    creature.Knockback(origin.transform.position, knockbackForce, duration);
                 }   
             }
         }
-        protected virtual void Hurt(Health creature)
-        {
-            creature.Damage(damage);   
-        }
-        protected virtual void Knockback(Rigidbody rb, float force)
-        {
-            rb.AddForce((rb.transform.position - origin.transform.position) * (force * 10), ForceMode.Force);
-        }
-
-        async Task Cooldown()
-        {
-            onCooldown = true;
-            
-            await Task.Delay(Mathf.RoundToInt(cooldown * 1000));
-            
-            onCooldown = false;
-        }
         
-        
-        public virtual void Gizmos(Transform origin)
+        public override void Gizmos(Transform origin)
         {
+            base.Gizmos(origin);
             if(origin == null) return;
-            UnityEngine.Gizmos.matrix = origin.localToWorldMatrix;
-            UnityEngine.Gizmos.color = gizmosColor;
             UnityEngine.Gizmos.DrawWireCube(center, size);
         }
     }

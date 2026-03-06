@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +23,7 @@ namespace Capstone
         bool canAttack;
         EnemyState enemyState;
 
-        [SerializeReference, SubclassSelector] public List<CombatAbility> abilities = new();
+        [Expandable] public List<Ability> abilities = new(); //things has been simplified, you're welcome
 
         /*
          * State machine enum (thingy with chase and attack)
@@ -52,6 +54,7 @@ namespace Capstone
         // Update is called once per frame, unless it is called twice, but then something is wrong
         void Update()
         {
+            if(!agent.enabled) return; //if the agent component is disabled, dont do shit thanks
 
             //Debug.Log(Vector3.Distance(player.transform.position, agent.transform.position));
             //Debug.Log (agent.destination);
@@ -74,8 +77,8 @@ namespace Capstone
 
             canAttack = false;
             abilityToPreform = Random.Range(0, abilities.Count);
-            abilities[abilityToPreform].Perform<Player>(); //preforms chosen ability, towards player creature
-            Debug.Log("attack happened");
+            abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature
+            //Debug.Log("attack happened");
             yield return new WaitForSeconds(5);
             canAttack = true;
 
@@ -106,7 +109,7 @@ namespace Capstone
 
         private void NewDestination()
         {
-            Debug.Log(player.transform.position);
+            //Debug.Log(player.transform.position);
             agent.destination = player.transform.position;
         }
 
@@ -121,6 +124,22 @@ namespace Capstone
 
                 ability.Gizmos(transform);
             }
+        }
+
+        //for knockback
+        public override async void Knockback(Vector3 origin, float knockback, float duration)
+        {
+            agent.enabled = false;
+            rb.isKinematic = false;
+            knockbacked = true;
+            
+            rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
+
+            await Task.Delay(Mathf.RoundToInt(1000 * duration));
+            
+            knockbacked = false;
+            rb.isKinematic = true;
+            agent.enabled = true;
         }
     }
 }

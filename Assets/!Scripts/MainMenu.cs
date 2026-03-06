@@ -30,6 +30,8 @@ namespace Capstone
             descriptionLabel = root.Q<Label>("Description");
             weatherField = root.Q<EnumField>("WeatherSelector");
 
+            weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
+
             gameSceneButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
             {
                 descriptionLabel.text = "Game scene is the game itself, only things that are finished will be added to this scene.";
@@ -50,7 +52,7 @@ namespace Capstone
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                LevelSettings.ChangeCurrentWeather((Weather)changeEvent.newValue);
+                LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
             });
         }
 
