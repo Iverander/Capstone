@@ -78,7 +78,7 @@ namespace Capstone
             canAttack = false;
             abilityToPreform = Random.Range(0, abilities.Count);
             abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature
-            Debug.Log("attack happened");
+            //Debug.Log("attack happened");
             yield return new WaitForSeconds(5);
             canAttack = true;
 

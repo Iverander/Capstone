@@ -43,7 +43,7 @@ namespace Capstone
 
         void UseAbility(int abilityIndex)
         {
-            Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex]);
+            //Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex]);
             abilities[(AbilityKeys)abilityIndex].Perform();
         }
     }

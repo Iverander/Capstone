@@ -53,13 +53,10 @@ namespace Capstone
             
             while(Mathf.Abs(transform.eulerAngles.y - target) > 10f)
             {
-                if(basedOnMovement)
+                if(basedOnMovement && moveDirection == Vector3.zero)
                 {
-                    if (moveDirection == Vector3.zero)
-                    {
-                        rb.angularVelocity = Vector3.zero;
-                        break;
-                    }
+                    rb.angularVelocity = Vector3.zero;
+                    break;
                 }
                 
                 target = GetTargetRotation();
@@ -74,8 +71,13 @@ namespace Capstone
 
             float GetTargetRotation()
             {
-                Quaternion rot = Quaternion.LookRotation(worldMousePosition, transform.up);
-                return rot.eulerAngles.y;
+                if (worldMousePosition != Vector3.zero)
+                {
+                    Quaternion rot = Quaternion.LookRotation(worldMousePosition, transform.up);
+                    return rot.eulerAngles.y;
+                }
+
+                return 0;
             }
         }
         
