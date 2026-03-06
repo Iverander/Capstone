@@ -5,7 +5,7 @@ namespace Capstone
 {
     public class ThirdpersonMovement : PlayerMovement
     {
-        protected Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
+        protected override Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
         
         protected override void Movement()
         {
@@ -19,6 +19,7 @@ namespace Capstone
             }
         }
         
+
         protected IEnumerator FaceCameraDirection(bool basedOnMovement)
         {
             Player.AddState(State.Turning);

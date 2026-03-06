@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f22e5c2dbce11b58cc255dc1fce5a7, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: Capstone::Capstone.MovementAbility
-  cooldown: 0.2
+  cooldown: 1
   <onCooldown>k__BackingField: 0
   <color>k__BackingField: {r: 0.48492336, g: 0, b: 1, a: 1}
   ShowGizmos: 0
-  distance: 0
-  time: 0
+  force: 2
+  direction: {x: -0, y: 0, z: 0}

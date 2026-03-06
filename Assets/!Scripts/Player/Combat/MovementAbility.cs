@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Capstone
@@ -8,11 +9,20 @@ namespace Capstone
     public class MovementAbility : Ability
     {
         [Header("Stats")]
-        [SerializeField] protected float distance;
-        [SerializeField] protected float time;
+        [SerializeField] protected float force;
+        
+        [InfoBox("Zero is adaptive :)")]
+        public Vector3 direction;
         public override void Action()
         {
-            //origin.Knockback(-origin.transform.forward + origin.transform.position, strength, 5f);
+            Vector3 directionVector = direction;
+            if (directionVector == Vector3.zero)
+            {
+                directionVector.x = origin.rb.linearVelocity.x;
+                directionVector.z = origin.rb.linearVelocity.z;
+            }
+            
+            origin.rb.AddForce(directionVector.normalized * (100 * force), ForceMode.Impulse);
         }
     }
 }
