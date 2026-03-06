@@ -83,13 +83,13 @@ namespace Capstone
             }
             if (!state.HasFlag(State.Falling))
             {
-                if(rb.linearVelocity.y > -.5) return;
-                AddState(State.Falling);
+                if(rb.linearVelocity.y <= -.5) 
+                    AddState(State.Falling);
             }
             else
             {
-                if(rb.linearVelocity.y <= -.5) return;
-                RemoveState(State.Falling);
+                if(rb.linearVelocity.y > -.5)
+                    RemoveState(State.Falling);
             }
         }
 

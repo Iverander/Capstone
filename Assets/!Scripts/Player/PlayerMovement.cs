@@ -23,7 +23,6 @@ namespace Capstone
         [Header("Turning")]
         [SerializeField] protected float rotationSpeed = 7;
         [SerializeField, ReadOnly] protected float rotationVelocity;
-        protected bool turning => Player.state.HasFlag(State.Turning);
         
         protected Rigidbody rb => Player.instance.rb;
         protected Camera cam => Player.instance.cam;
@@ -78,7 +77,7 @@ namespace Capstone
                 Player.RemoveState(State.Walking);
         }
 
-        void Update()
+        void FixedUpdate()
         {
             Movement();
             LimitSpeed();
@@ -96,6 +95,28 @@ namespace Capstone
             {
                 Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
                 rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
+            }
+        }
+        
+        protected void FaceDirection(Vector3 target, bool basedOnMovement)
+        {
+            if(Mathf.Abs(transform.eulerAngles.y - target.y) > 10f)
+            {
+                Player.AddState(State.Turning);
+                
+                if(basedOnMovement && moveDirection == Vector3.zero)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    Player.RemoveState(State.Turning);
+                    return;
+                }
+                    
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, target.y, ref rotationVelocity, 1 / rotationSpeed);
+                transform.eulerAngles = new Vector3(0, rotation, 0);
+            }
+            else
+            {
+                Player.RemoveState(State.Turning);
             }
         }
     }

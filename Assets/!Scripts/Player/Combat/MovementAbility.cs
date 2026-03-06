@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -21,8 +22,10 @@ namespace Capstone
                 directionVector.x = origin.rb.linearVelocity.x;
                 directionVector.z = origin.rb.linearVelocity.z;
             }
-            
-            origin.rb.AddForce(directionVector.normalized * (100 * force), ForceMode.Impulse);
+
+            //origin.
+
+            origin.rb.AddForce(directionVector.normalized * (10 * force), ForceMode.Impulse);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Capstone
         protected override Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
         private Vector3 worldMousePosition;
         
-        [SerializeField] LayerMask groundLayer = 1<<6;//bitshift '1' 6 times to the left: 0000000000000001 => 000000000100000
+        [SerializeField] LayerMask groundLayer = 1<<6;//bitshift '1' 6 times to the left: 00000001 => 01000000
         
 
         protected override void Start()
@@ -33,81 +33,8 @@ namespace Capstone
         {
             rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
             
-            if(!turning)
-            {
-                //StartCoroutine(FaceWalkDirection(true));
-                StartCoroutine(FaceMouseDirection(false));
-            }
-        }
-
-        IEnumerator FaceMouseDirection(bool basedOnMovement)
-        {
-            Player.AddState(State.Turning);
-            
-            float target = GetTargetRotation();
-            
-            while(Mathf.Abs(transform.eulerAngles.y - target) > 10f)
-            {
-                if(basedOnMovement && moveDirection == Vector3.zero)
-                {
-                    rb.angularVelocity = Vector3.zero;
-                    break;
-                }
-                
-                target = GetTargetRotation();
-                
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, target, ref rotationVelocity, 1 / rotationSpeed);
-                transform.eulerAngles = new Vector3(0, rotation, 0);
-
-                yield return null;
-            }
-            
-            Player.RemoveState(State.Turning);
-
-            float GetTargetRotation()
-            {
-                if (worldMousePosition != Vector3.zero)
-                {
-                    Quaternion rot = Quaternion.LookRotation(worldMousePosition, transform.up);
-                    return rot.eulerAngles.y;
-                }
-
-                return 0;
-            }
+            FaceDirection(Quaternion.LookRotation(worldMousePosition, transform.up).eulerAngles, false);
         }
         
-        IEnumerator FaceWalkDirection(bool basedOnMovement)
-        {
-            Player.AddState(State.Turning);
-            
-            float target = GetTargetRotation();
-            
-            while(Mathf.Abs(transform.eulerAngles.y - target) > 10f)
-            {
-                if(basedOnMovement)
-                {
-                    if (moveDirection == Vector3.zero)
-                    {
-                        rb.angularVelocity = Vector3.zero;
-                        break;
-                    }
-                }
-                
-                target = GetTargetRotation();
-                
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, target, ref rotationVelocity, 1 / rotationSpeed);
-                transform.eulerAngles = new Vector3(0, rotation, 0);
-
-                yield return null;
-            }
-            
-            Player.RemoveState(State.Turning);
-
-            float GetTargetRotation()
-            {
-                Quaternion rot = Quaternion.LookRotation(ConvertedDirection, transform.up);
-                return rot.eulerAngles.y;
-            }
-        }
     }
 }
