@@ -11,8 +11,6 @@ namespace Capstone
         {
             rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
             
-            LimitSpeed();
-            
             if(!turning)
             {
                 StartCoroutine(FaceCameraDirection(true));

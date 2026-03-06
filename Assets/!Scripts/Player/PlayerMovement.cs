@@ -36,13 +36,13 @@ namespace Capstone
             Player.input.onJump.AddListener(StartJump);
         }
 
-        private void StartJump()
+        void StartJump()
         {            
             if (Player.state.HasFlag(State.Falling) || !Player.state.HasFlag(State.Grounded)) return;
             StartCoroutine(Jump());
         }
 
-        private IEnumerator Jump()
+        IEnumerator Jump()
         {
             Player.AddState(State.Jumping);
             rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
@@ -57,7 +57,7 @@ namespace Capstone
             Player.RemoveState(State.Jumping);
         }
 
-        private void ToggleSprint()
+         void ToggleSprint()
         {
             if (!sprinting)
             {
@@ -68,7 +68,7 @@ namespace Capstone
                 Player.RemoveState(State.Sprinting);
             }
         }
-        protected void UpdateMovement(Vector2 value)
+        void UpdateMovement(Vector2 value)
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
             
@@ -78,16 +78,17 @@ namespace Capstone
                 Player.RemoveState(State.Walking);
         }
 
-        private void FixedUpdate()
+        void Update()
         {
             Movement();
+            LimitSpeed();
             Player.instance.dash.direction = ConvertedDirection;
         }
 
         protected abstract void Movement();
         
         
-        protected void LimitSpeed()
+        void LimitSpeed()
         {
             Vector3 maxVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 

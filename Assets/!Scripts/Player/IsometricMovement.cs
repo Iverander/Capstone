@@ -9,13 +9,12 @@ namespace Capstone
         protected override Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
         private Vector3 worldMousePosition;
         
-        [SerializeField] LayerMask groundLayer = 6;
+        [SerializeField] LayerMask groundLayer = 1<<6;//bitshift '1' 6 times to the left: 0000000000000001 => 000000000100000
         
 
         protected override void Start()
         {
             base.Start();
-            groundLayer = 1<<6; //bitshift '1' 6 times to the left: 0000000000000001 => 000000000100000
             Cursor.lockState = CursorLockMode.Confined;
             Player.input.onMousePosition.AddListener(GetMousePosition);
         }
@@ -33,8 +32,6 @@ namespace Capstone
         protected override void Movement()
         {
             rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
-            
-            LimitSpeed();
             
             if(!turning)
             {
