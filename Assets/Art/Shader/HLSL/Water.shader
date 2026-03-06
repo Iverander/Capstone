@@ -10,7 +10,7 @@ Shader "Custom/Water"
     SubShader
     {
         Tags { "RenderType" = "Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
-        LOD 200
+        LOD 2000
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
 
