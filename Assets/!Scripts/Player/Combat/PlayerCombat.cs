@@ -8,7 +8,7 @@ namespace Capstone
     public enum AbilityKeys
     {
         None = 0,
-        M1 = 1,
+        MB1 = 1,
         Q = 2,
         E = 3,
         F = 4
