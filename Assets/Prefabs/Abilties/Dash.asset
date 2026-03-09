@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: Capstone::Capstone.MovementAbility
   cooldown: 1
+  <onCooldown>k__BackingField: 0
   <color>k__BackingField: {r: 0.48492336, g: 0, b: 1, a: 1}
   ShowGizmos: 0
-  force: 1
-  direction: {x: 0, y: 0, z: -0}
+  effectPrefab: {fileID: 0}
+  force: 10
+  direction: {x: -0, y: 0, z: 0}

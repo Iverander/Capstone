@@ -13,11 +13,14 @@ namespace Capstone
         [Space, SerializeField] public float cooldown = .2f;
         [field:SerializeField]public bool onCooldown { get; private set; }
         [field: SerializeField] protected Color color { get; private set; } = Color.red;
-
+        public Action<float> performed;
+        
         [Header("Gizmos")]
         public bool ShowGizmos;
         
-        public Action<float> performed;
+        [Header("Art")]
+        [SerializeField] protected GameObject effectPrefab;
+        
         
         public void Initialize(Creature origin)
         {
@@ -32,8 +35,12 @@ namespace Capstone
                 _=Cooldown();
             
             Action();
+            Effect();
         }
-        public abstract void Action();
+        
+
+        protected abstract void Action();
+        protected abstract void Effect();
 
         protected async Task Cooldown()
         {

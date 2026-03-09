@@ -25,7 +25,7 @@ namespace Capstone
         [SerializeField] protected float knockbackForce = 5;
         [SerializeField] protected float duration = .3f;
         
-        public override void Action()
+        protected override void Action()
         {
             if(size == Vector3.zero) return;
             
@@ -58,7 +58,12 @@ namespace Capstone
                 }   
             }
         }
-        
+
+        protected override void Effect()
+        {
+            Destroy(Instantiate(effectPrefab, trueCenter, origin.transform.rotation), duration);
+        }
+
         public override void Gizmos(Transform origin)
         {
             base.Gizmos(origin);

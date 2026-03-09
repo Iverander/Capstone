@@ -16,6 +16,7 @@ MonoBehaviour:
   <onCooldown>k__BackingField: 0
   <color>k__BackingField: {r: 0.39488173, g: 1, b: 0, a: 1}
   ShowGizmos: 0
+  effectPrefab: {fileID: 7968046532550929234, guid: 29af3118d8bab414983d398d33feb4ad, type: 3}
   size: {x: 1, y: 1, z: 1}
   <center>k__BackingField: {x: 0, y: 1, z: 1}
   layerToHit:
