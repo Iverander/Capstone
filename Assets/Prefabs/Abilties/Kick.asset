@@ -23,6 +23,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   includeSelf: 0
-  damage: 40
+  damage: 65
   knockbackForce: 10
   duration: 0.3
