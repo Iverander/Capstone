@@ -1,11 +1,16 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Prefabs/UI/Menu/MenuStyle.uss?fileID=7433441132597879392&amp;guid=8cb9214734bef1e1a8d77e23b75f39ae&amp;type=3#MenuStyle"/>
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; width: 50%; align-self: center; height: 50%; justify-content: center; align-items: center;">
-        <ui:Label text="Rumble Mountain!" name="Header" style="font-size: 140px; padding-top: 62px; padding-right: 62px; padding-bottom: 62px; padding-left: 62px;"/>
-        <ui:EnumField label="Weather" value="None" type="Capstone.WeatherType, Capstone" name="WeatherSelector" style="font-size: 50px; width: 50%;"/>
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-items: center; width: 100%; max-height: 25%;">
-            <ui:Button text="Game Scene" name="GameScene" class="MenuButton"/>
-            <ui:Button text="Showcase " name="Showcase" class="MenuButton"/>
+    <ui:VisualElement picking-mode="Ignore" style="align-items: center;">
+        <ui:Label text="Rumble Mountain!" name="Header" style="font-size: 140px; padding-top: 8%; padding-right: 8%; padding-bottom: 8%; padding-left: 8%;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; width: 50%;">
+            <ui:VisualElement name="" style="flex-grow: 1; align-items: center;">
+                <ui:Button text="Game Scene" name="GameScene" class="MenuButton"/>
+                <ui:Button text="Showcase " name="Showcase" class="MenuButton"/>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; align-items: flex-start;">
+                <ui:EnumField label="Weather" value="None" type="Capstone.WeatherType, Capstone" name="WeatherSelector" style="font-size: 50px; width: 500px;"/>
+                <ui:Toggle label="Obstacles" value="false" name="ObstacleToggle"/>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:Label text="Hover over one of the buttons to get a short description!" name="Description" style="white-space: normal;"/>
     </ui:VisualElement>

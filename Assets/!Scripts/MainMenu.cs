@@ -20,6 +20,7 @@ namespace Capstone
         Button showcaseButton;
         Label descriptionLabel;
         EnumField weatherField;
+        Toggle obstacleToggle;
         private void Start()
         {
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
@@ -29,8 +30,10 @@ namespace Capstone
             showcaseButton = root.Q<Button>("Showcase");
             descriptionLabel = root.Q<Label>("Description");
             weatherField = root.Q<EnumField>("WeatherSelector");
+            obstacleToggle = root.Q<Toggle>("ObstacleToggle");
 
             weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
+            obstacleToggle.value = LevelSettings.CurrentMapSettings.obstacles;
 
             gameSceneButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
             {
@@ -53,6 +56,11 @@ namespace Capstone
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
                 LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
+            });
+            
+            obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
+            {
+                LevelSettings.ToggleObstacles(changeEvent.newValue);
             });
         }
 
