@@ -51,15 +51,10 @@ Shader "Custom/Water"
                 return float2(sin(uv.y * +offset) * .5 + .5, cos(uv.x * offset) * .5 + .5);
             }
             
-            float2 mod(float2 x, float y)
-            {
-                return x - y * floor(x/y);
-            }
-            
             void Ripples(float2 uv, float angleOffset, float cellDensity, float time, float strength, out float Out, out float3 Normal)
             {
                 float2 g = floor(uv *  cellDensity);
-                float2 f = frac(uv *  cellDensity);
+                float2 f = frac(uv *  cellDensity); //Returns the fractions. ie 2.54 => 0.54
                 
                 Out = 0;
                 Normal = float3(0,0,1);
@@ -69,7 +64,7 @@ Shader "Custom/Water"
                     for (int x = -1; x <= 1; ++x)
                     {
                         float2 lattice = float2(x, y);
-                        float2 offset = voronoi_randomVector(mod(lattice + g, cellDensity), angleOffset);
+                        float2 offset = voronoi_randomVector(fmod(lattice + g, cellDensity), angleOffset);
                         float d = distance(lattice + offset, f);
                         
                         float t = frac(time + (offset.x * 5));
@@ -99,13 +94,17 @@ Shader "Custom/Water"
 
             float4 frag(Varyings IN) : SV_Target
             {
+                float4 returnColor = _BaseColor;
+                
                 float Out;
                 float3 Normal;
                 Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
                 
                 float3 rippleNormal = InverseLerp(-1, 1, Normal);
                 
-                return float4(rippleNormal, 1) * _BaseColor;
+                returnColor *= float4(rippleNormal, 1);
+                
+                return returnColor;
             }
             ENDHLSL
         }
