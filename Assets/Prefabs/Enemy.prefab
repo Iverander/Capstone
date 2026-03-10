@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Enemy
   abilities:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c2a21eed87d4e15659564fc740e27ff6, type: 2}
 --- !u!114 &2031065405232868160
 MonoBehaviour:
   m_ObjectHideFlags: 0
