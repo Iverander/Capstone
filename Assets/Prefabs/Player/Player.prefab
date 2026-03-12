@@ -39,6 +39,7 @@ Transform:
   - {fileID: 3235235956221215346}
   - {fileID: 5750757743199086728}
   - {fileID: 2627809336265696482}
+  - {fileID: 8926698300581837538}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1092691132225541731
@@ -81,8 +82,10 @@ MonoBehaviour:
     onMousePosition:
       m_PersistentCalls:
         m_Calls: []
+    onCameraLock:
+      m_PersistentCalls:
+        m_Calls: []
   playerState: 0
-  dash: {fileID: 11400000, guid: 4daffad3ab19b5a60a16b2e859a21f27, type: 2}
 --- !u!114 &8550978030683346141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c944cb88a850072b0903e076f5060818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  cameraType: 1
+  cameraType: 0
   activeCamera: {fileID: 0}
   thirdPersonCamera: {fileID: 2095068982950105602, guid: 6547e22b812a4cf0091a358d905917b9, type: 3}
   isometricCamera: {fileID: 1613608796637834331, guid: cd378ab9479b169ec852834bf246156f, type: 3}
@@ -114,15 +117,95 @@ MonoBehaviour:
   abilities:
     _serializedList:
     - Key: 0
-      Value: {fileID: 0}
+      Value:
+        ability:
+          rid: -2
     - Key: 1
-      Value: {fileID: 11400000, guid: 2dc460679d9350ddd98f9d2df78fd69b, type: 2}
+      Value:
+        ability:
+          rid: 1974661590724378814
     - Key: 2
-      Value: {fileID: 11400000, guid: 60a0a52fc14081d88a93d286235e08ff, type: 2}
+      Value:
+        ability:
+          rid: 1974661590724378815
     - Key: 3
-      Value: {fileID: 11400000, guid: 8a041e8d112f31cb2847040a6d289c9e, type: 2}
+      Value:
+        ability:
+          rid: 1974661590724378816
     - Key: 4
-      Value: {fileID: 11400000, guid: 4daffad3ab19b5a60a16b2e859a21f27, type: 2}
+      Value:
+        ability:
+          rid: 1974661590724378817
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1974661590724378814
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: Punch
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
+        <color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+        ShowGizmos: 1
+        effectPrefab: {fileID: 795769684831347264, guid: 12d0b8700545fe58e806cd9e7943e25a, type: 3}
+        size: {x: 2, y: 1, z: 2}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        layerToHit:
+          serializedVersion: 2
+          m_Bits: 1
+        includeSelf: 0
+        damage: 25
+        knockbackForce: 5
+        duration: 0.3
+    - rid: 1974661590724378815
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: Kick
+        cooldown: 1
+        <onCooldown>k__BackingField: 0
+        <color>k__BackingField: {r: 0.42706084, g: 1, b: 0, a: 1}
+        ShowGizmos: 1
+        effectPrefab: {fileID: 795769684831347264, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
+        size: {x: 4, y: 1, z: 3}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        layerToHit:
+          serializedVersion: 2
+          m_Bits: 1
+        includeSelf: 0
+        damage: 75
+        knockbackForce: 5
+        duration: 0.3
+    - rid: 1974661590724378816
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: Push
+        cooldown: 0.3
+        <onCooldown>k__BackingField: 0
+        <color>k__BackingField: {r: 0, g: 1, b: 0.84622765, a: 1}
+        ShowGizmos: 1
+        effectPrefab: {fileID: 7968046532550929234, guid: 29af3118d8bab414983d398d33feb4ad, type: 3}
+        size: {x: 3, y: 1, z: 2}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        layerToHit:
+          serializedVersion: 2
+          m_Bits: 1
+        includeSelf: 0
+        damage: 5
+        knockbackForce: 20
+        duration: 0.3
+    - rid: 1974661590724378817
+      type: {class: MovementAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: Dash
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
+        <color>k__BackingField: {r: 0, g: 0.051280975, b: 1, a: 1}
+        ShowGizmos: 0
+        effectPrefab: {fileID: 0}
+        force: 10
+        direction: {x: 0, y: 0, z: 0}
 --- !u!114 &2088548381072869104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5750757743199086728
 Transform:
   m_ObjectHideFlags: 0
@@ -526,3 +609,85 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   abilityDocument: {fileID: 9197481963319205126, guid: 0347b64b2cfdab5ea986e4f5aac0e926, type: 3}
+--- !u!1001 &8964619234482986249
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 17345156514348565}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_Name
+      value: Female Base model Main character
+      objectReference: {fileID: 0}
+    - target: {fileID: 986530700061207544, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+--- !u!4 &8926698300581837538 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba0948d2fc72ade4188c2dfb46fb5c46, type: 3}
+  m_PrefabInstance: {fileID: 8964619234482986249}
+  m_PrefabAsset: {fileID: 0}

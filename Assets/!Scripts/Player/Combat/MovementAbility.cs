@@ -2,11 +2,11 @@ using System;
 using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Capstone
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "MovementAbility", menuName = "Scriptable Objects/MovementAbility")]
     public class MovementAbility : Ability
     {
         [Header("Stats")]
@@ -33,7 +33,7 @@ namespace Capstone
 
         protected override void Effect()
         {
-            Instantiate(effectPrefab, origin.transform.position, Quaternion.identity);
+            Object.Instantiate(effectPrefab, origin.transform.position, Quaternion.identity);
         }
     }
 }

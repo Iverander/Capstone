@@ -37,7 +37,7 @@ namespace Capstone
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
         public PlayerCombat combat { get; private set; }
-        public MovementAbility dash;
+
         
         
         void Start()

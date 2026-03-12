@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Capstone
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "CombatAbility", menuName = "Scriptable Objects/CombatAbility")]
     public class CombatAbility : Ability
     {
         
@@ -61,7 +61,7 @@ namespace Capstone
 
         protected override void Effect()
         {
-            Destroy(Instantiate(effectPrefab, trueCenter, origin.transform.rotation), duration);
+            Object.Destroy(Object.Instantiate(effectPrefab, trueCenter, origin.transform.rotation), duration);
         }
 
         public override void Gizmos(Transform origin)

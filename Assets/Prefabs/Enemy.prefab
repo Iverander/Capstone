@@ -124,7 +124,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Enemy
   abilities:
+<<<<<<< Updated upstream
   - {fileID: 0}
+=======
+  - rid: 1974661590724378813
+  references:
+    version: 2
+    RefIds:
+    - rid: 1974661590724378813
+      type: {class: CombatAbility, ns: Capstone, asm: Capstone}
+      data:
+        <name>k__BackingField: 
+        cooldown: 0.2
+        <onCooldown>k__BackingField: 0
+        <color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+        ShowGizmos: 0
+        effectPrefab: {fileID: 795769684831347264, guid: 4be85455886a74710a1a610333100f0a, type: 3}
+        size: {x: 1, y: 1, z: 1}
+        <center>k__BackingField: {x: 0, y: 1, z: 1}
+        layerToHit:
+          serializedVersion: 2
+          m_Bits: 8
+        includeSelf: 0
+        damage: 10
+        knockbackForce: 5
+        duration: 0.3
+>>>>>>> Stashed changes
 --- !u!114 &2031065405232868160
 MonoBehaviour:
   m_ObjectHideFlags: 0

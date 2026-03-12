@@ -16,15 +16,22 @@ namespace Capstone
 
     public class PlayerCombat : MonoBehaviour
     {
+        [Serializable]
+        public class workaround
+        {
+            [SerializeReference, SubclassSelector] 
+            public Ability ability;
+        }
 
-        [SerializedDictionary] public SerializedDictionary<AbilityKeys, Ability> abilities;
+        [SerializedDictionary] 
+        public SerializedDictionary<AbilityKeys, workaround> abilities;
 
         private void Start()
         {
             foreach (var ability in abilities.Values)
             {
-                if (ability == null) continue;
-                ability.Initialize(Player.instance);
+                if (ability.ability == null) continue;
+                ability.ability.Initialize(Player.instance);
             }
 
             Player.input.onAbility.AddListener(UseAbility);
@@ -34,17 +41,17 @@ namespace Capstone
         {
             foreach (var ability in abilities.Values)
             {
-                if (ability == null) continue;
-                if (!ability.ShowGizmos) continue;
+                if (ability.ability == null) continue;
+                if (!ability.ability.ShowGizmos) continue;
 
-                ability.Gizmos(transform);
+                ability.ability.Gizmos(transform);
             }
         }
 
         void UseAbility(int abilityIndex)
         {
             //Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex]);
-            abilities[(AbilityKeys)abilityIndex].Perform();
+            abilities[(AbilityKeys)abilityIndex].ability.Perform();
         }
     }
 }

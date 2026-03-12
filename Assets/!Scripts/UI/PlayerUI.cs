@@ -23,16 +23,16 @@ namespace Capstone
 
             foreach (var ability in Player.instance.combat.abilities)
             {
-                if(ability.Value == null) continue;
+                if(ability.Value.ability == null) continue;
                 VisualElement uiAbility = abilityDocument.Instantiate();
                 abilityContainer.Add(uiAbility);
-                uiAbility.Q<Label>().text = $"{ability.Key}: {ability.Value.name}";
+                uiAbility.Q<Label>().text = $"{ability.Key}: {ability.Value.ability.name}";
                 
                 ProgressBar bar = uiAbility.Q<ProgressBar>();
-                bar.highValue = ability.Value.cooldown;
+                bar.highValue = ability.Value.ability.cooldown;
                 bar.value = bar.highValue;
 
-                ability.Value.performed += async (cooldown) =>
+                ability.Value.ability.performed += async (cooldown) =>
                 {
                     bar.value = 0;
                     for (int i = 0; i < Mathf.RoundToInt(cooldown * 100); i++)

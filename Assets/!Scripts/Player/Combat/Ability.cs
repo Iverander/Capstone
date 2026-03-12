@@ -6,8 +6,9 @@ using UnityEngine.Serialization;
 namespace Capstone
 {
     [Serializable]
-    public abstract class Ability : ScriptableObject
+    public abstract class Ability
     {
+        [field: SerializeField]public string name { get; private set; }
         protected Creature origin;
         
         [Space, SerializeField] public float cooldown = .2f;

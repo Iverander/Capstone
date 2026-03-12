@@ -86,6 +86,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CameraLock",
+                    "type": "Button",
+                    "id": "c3da318d-f1aa-4182-8bdc-0ec8070b6317",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -405,6 +414,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cf133b3-8380-4de5-8858-b776171725b8",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraLock",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

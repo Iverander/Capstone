@@ -172,6 +172,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3da318d-f1aa-4182-8bdc-0ec8070b6317"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -493,6 +502,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cf133b3-8380-4de5-8858-b776171725b8"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""CameraLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -571,6 +591,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
+        m_Player_CameraLock = m_Player.FindAction("CameraLock", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -660,6 +681,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeCamera;
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_MousePosition;
+    private readonly InputAction m_Player_CameraLock;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -707,6 +729,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/MousePosition".
         /// </summary>
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/CameraLock".
+        /// </summary>
+        public InputAction @CameraLock => m_Wrapper.m_Player_CameraLock;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -760,6 +786,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @CameraLock.started += instance.OnCameraLock;
+            @CameraLock.performed += instance.OnCameraLock;
+            @CameraLock.canceled += instance.OnCameraLock;
         }
 
         /// <summary>
@@ -798,6 +827,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @CameraLock.started -= instance.OnCameraLock;
+            @CameraLock.performed -= instance.OnCameraLock;
+            @CameraLock.canceled -= instance.OnCameraLock;
         }
 
         /// <summary>
@@ -966,5 +998,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CameraLock" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCameraLock(InputAction.CallbackContext context);
     }
 }

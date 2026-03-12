@@ -10,7 +10,7 @@ namespace Capstone
     public abstract class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [SerializeField] protected Vector2 speed = new Vector2(5, 10);
+        [SerializeField] protected Vector2 speed = new Vector2(4, 6);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         protected abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
@@ -18,7 +18,7 @@ namespace Capstone
         protected float currentSpeed => sprinting ? speed.y : speed.x;
         
         [Header("Jumping")]
-        [SerializeField] protected float jumpForce = 7;
+        [SerializeField] protected float jumpForce = 4;
         
         [Header("Turning")]
         [SerializeField] protected float rotationSpeed = 7;
@@ -31,6 +31,7 @@ namespace Capstone
         {
             Cursor.lockState = CursorLockMode.Locked;
             Player.input.onMove.AddListener(UpdateMovement);
+            Player.AddState(State.Sprinting);
             Player.input.onSprint.AddListener(ToggleSprint);
             Player.input.onJump.AddListener(StartJump);
         }
@@ -81,7 +82,7 @@ namespace Capstone
         {
             Movement();
             LimitSpeed();
-            Player.instance.dash.direction = ConvertedDirection;
+            //Player.instance.dash.direction = ConvertedDirection;
         }
 
         protected abstract void Movement();

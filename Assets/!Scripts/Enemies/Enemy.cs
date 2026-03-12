@@ -23,7 +23,7 @@ namespace Capstone
         bool canAttack;
         EnemyState enemyState;
 
-        [Expandable] public List<Ability> abilities = new(); //things has been simplified, you're welcome
+        [SerializeReference, SubclassSelector] public List<Ability> abilities = new(); //things has been simplified, you're welcome
 
         /*
          * State machine enum (thingy with chase and attack)
