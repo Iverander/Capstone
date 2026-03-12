@@ -124,9 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Enemy
   abilities:
-<<<<<<< Updated upstream
-  - {fileID: 0}
-=======
   - rid: 1974661590724378813
   references:
     version: 2
@@ -149,7 +146,6 @@ MonoBehaviour:
         damage: 10
         knockbackForce: 5
         duration: 0.3
->>>>>>> Stashed changes
 --- !u!114 &2031065405232868160
 MonoBehaviour:
   m_ObjectHideFlags: 0
