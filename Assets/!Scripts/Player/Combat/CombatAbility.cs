@@ -54,14 +54,15 @@ namespace Capstone
 
                 if (knockbackForce > 0)
                 {
-                    creature.Knockback(origin.transform.position, knockbackForce, duration);
+                    creature.Stun(duration);
+                    creature.rb.AddForce((creature.transform.position - origin.transform.position) * (knockbackForce * 10), ForceMode.Force);
                 }   
             }
         }
 
         protected override void Effect()
         {
-            Object.Destroy(Object.Instantiate(effectPrefab, trueCenter, origin.transform.rotation), duration);
+            Object.Destroy(Object.Instantiate(effectPrefab, trueCenter, origin.transform.rotation), effectPrefab.main.duration);
         }
 
         public override void Gizmos(Transform origin)

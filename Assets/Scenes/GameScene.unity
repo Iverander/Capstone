@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 8175028}
   - component: {fileID: 8175027}
   - component: {fileID: 8175026}
+  - component: {fileID: 8175029}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -1254,7 +1255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6711680963819314367, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46252513
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6711680963819314367, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2427,17 +2428,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 195890739875289452, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      propertyPath: m_Constraints
-      value: 112
+    - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9964564
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.08411137
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 153122180645486381, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
 --- !u!1 &1207522234
 GameObject:
@@ -3653,6 +3655,7 @@ GameObject:
   - component: {fileID: 1508698482}
   - component: {fileID: 1508698481}
   - component: {fileID: 1508698480}
+  - component: {fileID: 1508698483}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -4013,24 +4016,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 985460735}
-  - {fileID: 539580932}
-  - {fileID: 594111033}
-  - {fileID: 507460542}
   - {fileID: 1392053959}
-  - {fileID: 1354399522}
-  - {fileID: 979427708}
   - {fileID: 1566715138}
-  - {fileID: 1033370331}
   - {fileID: 12407232}
   - {fileID: 2003964645}
   - {fileID: 87864637}
-  - {fileID: 401951823}
-  - {fileID: 1611855169}
-  - {fileID: 1340582773}
-  - {fileID: 1146798125}
-  - {fileID: 486374842}
-  - {fileID: 779105622}
   - {fileID: 1478124935}
   - {fileID: 1882528076}
   - {fileID: 1496146497}
@@ -4399,6 +4389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d408a29e52a6c469bf81e174780d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Water
+  defaultRippleStrength: 0
 --- !u!23 &1750053602
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4840,6 +4831,7 @@ GameObject:
   - component: {fileID: 2003533030}
   - component: {fileID: 2003533029}
   - component: {fileID: 2003533028}
+  - component: {fileID: 2003533031}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -5187,3 +5179,6 @@ SceneRoots:
   - {fileID: 1289332703}
   - {fileID: 1750053604}
   - {fileID: 351822482}
+  - {fileID: 1800210024}
+  - {fileID: 114426247}
+  - {fileID: 1572461000}

@@ -107,9 +107,9 @@ namespace Capstone
             Player.state &= ~state;
         }
 
-        public override void Knockback(Vector3 origin, float knockback, float duration)
+        public override void Stun(float duration)
         {
-            rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
+            //rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
         }
     }
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 195890739875289452}
   - component: {fileID: 1193891074316816883}
   - component: {fileID: 7922217572380646346}
+  - component: {fileID: 7712864306461528486}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -40,6 +41,7 @@ Transform:
   - {fileID: 5750757743199086728}
   - {fileID: 2627809336265696482}
   - {fileID: 8926698300581837538}
+  - {fileID: 6497187994369404934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1092691132225541731
@@ -54,6 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd2611b50e1ac4dbb5c399f1a001030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  stunEffect: {fileID: 4349443906711307342}
   inputReader:
     onMove:
       m_PersistentCalls:
@@ -124,15 +127,15 @@ MonoBehaviour:
       Value:
         ability:
           rid: 1974661590724378814
+    - Key: 4
+      Value:
+        ability:
+          rid: 1974661590724378816
     - Key: 2
       Value:
         ability:
           rid: 1974661590724378815
     - Key: 3
-      Value:
-        ability:
-          rid: 1974661590724378816
-    - Key: 4
       Value:
         ability:
           rid: 1974661590724378817
@@ -149,7 +152,7 @@ MonoBehaviour:
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
         ShowGizmos: 1
-        effectPrefab: {fileID: 795769684831347264, guid: 12d0b8700545fe58e806cd9e7943e25a, type: 3}
+        effectPrefab: {fileID: 2217095109323092603, guid: 12d0b8700545fe58e806cd9e7943e25a, type: 3}
         size: {x: 2, y: 1, z: 2}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         layerToHit:
@@ -157,7 +160,7 @@ MonoBehaviour:
           m_Bits: 1
         includeSelf: 0
         damage: 25
-        knockbackForce: 5
+        knockbackForce: 0
         duration: 0.3
     - rid: 1974661590724378815
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
@@ -167,7 +170,7 @@ MonoBehaviour:
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 0.42706084, g: 1, b: 0, a: 1}
         ShowGizmos: 1
-        effectPrefab: {fileID: 795769684831347264, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
+        effectPrefab: {fileID: 2217095109323092603, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
         size: {x: 4, y: 1, z: 3}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         layerToHit:
@@ -175,8 +178,8 @@ MonoBehaviour:
           m_Bits: 1
         includeSelf: 0
         damage: 75
-        knockbackForce: 5
-        duration: 0.3
+        knockbackForce: 10
+        duration: 2
     - rid: 1974661590724378816
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
@@ -185,7 +188,7 @@ MonoBehaviour:
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 0, g: 1, b: 0.84622765, a: 1}
         ShowGizmos: 1
-        effectPrefab: {fileID: 7968046532550929234, guid: 29af3118d8bab414983d398d33feb4ad, type: 3}
+        effectPrefab: {fileID: 4631374179909460134, guid: 29af3118d8bab414983d398d33feb4ad, type: 3}
         size: {x: 3, y: 1, z: 2}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         layerToHit:
@@ -193,8 +196,8 @@ MonoBehaviour:
           m_Bits: 1
         includeSelf: 0
         damage: 5
-        knockbackForce: 20
-        duration: 0.3
+        knockbackForce: 15
+        duration: 1
     - rid: 1974661590724378817
       type: {class: MovementAbility, ns: Capstone, asm: Capstone}
       data:
@@ -226,7 +229,19 @@ MonoBehaviour:
       m_Calls: []
   Killed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7712864306461528486}
+        m_TargetAssemblyTypeName: Capstone.SceneLoader, Capstone
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &195890739875289452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,7 +267,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1193891074316816883
 CapsuleCollider:
@@ -290,6 +305,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.FPSSetter
   fps: 0
+--- !u!114 &7712864306461528486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101182429259731174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ccf06c049dc6a779606407abed6d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.SceneLoader
 --- !u!1 &153122180645486381
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +636,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   abilityDocument: {fileID: 9197481963319205126, guid: 0347b64b2cfdab5ea986e4f5aac0e926, type: 3}
+--- !u!1001 &4286009026378856193
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 17345156514348565}
+    m_Modifications:
+    - target: {fileID: 515278084303106895, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_Name
+      value: StunEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.931
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3915042
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9201764
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+--- !u!1 &4349443906711307342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515278084303106895, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+  m_PrefabInstance: {fileID: 4286009026378856193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6497187994369404934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
+  m_PrefabInstance: {fileID: 4286009026378856193}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8964619234482986249
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -352,7 +352,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3a68d372-3aa9-4e0a-a1df-a6c6ab7e7001"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=4)"",
                     ""groups"": "";Keyboard&Mouse"",

@@ -72,14 +72,15 @@ namespace Capstone
         //i remember time.Deltatime btw:)
 
         IEnumerator Attack()
-        {if (!canAttack) yield break;
+        {
+            if (abilities[abilityToPreform].onCooldown) yield break;
             transform.LookAt(player.transform.position);
 
             canAttack = false;
             abilityToPreform = Random.Range(0, abilities.Count);
             abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature
             //Debug.Log("attack happened");
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(abilities[abilityToPreform].cooldown);
             canAttack = true;
 
             enemyState = EnemyState.Chase; //back to chase
@@ -89,7 +90,7 @@ namespace Capstone
         {
             //newPos
 
-            if (Vector3.Distance(agent.destination, transform.position) < 2)
+            //if (Vector3.Distance(agent.destination, transform.position) < 2)
             {
                 NewDestination();
             }
@@ -126,20 +127,22 @@ namespace Capstone
             }
         }
 
-        //for knockback
-        public override async void Knockback(Vector3 origin, float knockback, float duration)
+        //for stun & knockback
+        public override async void Stun(float duration)
         {
             agent.enabled = false;
             rb.isKinematic = false;
-            knockbacked = true;
+            stunned = true;
+            stunEffect.SetActive(true);
             
-            rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
+            //rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
 
             await Task.Delay(Mathf.RoundToInt(1000 * duration));
             
-            knockbacked = false;
+            stunned = false;
             rb.isKinematic = true;
             agent.enabled = true;
+            stunEffect.SetActive(false);
         }
     }
 }

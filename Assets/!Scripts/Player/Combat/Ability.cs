@@ -20,7 +20,7 @@ namespace Capstone
         public bool ShowGizmos;
         
         [Header("Art")]
-        [SerializeField] protected GameObject effectPrefab;
+        [SerializeField] protected ParticleSystem effectPrefab;
         
         
         public void Initialize(Creature origin)

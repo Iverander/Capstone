@@ -8,10 +8,10 @@ namespace Capstone
     public enum AbilityKeys
     {
         None = 0,
-        MB1 = 1,
+        LMB = 1,
         Q = 2,
         E = 3,
-        F = 4
+        RMB = 4
     }
 
     public class PlayerCombat : MonoBehaviour

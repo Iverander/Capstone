@@ -7,7 +7,7 @@
             <ui:Label text="Jump: Space" name="Jump" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; align-items: flex-end;">
-            <ui:Label text="Change Camera: Tab" name="Camera" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
+            <ui:Label text="Unlock Camera: Alt" name="Camera" focusable="false" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
             <ui:Label text="Exit to Menu: Esc" name="Menu" style="font-size: 100%; -unity-text-outline-width: 2px; color: rgb(255, 255, 255);"/>
         </ui:VisualElement>
     </ui:VisualElement>
