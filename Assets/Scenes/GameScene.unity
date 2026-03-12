@@ -231,8 +231,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8175024}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!208 &8175029
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -653,7 +651,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &216858201
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,8 +3106,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &1392053958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3457,7 +3452,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
->>>>>>> Stashed changes
 --- !u!1001 &1493374516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3519,8 +3513,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff784a14214c4b341817259317707010, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &1496146496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3649,7 +3641,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &1508698478
 GameObject:
   m_ObjectHideFlags: 0
@@ -3762,8 +3753,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508698478}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!208 &1508698483
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -4063,7 +4052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de440dad06e18875a50851da9d815ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Obstacle
->>>>>>> Stashed changes
 --- !u!1 &1595757283
 GameObject:
   m_ObjectHideFlags: 0
@@ -4543,8 +4531,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1713820048}
   m_SourcePrefab: {fileID: 100100000, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &1800210024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4730,7 +4716,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &1982967486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,8 +4940,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003533026}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!208 &2003533031
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -5187,7 +5170,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
->>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
