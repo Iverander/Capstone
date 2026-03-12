@@ -2556,6 +2556,7 @@ GameObject:
   - component: {fileID: 7439129665475197152}
   - component: {fileID: 7327257046699010396}
   - component: {fileID: 5299347423266921118}
+  - component: {fileID: 858934150545896333}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -2629,6 +2630,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac73c2501be2f5b25ab8dabc3c954571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &858934150545896333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6806784068832332746}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 706be95256ed429e98bcc69e01042219, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 6502fc50d59657363a18abd9b774c290, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &7039936975651378800
 GameObject:
   m_ObjectHideFlags: 0
