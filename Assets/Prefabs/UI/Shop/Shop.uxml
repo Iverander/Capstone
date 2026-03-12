@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Prefabs/UI/Shop/ShopStyle.uss?fileID=7433441132597879392&amp;guid=c6850a8136d3c1cad8edd62ba2ac62f2&amp;type=3#ShopStyle"/>
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(140, 254, 255, 0.39); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; position: absolute; top: 10%; bottom: 10%; left: 20%; right: 20%; align-items: center; justify-content: space-between;">
+        <ui:Label text="Shop"/>
+        <ui:VisualElement style="flex-grow: 1; align-self: stretch; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; align-items: center;">
+            <ui:Label text="I havent added anything yet, cut me some slack pls"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

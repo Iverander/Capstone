@@ -181,6 +181,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shop"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc4bd03e-afa5-4506-8046-e921ae7c3acf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -513,6 +522,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""CameraLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d5d0502-92c1-40a8-9419-b13b540766c2"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea277a0d-c08b-4d22-867b-6ad01d638ad5"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Shop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -592,6 +623,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_CameraLock = m_Player.FindAction("CameraLock", throwIfNotFound: true);
+        m_Player_Shop = m_Player.FindAction("Shop", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -682,6 +714,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_CameraLock;
+    private readonly InputAction m_Player_Shop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -733,6 +766,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/CameraLock".
         /// </summary>
         public InputAction @CameraLock => m_Wrapper.m_Player_CameraLock;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Shop".
+        /// </summary>
+        public InputAction @Shop => m_Wrapper.m_Player_Shop;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -789,6 +826,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CameraLock.started += instance.OnCameraLock;
             @CameraLock.performed += instance.OnCameraLock;
             @CameraLock.canceled += instance.OnCameraLock;
+            @Shop.started += instance.OnShop;
+            @Shop.performed += instance.OnShop;
+            @Shop.canceled += instance.OnShop;
         }
 
         /// <summary>
@@ -830,6 +870,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CameraLock.started -= instance.OnCameraLock;
             @CameraLock.performed -= instance.OnCameraLock;
             @CameraLock.canceled -= instance.OnCameraLock;
+            @Shop.started -= instance.OnShop;
+            @Shop.performed -= instance.OnShop;
+            @Shop.canceled -= instance.OnShop;
         }
 
         /// <summary>
@@ -1005,5 +1048,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCameraLock(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShop(InputAction.CallbackContext context);
     }
 }
