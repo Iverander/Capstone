@@ -3,14 +3,14 @@
 }
 
 .unity-label {
-    font-size: 36px;
+    font-size: 54px;
     color: rgb(255, 255, 255);
     -unity-text-outline-width: 1px;
     -unity-text-outline-color: rgb(0, 0, 0);
 }
 
 .title {
-    font-size: 76px;
+    font-size: 116px;
     margin-top: 15px;
     margin-right: 15px;
     margin-bottom: 15px;

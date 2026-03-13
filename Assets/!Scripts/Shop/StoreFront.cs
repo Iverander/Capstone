@@ -35,6 +35,8 @@ namespace Capstone
         {
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.Confined;
+            shopUI.rootVisualElement.Q<Label>("PlayerCash").text = Wallet.Cash.ToString();
+            Wallet.cashUpdated += RefreshCash;
             
             foreach (Modifier mod in Sellable)
             {
@@ -61,10 +63,16 @@ namespace Capstone
             }
         }
 
+        private void RefreshCash(float amount)
+        {
+            shopUI.rootVisualElement.Q<Label>("PlayerCash").text = amount.ToString();
+        }
+
         public void Close()
         {
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
+            Wallet.cashUpdated -= RefreshCash;
         }
     }
 }
