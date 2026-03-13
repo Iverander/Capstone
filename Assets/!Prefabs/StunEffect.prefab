@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7012193194829924103}
   - component: {fileID: 9222404700081458834}
   - component: {fileID: 6912269927537594937}
-  - component: {fileID: 3839317228399151630}
   m_Layer: 0
   m_Name: StunEffect
   m_TagString: Untagged
@@ -27,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515278084303106895}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.99868387, z: 0, w: 0.051288538}
+  m_LocalRotation: {x: -0, y: -0.9986838, z: 0, w: -0.051290564}
   m_LocalPosition: {x: 0, y: 1.85, z: -0.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 408.70898, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 534.12, z: 0}
 --- !u!198 &9222404700081458834
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -1492,7 +1491,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1708,7 +1707,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.26
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3935,7 +3934,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
@@ -4784,6 +4783,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4837,17 +4837,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &3839317228399151630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515278084303106895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1139b7c428343f5d8206f8c1e7a84fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  spin: {x: 0, y: 1, z: 0}
-  speed: 10

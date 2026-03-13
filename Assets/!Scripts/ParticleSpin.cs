@@ -3,24 +3,26 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public class Spin : MonoBehaviour
+    public class ParticleSpin : MonoBehaviour
     {
+        ParticleSystem particles;
         [SerializeField] private Vector3 spin;
         [SerializeField] private float speed;
 
         private void Start()
         {
+            particles = GetComponent<ParticleSystem>();
             transform.eulerAngles = Vector3.zero;
         }
 
         void Update()
         {
-            transform.Rotate(spin * (Time.deltaTime * speed));
+             //particles.shape.rotation += spin * (Time.deltaTime * speed);
         }
 
         private void OnDrawGizmosSelected()
         {
-            transform.Rotate(spin * (Time.deltaTime * speed));
+            //transform.Rotate(spin * (Time.deltaTime * speed));
         }
     }
 }
