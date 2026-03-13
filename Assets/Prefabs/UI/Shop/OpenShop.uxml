@@ -1,7 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Prefabs/UI/Shop/ShopStyle.uss?fileID=7433441132597879392&amp;guid=c6850a8136d3c1cad8edd62ba2ac62f2&amp;type=3#ShopStyle"/>
-    <ui:VisualElement style="flex-grow: 1; position: absolute; left: 45%; right: 45%; bottom: 200px;">
-        <ui:Label text="Open Shop" style="top: 0; position: absolute; right: 0; left: 0; -unity-text-align: middle-center;"/>
-        <ui:VisualElement style="background-image: url(&quot;project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/p.png?fileID=2800000&amp;guid=bee210a13ef25584a8f1b6f60614a60d&amp;type=3#p&quot;); background-size: contain; background-color: rgba(0, 0, 0, 0); height: 270px;"/>
-    </ui:VisualElement>
-</ui:UXML>

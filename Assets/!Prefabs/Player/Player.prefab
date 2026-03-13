@@ -88,6 +88,9 @@ MonoBehaviour:
     onCameraLock:
       m_PersistentCalls:
         m_Calls: []
+    onShop:
+      m_PersistentCalls:
+        m_Calls: []
   playerState: 0
 --- !u!114 &8550978030683346141
 MonoBehaviour:
@@ -168,7 +171,7 @@ MonoBehaviour:
         <name>k__BackingField: Kick
         cooldown: 1
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 0.42706084, g: 1, b: 0, a: 1}
+        <color>k__BackingField: {r: 1, g: 0, b: 0.5481839, a: 1}
         ShowGizmos: 1
         effectPrefab: {fileID: 2217095109323092603, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
         size: {x: 4, y: 1, z: 3}
@@ -202,9 +205,9 @@ MonoBehaviour:
       type: {class: MovementAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Dash
-        cooldown: 0.2
+        cooldown: 0.5
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 0, g: 0.051280975, b: 1, a: 1}
+        <color>k__BackingField: {r: 0.12616038, g: 1, b: 0, a: 1}
         ShowGizmos: 0
         effectPrefab: {fileID: 0}
         force: 10
@@ -662,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3915042
+      value: 0.9712871
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -670,7 +673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9201764
+      value: -0.23791048
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.z

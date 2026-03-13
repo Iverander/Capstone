@@ -31,6 +31,7 @@ namespace Capstone
                 ProgressBar bar = uiAbility.Q<ProgressBar>();
                 bar.highValue = ability.Value.ability.cooldown;
                 bar.value = bar.highValue;
+                bar.Q(className:"unity-progress-bar__progress").style.backgroundColor = ability.Value.ability.color;
 
                 ability.Value.ability.performed += async (cooldown) =>
                 {

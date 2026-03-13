@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,8 @@ namespace Capstone
     {
         [field: SerializeField, ReadOnly] public float health { get; private set; }
         [field: SerializeField] public float maxHealth { get; private set; } = 100;
+        
+        [SerializeField] float regenerationRate;
 
         [SerializeField] bool destroyOnDeath;
 
@@ -19,6 +22,12 @@ namespace Capstone
         private void Start()
         {
             health = maxHealth;
+        }
+
+        private void Update()
+        {
+            if(regenerationRate <= 0) return;
+            Heal( regenerationRate * Time.deltaTime);
         }
 
         public void Damage(float amount)
@@ -33,6 +42,14 @@ namespace Capstone
                 if (destroyOnDeath)
                     Destroy(gameObject);
             }
+        }
+
+        public void Heal(float amount)
+        {
+            health += amount;
+            
+            if(health > maxHealth)
+                health = maxHealth;
         }
     }
 }

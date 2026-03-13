@@ -13,7 +13,7 @@ namespace Capstone
         
         [Space, SerializeField] public float cooldown = .2f;
         [field:SerializeField]public bool onCooldown { get; private set; }
-        [field: SerializeField] protected Color color { get; private set; } = Color.red;
+        [field: SerializeField] public Color color { get; private set; } = Color.red;
         public Action<float> performed;
         
         [Header("Gizmos")]

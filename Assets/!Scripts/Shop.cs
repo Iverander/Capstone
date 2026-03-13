@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 namespace Capstone
 {
@@ -29,6 +30,17 @@ namespace Capstone
         private void ToggleShop()
         {
             shopUI.enabled = !shopUI.enabled;
+
+            if (shopUI.enabled)
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 }
