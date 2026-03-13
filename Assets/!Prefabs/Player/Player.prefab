@@ -211,8 +211,8 @@ MonoBehaviour:
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 0.12616038, g: 1, b: 0, a: 1}
         ShowGizmos: 0
-        effectPrefab: {fileID: 0}
-        force: 10
+        effectPrefab: {fileID: 4631374179909460134, guid: 7af3fed4e4aacf970b86b5dce9404608, type: 3}
+        force: 25
         direction: {x: 0, y: 0, z: 0}
 --- !u!114 &2088548381072869104
 MonoBehaviour:

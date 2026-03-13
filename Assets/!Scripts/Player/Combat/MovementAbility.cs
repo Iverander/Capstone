@@ -19,21 +19,22 @@ namespace Capstone
             Vector3 directionVector = direction;
             if (directionVector == Vector3.zero)
             {
-                directionVector.x = origin.rb.linearVelocity.x;
-                directionVector.z = origin.rb.linearVelocity.z;
+                directionVector = Player.instance.movement.ConvertedDirection;
             }
 
             //origin.
+            origin.Stun(.15f);
 
             if(directionVector.normalized != Vector3.zero) 
-                origin.rb.AddForce(directionVector.normalized * (10 * force), ForceMode.Impulse);
+                origin.rb.AddForce(directionVector.normalized * (force), ForceMode.Impulse);
             else
-                origin.rb.AddForce(origin.transform.forward * (10 * force), ForceMode.Impulse);
+                origin.rb.AddForce(origin.transform.forward * (force), ForceMode.Impulse);
         }
 
         protected override void Effect()
         {
-            Object.Instantiate(effectPrefab, origin.transform.position, Quaternion.identity);
+            var effect = Object.Instantiate(effectPrefab, origin.transform);
+            Object.Destroy(effect.gameObject, effect.main.duration * 2);
         }
     }
 }

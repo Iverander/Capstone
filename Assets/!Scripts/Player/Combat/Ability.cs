@@ -36,7 +36,8 @@ namespace Capstone
                 _=Cooldown();
             
             Action();
-            Effect();
+            if(effectPrefab)
+                Effect();
         }
         
 

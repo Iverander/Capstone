@@ -7,7 +7,7 @@ namespace Capstone
 {
     public class IsometricMovement : PlayerMovement
     {
-        protected override Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
+        public override Vector3 ConvertedDirection => Quaternion.AngleAxis(45, Vector3.up) * moveDirection;
         private Vector3 worldMousePosition;
         Vector2 screenMousePosition;
         

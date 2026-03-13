@@ -10,7 +10,8 @@ namespace Capstone
         [SerializeField] protected GameObject stunEffect;
         public Health health { get; private set; }
         public Rigidbody rb { get; private set; }
-        protected bool stunned;
+        public bool stunned { get; protected set; }
+
         private void Awake()
         {
             health = GetComponent<Health>();

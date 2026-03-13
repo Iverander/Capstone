@@ -62,7 +62,9 @@ namespace Capstone
 
         protected override void Effect()
         {
-            Object.Destroy(Object.Instantiate(effectPrefab, trueCenter, origin.transform.rotation), .5f);
+            var effect = Object.Instantiate(effectPrefab, origin.transform);
+            effect.transform.position = trueCenter;
+            Object.Destroy(effect.gameObject, effect.main.duration);
         }
 
         public override void Gizmos(Transform origin)
