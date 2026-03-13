@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1075573937082332685}
   - component: {fileID: 2031065405232868160}
   - component: {fileID: 5360483366724408332}
+  - component: {fileID: 1623346721436681438}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -174,13 +175,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Capstone::Capstone.Health
   <health>k__BackingField: 0
   <maxHealth>k__BackingField: 100
+  regenerationRate: 0
   destroyOnDeath: 1
   Damaged:
     m_PersistentCalls:
       m_Calls: []
   Killed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1623346721436681438}
+        m_TargetAssemblyTypeName: Capstone.DropCash, Capstone
+        m_MethodName: CashToDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1623346721436681438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158182164762022613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6abbb10f7b3b6b5eeb06891dbf6e9693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &9189600592062954612
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.09792723
+      value: -0.041093197
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -284,7 +310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9951936
+      value: 0.99915534
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalRotation.z

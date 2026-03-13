@@ -37,6 +37,7 @@ namespace Capstone
         public CameraSettings cameraSettings { get; private set; }
         public PlayerMovement movement { get; private set; }
         public PlayerCombat combat { get; private set; }
+        public PlayerModifier modifier { get; private set; }
 
         
         
@@ -49,6 +50,7 @@ namespace Capstone
             
             cameraSettings = GetComponent<CameraSettings>();
             combat = GetComponent<PlayerCombat>();
+            modifier = GetComponent<PlayerModifier>();
             cameraSettings.CameraChanged += CameraChanged;
         }
 

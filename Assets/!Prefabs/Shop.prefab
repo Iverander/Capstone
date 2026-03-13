@@ -352,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1471348746739786876}
   - component: {fileID: 7146211345010210271}
+  - component: {fileID: 3868322497566036095}
   m_Layer: 0
   m_Name: ShopMenu
   m_TagString: Untagged
@@ -397,6 +398,20 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &3868322497566036095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642528156843147616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b064d31b7037faa92affa062ea051371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  Sellable: []
+  productAsset: {fileID: 9197481963319205126, guid: 838542d1f6f4b1079939417343a331a3, type: 3}
 --- !u!1 &980001168028939294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,7 +2757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   keyIndicator: {fileID: 7017984163810976774}
-  shopUI: {fileID: 7146211345010210271}
+  storeFront: {fileID: 3868322497566036095}
 --- !u!1 &7039936975651378800
 GameObject:
   m_ObjectHideFlags: 0

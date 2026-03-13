@@ -2373,24 +2373,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.60520715
+      value: 0.26204783
       objectReference: {fileID: 0}
     - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.796068
+      value: -0.9650549
       objectReference: {fileID: 0}
-    - target: {fileID: 6604586386959587976, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      propertyPath: modifiers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604586386959587976, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      propertyPath: 'modifiers.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 25863ed3c208a6da49b6eb486878ab4d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 101182429259731174, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2094168305}
   m_SourcePrefab: {fileID: 100100000, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
 --- !u!1 &1207522234
 GameObject:
@@ -5009,6 +5004,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!1 &2094168294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 101182429259731174, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+  m_PrefabInstance: {fileID: 1167400433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2094168305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094168294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0990ff82b24851f25a958ef2a0972ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  <_cash>k__BackingField: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

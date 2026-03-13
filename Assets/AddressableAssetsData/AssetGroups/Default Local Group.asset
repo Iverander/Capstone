@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Default Local Group
+  m_GUID: aa32bbbfe541b8530a4127a5c8306154
+  m_SerializeEntries:
+  - m_GUID: 25863ed3c208a6da49b6eb486878ab4d
+    m_Address: Assets/!Prefabs/Modifiers/IntermediateMaxHealthModifier.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c892eb5a43b117c91b8500612d64e0d2
+    m_Address: Assets/!Prefabs/Modifiers/GreaterMaxHealthModifier.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e264cc35bc9f236b4a8265cf246fdee6
+    m_Address: Assets/!Prefabs/Modifiers/LesserMaxHealthModifier.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7114be189f1f2de07b20e4395039f612, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1ea77720b912a9e81b5b68fcc2860d1c, type: 2}
+    - {fileID: 11400000, guid: b3b0929b4a279a4e294b64d04665a24e, type: 2}
