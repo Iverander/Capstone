@@ -2375,10 +2375,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3578977037889555636, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      propertyPath: managedReferences[1974661590724378817].cooldown
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3040,10 +3036,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1987458711753126344, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5886149347113776361, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5969275265667958413, guid: 0edc2d07396f688c68668e59f9de06aa, type: 3}

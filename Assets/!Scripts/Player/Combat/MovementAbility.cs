@@ -13,7 +13,9 @@ namespace Capstone
         [SerializeField] protected float force;
         
         [InfoBox("Zero is adaptive :)")]
-        public Vector3 direction;
+        [SerializeField] Vector3 direction;
+
+        [SerializeField] private float duration = .15f;
         protected override void Action()
         {
             Vector3 directionVector = direction;
@@ -23,7 +25,7 @@ namespace Capstone
             }
 
             //origin.
-            origin.Stun(.15f);
+            origin.Stun(duration);
 
             if(directionVector.normalized != Vector3.zero) 
                 origin.rb.AddForce(directionVector.normalized * (force), ForceMode.Impulse);

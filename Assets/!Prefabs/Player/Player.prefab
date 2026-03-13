@@ -173,7 +173,7 @@ MonoBehaviour:
         <name>k__BackingField: Kick
         cooldown: 1
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 1, g: 0, b: 0.5481839, a: 1}
+        <color>k__BackingField: {r: 0.5882353, g: 1, b: 0.9607843, a: 1}
         ShowGizmos: 1
         effectPrefab: {fileID: 2217095109323092603, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
         size: {x: 4, y: 1, z: 3}
@@ -191,7 +191,7 @@ MonoBehaviour:
         <name>k__BackingField: Push
         cooldown: 0.3
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 0, g: 1, b: 0.84622765, a: 1}
+        <color>k__BackingField: {r: 0.1254902, g: 1, b: 0, a: 1}
         ShowGizmos: 1
         effectPrefab: {fileID: 4631374179909460134, guid: 29af3118d8bab414983d398d33feb4ad, type: 3}
         size: {x: 3, y: 1, z: 2}
@@ -207,9 +207,9 @@ MonoBehaviour:
       type: {class: MovementAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Dash
-        cooldown: 0.5
+        cooldown: 1
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 0.12616038, g: 1, b: 0, a: 1}
+        <color>k__BackingField: {r: 0.48443222, g: 0, b: 1, a: 1}
         ShowGizmos: 0
         effectPrefab: {fileID: 4631374179909460134, guid: 7af3fed4e4aacf970b86b5dce9404608, type: 3}
         force: 25
