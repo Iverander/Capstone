@@ -94,12 +94,13 @@ namespace Capstone
                 yield return new WaitForSeconds(abilities[abilityToPreform].cooldown / 2);
                 firstAttack = false;
 
-                if (enemyState == EnemyState.Attack || !stunned)
+                if (enemyState != EnemyState.Attack || stunned)
                 {
                     firstAttack = true;
                     yield break;   
                 }
             }
+            
             abilityToPreform = Random.Range(0, abilities.Count);
             abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature (no longer towards a player creature as we use layers instead now like any good citizen)
             yield return new WaitForSeconds(abilities[abilityToPreform].cooldown);

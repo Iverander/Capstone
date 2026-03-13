@@ -2371,18 +2371,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2088548381072869104, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
-      propertyPath: regenerationRate
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.45793247
+      value: -0.60520715
       objectReference: {fileID: 0}
     - target: {fileID: 6497187994369404934, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.88898706
+      value: -0.796068
       objectReference: {fileID: 0}
+    - target: {fileID: 6604586386959587976, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: modifiers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604586386959587976, guid: 6837b0591a2c6f7c69ea465dd02616f6, type: 3}
+      propertyPath: 'modifiers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 25863ed3c208a6da49b6eb486878ab4d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
