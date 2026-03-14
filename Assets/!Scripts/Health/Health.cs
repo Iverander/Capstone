@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Capstone
 {
-    [DefaultExecutionOrder(-100)] //Marie did this btw she's so good at programming and she understands what she's doing completely
+    [DefaultExecutionOrder(-100), RequireComponent(typeof(Creature))] //Marie did this btw she's so good at programming and she understands what she's doing completely
     public class Health : MonoBehaviour
     {
         [field: SerializeField, ReadOnly] public float health { get; private set; }
@@ -22,10 +22,13 @@ namespace Capstone
         public UnityEvent Killed;
         public Action<float> healthChanged; 
         public Action<float> maxHealthChanged;
+        
+        Creature creature;
 
         private void Start()
         {
             health = maxHealth;
+            creature = GetComponent<Creature>();
         }
 
         private void Update()
@@ -48,7 +51,7 @@ namespace Capstone
             if(regenerationRoutine != null)
                 StopCoroutine(regenerationRoutine);
             
-            health -= amount;
+            health -= amount / creature.stats.DamageResistance;
             Damaged?.Invoke(health);
             healthChanged?.Invoke(health);
             

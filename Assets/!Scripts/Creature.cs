@@ -11,6 +11,7 @@ namespace Capstone
         public Health health { get; private set; }
         public Rigidbody rb { get; private set; }
         public bool stunned { get; protected set; }
+        public Stats stats;
 
         private void Awake()
         {

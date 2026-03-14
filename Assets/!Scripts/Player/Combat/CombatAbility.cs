@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NaughtyAttributes;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Capstone
 {
@@ -49,7 +45,7 @@ namespace Capstone
             {
                 if (damage > 0)
                 {
-                    creature.health.Damage(damage);
+                    creature.health.Damage(damage * origin.stats.DamageMultiplier);
                 }
 
                 if (knockbackForce > 0)
@@ -60,11 +56,9 @@ namespace Capstone
             }
         }
 
-        protected override void Effect()
+        protected override void Effect(Vector3 offeset)
         {
-            var effect = Object.Instantiate(effectPrefab, origin.transform);
-            effect.transform.position = trueCenter;
-            Object.Destroy(effect.gameObject, effect.main.duration);
+            base.Effect(trueCenter);
         }
 
         public override void Gizmos(Transform origin)

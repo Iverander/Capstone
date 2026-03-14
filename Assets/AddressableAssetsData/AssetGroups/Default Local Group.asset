@@ -15,6 +15,24 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: aa32bbbfe541b8530a4127a5c8306154
   m_SerializeEntries:
+  - m_GUID: 09505a1fa74ca42efb8f757225548f1f
+    m_Address: Assets/!Prefabs/Modifiers/Attack Multiplier ++.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a53205a7a2339b898c107f1412dcea4
+    m_Address: Assets/!Prefabs/Modifiers/Attack Multiplier +.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1aad8e89b9294beb2915414b4c2b5172
+    m_Address: Assets/!Prefabs/Modifiers/Attack Multiplier.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Modifier
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 25863ed3c208a6da49b6eb486878ab4d
     m_Address: Assets/!Prefabs/Modifiers/IntermediateMaxHealthModifier.asset
     m_ReadOnly: 0

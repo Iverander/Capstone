@@ -1,8 +1,6 @@
 using System;
-using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Capstone
 {
@@ -33,10 +31,9 @@ namespace Capstone
                 origin.rb.AddForce(origin.transform.forward * (force), ForceMode.Impulse);
         }
 
-        protected override void Effect()
+        protected override void Effect(Vector3 offset)
         {
-            var effect = Object.Instantiate(effectPrefab, origin.transform);
-            Object.Destroy(effect.gameObject, effect.main.duration * 2);
+            base.Effect(Vector3.up + origin.transform.position);
         }
     }
 }

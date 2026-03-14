@@ -19,6 +19,10 @@ namespace Capstone
         private void Start()
         {
             Instance = this;
+
+#if  !UNITY_EDITOR
+      _cash = 0;      
+#endif
         }
 
         public static void GiveCash(int amount)

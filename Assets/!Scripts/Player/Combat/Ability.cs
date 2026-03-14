@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace Capstone
 {
@@ -37,12 +37,21 @@ namespace Capstone
             
             Action();
             if(effectPrefab)
-                Effect();
+                Effect(Vector3.zero);
         }
         
 
         protected abstract void Action();
-        protected abstract void Effect();
+
+        protected virtual void Effect(Vector3 offset)
+        {
+            var effect = Object.Instantiate(effectPrefab, origin.transform);
+            effect.transform.position = offset;
+            var main = effect.main;
+            main.startColor = color;
+            Object.Destroy(effect.gameObject, effect.main.duration);
+            effect.Play();
+        }
 
         protected async Task Cooldown()
         {

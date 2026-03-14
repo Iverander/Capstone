@@ -59,6 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   stunEffect: {fileID: 4349443906711307342}
+  stats:
+    DamageMultiplier: 1
+    DamageResistance: 1
   inputReader:
     onMove:
       m_PersistentCalls:
@@ -173,7 +176,7 @@ MonoBehaviour:
         <name>k__BackingField: Kick
         cooldown: 1
         <onCooldown>k__BackingField: 0
-        <color>k__BackingField: {r: 0.5882353, g: 1, b: 0.9607843, a: 1}
+        <color>k__BackingField: {r: 0.5882353, g: 0.7068964, b: 1, a: 1}
         ShowGizmos: 1
         effectPrefab: {fileID: 2217095109323092603, guid: 95d5bb00baf9aff28bd459fdf2ec69e0, type: 3}
         size: {x: 4, y: 1, z: 3}
@@ -214,6 +217,7 @@ MonoBehaviour:
         effectPrefab: {fileID: 4631374179909460134, guid: 7af3fed4e4aacf970b86b5dce9404608, type: 3}
         force: 25
         direction: {x: 0, y: 0, z: 0}
+        duration: 0.15
 --- !u!114 &2088548381072869104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +311,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -348,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0990ff82b24851f25a958ef2a0972ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <_cash>k__BackingField: 0
+  <_cash>k__BackingField: 10000
 --- !u!1 &153122180645486381
 GameObject:
   m_ObjectHideFlags: 0
