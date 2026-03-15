@@ -5,9 +5,9 @@ namespace Capstone
 {
     public class Rain : Weather
     {
-        protected override void Start()
+        public override void  Apply() 
         {
-            base.Start();
+            base.Apply();
             Water.SetRippleStrength(1);
         }
     }

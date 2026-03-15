@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Capstone
@@ -7,7 +8,13 @@ namespace Capstone
     {
         [SerializeField] protected Material skybox;
 
-        protected virtual void Start()
+        void Start()
+        {
+            Apply();
+        }
+        
+        [Button]
+        public virtual void Apply()
         {
             if (skybox)
                 RenderSettings.skybox = skybox;
