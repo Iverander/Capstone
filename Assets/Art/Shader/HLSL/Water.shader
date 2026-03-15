@@ -22,6 +22,7 @@ Shader "Custom/Water"
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Assets/Art/Shader/HLSL/Noise.hlsl"
 
             struct Attributes
             {
@@ -102,7 +103,7 @@ Shader "Custom/Water"
                 
                 float3 rippleNormal = InverseLerp(-1, 1, Normal);
                 
-                returnColor *= float4(rippleNormal, 1);
+                returnColor *= float4(rippleNormal, 1) * max(voronoiNoise(IN.uv * 5 * ((_Time.y + 1000) / 1000)) * 2, .7);
                 
                 return returnColor;
             }

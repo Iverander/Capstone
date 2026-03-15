@@ -4,6 +4,7 @@ Shader "Custom/Noise/VornoiNoise"
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
+        _CellSize("Cell Size", Vector) = (1,1,1,0)
     }
 
     SubShader
@@ -18,6 +19,7 @@ Shader "Custom/Noise/VornoiNoise"
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Assets/Art/Shader/HLSL/Noise.hlsl"
 
             struct Attributes
             {
@@ -37,6 +39,7 @@ Shader "Custom/Noise/VornoiNoise"
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
+                float3 _CellSize;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -47,10 +50,10 @@ Shader "Custom/Noise/VornoiNoise"
                 return OUT;
             }
 
-            half4 frag(Varyings IN) : SV_Target
+            float4 frag(Varyings IN) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
-                return color;
+                float4 color = voronoiNoise(IN.uv / _CellSize);
+                return color;//SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * color;
             }
             ENDHLSL
         }
