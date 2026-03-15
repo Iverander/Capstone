@@ -9,7 +9,7 @@ Shader "Custom/Water"
 
     SubShader
     {
-        Tags { "RenderType" = "Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
+        Tags { "RenderType" = "Opaque" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
         LOD 2000
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
@@ -102,8 +102,9 @@ Shader "Custom/Water"
                 Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
                 
                 float3 rippleNormal = InverseLerp(-1, 1, Normal);
+                float3 color = rippleNormal * max(voronoiNoise(IN.uv * 5 * ((_Time.y + 1000) / 1000)) * 2, .7);
                 
-                returnColor *= float4(rippleNormal, 1) * max(voronoiNoise(IN.uv * 5 * ((_Time.y + 1000) / 1000)) * 2, .7);
+                returnColor *= float4(color, 1);
                 
                 return returnColor;
             }

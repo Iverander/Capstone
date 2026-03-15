@@ -4934,6 +4934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dada816e0ec1f0176b8e88a3590d540a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Rain
+  skybox: {fileID: 2100000, guid: e0a21ebc98cee4e46bbae873ec0be703, type: 2}
 --- !u!4 &5396817571112284874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4409359758995111386, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
