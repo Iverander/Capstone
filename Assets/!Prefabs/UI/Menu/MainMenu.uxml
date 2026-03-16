@@ -15,27 +15,27 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Label text="Hover over one of the buttons to get a short description!" name="Description" style="white-space: normal; width: 50%; min-height: 150px;"/>
-    </ui:VisualElement>
-    <ui:VisualElement style="justify-content: center; flex-direction: row; align-items: flex-end; height: 200px;">
-        <ui:VisualElement name="VisualElement" class="Tutorial" style="justify-content: space-between;">
-            <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/keyboard-wasd.png?fileID=2800000&amp;guid=2bcba8b39558408428a71f04fd7be6b6&amp;type=3#keyboard-wasd"/>
-            <ui:Label text="Movement&#10;" name="" class="Tutorial"/>
-        </ui:VisualElement>
-        <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
-            <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/space.png?fileID=2800000&amp;guid=0ed2882c805bc5441a0b4f0f5b3e2f6f&amp;type=3#space"/>
-            <ui:Label text="Jump" class="Tutorial"/>
-        </ui:VisualElement>
-        <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
-            <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/shift.png?fileID=2800000&amp;guid=185cf49fca2ff1f4c8fd8e3b993f700e&amp;type=3#shift"/>
-            <ui:Label text="Walk" class="Tutorial"/>
-        </ui:VisualElement>
-        <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
-            <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/alt.png?fileID=2800000&amp;guid=f39bfa447c10b6848ac2186d892cd9f5&amp;type=3#alt"/>
-            <ui:Label text="Unlock Camera" class="Tutorial"/>
-        </ui:VisualElement>
-        <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
-            <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/esc.png?fileID=2800000&amp;guid=a51aac4521ec79b4f99279d63e8c4d78&amp;type=3#esc"/>
-            <ui:Label text="Menu" class="Tutorial"/>
+        <ui:VisualElement style="justify-content: center; flex-direction: row; align-items: center; height: 200px;">
+            <ui:VisualElement name="" class="Tutorial" style="justify-content: space-between;">
+                <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/keyboard-wasd.png?fileID=2800000&amp;guid=2bcba8b39558408428a71f04fd7be6b6&amp;type=3#keyboard-wasd"/>
+                <ui:Label text="Movement&#10;" name="" class="Tutorial"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
+                <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/space.png?fileID=2800000&amp;guid=0ed2882c805bc5441a0b4f0f5b3e2f6f&amp;type=3#space"/>
+                <ui:Label text="Jump" class="Tutorial"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
+                <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/shift.png?fileID=2800000&amp;guid=185cf49fca2ff1f4c8fd8e3b993f700e&amp;type=3#shift"/>
+                <ui:Label text="Walk" class="Tutorial"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
+                <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/alt.png?fileID=2800000&amp;guid=f39bfa447c10b6848ac2186d892cd9f5&amp;type=3#alt"/>
+                <ui:Label text="Unlock Camera" class="Tutorial"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="Tutorial" style="justify-content: space-between;">
+                <ui:Image source="project://database/Assets/GameInputControllerIconsFree/keyboard/keyboard-solid/esc.png?fileID=2800000&amp;guid=a51aac4521ec79b4f99279d63e8c4d78&amp;type=3#esc"/>
+                <ui:Label text="Menu" class="Tutorial"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
