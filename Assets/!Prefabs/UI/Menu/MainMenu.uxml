@@ -3,9 +3,10 @@
     <ui:VisualElement picking-mode="Ignore" style="align-items: center; flex-grow: 1; padding-top: 60px; padding-right: 60px; padding-bottom: 60px; padding-left: 60px;">
         <ui:Label text="Rumble Mountain!" name="Header" style="font-size: 140px; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;"/>
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; width: 50%; height: 600px;">
-            <ui:VisualElement name="" style="flex-grow: 1; align-items: center; height: 100%; justify-content: space-between;">
+            <ui:VisualElement name="" style="align-items: center; height: 100%; justify-content: space-around;">
                 <ui:Button text="Start" name="Start" class="MenuButton"/>
-                <ui:Button text="Showcase " name="Showcase" class="MenuButton"/>
+                <ui:Button text="Showcase " name="Showcase" class="MenuButton" style="display: none;"/>
+                <ui:Button text="Settings" name="Settings" class="MenuButton" style="display: none;"/>
                 <ui:Button text="Quit" name="Quit" class="MenuButton"/>
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; align-items: flex-start; background-color: rgb(120, 191, 213); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; height: 100%;">

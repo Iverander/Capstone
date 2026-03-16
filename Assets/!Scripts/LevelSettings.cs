@@ -3,12 +3,7 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public enum WeatherType
-    {
-        None,
-        Raining,
-    }
-    
+
     [Serializable]
     public class MapSettings
     {
