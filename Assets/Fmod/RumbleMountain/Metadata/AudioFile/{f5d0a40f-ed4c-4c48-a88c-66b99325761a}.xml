@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{f5d0a40f-ed4c-4c48-a88c-66b99325761a}">
+		<property name="assetPath">
+			<value>Looping Rain Sounds.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>104.17632653061224</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{50075ec3-7bd1-4349-b7d7-165e5d8ee64b}</destination>
+		</relationship>
+	</object>
+</objects>

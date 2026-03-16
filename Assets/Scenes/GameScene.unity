@@ -1219,13 +1219,13 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1162790014
-      Data2: 1219598074
-      Data3: 897519799
-      Data4: -196089552
-    Path: event:/Test
+      Data1: 1920040102
+      Data2: 1110084475
+      Data3: 318315654
+      Data4: -2077770459
+    Path: event:/Rain
   Event: 
-  EventPlayTrigger: 0
+  EventPlayTrigger: 1
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
