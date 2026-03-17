@@ -148,23 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ccf06c049dc6a779606407abed6d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.SceneLoader
-  preloadScenes:
-    _serializedList:
-    - Key: Menu
-      Value:
-        name: Menu
-        loaded: 0
-        activateOnLoad: 1
-    - Key: GameScene
-      Value:
-        name: GameScene
-        loaded: 0
-        activateOnLoad: 0
-    - Key: ShowcaseScene
-      Value:
-        name: ShowcaseScene
-        loaded: 0
-        activateOnLoad: 0
+  preLoadScenes: []
 --- !u!4 &64862471
 Transform:
   m_ObjectHideFlags: 0
