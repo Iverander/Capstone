@@ -26,12 +26,18 @@ namespace Capstone
                 public string _name;
                 public int averageFramerate;
                 public int round;
+                public int cpuPercentage;
+                public int gpuPercentage;
+                public int usedRam;
 
                 public Section(string name, int averageFramerate,  int round)
                 {
                     this._name = name;
                     this.averageFramerate = averageFramerate;
                     this.round = round;
+                    cpuPercentage = -1;
+                    gpuPercentage = -1;
+                    usedRam = -1;
                 }
             }
 
@@ -63,8 +69,9 @@ namespace Capstone
         public string CPU;
         public string GPU;
         public int RAM;
+        public string resolution;
         
-        public List<Session> Sessions = new();
+        public List<Session> sessions = new();
         
         public UnityEvent<string> DataUpdated;
         
@@ -76,6 +83,7 @@ namespace Capstone
             CPU = SystemInfo.processorType;
             GPU = SystemInfo.graphicsDeviceName;
             RAM = SystemInfo.systemMemorySize;
+            resolution = $"{Screen.width}x{Screen.height}";
 
             //DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
             
@@ -85,21 +93,23 @@ namespace Capstone
 
         public void StartNewSession(string sessionName)
         {
-            Sessions.Add(new Session(sessionName));
+            sessions.Add(new Session(sessionName));
         }
         public void NewSection(string sectionName)
         {
-            if (Sessions.Count <= 0)
+            if (sessions.Count <= 0)
             {
                 Debug.Log("Create a session first!");
                 return;
             }
-            Sessions[^1].NewSection(sectionName);
+            sessions[^1].NewSection(sectionName);
         }
         
         public void Save()
         {
-            #if !UNITY_EDITOR //only update firebase if it's a build
+            #if UNITY_EDITOR //only update firebase if it's a build
+            DataManager.database.Child("devUsers").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
+            #elif !UNITY_EDITOR
             DataManager.database.Child("users").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
             #endif
             UpdateData();

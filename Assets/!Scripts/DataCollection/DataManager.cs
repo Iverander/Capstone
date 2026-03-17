@@ -29,7 +29,7 @@ namespace Capstone
 
         private void OnApplicationQuit()
         {
-            data.NewSection("Application Quit");
+            data.StartNewSession("Application Quit");
             data.Save();
         }
 
