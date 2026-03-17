@@ -4283,10 +4283,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1292326624328648717, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
-      propertyPath: weatherTypeOverride
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2939753162401493780, guid: 11e6b8071b17159d281344becca8deb2, type: 3}
       propertyPath: m_Name
       value: WeatherManager

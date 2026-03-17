@@ -77,7 +77,7 @@ namespace Capstone
             GPU = SystemInfo.graphicsDeviceName;
             RAM = SystemInfo.systemMemorySize;
 
-            DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
+            //DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
             
             StartNewSession("Initialization");
             UpdateData();
@@ -100,7 +100,7 @@ namespace Capstone
         public void Save()
         {
             #if !UNITY_EDITOR //only update firebase if it's a build
-            DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
+            DataManager.database.Child("users").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
             #endif
             UpdateData();
         }

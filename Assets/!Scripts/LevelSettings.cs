@@ -12,11 +12,13 @@ namespace Capstone
 
         public override string ToString()
         {
-            string returnString = "";
+            string result = "";
+            foreach (var field in typeof(MapSettings).GetFields())
+            {
+                result += "["+field.Name + ": " + field.GetValue(this) + "] \n";
+            }
             
-            returnString += $"Weather: {weatherType.ToString()}\n";
-            
-            return returnString;
+            return result;
         }
     }
     public static class LevelSettings
