@@ -24,6 +24,7 @@ namespace Capstone
         Toggle obstacleToggle;
         private void Start()
         {
+            Time.timeScale = 1;
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             root = mainMenu.rootVisualElement;
             

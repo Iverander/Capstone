@@ -4,6 +4,12 @@ using UnityEngine.Serialization;
 
 namespace Capstone
 {
+    public enum WeatherType
+    {
+        None,
+        Raining,
+    }
+    
     public class WeatherManager : MonoBehaviour
     {
         [FormerlySerializedAs("weatherOverride")] [SerializeField] WeatherType weatherTypeOverride;
