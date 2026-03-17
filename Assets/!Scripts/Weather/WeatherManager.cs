@@ -6,7 +6,7 @@ namespace Capstone
 {
     public enum WeatherType
     {
-        None,
+        Sunny,
         Raining,
     }
     
@@ -17,7 +17,7 @@ namespace Capstone
 
         void Start()
         {
-            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.None)
+            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.Sunny)
             {
                 LevelSettings.ChangeCurrentWeather(weatherTypeOverride);
             }

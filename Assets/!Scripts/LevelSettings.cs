@@ -7,7 +7,7 @@ namespace Capstone
     [Serializable]
     public class MapSettings
     {
-        public WeatherType weatherType = WeatherType.None;
+        public WeatherType weatherType = WeatherType.Sunny;
         public bool obstacles = true;
 
         public override string ToString()

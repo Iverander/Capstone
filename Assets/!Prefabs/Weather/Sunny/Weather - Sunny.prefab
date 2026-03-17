@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 4409359758995111386}
   - component: {fileID: 9171272992362412109}
   m_Layer: 0
-  m_Name: Weather - None
+  m_Name: Weather - Sunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
