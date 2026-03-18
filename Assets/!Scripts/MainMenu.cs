@@ -18,25 +18,37 @@ namespace Capstone
 
         Button gameSceneButton;
         Button showcaseButton;
+        Button quitButton;
         Label descriptionLabel;
         EnumField weatherField;
+        Toggle obstacleToggle;
         private void Start()
         {
+            Time.timeScale = 1;
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             root = mainMenu.rootVisualElement;
             
-            gameSceneButton = root.Q<Button>("GameScene");
+            gameSceneButton = root.Q<Button>("Start");
             showcaseButton = root.Q<Button>("Showcase");
+            quitButton = root.Q<Button>("Quit");
             descriptionLabel = root.Q<Label>("Description");
             weatherField = root.Q<EnumField>("WeatherSelector");
+            obstacleToggle = root.Q<Toggle>("ObstacleToggle");
+
+            weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
+            obstacleToggle.value = LevelSettings.CurrentMapSettings.obstacles;
 
             gameSceneButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
             {
-                descriptionLabel.text = "Game scene is the game itself, only things that are finished will be added to this scene.";
+                descriptionLabel.text = "Start the game! remember to set your game setting before going in!";
             });
             showcaseButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
             {
                 descriptionLabel.text = "Showcase is used to display work and progress on unfinished shaders & models.";
+            });
+            quitButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
+            {
+                descriptionLabel.text = "Quit the game";
             });
 
             gameSceneButton.clicked += () =>
@@ -47,10 +59,16 @@ namespace Capstone
             {
                 SceneManager.LoadScene(showcaseScene);
             };
+            quitButton.clicked += Application.Quit;
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
                 LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
+            });
+            
+            obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
+            {
+                LevelSettings.ToggleObstacles(changeEvent.newValue);
             });
         }
 

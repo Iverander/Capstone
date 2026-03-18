@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,11 +19,11 @@ namespace Capstone
         NavMeshAgent agent;
 
         int abilityToPreform;
-        int coolDown;
-        bool canAttack;
         EnemyState enemyState;
 
-        [SerializeReference, SubclassSelector] public List<CombatAbility> abilities = new();
+        private bool firstAttack;
+
+        [SerializeReference, SubclassSelector] public List<Ability> abilities = new(); //things has been simplified, you're welcome
 
         /*
          * State machine enum (thingy with chase and attack)
@@ -43,8 +45,7 @@ namespace Capstone
                 ability.Initialize(this);
             }
             agent.destination = player.transform.position;
-
-            canAttack = true;
+            
             //chase
             enemyState = EnemyState.Chase;
         }
@@ -52,61 +53,73 @@ namespace Capstone
         // Update is called once per frame, unless it is called twice, but then something is wrong
         void Update()
         {
+            if(!agent.enabled) return; //if the agent component is disabled, dont do shit thanks
 
             //Debug.Log(Vector3.Distance(player.transform.position, agent.transform.position));
             //Debug.Log (agent.destination);
 
+            if (Vector3.Distance(player.transform.position, agent.transform.position) < 2) //selects the correct state
+                enemyState = EnemyState.Attack;
+            else
+                enemyState = EnemyState.Chase;
+
             switch (enemyState)
             {
                 case EnemyState.Chase:
-                    Chase();
+                    ChaseState();
                     break;
                 case EnemyState.Attack:
-                    StartCoroutine(Attack());
+                    AttackState();
                     break;
             }
         }
         //i remember time.Deltatime btw:)
 
-        IEnumerator Attack()
-        {if (!canAttack) yield break;
+        /// <summary>
+        /// What to do when the enemy is in the attack state
+        /// </summary>
+        void AttackState()
+        {
+            agent.isStopped = true; //ensures that they wont move
             transform.LookAt(player.transform.position);
-
-            canAttack = false;
-            abilityToPreform = Random.Range(0, abilities.Count);
-            abilities[abilityToPreform].Perform<Player>(); //preforms chosen ability, towards player creature
-            Debug.Log("attack happened");
-            yield return new WaitForSeconds(5);
-            canAttack = true;
-
-            enemyState = EnemyState.Chase; //back to chase
+            
+            if (abilities[abilityToPreform].onCooldown) return;
+            StartCoroutine(Attack());
         }
 
-        void Chase()
+        IEnumerator Attack()
         {
-            //newPos
-
-            if (Vector3.Distance(agent.destination, transform.position) < 2)
+            if (firstAttack)
             {
-                NewDestination();
-            }
-            agent.isStopped = false;
+                yield return new WaitForSeconds(abilities[abilityToPreform].cooldown / 2);
+                firstAttack = false;
 
-            //tryAttack
-            if (Vector3.Distance(player.transform.position, agent.transform.position) < 2)
-            {
-                agent.isStopped = true;
-
-                if (canAttack)
+                if (enemyState != EnemyState.Attack || stunned)
                 {
-                    enemyState = EnemyState.Attack;
+                    firstAttack = true;
+                    yield break;   
                 }
             }
+            
+            abilityToPreform = Random.Range(0, abilities.Count);
+            abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature (no longer towards a player creature as we use layers instead now like any good citizen)
+            yield return new WaitForSeconds(abilities[abilityToPreform].cooldown);
+        }
+
+        /// <summary>
+        /// What to do when the enemy is in the chase state
+        /// </summary>
+        void ChaseState()
+        {
+            //newPos
+            agent.isStopped = false; //makes sure they can move
+            firstAttack = true; //allows us to wait a little before a attack happens when it changes state
+            NewDestination();
         }
 
         private void NewDestination()
         {
-            Debug.Log(player.transform.position);
+            //Debug.Log(player.transform.position);
             agent.destination = player.transform.position;
         }
 
@@ -121,6 +134,24 @@ namespace Capstone
 
                 ability.Gizmos(transform);
             }
+        }
+
+        //for stun & knockback
+        public override async void Stun(float duration)
+        {
+            agent.enabled = false;
+            rb.isKinematic = false;
+            stunned = true;
+            stunEffect.SetActive(true);
+            
+            //rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
+
+            await Task.Delay(Mathf.RoundToInt(1000 * duration));
+            
+            stunned = false;
+            rb.isKinematic = true;
+            agent.enabled = true;
+            stunEffect.SetActive(false);
         }
     }
 }

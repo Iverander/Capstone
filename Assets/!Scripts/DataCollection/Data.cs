@@ -25,11 +25,13 @@ namespace Capstone
             {
                 public string _name;
                 public int averageFramerate;
+                public int round;
 
-                public Section(string name, int averageFramerate)
+                public Section(string name, int averageFramerate,  int round)
                 {
                     this._name = name;
                     this.averageFramerate = averageFramerate;
+                    this.round = round;
                 }
             }
 
@@ -48,7 +50,10 @@ namespace Capstone
             {
                 sections.Add(new Section(
                     name: sectionName,
-                    averageFramerate: Time.frameCount > 0 ? Mathf.RoundToInt((Time.frameCount - frameStart) / (Time.time - timeStart)) : -1)
+                    averageFramerate: Time.frameCount > 0 ? Mathf.RoundToInt((Time.frameCount - frameStart) / (Time.time - timeStart)) : -1,
+                    round: RoundManager.instance != null ? RoundManager.round : -1
+                    )
+                    
                 );
             }
         }
@@ -94,7 +99,9 @@ namespace Capstone
         
         public void Save()
         {
+            #if !UNITY_EDITOR //only update firebase if it's a build
             DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
+            #endif
             UpdateData();
         }
         

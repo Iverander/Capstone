@@ -10,19 +10,19 @@ namespace Capstone
     public abstract class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [SerializeField] protected Vector2 speed = new Vector2(5, 10);
+        [SerializeField] protected Vector2 speed = new Vector2(4, 6);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
+        public abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
         
         protected float currentSpeed => sprinting ? speed.y : speed.x;
         
         [Header("Jumping")]
-        [SerializeField] protected float jumpForce = 7;
+        [SerializeField] protected float jumpForce = 4;
         
         [Header("Turning")]
         [SerializeField] protected float rotationSpeed = 7;
         [SerializeField, ReadOnly] protected float rotationVelocity;
-        protected bool turning => Player.state.HasFlag(State.Turning);
         
         protected Rigidbody rb => Player.instance.rb;
         protected Camera cam => Player.instance.cam;
@@ -31,17 +31,18 @@ namespace Capstone
         {
             Cursor.lockState = CursorLockMode.Locked;
             Player.input.onMove.AddListener(UpdateMovement);
+            Player.AddState(State.Sprinting);
             Player.input.onSprint.AddListener(ToggleSprint);
             Player.input.onJump.AddListener(StartJump);
         }
 
-        private void StartJump()
+        void StartJump()
         {            
-            if (Player.state.HasFlag(State.Jumping) || Player.state.HasFlag(State.Falling)) return;
+            if (Player.state.HasFlag(State.Falling) || !Player.state.HasFlag(State.Grounded)) return;
             StartCoroutine(Jump());
         }
 
-        private IEnumerator Jump()
+        IEnumerator Jump()
         {
             Player.AddState(State.Jumping);
             rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
@@ -56,7 +57,7 @@ namespace Capstone
             Player.RemoveState(State.Jumping);
         }
 
-        private void ToggleSprint()
+         void ToggleSprint()
         {
             if (!sprinting)
             {
@@ -70,17 +71,30 @@ namespace Capstone
         void UpdateMovement(Vector2 value)
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
+            
+            if(moveDirection.magnitude > .1f)
+                Player.AddState(State.Walking);
+            else
+                Player.RemoveState(State.Walking);
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
+            if(Player.instance.stunned) return;
             Movement();
+            //Player.instance.dash.direction = ConvertedDirection;
+        }
+
+        private void Update()
+        {
+            if(Player.instance.stunned) return;
+            LimitSpeed();
         }
 
         protected abstract void Movement();
         
         
-        protected void LimitSpeed()
+        void LimitSpeed()
         {
             Vector3 maxVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
@@ -88,6 +102,28 @@ namespace Capstone
             {
                 Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
                 rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
+            }
+        }
+        
+        protected void FaceDirection(Vector3 target, bool basedOnMovement)
+        {
+            if(Mathf.Abs(transform.eulerAngles.y - target.y) > 10f)
+            {
+                Player.AddState(State.Turning);
+                
+                if(basedOnMovement && moveDirection == Vector3.zero)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    Player.RemoveState(State.Turning);
+                    return;
+                }
+                    
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, target.y, ref rotationVelocity, 1 / rotationSpeed);
+                transform.eulerAngles = new Vector3(0, rotation, 0);
+            }
+            else
+            {
+                Player.RemoveState(State.Turning);
             }
         }
     }

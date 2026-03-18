@@ -3,16 +3,12 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public enum WeatherType
-    {
-        None,
-        Raining,
-    }
-    
+
     [Serializable]
     public class MapSettings
     {
-        public WeatherType weatherType = WeatherType.None;
+        public WeatherType weatherType = WeatherType.Sunny;
+        public bool obstacles = true;
 
         public override string ToString()
         {
@@ -32,6 +28,10 @@ namespace Capstone
         {
             Debug.Log($"Changing weather to {weatherType}");
             CurrentMapSettings.weatherType = weatherType;
+        }
+        public static void ToggleObstacles(bool toggle)
+        {
+            CurrentMapSettings.obstacles = toggle;
         }
     }
 }

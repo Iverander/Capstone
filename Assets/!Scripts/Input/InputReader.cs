@@ -50,7 +50,7 @@ namespace Capstone
         public UnityEvent onSprint;
         public void OnSprint(InputAction.CallbackContext context)
         {
-            if(!context.started)return;
+            if(context.performed)return;
             onSprint?.Invoke();
         }
         
@@ -79,6 +79,20 @@ namespace Capstone
         public void OnMousePosition(InputAction.CallbackContext context)
         {
             onMousePosition?.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public UnityEvent onCameraLock;
+        public void OnCameraLock(InputAction.CallbackContext context)
+        {
+            if(context.performed) return;
+            onCameraLock?.Invoke();
+        }
+
+        public UnityEvent onShop;
+        public void OnShop(InputAction.CallbackContext context)
+        {
+            if(!context.started) return;
+            onShop?.Invoke();
         }
     }
 }
