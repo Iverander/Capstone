@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 namespace Capstone
 {
@@ -26,8 +29,8 @@ namespace Capstone
                 public string _name;
                 public int averageFramerate;
                 public int round;
-                public int cpuPercentage;
-                public int gpuPercentage;
+                public float cpuPercentage;
+                public float gpuPercentage;
                 public int usedRam;
 
                 public Section(string name, int averageFramerate,  int round)
@@ -35,9 +38,13 @@ namespace Capstone
                     this._name = name;
                     this.averageFramerate = averageFramerate;
                     this.round = round;
+
                     cpuPercentage = -1;
                     gpuPercentage = -1;
                     usedRam = -1;
+                    
+                    if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
+                        cpuPercentage = DataManager.CPUPercentage;
                 }
             }
 
