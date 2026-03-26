@@ -2067,7 +2067,7 @@ GameObject:
   - component: {fileID: 661410483}
   - component: {fileID: 661410482}
   m_Layer: 0
-  m_Name: UIDocument
+  m_Name: GamePhasesUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
