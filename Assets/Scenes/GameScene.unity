@@ -1379,6 +1379,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.94499993
       objectReference: {fileID: 0}
+    - target: {fileID: 3868322497566036095, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
+      propertyPath: shopCurtain
+      value: 
+      objectReference: {fileID: 357392214}
     - target: {fileID: 6711680963819314367, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.96
@@ -1445,6 +1449,11 @@ PrefabInstance:
 --- !u!4 &357392213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4677548831050065368, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
+  m_PrefabInstance: {fileID: 357392212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &357392214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9036176446024580, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
   m_PrefabInstance: {fileID: 357392212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &492394529

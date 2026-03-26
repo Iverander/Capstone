@@ -13,12 +13,15 @@ namespace Capstone
         [SerializeField, ReadOnly] private List<Modifier> Sellable;
         private UIDocument shopUI;
         [SerializeField] private VisualTreeAsset productAsset;
+        bool shopOpen;
+        [SerializeField] GameObject shopCurtain;
 
         async void Start()
         {
             shopUI = GetComponent<UIDocument>();
             shopUI.enabled = false;
             Sellable = await Addressable.LoadAssets<Modifier>("Modifier");
+            shopOpen = false;
         }
 
         public void Toggle()
@@ -29,6 +32,13 @@ namespace Capstone
                 Open();
             else
                 Close();
+        }
+        public void ToggleShopOpen()
+        {
+            shopOpen = !shopOpen;
+
+            if (shopOpen) shopCurtain.SetActive(true);
+            else shopCurtain.SetActive(false);
         }
 
         public void Open()
