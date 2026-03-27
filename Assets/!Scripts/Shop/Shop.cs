@@ -17,7 +17,7 @@ namespace Capstone
         {
             keyIndicator.enabled = false;
         }
-
+        /*
         private void OnTriggerEnter(Collider other)
         {
             keyIndicator.enabled = true;
@@ -30,5 +30,6 @@ namespace Capstone
             Player.input.onShop.RemoveListener(storeFront.Toggle);
             storeFront.Close();
         }
+        */
     }
 }

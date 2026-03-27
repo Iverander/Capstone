@@ -19,27 +19,31 @@ namespace Capstone
         async void Start()
         {
             shopUI = GetComponent<UIDocument>();
-            shopUI.enabled = false;
+            shopUI.enabled = true;
             Sellable = await Addressable.LoadAssets<Modifier>("Modifier");
-            shopOpen = false;
+            shopOpen = true;
         }
 
-        public void Toggle()
-        {
-            shopUI.enabled = !shopUI.enabled;
+        /*
+public void Toggle()
+{
+    shopUI.enabled = !shopUI.enabled;
 
-            if (shopUI.enabled)
-                Open();
-            else
-                Close();
-        }
-        public void ToggleShopOpen()
-        {
-            shopOpen = !shopOpen;
+    if (shopUI.enabled)
+        Open();
+    else
+        Close();
+}
 
-            if (shopOpen) shopCurtain.SetActive(true);
-            else shopCurtain.SetActive(false);
-        }
+
+public void ToggleShopOpen()
+{
+    shopOpen = !shopOpen;
+
+    if (shopOpen) shopCurtain.SetActive(true);
+    else shopCurtain.SetActive(false);
+}
+*/
 
         public void Open()
         {

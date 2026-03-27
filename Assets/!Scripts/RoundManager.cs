@@ -11,7 +11,15 @@ namespace Capstone
     {
         /*
          * This script controls the rounds and spawning in the game.
+         * So the idea here would be a completely reworked round system.
+         * Old script is greyed out at the bottom, and will be removed when done.
          */
+
+
+
+
+
+
 
         [SerializeField] UIDocument UIObject;
         Label UIText;
@@ -62,5 +70,6 @@ namespace Capstone
             yield return new WaitForSeconds(2.5f);
             UIText.style.visibility = new StyleEnum<Visibility> (Visibility.Hidden);
         }
+        
     }
 }
