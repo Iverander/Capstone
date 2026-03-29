@@ -39,6 +39,8 @@ namespace Capstone
             player = Player.instance;
             agent = GetComponent<NavMeshAgent>();
 
+            RoundManager.UpdateEnemyCount(1);
+
             foreach (var ability in abilities) //i forgot we have to initialize the abilities lol
             {
                 if (ability == null) continue;
@@ -72,6 +74,12 @@ namespace Capstone
                     AttackState();
                     break;
             }
+        }
+
+        private void OnDestroy()
+        {
+            //when it fucking dies
+            RoundManager.UpdateEnemyCount(-1);
         }
         //i remember time.Deltatime btw:)
 

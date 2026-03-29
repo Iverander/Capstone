@@ -4,7 +4,7 @@
         <ui:Label text="Shop" class="Title title"/>
         <ui:VisualElement name="ProductShelf" style="flex-grow: 1; width: 100%; height: 100%; flex-direction: row; align-items: center; justify-content: space-around; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; overflow: hidden; flex-wrap: wrap;">
             <ui:VisualElement name="" style="flex-grow: 1; position: absolute; top: 0; right: 0; flex-direction: row; align-items: center; left: auto; height: 120px; width: 240px;">
-                <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=8228938214290033325&amp;guid=5043921403f21d0aab4605d74e3be12c&amp;type=3#console.warnicon" style="height: 100%; width: 40%;"/>
+                <ui:Image source="project://database/Assets/Art/GoldBar.png?fileID=2800000&amp;guid=86dd96bbe286563409d9376c6ff0bec0&amp;type=3#GoldBar" style="height: 100%; width: 40%;"/>
                 <ui:Label text="Cash" name="PlayerCash" style="-unity-text-align: upper-right;"/>
             </ui:VisualElement>
         </ui:VisualElement>
