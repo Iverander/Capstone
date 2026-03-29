@@ -1383,6 +1383,10 @@ PrefabInstance:
       propertyPath: shopCurtain
       value: 
       objectReference: {fileID: 357392214}
+    - target: {fileID: 5299347423266921118, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
+      propertyPath: shopCurtain
+      value: 
+      objectReference: {fileID: 357392214}
     - target: {fileID: 6711680963819314367, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.96

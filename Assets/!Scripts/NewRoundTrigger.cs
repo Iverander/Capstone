@@ -5,6 +5,7 @@ namespace Capstone
     public class NewRoundTrigger : MonoBehaviour
     {
         float countdown;
+        [SerializeField] float timeToWait = 2;
 
         private void OnTriggerStay(Collider other)
         {
@@ -13,7 +14,7 @@ namespace Capstone
                 return;
             }
             countdown += Time.deltaTime;
-            if (countdown >= 5)
+            if (countdown >= timeToWait)
             {
                 Debug.Log("five seconds have passed");
                 RoundManager.instance.NewRound();

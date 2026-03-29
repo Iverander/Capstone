@@ -17,7 +17,7 @@ namespace Capstone
 
         void Start()
         {
-            RoundManager.newRound.AddListener(SpawnEnemies);
+            RoundManager.onNewRound.AddListener(SpawnEnemies);
             if (spawnPoints == null) oneSpawn = true;
             else oneSpawn = false;
         }

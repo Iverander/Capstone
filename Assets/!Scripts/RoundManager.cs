@@ -33,8 +33,8 @@ namespace Capstone
         [ReadOnly] public int roundNr = 0;
         public static int round => instance.roundNr; //shortcut for the round number
 
-        public static UnityEvent newRound = new();
-        public static UnityEvent betweenRound = new();
+        public static UnityEvent onNewRound = new();
+        public static UnityEvent onBetweenRound = new();
         public int enemiesAlive;
  
 
@@ -49,7 +49,7 @@ namespace Capstone
 
         public void BetweenRounds()
         {
-            betweenRound?.Invoke();
+            onBetweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
 
@@ -61,7 +61,7 @@ namespace Capstone
             roundState = RoundState.DuringRound;
             roundNr++;
             //EnemySpawner, 
-            newRound?.Invoke();
+            onNewRound?.Invoke();
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
         }
@@ -72,7 +72,7 @@ namespace Capstone
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             //Should update UI with text like roundNr Spawning enemies..
-            UIText.text = "Starting round " + (roundNr - 1);
+            UIText.text = "Starting round " + (roundNr);
             yield return new WaitForSeconds(2.5f);
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }
