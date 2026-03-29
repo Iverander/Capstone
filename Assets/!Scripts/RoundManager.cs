@@ -6,7 +6,9 @@ using UnityEngine.UIElements;
 
 namespace Capstone
 {
-    public class RoundManager : MonoBehaviour
+
+    [DefaultExecutionOrder(100)]
+    public class RoundManager : MonoBehaviour //this is actually the gamemanager hidden under a secret name...
     {
         /*
          * This script controls the rounds and spawning in the game.
@@ -15,9 +17,16 @@ namespace Capstone
          * Evt. at når du lukker shoppen laster du gamescene, men lagre relevant data.
          */
 
+        public enum RoundState
+        {
+            DuringRound,
+            BetweenRounds
+        }
+
+        public RoundState roundState;
+
         [SerializeField] UIDocument UIObject;
         Label UIText;
-        Button roundButton;
 
         public static RoundManager instance; //makes it accessible from everywhere
 
@@ -25,23 +34,21 @@ namespace Capstone
         public static int round => instance.roundNr; //shortcut for the round number
 
         public static UnityEvent newRound = new();
-        bool enemiesAlive;
+        public int enemiesAlive;
+ 
 
         private void Start()
         {
             instance = this;
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
-            roundButton = UIObject.rootVisualElement.Q<Button>();
-            roundButton.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
 
             NewRound();
         }
 
         public void BetweenRounds()
         {
-            roundNr++;
-            StartCoroutine(UserInterfaceBetweenRounds());
+            roundState = RoundState.BetweenRounds;
         }
 
 
@@ -49,6 +56,7 @@ namespace Capstone
         [ContextMenu("Start New Round")]
         public void NewRound()
         {
+            roundState = RoundState.DuringRound;
             roundNr++;
             //EnemySpawner, 
             newRound?.Invoke();
@@ -56,15 +64,6 @@ namespace Capstone
             Debug.Log("Starting round " + roundNr);
         }
 
-        private void Update()
-        {
-            if (transform.childCount == 0) enemiesAlive = false;
-            else enemiesAlive = true;
-
-            if (!enemiesAlive) BetweenRounds();
-
-            //roundButton.clicked += () => NewRound();
-        }
 
         //Handles screenUI for game phases
         IEnumerator UserInterfaceNewRound()
@@ -76,13 +75,13 @@ namespace Capstone
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }
 
-        IEnumerator UserInterfaceBetweenRounds()
+        public static void UpdateEnemyCount(int amount)
         {
-            UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
-            //Should update UI with text like roundNr Spawning enemies..
-            UIText.text = "Round " + (roundNr - 1);
-            yield return new WaitForSeconds(2.5f);
-            //UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+            instance.enemiesAlive += amount;
+            if(instance.enemiesAlive <= 0)
+            {
+                instance.BetweenRounds();
+            }
         }
     }
 }
