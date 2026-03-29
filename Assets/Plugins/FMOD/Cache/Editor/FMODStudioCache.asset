@@ -50,7 +50,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6919271423687280397}
   cacheVersion: 131858
-  cacheTime: 639093559303888177
+  cacheTime: 639104040044452098
   SerializableEventsDict:
   - key: event:/Rain
     index: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: Assets/Fmod/RumbleMountain/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639093559303888177
+  lastModified: 639104040044452098
   FileSizes:
   - Name: Desktop
     Value: 766
@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: Assets/Fmod/RumbleMountain/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639093559303880422
+  lastModified: 639104040044442098
   FileSizes:
   - Name: Desktop
     Value: 1260672
