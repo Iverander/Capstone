@@ -33,7 +33,7 @@ namespace Capstone
 
         public void Open()
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.Confined;
             shopUI.rootVisualElement.Q<Label>("PlayerCash").text = Wallet.Cash.ToString();
             Wallet.cashUpdated += RefreshCash;
@@ -70,7 +70,7 @@ namespace Capstone
 
         public void Close()
         {
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
             Wallet.cashUpdated -= RefreshCash;
         }
