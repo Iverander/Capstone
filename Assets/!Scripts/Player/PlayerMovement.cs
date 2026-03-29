@@ -82,8 +82,13 @@ namespace Capstone
         {
             if(Player.instance.stunned) return;
             Movement();
-            LimitSpeed();
             //Player.instance.dash.direction = ConvertedDirection;
+        }
+
+        private void Update()
+        {
+            if(Player.instance.stunned) return;
+            LimitSpeed();
         }
 
         protected abstract void Movement();

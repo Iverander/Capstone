@@ -3,25 +3,22 @@ using UnityEngine;
 
 namespace Capstone
 {
-    public enum WeatherType
-    {
-        None,
-        Raining,
-    }
-    
+
     [Serializable]
     public class MapSettings
     {
-        public WeatherType weatherType = WeatherType.None;
+        public WeatherType weatherType = WeatherType.Sunny;
         public bool obstacles = true;
 
         public override string ToString()
         {
-            string returnString = "";
+            string result = "";
+            foreach (var field in typeof(MapSettings).GetFields())
+            {
+                result += "["+field.Name + ": " + field.GetValue(this) + "] \n";
+            }
             
-            returnString += $"Weather: {weatherType.ToString()}\n";
-            
-            return returnString;
+            return result;
         }
     }
     public static class LevelSettings

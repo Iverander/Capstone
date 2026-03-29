@@ -4,6 +4,12 @@ using UnityEngine.Serialization;
 
 namespace Capstone
 {
+    public enum WeatherType
+    {
+        Sunny,
+        Raining,
+    }
+    
     public class WeatherManager : MonoBehaviour
     {
         [FormerlySerializedAs("weatherOverride")] [SerializeField] WeatherType weatherTypeOverride;
@@ -11,7 +17,7 @@ namespace Capstone
 
         void Start()
         {
-            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.None)
+            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.Sunny)
             {
                 LevelSettings.ChangeCurrentWeather(weatherTypeOverride);
             }

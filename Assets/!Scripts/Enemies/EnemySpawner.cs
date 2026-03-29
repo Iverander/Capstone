@@ -17,7 +17,7 @@ namespace Capstone
 
         void Start()
         {
-            RoundManager.newRound.AddListener(SpawnEnemies);
+            RoundManager.onNewRound.AddListener(SpawnEnemies);
             if (spawnPoints == null) oneSpawn = true;
             else oneSpawn = false;
         }
@@ -25,6 +25,8 @@ namespace Capstone
         //called from RoundManager
         async void SpawnEnemies()
         {
+            Debug.Log("Spawn Enemies please : )))");
+
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
             for (int i = 0; i < amountToSpawn; i++)
             {

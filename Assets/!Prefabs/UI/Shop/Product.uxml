@@ -1,10 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/!Prefabs/UI/Shop/ShopStyle.uss?fileID=7433441132597879392&amp;guid=c6850a8136d3c1cad8edd62ba2ac62f2&amp;type=3#ShopStyle"/>
-    <ui:Button text="" class="Product" style="max-height: 500px; max-width: 500px;">
-        <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=3506167780502562645&amp;guid=5043921403f21d0aab4605d74e3be12c&amp;type=3#console.erroricon@2x" scale-mode="ScaleToFit" style="height: 100%; width: 100%;"/>
-        <ui:Label text="There is an error lol" style="-unity-text-align: middle-center; white-space: normal;"/>
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; position: absolute; bottom: -60px; height: 50px; width: 100%; align-self: center;">
-            <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=8228938214290033325&amp;guid=5043921403f21d0aab4605d74e3be12c&amp;type=3#console.warnicon" style="aspect-ratio: 1; height: 100%;"/>
+    <ui:Button text="" class="Product" style="max-height: 350px; max-width: 350px; min-width: 100px; min-height: 250px; align-items: center;">
+        <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=3506167780502562645&amp;guid=5043921403f21d0aab4605d74e3be12c&amp;type=3#console.erroricon@2x" scale-mode="ScaleToFit" style="height: 70%; aspect-ratio: 1;"/>
+        <ui:VisualElement style="flex-grow: 0; height: 30%; width: 100%;">
+            <ui:Label text="There is an error lol" style="-unity-text-align: middle-center; white-space: normal; -unity-text-auto-size: best-fit 0 35px; -unity-text-generator: advanced;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; position: absolute; bottom: -60px; height: 15%; width: 100%; align-self: center;">
+            <ui:Image source="project://database/Assets/Art/GoldBar.png?fileID=2800000&amp;guid=86dd96bbe286563409d9376c6ff0bec0&amp;type=3#GoldBar" style="aspect-ratio: 1; height: 100%;"/>
             <ui:Label text="Cost" name="Cost"/>
         </ui:VisualElement>
     </ui:Button>

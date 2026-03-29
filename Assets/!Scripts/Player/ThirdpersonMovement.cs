@@ -6,7 +6,7 @@ namespace Capstone
     public class ThirdpersonMovement : PlayerMovement
     {
         [SerializeField] private bool lockedToCamera = true;
-        public override Vector3 ConvertedDirection => transform.forward * moveDirection.z + transform.right * moveDirection.x;
+        public override Vector3 ConvertedDirection => cam.transform.forward * moveDirection.z + cam.transform.right * moveDirection.x;
         
         protected override void Start()
         {
