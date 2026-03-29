@@ -22,6 +22,11 @@ namespace Capstone
             shopUI.enabled = false;
             Sellable = await Addressable.LoadAssets<Modifier>("Modifier");
             shopOpen = false;
+
+            RoundManager.
+
+            if (shopOpen) shopCurtain.SetActive(true);
+            else shopCurtain.SetActive(false);
         }
 
         public void Toggle()
@@ -36,9 +41,6 @@ namespace Capstone
         public void ToggleShopOpen()
         {
             shopOpen = !shopOpen;
-
-            if (shopOpen) shopCurtain.SetActive(true);
-            else shopCurtain.SetActive(false);
         }
 
         public void Open()
