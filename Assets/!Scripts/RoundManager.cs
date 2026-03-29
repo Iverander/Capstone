@@ -34,6 +34,7 @@ namespace Capstone
         public static int round => instance.roundNr; //shortcut for the round number
 
         public static UnityEvent newRound = new();
+        public static UnityEvent betweenRound = new();
         public int enemiesAlive;
  
 
@@ -48,6 +49,7 @@ namespace Capstone
 
         public void BetweenRounds()
         {
+            betweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
 
