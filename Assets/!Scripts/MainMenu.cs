@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
@@ -78,11 +79,8 @@ namespace Capstone
             gameSceneButton.SetEnabled(false);
             gameSceneButton.text = "Loading";
 
-            yield return StartCoroutine(gameScene.Load(true));
-            yield return StartCoroutine(playerScene.Load(true));
-
-            //gameScene.Activate();
-            //playerScene.Activate();
+            yield return StartCoroutine(gameScene.Load());
+            yield return StartCoroutine(playerScene.Load());
         }
 
     }
