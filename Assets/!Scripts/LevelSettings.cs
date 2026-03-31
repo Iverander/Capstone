@@ -3,6 +3,15 @@ using UnityEngine;
 
 namespace Capstone
 {
+    public enum ShaderType
+    {
+        HLSL,
+        ShaderGraph
+    }
+    public enum Map
+    {
+        Mountain
+    }
 
     [Serializable]
     public class MapSettings
@@ -23,6 +32,7 @@ namespace Capstone
     }
     public static class LevelSettings
     {
+        public static ShaderType shaderType;
         public static MapSettings CurrentMapSettings { get; private set; } = new();
         
 

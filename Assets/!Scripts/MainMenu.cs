@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
+using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,11 +21,15 @@ namespace Capstone
         [SerializeField] Scene playerScene;
         [SerializeField] Scene showcaseScene;
 
+        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLmaps = new();
+        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGmaps = new();  
+
         Button gameSceneButton;
         Button showcaseButton;
         Button quitButton;
         Label descriptionLabel;
         EnumField weatherField;
+        EnumField shaderField;
         Toggle obstacleToggle;
         private void Start()
         {
@@ -37,9 +42,11 @@ namespace Capstone
             quitButton = root.Q<Button>("Quit");
             descriptionLabel = root.Q<Label>("Description");
             weatherField = root.Q<EnumField>("WeatherSelector");
+            shaderField = root.Q<EnumField>("ShaderSelector");
             obstacleToggle = root.Q<Toggle>("ObstacleToggle");
 
             weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
+            shaderField.value = LevelSettings.shaderType;
             obstacleToggle.value = LevelSettings.CurrentMapSettings.obstacles;
 
             gameSceneButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
@@ -55,7 +62,7 @@ namespace Capstone
                 descriptionLabel.text = "Quit the game";
             });
 
-            gameSceneButton.clicked += () => StartCoroutine(StartGame());
+            gameSceneButton.clicked += () => StartGame();
             showcaseButton.clicked += () =>
             {
                 //yield return StartCoroutine(showcaseScene.Load());
@@ -67,6 +74,11 @@ namespace Capstone
             {
                 LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
             });
+            shaderField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
+            {
+                LevelSettings.shaderType = (ShaderType)changeEvent.newValue;
+                //Debug.Log(LevelSettings.shaderType);
+            });
             
             obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
             {
@@ -74,14 +86,27 @@ namespace Capstone
             });
         }
 
-        IEnumerator StartGame()
+        void StartGame()
         {
             gameSceneButton.SetEnabled(false);
             gameSceneButton.text = "Loading";
 
-            yield return StartCoroutine(gameScene.Load());
-            yield return StartCoroutine(playerScene.Load());
+            StartCoroutine(gameScene.Load());
+            StartCoroutine(GetMap().Load());
+            StartCoroutine(playerScene.Load());
         }
 
+        Scene GetMap()
+        {
+            switch(LevelSettings.shaderType)
+            {
+                case ShaderType.HLSL:
+                    return HLSLmaps[Map.Mountain];
+                case ShaderType.ShaderGraph:
+                    return SGmaps[Map.Mountain];
+            }
+
+            return null;
+        }
     }
 }

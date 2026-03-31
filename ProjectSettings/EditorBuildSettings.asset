@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/PauseMenu.unity
     guid: 623bb34fbf34bbc1c808a8921fcfa616
+  - enabled: 1
+    path: Assets/Scenes/Maps/HLSLMountain.unity
+    guid: 4b4a9e8553daa7402a775252a3ff4b83
+  - enabled: 1
+    path: Assets/Scenes/Maps/SGMountain.unity
+    guid: 36d2b5f1197318ff5a7574898f979ab2
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7c57b1dcabef351609c2d5c10e7b17d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

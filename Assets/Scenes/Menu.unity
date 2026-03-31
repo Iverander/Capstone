@@ -198,6 +198,18 @@ MonoBehaviour:
   showcaseScene:
     name: LoadingScreen
     loadSceneMode: 0
+  HLSLmaps:
+    _serializedList:
+    - Key: 0
+      Value:
+        name: HLSLMountain
+        loadSceneMode: 1
+  SGmaps:
+    _serializedList:
+    - Key: 0
+      Value:
+        name: SGMountain
+        loadSceneMode: 1
 --- !u!114 &1831338788
 MonoBehaviour:
   m_ObjectHideFlags: 0
