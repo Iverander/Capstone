@@ -19,17 +19,15 @@ namespace Capstone
 
         [SerializeField] Scene gameScene;
         [SerializeField] Scene playerScene;
-        [SerializeField] Scene showcaseScene;
 
         [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLMaps = new();
         [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGMaps = new();  
 
         Button gameSceneButton;
-        Button showcaseButton;
         Button quitButton;
-        Label descriptionLabel;
         EnumField weatherField;
         EnumField shaderField;
+        EnumField mapField;
         Toggle obstacleToggle;
         private void Start()
         {
@@ -38,52 +36,44 @@ namespace Capstone
             root = mainMenu.rootVisualElement;
             
             gameSceneButton = root.Q<Button>("Start");
-            showcaseButton = root.Q<Button>("Showcase");
             quitButton = root.Q<Button>("Quit");
-            descriptionLabel = root.Q<Label>("Description");
             weatherField = root.Q<EnumField>("WeatherSelector");
             shaderField = root.Q<EnumField>("ShaderSelector");
+            mapField = root.Q<EnumField>("MapSelector");
             obstacleToggle = root.Q<Toggle>("ObstacleToggle");
 
             weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
             shaderField.value = LevelSettings.shaderType;
+            mapField.value = LevelSettings.currentMap;
             obstacleToggle.value = LevelSettings.CurrentMapSettings.obstacles;
 
-            gameSceneButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
-            {
-                descriptionLabel.text = "Start the game! remember to set your game setting before going in!";
-            });
-            showcaseButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
-            {
-                descriptionLabel.text = "Showcase is used to display work and progress on unfinished shaders & models.";
-            });
-            quitButton.RegisterCallback<MouseOverEvent> (mouseEvent =>
-            {
-                descriptionLabel.text = "Quit the game";
-            });
-
-            gameSceneButton.clicked += () => StartGame();
-            showcaseButton.clicked += () =>
-            {
-                //yield return StartCoroutine(showcaseScene.Load());
-                //showcaseScene.Activate();
-            };
+            gameSceneButton.clicked += StartGame;
             quitButton.clicked += Application.Quit;
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
                 LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
             });
-            weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
+            shaderField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
                 LevelSettings.shaderType = (ShaderType)changeEvent.newValue;
-                Debug.Log(LevelSettings.shaderType);
+                //Debug.Log(LevelSettings.shaderType);
+            });
+            mapField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
+            {
+                LevelSettings.currentMap = (Map)changeEvent.newValue;
             });
             
             obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
             {
                 LevelSettings.ToggleObstacles(changeEvent.newValue);
             });
+        }
+
+        void OnDestroy()
+        {
+            gameSceneButton.clicked -= StartGame;
+            quitButton.clicked -= Application.Quit;
         }
 
         void StartGame()
@@ -101,9 +91,9 @@ namespace Capstone
             switch(LevelSettings.shaderType)
             {
                 case ShaderType.HLSL:
-                    return HLSLMaps[Map.Mountain];
+                    return HLSLMaps[LevelSettings.currentMap];
                 case ShaderType.ShaderGraph:
-                    return HLSLMaps[Map.Mountain];
+                    return SGMaps[LevelSettings.currentMap];
             }
 
             return null;

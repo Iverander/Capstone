@@ -18,7 +18,7 @@ namespace Capstone
             public string _name;
             public string dateTime;
             public List<Section> sections = new();
-            public string mapSettings;
+            public string levelSettings;
 
             private float timeStart;
             private float frameStart;
@@ -52,7 +52,7 @@ namespace Capstone
             {
                 _name = sessionName;
                 this.dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                this.mapSettings = LevelSettings.CurrentMapSettings.ToString();
+                this.levelSettings = LevelSettings.ToString();
                 this.timeStart = Time.time;
                 this.frameStart = Time.frameCount;
                 
