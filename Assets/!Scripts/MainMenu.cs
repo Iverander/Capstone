@@ -21,8 +21,8 @@ namespace Capstone
         [SerializeField] Scene playerScene;
         [SerializeField] Scene showcaseScene;
 
-        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLmaps = new();
-        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGmaps = new();  
+        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLMaps = new();
+        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGMaps = new();  
 
         Button gameSceneButton;
         Button showcaseButton;
@@ -74,10 +74,10 @@ namespace Capstone
             {
                 LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
             });
-            shaderField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
+            weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
                 LevelSettings.shaderType = (ShaderType)changeEvent.newValue;
-                //Debug.Log(LevelSettings.shaderType);
+                Debug.Log(LevelSettings.shaderType);
             });
             
             obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
@@ -101,9 +101,9 @@ namespace Capstone
             switch(LevelSettings.shaderType)
             {
                 case ShaderType.HLSL:
-                    return HLSLmaps[Map.Mountain];
+                    return HLSLMaps[Map.Mountain];
                 case ShaderType.ShaderGraph:
-                    return SGmaps[Map.Mountain];
+                    return HLSLMaps[Map.Mountain];
             }
 
             return null;
