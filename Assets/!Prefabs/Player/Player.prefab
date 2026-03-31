@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 195890739875289452}
   - component: {fileID: 1193891074316816883}
   - component: {fileID: 7922217572380646346}
-  - component: {fileID: 7712864306461528486}
   - component: {fileID: 4382639448646026390}
   m_Layer: 3
   m_Name: Player
@@ -85,6 +84,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     onMenu:
+      m_PersistentCalls:
+        m_Calls: []
+    onCloseMenu:
       m_PersistentCalls:
         m_Calls: []
     onMousePosition:
@@ -240,7 +242,7 @@ MonoBehaviour:
   Killed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7712864306461528486}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Capstone.SceneLoader, Capstone
         m_MethodName: LoadScene
         m_Mode: 5
@@ -328,18 +330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.FPSSetter
   fps: 0
---- !u!114 &7712864306461528486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101182429259731174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ccf06c049dc6a779606407abed6d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Capstone::Capstone.SceneLoader
 --- !u!114 &4382639448646026390
 MonoBehaviour:
   m_ObjectHideFlags: 0
