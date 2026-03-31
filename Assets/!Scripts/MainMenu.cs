@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,8 +15,9 @@ namespace Capstone
         
         VisualElement root;
 
-        [SerializeField, Scene] string gameScene;
-        [SerializeField, Scene] string showcaseScene;
+        [SerializeField] Scene gameScene;
+        [SerializeField] Scene playerScene;
+        [SerializeField] Scene showcaseScene;
 
         Button gameSceneButton;
         Button showcaseButton;
@@ -51,13 +54,11 @@ namespace Capstone
                 descriptionLabel.text = "Quit the game";
             });
 
-            gameSceneButton.clicked += () =>
-            {
-                SceneManager.LoadScene(gameScene);
-            };
+            gameSceneButton.clicked += () => StartCoroutine(StartGame());
             showcaseButton.clicked += () =>
             {
-                SceneManager.LoadScene(showcaseScene);
+                //yield return StartCoroutine(showcaseScene.Load());
+                //showcaseScene.Activate();
             };
             quitButton.clicked += Application.Quit;
             
@@ -70,6 +71,18 @@ namespace Capstone
             {
                 LevelSettings.ToggleObstacles(changeEvent.newValue);
             });
+        }
+
+        IEnumerator StartGame()
+        {
+            gameSceneButton.SetEnabled(false);
+            gameSceneButton.text = "Loading";
+
+            yield return StartCoroutine(gameScene.Load(true));
+            yield return StartCoroutine(playerScene.Load(true));
+
+            //gameScene.Activate();
+            //playerScene.Activate();
         }
 
     }

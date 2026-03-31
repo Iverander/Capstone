@@ -13,8 +13,10 @@ namespace Capstone
 
         private void OpenMenu()
         {
-            DataManager.NewSection("Exit to Menu");
-            SceneManager.LoadScene(1);
+            Debug.Log("OpenMenu");
+            MenuManager.OpenMenu(MenuManager.Menu.Pause);
+            //DataManager.NewSection("Exit to Menu");
+            //SceneManager.LoadScene(1);
         }
         
     }

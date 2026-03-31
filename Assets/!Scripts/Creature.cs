@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Capstone
@@ -20,6 +21,6 @@ namespace Capstone
             stunEffect.SetActive(false);
         }
 
-        public abstract void Stun(float duration);
+        public abstract IEnumerator Stun(float durationSeconds);
     }
 }

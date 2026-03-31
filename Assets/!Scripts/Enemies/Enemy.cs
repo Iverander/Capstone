@@ -145,7 +145,7 @@ namespace Capstone
         }
 
         //for stun & knockback
-        public override async void Stun(float duration)
+        public override IEnumerator Stun(float durationSeconds)
         {
             agent.enabled = false;
             rb.isKinematic = false;
@@ -154,7 +154,7 @@ namespace Capstone
             
             //rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
 
-            await Task.Delay(Mathf.RoundToInt(1000 * duration));
+            yield return new WaitForSeconds(durationSeconds);
             
             stunned = false;
             rb.isKinematic = true;

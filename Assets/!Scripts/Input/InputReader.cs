@@ -69,10 +69,15 @@ namespace Capstone
         }
 
         public UnityEvent onMenu;
+        public UnityEvent onCloseMenu;
         public void OnMenu(InputAction.CallbackContext context)
         {
             if(!context.started) return;
-            onMenu?.Invoke();
+
+            if(MenuManager.instance.currentMenu == MenuManager.Menu.None)
+                onMenu?.Invoke();
+            else
+                onCloseMenu?.Invoke();
         }
 
         public UnityEvent<Vector2> onMousePosition;

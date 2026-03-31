@@ -17,27 +17,17 @@ namespace Capstone
         async void Start()
         {
             shopUI = GetComponent<UIDocument>();
-            shopUI.enabled = false;
+            shopUI.rootVisualElement.Q<Label>("PlayerCash").text = Wallet.Cash.ToString();
+            Wallet.cashUpdated += RefreshCash;
             Sellable = await Addressable.LoadAssets<Modifier>("Modifier");
-        }
 
-        public void Toggle()
-        {
-            shopUI.enabled = !shopUI.enabled;
-
-            if (shopUI.enabled)
-                Open();
-            else
-                Close();
+            Open();
         }
 
         public void Open()
         {
             //Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.Confined;
-            shopUI.rootVisualElement.Q<Label>("PlayerCash").text = Wallet.Cash.ToString();
-            Wallet.cashUpdated += RefreshCash;
-            
+            //Cursor.lockState = CursorLockMode.Confined;            
             foreach (Modifier mod in Sellable)
             {
                 VisualElement product = productAsset.Instantiate();
@@ -68,10 +58,8 @@ namespace Capstone
             shopUI.rootVisualElement.Q<Label>("PlayerCash").text = amount.ToString();
         }
 
-        public void Close()
+        public void OnDestroy()
         {
-            //Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
             Wallet.cashUpdated -= RefreshCash;
         }
     }

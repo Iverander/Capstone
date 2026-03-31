@@ -23,7 +23,7 @@ namespace Capstone
             }
 
             //origin.
-            origin.Stun(duration);
+            origin.StartCoroutine(origin.Stun(duration));
 
             if(directionVector.normalized != Vector3.zero) 
                 origin.rb.AddForce(directionVector.normalized * (force), ForceMode.Impulse);

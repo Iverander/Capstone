@@ -50,7 +50,7 @@ namespace Capstone
 
                 if (knockbackForce > 0)
                 {
-                    creature.Stun(duration);
+                    creature.StartCoroutine(creature.Stun(duration));
                     creature.rb.AddForce((creature.transform.position - origin.transform.position) * (knockbackForce * 10), ForceMode.Force);
                 }   
             }

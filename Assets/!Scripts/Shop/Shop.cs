@@ -11,7 +11,6 @@ namespace Capstone
     public class Shop : MonoBehaviour
     {
         [SerializeField] private UIDocument keyIndicator;
-        [SerializeField] private StoreFront storeFront;
         [SerializeField] GameObject shopCurtain;
 
         bool shopOpen;
@@ -27,27 +26,30 @@ namespace Capstone
         {
             if (!shopOpen) return;
             keyIndicator.enabled = true;
-            Player.input.onShop.AddListener(storeFront.Toggle);
+            Player.input.onShop.AddListener(OpenStorefront);
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!shopOpen) return;
             keyIndicator.enabled = false;
-            Player.input.onShop.RemoveListener(storeFront.Toggle);
-            storeFront.Close();
+            Player.input.onShop.RemoveListener(OpenStorefront);
+        }
+
+        void OpenStorefront()
+        {
+            
+            MenuManager.OpenMenu(MenuManager.Menu.Store);
         }
 
         void OpenShop()
         {
             shopOpen = true;
-
             shopCurtain.SetActive(false);
         }
 
         public void CloseShop()
         {
-
             shopOpen=false;
             shopCurtain.SetActive(true);
         }

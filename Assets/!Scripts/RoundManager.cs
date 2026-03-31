@@ -12,9 +12,9 @@ namespace Capstone
     {
         /*
          * This script controls the rounds and spawning in the game.
-         * TO mener det er tryggere å laste scenen på nytt, og legge inn dataene i playerprefs
-         * Også er butikken også en egen scene
-         * Evt. at når du lukker shoppen laster du gamescene, men lagre relevant data.
+         * TO mener det er tryggere ï¿½ laste scenen pï¿½ nytt, og legge inn dataene i playerprefs
+         * Ogsï¿½ er butikken ogsï¿½ en egen scene
+         * Evt. at nï¿½r du lukker shoppen laster du gamescene, men lagre relevant data.
          */
 
         public enum RoundState
@@ -30,6 +30,8 @@ namespace Capstone
 
         public static RoundManager instance; //makes it accessible from everywhere
 
+        [SerializeField] float firstRoundDelaySeconds = 3;
+
         [ReadOnly] public int roundNr = 0;
         public static int round => instance.roundNr; //shortcut for the round number
 
@@ -38,11 +40,13 @@ namespace Capstone
         public int enemiesAlive;
  
 
-        private void Start()
+        private IEnumerator Start()
         {
             instance = this;
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+
+            yield return new WaitForSeconds(firstRoundDelaySeconds);
 
             NewRound();
         }

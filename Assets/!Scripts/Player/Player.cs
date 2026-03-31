@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
@@ -110,10 +111,10 @@ namespace Capstone
       Player.state &= ~state;
     }
 
-    public override async void Stun(float duration)
+    public override IEnumerator Stun(float durationSeconds)
     {
       stunned = true;
-      await Task.Delay(TimeSpan.FromSeconds(duration));
+      yield return new WaitForSeconds(durationSeconds);
       stunned = false;
       //rb.AddForce((transform.position - origin) * (knockback * 10), ForceMode.Force);
     }
