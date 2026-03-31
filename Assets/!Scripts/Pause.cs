@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Capstone
 {
-    public class Menu : MonoBehaviour
+    public class Pause : MonoBehaviour
     {
         void Start()
         {
@@ -12,11 +12,8 @@ namespace Capstone
         }
 
         private void OpenMenu()
-        {
-            Debug.Log("OpenMenu");
+        { 
             MenuManager.OpenMenu(MenuManager.Menu.Pause);
-            //DataManager.NewSection("Exit to Menu");
-            //SceneManager.LoadScene(1);
         }
         
     }

@@ -7,6 +7,22 @@ namespace Capstone
         float countdown;
         [SerializeField] float timeToWait = 2;
 
+        void Start()
+        {
+            RoundManager.onBetweenRound.AddListener(Enable);
+            RoundManager.onNewRound.AddListener(Disable);
+            Disable();
+        }
+
+        void Enable()
+        {
+            gameObject.SetActive(true);
+        }
+        void Disable()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (RoundManager.instance.roundState == RoundManager.RoundState.DuringRound)
