@@ -17,8 +17,19 @@ namespace Capstone
     [Serializable]
     public class MapSettings
     {
+        public Map map = Map.Mountain;
         public WeatherType weatherType = WeatherType.Sunny;
         public bool obstacles = true;
+
+        public void SetWeather(WeatherType weatherType)
+        {
+            Debug.Log($"Changing weather to {weatherType}");
+            this.weatherType = weatherType;
+        }
+        public void ToggleObstacles(bool toggle)
+        {
+            this.obstacles = toggle;
+        }
 
         public override string ToString()
         {
@@ -31,29 +42,16 @@ namespace Capstone
             return result;
         }
     }
-    public static class LevelSettings
+    public static class Settings
     {
-        public static ShaderType shaderType;
-        public static Map currentMap = Map.Mountain;
-        public static MapSettings CurrentMapSettings { get; private set; } = new();
-        
-
-        public static void ChangeCurrentWeather(WeatherType weatherType)
-        {
-            Debug.Log($"Changing weather to {weatherType}");
-            CurrentMapSettings.weatherType = weatherType;
-        }
-        public static void ToggleObstacles(bool toggle)
-        {
-            CurrentMapSettings.obstacles = toggle;
-        }
+        public static ShaderType shaderType; 
+        public static MapSettings mapSettings { get; private set; } = new();
 
         public static string ToString()
         {
             return 
             $"[Shader type: {shaderType}]" +
-            $"[Map: {currentMap}]"+
-            $"[MapSettings: {CurrentMapSettings.ToString()}]";
+            $"[MapSettings: {mapSettings.ToString()}]";
         }
     }
 }

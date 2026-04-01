@@ -6,31 +6,20 @@ namespace Capstone
     public class Water : MonoBehaviour
     {
         Renderer waterRenderer;
-        private static Action<float> RippleUpdated;
-        
+               
         [SerializeField] float defaultRippleStrength = 0;
         
         void Start()
         {
             waterRenderer = GetComponent<Renderer>();
-            waterRenderer.material.SetFloat("_RippleStrength", defaultRippleStrength);
-
-            RippleUpdated += UpdateRipple;
+            SetRippleStrength(defaultRippleStrength);
+            
+            if(Settings.mapSettings.weatherType == WeatherType.Raining)
+                SetRippleStrength(1);
         }
-
-        private void OnDestroy()
+        public void SetRippleStrength(float value)
         {
-            RippleUpdated -= UpdateRipple;
-        }
-
-        private void UpdateRipple(float ripple)
-        {
-            waterRenderer.material.SetFloat("_RippleStrength", ripple);
-        }
-
-        public static void SetRippleStrength(float value)
-        {
-            RippleUpdated?.Invoke(value);
+            waterRenderer.material.SetFloat("_RippleStrength", value);
         }
     }
 }

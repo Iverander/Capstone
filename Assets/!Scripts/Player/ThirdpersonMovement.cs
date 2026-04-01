@@ -6,7 +6,11 @@ namespace Capstone
     public class ThirdpersonMovement : PlayerMovement
     {
         [SerializeField] private bool lockedToCamera = true;
-        public override Vector3 ConvertedDirection => cam.transform.forward * moveDirection.z + cam.transform.right * moveDirection.x;
+
+        Vector3 cameraForward => new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z).normalized;
+        Vector3 cameraRight => new Vector3(cam.transform.right.x, 0, cam.transform.right.z).normalized;
+
+        public override Vector3 ConvertedDirection => cameraForward * moveDirection.z + cameraRight * moveDirection.x;
         
         protected override void Start()
         {
@@ -16,6 +20,8 @@ namespace Capstone
 
         protected override void Movement()
         {
+            Debug.Log(cam.transform.forward);
+
             rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
             
             if(lockedToCamera)

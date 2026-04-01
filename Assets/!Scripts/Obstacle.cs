@@ -7,7 +7,7 @@ namespace Capstone
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            gameObject.SetActive(LevelSettings.CurrentMapSettings.obstacles);
+            gameObject.SetActive(Settings.mapSettings.obstacles);
         }
 
         // Update is called once per frame

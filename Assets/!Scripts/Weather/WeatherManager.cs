@@ -12,16 +12,11 @@ namespace Capstone
     
     public class WeatherManager : MonoBehaviour
     {
-        [FormerlySerializedAs("weatherOverride")] [SerializeField] WeatherType weatherTypeOverride;
         [SerializedDictionary, SerializeField] SerializedDictionary<WeatherType, Weather> weatherPrefabs;
 
         void Start()
         {
-            if (LevelSettings.CurrentMapSettings.weatherType == WeatherType.Sunny)
-            {
-                LevelSettings.ChangeCurrentWeather(weatherTypeOverride);
-            }
-            Instantiate(weatherPrefabs[LevelSettings.CurrentMapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
+            Instantiate(weatherPrefabs[Settings.mapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
         }
     }
 }

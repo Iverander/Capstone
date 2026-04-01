@@ -52,7 +52,7 @@ namespace Capstone
             {
                 _name = sessionName;
                 this.dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                this.levelSettings = LevelSettings.ToString();
+                this.levelSettings = Settings.ToString();
                 this.timeStart = Time.time;
                 this.frameStart = Time.frameCount;
                 

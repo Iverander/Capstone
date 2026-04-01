@@ -8,7 +8,7 @@ namespace Capstone
         public override void  Apply() 
         {
             base.Apply();
-            Water.SetRippleStrength(1);
+            //Water.UpdateRipple?.Invoke(1);
         }
     }
 }

@@ -42,31 +42,31 @@ namespace Capstone
             mapField = root.Q<EnumField>("MapSelector");
             obstacleToggle = root.Q<Toggle>("ObstacleToggle");
 
-            weatherField.value = LevelSettings.CurrentMapSettings.weatherType;
-            shaderField.value = LevelSettings.shaderType;
-            mapField.value = LevelSettings.currentMap;
-            obstacleToggle.value = LevelSettings.CurrentMapSettings.obstacles;
+            weatherField.value = Settings.mapSettings.weatherType;
+            shaderField.value = Settings.shaderType;
+            mapField.value = Settings.mapSettings.map;
+            obstacleToggle.value = Settings.mapSettings.obstacles;
 
             gameSceneButton.clicked += StartGame;
             quitButton.clicked += Application.Quit;
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                LevelSettings.ChangeCurrentWeather((WeatherType)changeEvent.newValue);
+                Settings.mapSettings.SetWeather((WeatherType)changeEvent.newValue);
             });
             shaderField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                LevelSettings.shaderType = (ShaderType)changeEvent.newValue;
+                Settings.shaderType = (ShaderType)changeEvent.newValue;
                 //Debug.Log(LevelSettings.shaderType);
             });
             mapField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                LevelSettings.currentMap = (Map)changeEvent.newValue;
+                Settings.mapSettings.map = (Map)changeEvent.newValue;
             });
             
             obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
             {
-                LevelSettings.ToggleObstacles(changeEvent.newValue);
+                Settings.mapSettings.ToggleObstacles(changeEvent.newValue);
             });
         }
 
@@ -88,12 +88,12 @@ namespace Capstone
 
         Scene GetMap()
         {
-            switch(LevelSettings.shaderType)
+            switch(Settings.shaderType)
             {
-                case ShaderType.HLSL:
-                    return HLSLMaps[LevelSettings.currentMap];
+                case ShaderType.HLSL:   
+                    return HLSLMaps[Settings.mapSettings.map];
                 case ShaderType.ShaderGraph:
-                    return SGMaps[LevelSettings.currentMap];
+                    return SGMaps[Settings.mapSettings.map];
             }
 
             return null;
