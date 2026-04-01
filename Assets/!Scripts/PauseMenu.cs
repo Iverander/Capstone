@@ -18,7 +18,7 @@ namespace Capstone
 
         void ExitToMenu()
         {
-            StartCoroutine(menuScene.Load());
+            menuScene.Load();
             DataManager.NewSection("Exit to menu");
         }
     }

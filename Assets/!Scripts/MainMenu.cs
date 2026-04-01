@@ -17,8 +17,8 @@ namespace Capstone
         
         VisualElement root;
 
-        [SerializeField] Scene gameScene;
-        [SerializeField] Scene playerScene;
+        [SerializeField] SceneGroup gameScene;
+        //[SerializeField] Scene playerScene;
 
         [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLMaps = new();
         [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGMaps = new();  
@@ -81,9 +81,9 @@ namespace Capstone
             gameSceneButton.SetEnabled(false);
             gameSceneButton.text = "Loading";
 
-            StartCoroutine(gameScene.Load());
-            StartCoroutine(GetMap().Load());
-            StartCoroutine(playerScene.Load());
+            gameScene.Load();
+            GetMap().Load();
+            //playerScene.Load();
         }
 
         Scene GetMap()

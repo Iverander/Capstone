@@ -190,8 +190,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   mainMenu: {fileID: 1831338785}
   gameScene:
-    name: GameScene
-    loadSceneMode: 0
+    scenes:
+    - name: GameScene
+      loadSceneMode: 0
+    - name: PlayerScene
+      loadSceneMode: 1
   playerScene:
     name: PlayerScene
     loadSceneMode: 1

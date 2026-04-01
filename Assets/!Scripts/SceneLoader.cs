@@ -11,56 +11,34 @@ using UnityEngine.SceneManagement;
 namespace Capstone
 {
     [Serializable]
+    public class SceneGroup
+    {
+        public Scene[] scenes;
+
+        public void Load()
+        {
+            foreach (var scene in scenes)
+            {
+                scene.Load();   
+            }
+        }
+    }
+    [Serializable]
     public class Scene
     {
         [Scene] public string name;
         public LoadSceneMode loadSceneMode;
         public AsyncOperation operation { get; private set; }
         public float LoadingProgress => operation.progress * 100;
-        public bool autoActivate = true;
 
-        public IEnumerator Load(bool autoActivate = true)
+
+        public void Load(bool autoActivate = true)
         {
             operation = SceneManager.LoadSceneAsync(name, loadSceneMode);
             operation.allowSceneActivation = autoActivate;
-
-            while(operation.progress < .9f && Application.isPlaying)
-            {
-                Debug.Log(name + ": " + LoadingProgress);
-                yield return null;
-            }
-        }
-        public void LoadAsync(bool autoActivate = true)
-        {
-            this.autoActivate = autoActivate;
-            new Thread(Load)
-            {
-                IsBackground = true,
-                Priority = System.Threading.ThreadPriority.AboveNormal
-            };
         }
 
-
-        async void Load()
-        {
-            operation = SceneManager.LoadSceneAsync(name, loadSceneMode);
-            operation.allowSceneActivation = autoActivate;
-
-            while(operation.progress < .9f && Application.isPlaying)
-            {
-                Debug.Log(name + ": " + LoadingProgress);
-                await Task.Delay(10);
-            }
-        }
-
-        public void Activate()
-        {
-            if(operation == null) throw new Exception("Cannot activate unloaded scene");
-            if(operation.progress <.9f) throw new Exception("Scene not ready for activation");
-
-            operation.allowSceneActivation = true;
-        }
-        public void Deactivate()
+        public void Unload()
         {
             SceneManager.UnloadSceneAsync(name);
         }
