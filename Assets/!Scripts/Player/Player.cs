@@ -45,8 +45,6 @@ namespace Capstone
 
     void Start()
     {
-      DataManager.StartNewSession(SceneManager.GetActiveScene().name);
-
       instance = this;
       inputReader.Enable();
 

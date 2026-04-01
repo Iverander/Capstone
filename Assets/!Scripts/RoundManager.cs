@@ -46,6 +46,8 @@ namespace Capstone
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
 
+            DataManager.StartNewSession("Started Game");
+
             yield return new WaitForSeconds(firstRoundDelaySeconds);
 
             NewRound();
