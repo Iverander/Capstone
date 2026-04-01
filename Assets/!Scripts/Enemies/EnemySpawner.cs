@@ -8,7 +8,6 @@ namespace Capstone
         [SerializeField] Enemy enemy;
         [SerializeField] int amountToSpawn = 2;
 
-        [SerializeField] Transform spawnPoints;
         int spawnPlace;
         bool oneSpawn = false;
         Transform currentSpawn;
@@ -18,13 +17,13 @@ namespace Capstone
         void Start()
         {
             RoundManager.onNewRound.AddListener(SpawnEnemies);
-            if (spawnPoints == null) oneSpawn = true;
-            else oneSpawn = false;
         }
 
         //called from RoundManager
         async void SpawnEnemies()
         {
+            oneSpawn = SpawnManager.instance == null;
+
             Debug.Log("Spawn Enemies please : )))");
 
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
@@ -58,8 +57,8 @@ namespace Capstone
 
         void CalculateSpawnPoint()
         {
-            spawnPlace = Random.Range(0, spawnPoints.childCount);
-            currentSpawn = spawnPoints.GetChild(spawnPlace);
+            spawnPlace = Random.Range(0, SpawnManager.instance.spawnPoints.Count);
+            currentSpawn = SpawnManager.instance.spawnPoints[spawnPlace];
         }
     }
 }

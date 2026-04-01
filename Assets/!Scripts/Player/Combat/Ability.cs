@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -33,7 +34,7 @@ namespace Capstone
             if(onCooldown) return;
             performed?.Invoke(cooldown);
             if(cooldown > 0)
-                _=Cooldown();
+                origin.StartCoroutine(Cooldown());
             
             Action();
             if(effectPrefab)
@@ -53,11 +54,16 @@ namespace Capstone
             effect.Play();
         }
 
-        protected async Task Cooldown()
+        protected IEnumerator Cooldown()
         {
             onCooldown = true;
             
-            await Task.Delay(Mathf.RoundToInt(cooldown * 1000));
+            float timer = 0;
+            while(timer < cooldown)
+            {
+                timer += Time.deltaTime * Time.timeScale;
+                yield return null;   
+            }
             
             onCooldown = false;
         }

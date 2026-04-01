@@ -63,7 +63,7 @@ namespace Capstone
                 lastCpuTime = cpuTime;
                 CPUPercentage = 100 * (float)cpuDiff.TotalSeconds / timeout / ProcessorCount;
             
-                Debug.Log(CPUPercentage);
+                //Debug.Log(CPUPercentage);
                 Thread.Sleep((int)(timeout * 1000));
             }
         }

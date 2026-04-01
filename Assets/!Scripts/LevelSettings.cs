@@ -3,6 +3,16 @@ using UnityEngine;
 
 namespace Capstone
 {
+    public enum ShaderType
+    {
+        HLSL,
+        ShaderGraph
+    }
+    public enum Map
+    {
+        Showcase,
+        Mountain
+    }
 
     [Serializable]
     public class MapSettings
@@ -23,6 +33,8 @@ namespace Capstone
     }
     public static class LevelSettings
     {
+        public static ShaderType shaderType;
+        public static Map currentMap = Map.Mountain;
         public static MapSettings CurrentMapSettings { get; private set; } = new();
         
 
@@ -34,6 +46,14 @@ namespace Capstone
         public static void ToggleObstacles(bool toggle)
         {
             CurrentMapSettings.obstacles = toggle;
+        }
+
+        public static string ToString()
+        {
+            return 
+            $"[Shader type: {shaderType}]" +
+            $"[Map: {currentMap}]"+
+            $"[MapSettings: {CurrentMapSettings.ToString()}]";
         }
     }
 }

@@ -36,10 +36,10 @@ namespace Capstone
                 ability.Value.ability.performed += async (cooldown) =>
                 {
                     bar.value = 0;
-                    for (int i = 0; i < Mathf.RoundToInt(cooldown * 100); i++)
+                    for (float i = 0; i < Mathf.RoundToInt(cooldown * 100); i += Time.timeScale)
                     {
                         await Task.Delay(10); 
-                        bar.value += .01f;
+                        bar.value += .01f * Time.timeScale;
                     }
                 };
             }

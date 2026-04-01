@@ -68,6 +68,7 @@ namespace Capstone
             onNewRound?.Invoke();
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
+            DataManager.NewSection($"New Round: {roundNr}");
         }
 
 
