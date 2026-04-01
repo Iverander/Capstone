@@ -74,13 +74,20 @@ namespace Capstone
             });
         }
 
-        IEnumerator StartGame()
+        void OnDestroy()
+        {
+            gameSceneButton.clicked -= StartGame;
+            quitButton.clicked -= Application.Quit;
+        }
+
+        async void StartGame()
         {
             gameSceneButton.SetEnabled(false);
             gameSceneButton.text = "Loading";
 
-            yield return StartCoroutine(gameScene.Load());
-            yield return StartCoroutine(playerScene.Load());
+            await gameScene.LoadAsync(false);
+            await GetMeap().LoadAsync(false);
+            await playerScene.LoadAsync(false);
         }
 
     }

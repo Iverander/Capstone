@@ -17,6 +17,7 @@ namespace Capstone
         public LoadSceneMode loadSceneMode;
         public AsyncOperation operation { get; private set; }
         public float LoadingProgress => operation.progress * 100;
+        public bool autoActivate = true;
 
         public IEnumerator Load(bool autoActivate = true)
         {
@@ -27,6 +28,28 @@ namespace Capstone
             {
                 Debug.Log(name + ": " + LoadingProgress);
                 yield return null;
+            }
+        }
+        public void LoadAsync(bool autoActivate = true)
+        {
+            this.autoActivate = autoActivate;
+            new Thread(Load)
+            {
+                IsBackground = true,
+                Priority = System.Threading.ThreadPriority.AboveNormal
+            };
+        }
+
+
+        async void Load()
+        {
+            operation = SceneManager.LoadSceneAsync(name, loadSceneMode);
+            operation.allowSceneActivation = autoActivate;
+
+            while(operation.progress < .9f && Application.isPlaying)
+            {
+                Debug.Log(name + ": " + LoadingProgress);
+                await Task.Delay(10);
             }
         }
 
