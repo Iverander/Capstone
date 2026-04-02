@@ -4,7 +4,8 @@ Shader "Custom/Pulse"
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
-        _val("Value", float) = 1
+        _Width("Width", float) = 1
+        _Size("Size", float) = 1
     }
 
     SubShader
@@ -41,7 +42,8 @@ Shader "Custom/Pulse"
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
-                float _val;
+                float _Width;
+                float _Size;
             CBUFFER_END
 
             float3 pulse()
@@ -52,23 +54,20 @@ Shader "Custom/Pulse"
             {
                 Varyings OUT;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap) - float2(.5,.5);
+                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 return OUT;
             }
 
             float4 frag(Varyings IN) : SV_Target
             {
-                float4 color;
+                float4 color = _BaseColor;
 
-                float outerCircle = (_SinTime.w + 1) /4;
-                float innerCircle = outerCircle - .1;
+                float dist = distance(IN.uv, float2(0.5, 0.5));
+                float sine = sin(dist * PI * (-_Time.x + 2) * 10) * .5 + .5;
+                float outer = 1 - step(_Size, dist);
 
-                if(
-                (abs(IN.uv.y) < outerCircle && abs(IN.uv.x) < outerCircle) && 
-                (abs(IN.uv.y) > innerCircle && abs(IN.uv.x) > innerCircle))
-                    color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
-                else
-                    color = float4(1,1,1,0);
+                color.a *= sine * outer;// * _SinTime.w; 
+                
                 return color;
             }
             ENDHLSL

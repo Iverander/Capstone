@@ -13,11 +13,13 @@ namespace Capstone
         [SerializeField] private UIDocument keyIndicator;
         [SerializeField] GameObject shopCurtain;
 
+        public Action<bool> onShopToggle; 
         bool shopOpen;
 
         private void Start()
         {
             keyIndicator.enabled = false;
+            CloseShop();
             RoundManager.onBetweenRound.AddListener(OpenShop);
             RoundManager.onNewRound.AddListener(CloseShop);
         }
@@ -45,13 +47,13 @@ namespace Capstone
         void OpenShop()
         {
             shopOpen = true;
-            shopCurtain.SetActive(false);
+            onShopToggle?.Invoke(true);
         }
 
         public void CloseShop()
         {
             shopOpen=false;
-            shopCurtain.SetActive(true);
+            onShopToggle?.Invoke(false);
         }
     }
 }
