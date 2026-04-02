@@ -4,8 +4,7 @@ Shader "Custom/Pulse"
     {
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
-        _Width("Width", float) = 1
-        _Size("Size", float) = 1
+        _Glow("Glow",float) = 1
     }
 
     SubShader
@@ -42,13 +41,9 @@ Shader "Custom/Pulse"
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
-                float _Width;
-                float _Size;
+                float _Glow;
             CBUFFER_END
-
-            float3 pulse()
-            {
-            }
+            
 
             Varyings vert(Attributes IN)
             {
@@ -63,10 +58,10 @@ Shader "Custom/Pulse"
                 float4 color = _BaseColor;
 
                 float dist = distance(IN.uv, float2(0.5, 0.5));
-                float sine = sin(dist * PI * (_CosTime.x + 2) * 10) * .5 + .5;
-                float outer = 1 - step(_Size, dist);
+                float sine = min(sin(dist * PI * (_CosTime.x + 2) * 10) * _Glowz, 0);
+                float outer = 1 - step(.5, dist);
 
-                color.a *= sine * outer;// * _SinTime.w; 
+                color *= sine * outer;// * _SinTime.w; 
                 
                 return color;
             }
