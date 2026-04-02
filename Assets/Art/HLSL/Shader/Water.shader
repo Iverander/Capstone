@@ -22,7 +22,7 @@ Shader "Custom/Water"
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Assets/Art/Shader/HLSL/Noise.hlsl"
+            #include "Assets/Art/HLSL/Shader/Noise.hlsl"
 
             struct Attributes
             {
