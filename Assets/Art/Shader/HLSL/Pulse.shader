@@ -63,7 +63,7 @@ Shader "Custom/Pulse"
                 float4 color = _BaseColor;
 
                 float dist = distance(IN.uv, float2(0.5, 0.5));
-                float sine = sin(dist * PI * (-_Time.x + 2) * 10) * .5 + .5;
+                float sine = sin(dist * PI * (_CosTime.x + 2) * 10) * .5 + .5;
                 float outer = 1 - step(_Size, dist);
 
                 color.a *= sine * outer;// * _SinTime.w; 
