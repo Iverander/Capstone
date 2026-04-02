@@ -58,10 +58,11 @@ Shader "Custom/Pulse"
                 float4 color = _BaseColor;
 
                 float dist = distance(IN.uv, float2(0.5, 0.5));
-                float sine = min(sin(dist * PI * (_CosTime.x + 2) * 10) * _Glow, 0);
+                //float sine = min(sin(dist * PI * frac(-_SinTime.x) * 100), 0);
                 float outer = 1 - step(.5, dist);
+                float fract = frac(dist * (8 + _SinTime.y * 5));
 
-                color *= sine * outer;// * _SinTime.w; 
+                color *= fract * outer * _Glow;// * _SinTime.w; 
                 
                 return color;
             }
