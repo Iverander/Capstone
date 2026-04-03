@@ -5,12 +5,13 @@ Shader "Custom/Water"
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white"
         [RippleStrength] _RippleStrength("RippleStrength", Float) = 0
+        [Depth] _Depth("Depth", Float) = 1
     }
 
     SubShader
     {
         Tags { "RenderType" = "Opaque" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
-        LOD 2000
+        LOD 5000
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
 
@@ -34,6 +35,7 @@ Shader "Custom/Water"
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float alpha : TEXCOORD1;
             };
 
             TEXTURE2D(_BaseMap);
@@ -43,14 +45,8 @@ Shader "Custom/Water"
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
                 float _RippleStrength;
+                float _Depth;
             CBUFFER_END
-            
-            float2 voronoi_randomVector(float2 uv, float offset)
-            {
-                float2x2 m = float2x2(15.27, 57.63, 99.41, 89.98);
-                uv = frac(sin(mul(uv, m)) * 46839.32);
-                return float2(sin(uv.y * +offset) * .5 + .5, cos(uv.x * offset) * .5 + .5);
-            }
             
             void Ripples(float2 uv, float angleOffset, float cellDensity, float time, float strength, out float Out, out float3 Normal)
             {
@@ -65,7 +61,11 @@ Shader "Custom/Water"
                     for (int x = -1; x <= 1; ++x)
                     {
                         float2 lattice = float2(x, y);
-                        float2 offset = voronoi_randomVector(fmod(lattice + g, cellDensity), angleOffset);
+                        float2 noise = voronoiNoise(fmod(lattice + g, cellDensity));
+                        float2 offset = float2( 
+                            sin(noise.y * +angleOffset) * .5 + .5, 
+                            cos(noise.x * angleOffset) * .5 + .5 );
+                        
                         float d = distance(lattice + offset, f);
                         
                         float t = frac(time + (offset.x * 5));
@@ -78,7 +78,6 @@ Shader "Custom/Water"
                 
                 Normal = normalize(Normal);
             }
-            
             float InverseLerp(float a, float b, float v)
             {
                 return  (v - a) / (b - a);
@@ -89,6 +88,7 @@ Shader "Custom/Water"
                 Varyings OUT;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.alpha = clamp(distance(_WorldSpaceCameraPos, OUT.positionHCS) / 70, .3, 3);
                 
                 return OUT;
             }
@@ -100,13 +100,15 @@ Shader "Custom/Water"
                 float Out;
                 float3 Normal;
                 Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
-                
                 float3 rippleNormal = InverseLerp(-1, 1, Normal);
-                float3 color = rippleNormal * max(voronoiNoise(IN.uv * 5 * ((_Time.y + 1000) / 1000)) * 1.3, .7);
                 
-                returnColor *= float4(color, 1);
+                returnColor *= float4(rippleNormal, 1); //add ripples
+                returnColor *= max(voronoiNoise(IN.uv * 5 * ((_Time.y + 1000) / 1000)) * 1.3, .7); //add noise
+
+                return returnColor * IN.alpha;
                 
-                return returnColor;
+                
+                //return float4 (1, 1, 1, (IN.positionHCS.a + _Depth) - (SHADERG * _ProjectionParams.z));
             }
             ENDHLSL
         }
