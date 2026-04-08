@@ -8,7 +8,7 @@
 			<value>2</value>
 		</property>
 		<relationship name="folder">
-			<destination>{63ec57ef-bba5-4a42-bc17-1a608b109465}</destination>
+			<destination>{2c3d6a89-9869-49d2-bf09-9338f341274c}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{b0a24741-ce8a-4d09-a7ba-20148cad2e76}</destination>
@@ -136,7 +136,14 @@
 			<destination>{df534c55-a00b-44e8-b3a7-1185597774d5}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{bbf7f0b5-e2c8-4a4a-888d-f052df5f7f9b}" />
+	<object class="MixerBusPanner" id="{bbf7f0b5-e2c8-4a4a-888d-f052df5f7f9b}">
+		<property name="surroundLFELevel">
+			<value>-14.5</value>
+		</property>
+		<property name="disabledSpeakers">
+			<value>51</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{06dcd990-d58e-406e-ad0b-baf07a8af55e}" />
 	<object class="MixerBusEffectChain" id="{a9910546-9f6a-49c6-9a70-c3085c0172ec}">
 		<relationship name="effects">

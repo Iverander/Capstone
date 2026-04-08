@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using FMODUnity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,6 +23,8 @@ namespace Capstone
         
         [Header("Art")]
         [SerializeField] protected ParticleSystem effectPrefab;
+
+        [SerializeField] private EventReference sfx;
         
         
         public void Initialize(Creature origin)
@@ -51,6 +54,7 @@ namespace Capstone
             var main = effect.main;
             main.startColor = color;
             Object.Destroy(effect.gameObject, effect.main.duration);
+            AudioManager.PlayOneShot(sfx, origin.transform.position);
             effect.Play();
         }
 
