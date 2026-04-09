@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 namespace Capstone
@@ -7,6 +8,7 @@ namespace Capstone
     [Serializable]
     public class CombatAbility : Ability
     {
+        [SerializeField] private EventReference hitSFX;
         
         [Header("Targeting")] 
         [SerializeField] protected Vector3 size = Vector3.one;
@@ -40,6 +42,9 @@ namespace Capstone
                     hit.Add(c);   
                 }
             }
+            
+            if(hit.Count <= 0) return;
+            AudioManager.PlayOneShot(hitSFX, trueCenter);
 
             foreach (var creature in hit)
             {

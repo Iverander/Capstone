@@ -166,6 +166,13 @@ MonoBehaviour:
         effectPrefab: {fileID: 2217095109323092603, guid: 12d0b8700545fe58e806cd9e7943e25a, type: 3}
         sfx:
           Guid:
+            Data1: 0
+            Data2: 0
+            Data3: 0
+            Data4: 0
+          Path: 
+        hitSFX:
+          Guid:
             Data1: 937363565
             Data2: 1119312861
             Data3: -201047422
@@ -196,6 +203,13 @@ MonoBehaviour:
             Data3: 120854915
             Data4: 1410814994
           Path: event:/Combat/Kick
+        hitSFX:
+          Guid:
+            Data1: 0
+            Data2: 0
+            Data3: 0
+            Data4: 0
+          Path: 
         size: {x: 4, y: 1, z: 3}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         layerToHit:
@@ -221,6 +235,13 @@ MonoBehaviour:
             Data3: 873602704
             Data4: 641273310
           Path: event:/Combat/Push
+        hitSFX:
+          Guid:
+            Data1: 0
+            Data2: 0
+            Data3: 0
+            Data4: 0
+          Path: 
         size: {x: 3, y: 1, z: 2}
         <center>k__BackingField: {x: 0, y: 1, z: 1}
         layerToHit:
