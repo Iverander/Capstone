@@ -8,6 +8,7 @@ namespace Capstone
     {
         Sunny,
         Raining,
+        Snowing
     }
     
     public class WeatherManager : MonoBehaviour

@@ -284,19 +284,47 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mountain Map
       objectReference: {fileID: 0}
+    - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 509285505436395755, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 46945880}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5760452864906794176, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 583190896}
   m_SourcePrefab: {fileID: 100100000, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
 --- !u!4 &583190894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 509285505436395755, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
   m_PrefabInstance: {fileID: 583190893}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &583190895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5760452864906794176, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+  m_PrefabInstance: {fileID: 583190893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &583190896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583190895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c520b9a25ea1ef0f933453003c2b8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &8208574586665602808
 PrefabInstance:
   m_ObjectHideFlags: 0

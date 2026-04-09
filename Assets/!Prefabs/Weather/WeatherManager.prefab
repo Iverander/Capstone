@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42e295856eb06698b12f493e796ab4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.WeatherManager
-  weatherTypeOverride: 0
   weatherPrefabs:
     _serializedList:
     - Key: 0
       Value: {fileID: 9171272992362412109, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
     - Key: 1
       Value: {fileID: 531889727527567108, guid: 742312a489a4747ec8f0981366e19f6b, type: 3}
+    - Key: 2
+      Value: {fileID: 8457467383080907933, guid: f2285efb0d31666b98b26af761a52464, type: 3}

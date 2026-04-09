@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2617854031232035406
 Transform:
   m_ObjectHideFlags: 0
@@ -4880,7 +4880,7 @@ PrefabInstance:
     - target: {fileID: 969129702569995192, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: 5a6c934179b409176b8d69029b3649de, type: 2}
+      objectReference: {fileID: 11400000, guid: 90fcd3b9d9eda7b7cb4adab7c8009328, type: 2}
     - target: {fileID: 4409359758995111386, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4935,7 +4935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7866507208628124904, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
       propertyPath: m_Name
-      value: Weather - Rain Variant
+      value: Weather - Snow Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9171272992362412109, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
@@ -4947,29 +4947,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7866507208628124904, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 531889727527567108}
+      addedObject: {fileID: 4306712952551164272}
     - targetCorrespondingSourceObject: {fileID: 7866507208628124904, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4306712952551164272}
+      addedObject: {fileID: 8457467383080907933}
   m_SourcePrefab: {fileID: 100100000, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
 --- !u!1 &1945303296950531064 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7866507208628124904, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
   m_PrefabInstance: {fileID: 8634642564616933136}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &531889727527567108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945303296950531064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dada816e0ec1f0176b8e88a3590d540a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Capstone::Capstone.Rain
-  skybox: {fileID: 2100000, guid: e0a21ebc98cee4e46bbae873ec0be703, type: 2}
 --- !u!114 &4306712952551164272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4985,11 +4972,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1920040102
-      Data2: 1110084475
-      Data3: 318315654
-      Data4: -2077770459
-    Path: event:/Weather/Rain
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2
@@ -5001,6 +4988,20 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &8457467383080907933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945303296950531064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b6e369f8e09cbbca5ccd0bfa913df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  skybox: {fileID: 2100000, guid: 7b0f2096b49ccfb4f8b47c8084d650fa, type: 2}
+  snowMat: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
 --- !u!4 &5396817571112284874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4409359758995111386, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
