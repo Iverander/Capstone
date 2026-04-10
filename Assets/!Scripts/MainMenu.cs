@@ -29,6 +29,7 @@ namespace Capstone
         EnumField shaderField;
         EnumField mapField;
         Toggle obstacleToggle;
+        Button randomizeButton;
         private void Start()
         {
             Time.timeScale = 1;
@@ -41,6 +42,7 @@ namespace Capstone
             shaderField = root.Q<EnumField>("ShaderSelector");
             mapField = root.Q<EnumField>("MapSelector");
             obstacleToggle = root.Q<Toggle>("ObstacleToggle");
+            randomizeButton = root.Q<Button>("Randomize");
 
             weatherField.value = Settings.mapSettings.weatherType;
             shaderField.value = Settings.shaderType;
@@ -49,6 +51,7 @@ namespace Capstone
 
             gameSceneButton.clicked += StartGame;
             quitButton.clicked += Application.Quit;
+            randomizeButton.clicked += RandomizeSettings; 
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
@@ -74,6 +77,7 @@ namespace Capstone
         {
             gameSceneButton.clicked -= StartGame;
             quitButton.clicked -= Application.Quit;
+            randomizeButton.clicked -= RandomizeSettings;
         }
 
         void StartGame()
@@ -84,6 +88,16 @@ namespace Capstone
             gameScene.Load();
             GetMap().Load();
             //playerScene.Load();
+        }
+
+        void RandomizeSettings()
+        {
+            Settings.Randomize();
+           
+            weatherField.value = Settings.mapSettings.weatherType;
+            shaderField.value = Settings.shaderType;
+            mapField.value = Settings.mapSettings.map;
+            obstacleToggle.value = Settings.mapSettings.obstacles;
         }
 
         Scene GetMap()
