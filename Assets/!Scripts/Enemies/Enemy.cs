@@ -24,6 +24,7 @@ namespace Capstone
         private bool firstAttack;
 
         [SerializeReference, SubclassSelector] public List<Ability> abilities = new(); //things has been simplified, you're welcome
+        [SerializeField] Animator animator;
 
         /*
          * State machine enum (thingy with chase and attack)
@@ -55,6 +56,7 @@ namespace Capstone
         // Update is called once per frame, unless it is called twice, but then something is wrong
         void Update()
         {
+            
             if(!agent.enabled) return; //if the agent component is disabled, dont do shit thanks
 
             //Debug.Log(Vector3.Distance(player.transform.position, agent.transform.position));
@@ -68,9 +70,11 @@ namespace Capstone
             switch (enemyState)
             {
                 case EnemyState.Chase:
+                    animator.SetFloat("Speed", 1);
                     ChaseState();
                     break;
                 case EnemyState.Attack:
+                    animator.SetFloat("Speed", 0);
                     AttackState();
                     break;
             }
@@ -80,6 +84,7 @@ namespace Capstone
         {
             //when it fucking dies
             RoundManager.UpdateEnemyCount(-1);
+
         }
         //i remember time.Deltatime btw:)
 
@@ -108,6 +113,8 @@ namespace Capstone
                     yield break;   
                 }
             }
+
+            animator.SetTrigger("Punch");
             
             abilityToPreform = Random.Range(0, abilities.Count);
             abilities[abilityToPreform].Perform(); //preforms chosen ability, towards player creature (no longer towards a player creature as we use layers instead now like any good citizen)

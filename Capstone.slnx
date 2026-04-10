@@ -4,6 +4,7 @@
   <Project Path="NaughtyAttributes.Core.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.csproj" />
   <Project Path="NaughtyAttributes.Editor.csproj" />
+  <Project Path="Unity.RenderPipelines.Core.Samples.Runtime.csproj" />
   <Project Path="FMODUnityResonanceEditor.csproj" />
   <Project Path="MackySoft.SerializeReferenceExtensions.Editor.csproj" />
   <Project Path="FMODUnityEditor.csproj" />
@@ -13,6 +14,7 @@
   <Project Path="FMODUnityHaptics.csproj" />
   <Project Path="MackySoft.SerializeReferenceExtensions.Tests.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.RenderPipelines.Core.Samples.Editor.csproj" />
   <Project Path="FMODUnityResonance.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
