@@ -40,6 +40,7 @@ namespace Capstone
     public PlayerMovement movement { get; private set; }
     public PlayerCombat combat { get; private set; }
     public PlayerModifier modifier { get; private set; }
+    [field: SerializeField] public Animator animator { get; private set; }
 
 
 
@@ -73,6 +74,9 @@ namespace Capstone
 
     private void FixedUpdate()
     {
+      Debug.Log(rb.linearVelocity.magnitude);
+      animator.SetFloat("Speed", rb.linearVelocity.magnitude);
+
       Ray groundRay = new(transform.position + -Vector3.down * .1f, Vector3.down);
       Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
       if (Physics.Raycast(groundRay, .2f))

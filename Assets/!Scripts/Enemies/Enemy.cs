@@ -154,6 +154,7 @@ namespace Capstone
         //for stun & knockback
         public override IEnumerator Stun(float durationSeconds)
         {
+            animator.SetBool("Stunned", true);
             agent.enabled = false;
             rb.isKinematic = false;
             stunned = true;
@@ -167,6 +168,7 @@ namespace Capstone
             rb.isKinematic = true;
             agent.enabled = true;
             stunEffect.SetActive(false);
+            animator.SetBool("Stunned", false);
         }
     }
 }

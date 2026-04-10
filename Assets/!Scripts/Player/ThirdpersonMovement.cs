@@ -20,7 +20,7 @@ namespace Capstone
 
         protected override void Movement()
         {
-            Debug.Log(cam.transform.forward);
+            //Debug.Log(cam.transform.forward);
 
             rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
             

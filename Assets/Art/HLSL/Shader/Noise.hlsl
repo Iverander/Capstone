@@ -66,3 +66,9 @@ float voronoiNoise(float2 value)
     
     return minDistancToCell;
 }
+
+//-----------------Perlin Noise------------------------------------------------
+float perlinNoise(float2 value)
+{
+    
+}
