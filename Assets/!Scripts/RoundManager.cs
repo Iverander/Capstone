@@ -13,7 +13,7 @@ namespace Capstone
         /*
          * This script controls the rounds and spawning in the game.
          * TO mener det er tryggere � laste scenen p� nytt, og legge inn dataene i playerprefs
-         * Ogs� er butikken ogs� en egen scene
+         * Også er butikken ogs� en egen scene
          * Evt. at n�r du lukker shoppen laster du gamescene, men lagre relevant data.
          */
 
@@ -80,7 +80,7 @@ namespace Capstone
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             //Should update UI with text like roundNr Spawning enemies..
             UIText.text = "Starting round " + (roundNr);
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(3f);
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }
 

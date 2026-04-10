@@ -5,8 +5,10 @@ namespace Capstone
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] Enemy enemy;
+        [SerializeField] Enemy normalGoon;
+        [SerializeField] Enemy bigGoon;
         [SerializeField] int amountToSpawn = 2;
+        int bigGoonsToSpawn = 1;
 
         int spawnPlace;
         bool oneSpawn = false;
@@ -20,45 +22,51 @@ namespace Capstone
         }
 
         //called from RoundManager
-        async void SpawnEnemies()
+        void SpawnEnemies()
         {
             oneSpawn = SpawnManager.instance == null;
 
-            Debug.Log("Spawn Enemies please : )))");
+            SpawnGoons();
+            SpawnBigGoon();
+        }
 
+        async void SpawnGoons()
+        {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < amountToSpawn; i++)
+            for (int i = 0; i < RoundManager.round*2; i++)
             {
-                //for only one spawnPoint - spawns from itself :-)
-                if (oneSpawn)
-                {
-                    Instantiate(enemy.gameObject, transform.position, transform.rotation, transform);
-                }
-                //for multiple spawnPoints - spawns from gameobjects that u pick :-)
-                else
-                {
-                    CalculateSpawnPoint();
-                    if (transform == null || currentSpawn == null) return;
-                    Instantiate(enemy.gameObject, currentSpawn.position, currentSpawn.rotation, transform);
-                }
+                Debug.Log(CalculateSpawnPoint());
+                Instantiate(normalGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
+
                 await Task.Delay(1000);
             }
-            CalculateAmount();
+            //CalculateAmount(ref amountToSpawn);
         }
-
-        void CalculateAmount()
+        async void SpawnBigGoon()
         {
-            if (spawnCalc == 1)
+            //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
+            for (int i = 0; i < RoundManager.round/5; i++)
             {
-                amountToSpawn *= 2;
+                Instantiate(bigGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
+
+                await Task.Delay(1000);
             }
-            else { amountToSpawn++; }
+            //CalculateAmount(ref bigGoonsToSpawn);
         }
 
-        void CalculateSpawnPoint()
+        //void CalculateAmount(ref int amount)
+        //{
+        //    if (spawnCalc == 1)
+        //    {
+        //        amount *= 2;
+        //    }
+        //    else { amount++; }
+        //}
+
+        Vector3 CalculateSpawnPoint()
         {
             spawnPlace = Random.Range(0, SpawnManager.instance.spawnPoints.Count);
-            currentSpawn = SpawnManager.instance.spawnPoints[spawnPlace];
+            return SpawnManager.instance.spawnPoints[spawnPlace].position;
         }
     }
 }
