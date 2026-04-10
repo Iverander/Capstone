@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Capstone
 {
@@ -21,6 +22,15 @@ namespace Capstone
         void Disable()
         {
             gameObject.SetActive(false);
+        }
+
+        [SerializeField] UIDocument UIObject;
+        Label UIText;
+
+        private void Start()
+        {
+            UIText = UIObject.rootVisualElement.Q<Label>();
+            UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }
 
         private void OnTriggerStay(Collider other)
