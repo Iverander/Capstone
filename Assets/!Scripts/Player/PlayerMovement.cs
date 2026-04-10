@@ -10,7 +10,7 @@ namespace Capstone
     public abstract class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [SerializeField] protected Vector2 speed = new Vector2(4, 6);
+        [SerializeField] protected Vector2 speed = new Vector2(4, 7);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         public abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
