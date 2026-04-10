@@ -226,10 +226,6 @@ PrefabInstance:
       propertyPath: UIObject
       value: 
       objectReference: {fileID: 661410482}
-    - target: {fileID: 4520432571151437763, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
-      propertyPath: spawnPoints
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_Name
       value: RoundManager

@@ -25,7 +25,7 @@ namespace Capstone
         void Enable()
         {
             gameObject.SetActive(true);
-            countdown = 3;
+            countdown = timeToWait;
         }
         void Disable()
         {
@@ -52,13 +52,12 @@ namespace Capstone
 
         private void OnTriggerExit(Collider other)
         {
-            countdown = 3;
+            countdown = timeToWait;
             endCountDownUI();
         }
 
         void CountDownUI()
         {
-            Debug.Log(countdown);
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             UIText.text = countdown.ToString("0.0");
             //Should update UI with text like roundNr Spawning enemies..
