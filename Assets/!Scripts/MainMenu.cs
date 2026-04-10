@@ -98,6 +98,8 @@ namespace Capstone
             shaderField.value = Settings.shaderType;
             mapField.value = Settings.mapSettings.map;
             obstacleToggle.value = Settings.mapSettings.obstacles;
+            
+            randomizeButton.text = "Randomize Successful";
         }
 
         Scene GetMap()
