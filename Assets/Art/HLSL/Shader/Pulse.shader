@@ -60,7 +60,7 @@ Shader "Custom/Pulse"
                 float dist = distance(IN.uv, float2(0.5, 0.5));
                 //float sine = min(sin(dist * PI * frac(-_SinTime.x) * 100), 0);
                 float outer = 1 - step(.5, dist);
-                float fract = frac(dist * 6) ;
+                float fract = frac(dist);
 
                 color *= fract * outer * _Glow;// * _SinTime.w; 
                 
