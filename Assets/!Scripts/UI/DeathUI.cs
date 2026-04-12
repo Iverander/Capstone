@@ -1,19 +1,21 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Capstone
 {
     public class DeathUI : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        UIDocument uiDocument;
+
         void Start()
         {
-        
+            uiDocument = GetComponent<UIDocument>();
+            uiDocument.rootVisualElement.style.display =  DisplayStyle.None; 
         }
 
-        // Update is called once per frame
-        void Update()
+        public void ShowDeathScreen()
         {
-        
+            uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
         }
     }
 }
