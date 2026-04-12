@@ -74,8 +74,9 @@ namespace Capstone
 
     private void FixedUpdate()
     {
-      Debug.Log(rb.linearVelocity.magnitude);
+      Debug.Log((transform.rotation * rb.linearVelocity));
       animator.SetFloat("Speed", rb.linearVelocity.magnitude);
+      animator.SetFloat("Direction", movement.moveDirection.x);
 
       Ray groundRay = new(transform.position + -Vector3.down * .1f, Vector3.down);
       Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
