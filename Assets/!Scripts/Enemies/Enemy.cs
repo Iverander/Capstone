@@ -24,7 +24,6 @@ namespace Capstone
         private bool firstAttack;
 
         [SerializeReference, SubclassSelector] public List<Ability> abilities = new(); //things has been simplified, you're welcome
-        [SerializeField] Animator animator;
 
         /*
          * State machine enum (thingy with chase and attack)

@@ -130,9 +130,9 @@ MonoBehaviour:
   stats:
     DamageMultiplier: 1
     DamageResistance: 1
+  <animator>k__BackingField: {fileID: 6605505719314081773}
   abilities:
   - rid: 1974661590724378813
-  animator: {fileID: 6605505719314081773}
   references:
     version: 2
     RefIds:

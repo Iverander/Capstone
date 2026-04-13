@@ -9,8 +9,7 @@ namespace Capstone
     //[DisallowMultipleComponent]
     public abstract class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement")]
-        [SerializeField] protected Vector2 speed = new Vector2(4, 7);
+        [Header("Movement")] public Vector2 speed { get; protected set; } = new Vector2(4, 7);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         public abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
@@ -26,6 +25,7 @@ namespace Capstone
         
         protected Rigidbody rb => Player.instance.rb;
         protected Camera cam => Player.instance.cam;
+        protected Animator animator => Player.instance.animator;
         
         protected virtual void Start()
         {
@@ -44,6 +44,7 @@ namespace Capstone
 
         IEnumerator Jump()
         {
+            animator.SetTrigger("Jump");
             Player.AddState(State.Jumping);
             rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
             
@@ -80,6 +81,10 @@ namespace Capstone
 
         void FixedUpdate()
         {
+            animator.SetFloat("Speed", rb.linearVelocity.magnitude / speed.y);
+            animator.SetFloat("DirectionX", moveDirection.x);
+            animator.SetFloat("DirectionY", moveDirection.z);
+            
             if(Player.instance.stunned) return;
             Movement();
             //Player.instance.dash.direction = ConvertedDirection;
