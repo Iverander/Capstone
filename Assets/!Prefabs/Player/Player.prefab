@@ -161,7 +161,7 @@ MonoBehaviour:
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Punch
-        cooldown: 0.4
+        cooldown: 0.8
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
         ShowGizmos: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
       type: {class: CombatAbility, ns: Capstone, asm: Capstone}
       data:
         <name>k__BackingField: Kick
-        cooldown: 1
+        cooldown: 2
         <onCooldown>k__BackingField: 0
         <color>k__BackingField: {r: 0.5882353, g: 0.7068964, b: 1, a: 1}
         ShowGizmos: 1

@@ -36,7 +36,9 @@ namespace Capstone
         
         public void Perform() 
         {
-            if(onCooldown) return;
+            if(onCooldown || origin.isActing) return;
+
+            origin.StartCoroutine(origin.ActionCooldown());
             if(animationTriggers.Length > 0)
                 origin.animator.SetTrigger(animationTriggers[UnityEngine.Random.Range(0, animationTriggers.Length)]);
             performed?.Invoke(cooldown);
