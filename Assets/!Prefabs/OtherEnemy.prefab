@@ -127,12 +127,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Enemy
   stunEffect: {fileID: 1169674385049718757}
+  <animator>k__BackingField: {fileID: 6605505719314081773}
   stats:
     DamageMultiplier: 1
     DamageResistance: 1
   abilities:
   - rid: 1974661590724378813
-  animator: {fileID: 6605505719314081773}
   references:
     version: 2
     RefIds:
@@ -152,6 +152,7 @@ MonoBehaviour:
             Data3: 1402493073
             Data4: -1656664870
           Path: event:/Combat/Punch
+        animationTriggers: []
         hitSFX:
           Guid:
             Data1: 0
@@ -165,7 +166,7 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 8
         includeSelf: 0
-        damage: 10
+        damage: 50
         knockbackForce: 0
         duration: 0
 --- !u!114 &2031065405232868160
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.Health
   <health>k__BackingField: 0
-  <maxHealth>k__BackingField: 100
+  <maxHealth>k__BackingField: 250
   regenerationRate: 0
   destroyOnDeath: 1
   Damaged:

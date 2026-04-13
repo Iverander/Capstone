@@ -101,12 +101,20 @@ namespace Capstone
         
         void LimitSpeed()
         {
-            Vector3 maxVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            Vector3 maxVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            
+            Limiter(currentSpeed);
+            if(moveDirection.z < 0)
+                Limiter(speed.x);
+            
 
-            if (maxVelocity.magnitude > currentSpeed)
+            void Limiter(float speed)
             {
-                Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
-                rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
+                if (maxVelocity.magnitude > speed * ConvertedDirection.magnitude)
+                {
+                    Vector3 newSpeed = ConvertedDirection.normalized * speed;
+                    rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
+                }
             }
         }
         
