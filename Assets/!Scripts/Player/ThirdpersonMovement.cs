@@ -22,7 +22,8 @@ namespace Capstone
         {
             //Debug.Log(cam.transform.forward);
 
-            rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
+            //rb.AddForce(100 * currentSpeed * Time.fixedDeltaTime * ConvertedDirection, ForceMode.Force);
+            rb.linearVelocity = ConvertedDirection * Time.fixedDeltaTime * currentSpeed * 45;
             
             if(lockedToCamera)
                 transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, 0);

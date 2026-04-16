@@ -58,7 +58,7 @@ namespace Capstone
             Player.RemoveState(State.Jumping);
         }
 
-         void ToggleSprint()
+        void ToggleSprint()
         {
             if (!sprinting)
             {
@@ -73,26 +73,34 @@ namespace Capstone
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
             
+            
+            //rb.linearVelocity = ConvertedDirection * currentSpeed;
+            
             if(moveDirection.magnitude > .1f)
+            {
                 Player.AddState(State.Walking);
+            }
             else
                 Player.RemoveState(State.Walking);
         }
+
+        bool WalkCondition => !(Player.instance.stunned || !Player.instance.playerState.HasFlag(State.Grounded));
 
         void FixedUpdate()
         {
             animator.SetFloat("Speed", rb.linearVelocity.magnitude / speed.y);
             animator.SetFloat("DirectionX", moveDirection.x);
             animator.SetFloat("DirectionY", moveDirection.z);
+            Debug.Log(WalkCondition);
             
-            if(Player.instance.stunned) return;
+            if(!WalkCondition) return;
             Movement();
             //Player.instance.dash.direction = ConvertedDirection;
         }
 
         private void Update()
         {
-            if(Player.instance.stunned) return;
+            if(!WalkCondition) return;
             LimitSpeed();
         }
 
@@ -103,18 +111,10 @@ namespace Capstone
         {
             Vector3 maxVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             
-            Limiter(currentSpeed);
-            if(moveDirection.z < 0)
-                Limiter(speed.x);
-            
-
-            void Limiter(float speed)
+            if (maxVelocity.magnitude > currentSpeed)
             {
-                if (maxVelocity.magnitude > speed * ConvertedDirection.magnitude)
-                {
-                    Vector3 newSpeed = ConvertedDirection.normalized * speed;
-                    rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
-                }
+                Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
+                rb.linearVelocity = new Vector3(newSpeed.x, rb.linearVelocity.y, newSpeed.z);
             }
         }
         
