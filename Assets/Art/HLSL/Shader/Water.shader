@@ -73,8 +73,6 @@ Shader "Custom/Water"
                 Ripples(IN.uv, 3, 10, _Time.w, _RippleStrength, Out, Normal);
                 float3 rippleNormal = InverseLerp(-1, 1, Normal);
                 
-                float inverseAlpha = abs(-IN.alpha + IN.alpha);
-                
                 returnColor *= float4(rippleNormal, 1); //add ripples
                 returnColor *= max(voronoiNoise(IN.uv * 10 * ((_Time.y + 300) / 1000)) * 1.1, .7); //add noise
 
