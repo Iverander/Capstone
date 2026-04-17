@@ -26,6 +26,7 @@ namespace Capstone
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            //Profiler.BeginThreadProfiling("main", "mainthread");
             Application.runInBackground = true;
             ProcessorCount = SystemInfo.processorCount/2;
             cpuThread = new Thread(RefreshCpuUsage)

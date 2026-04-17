@@ -5,6 +5,7 @@ using System.Linq;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling;
 using Debug = UnityEngine.Debug;
 
 namespace Capstone
@@ -42,6 +43,8 @@ namespace Capstone
                     cpuPercentage = -1;
                     gpuPercentage = -1;
                     usedRam = -1;
+                    
+                    //Debug.Log(Profiler.maxUsedMemory);
                     
                     if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
                         cpuPercentage = DataManager.CPUPercentage;

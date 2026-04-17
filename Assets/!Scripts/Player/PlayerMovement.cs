@@ -91,7 +91,7 @@ namespace Capstone
             animator.SetFloat("Speed", rb.linearVelocity.magnitude / speed.y);
             animator.SetFloat("DirectionX", moveDirection.x);
             animator.SetFloat("DirectionY", moveDirection.z);
-            Debug.Log(WalkCondition);
+            //Debug.Log(WalkCondition);
             
             if(!WalkCondition) return;
             Movement();
