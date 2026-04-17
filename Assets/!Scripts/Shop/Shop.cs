@@ -40,8 +40,16 @@ namespace Capstone
 
         void OpenStorefront()
         {
-            
             MenuManager.OpenMenu(MenuManager.Menu.Store);
+            Player.input.onShop.RemoveListener(OpenStorefront);
+            Player.input.onShop.AddListener(CloseStorefront);
+        }
+
+        void CloseStorefront()
+        {
+            MenuManager.instance.CloseMenu();
+            Player.input.onShop.AddListener(OpenStorefront);
+            Player.input.onShop.RemoveListener(CloseStorefront); 
         }
 
         void OpenShop()
