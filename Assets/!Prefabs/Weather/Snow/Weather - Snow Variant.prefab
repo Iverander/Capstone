@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 4689774169930191924}
   - component: {fileID: 8735653869256533421}
   m_Layer: 0
-  m_Name: Rain
+  m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2617854031232035406
 Transform:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 7
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.01
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -612,7 +612,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -871,7 +871,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2500
+      scalar: 1000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4783,7 +4783,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13f14cb825b6a428ea17cd29210c5a5b, type: 2}
+  - {fileID: 2100000, guid: 0406ac3c85c21de5e94712cd35a79e01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4806,7 +4806,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5001,7 +5001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   skybox: {fileID: 2100000, guid: 7b0f2096b49ccfb4f8b47c8084d650fa, type: 2}
-  snowMat: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
 --- !u!4 &5396817571112284874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4409359758995111386, guid: 024b1a43e7cbd9f88b2db4be17794a8a, type: 3}
