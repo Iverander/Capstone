@@ -14,8 +14,39 @@ namespace Capstone
     public class Data
     {
         [Serializable]
+        public struct Section
+        {
+            public string _name;
+            public int averageFramerate;
+            public int round;
+            public float cpuPercentage;
+            public float gpuPercentage;
+            public long graphicsMemory;
+            public long usedRam;
+
+            public Section(string name, int averageFramerate,  int round)
+            {
+                this._name = name;
+                this.averageFramerate = averageFramerate;
+                this.round = round;
+
+                cpuPercentage = -1;
+                gpuPercentage = -1;
+                usedRam = -1;
+                
+                graphicsMemory = Profiler.GetAllocatedMemoryForGraphicsDriver();
+                usedRam = Profiler.GetTotalReservedMemoryLong();
+                
+                if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
+                    cpuPercentage = DataManager.CPUPercentage;
+                
+                
+            }
+        }
+        [Serializable]
         public class Session
         {
+            
             public string _name;
             public string dateTime;
             public List<Section> sections = new();
@@ -24,32 +55,6 @@ namespace Capstone
             private float timeStart;
             private float frameStart;
                 
-            [Serializable]
-            public struct Section
-            {
-                public string _name;
-                public int averageFramerate;
-                public int round;
-                public float cpuPercentage;
-                public float gpuPercentage;
-                public int usedRam;
-
-                public Section(string name, int averageFramerate,  int round)
-                {
-                    this._name = name;
-                    this.averageFramerate = averageFramerate;
-                    this.round = round;
-
-                    cpuPercentage = -1;
-                    gpuPercentage = -1;
-                    usedRam = -1;
-                    
-                    //Debug.Log(Profiler.maxUsedMemory);
-                    
-                    if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
-                        cpuPercentage = DataManager.CPUPercentage;
-                }
-            }
 
             public Session(string sessionName)
             {
@@ -59,7 +64,7 @@ namespace Capstone
                 this.timeStart = Time.time;
                 this.frameStart = Time.frameCount;
                 
-                NewSection($"--{sessionName} start--");
+                //NewSection($"--{sessionName} start--");
             }
 
             public void NewSection(string sectionName)

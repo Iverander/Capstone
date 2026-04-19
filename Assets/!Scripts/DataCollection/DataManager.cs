@@ -58,7 +58,7 @@ namespace Capstone
             {
                 Process[] processes = Process.GetProcesses();
 
-                var cpuTime = new TimeSpan();
+                var cpuTime = TimeSpan.Zero;
                 cpuTime = processes.Aggregate(cpuTime, (current, process) => current + process.TotalProcessorTime);
                 var cpuDiff = cpuTime - lastCpuTime;
                 lastCpuTime = cpuTime;
