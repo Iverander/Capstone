@@ -27,6 +27,7 @@ namespace Capstone
         void Start()
         {
             //Profiler.BeginThreadProfiling("main", "mainthread");
+            
             Application.runInBackground = true;
             ProcessorCount = SystemInfo.processorCount/2;
             cpuThread = new Thread(RefreshCpuUsage)
@@ -42,6 +43,12 @@ namespace Capstone
             data.Initialize();
             
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Update()
+        {
+            if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)
+                Debug.Log("GPU%: " + new PerformanceCounter("GPU Engine", "Utilization Percentage"));
         }
 
         private void OnDestroy()
