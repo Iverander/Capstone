@@ -83,12 +83,12 @@ namespace Capstone
         public string OS;
         public string CPU;
         public string GPU;
-        public int RAM;
+        public int RAM; //MB
+        public int VRAM;
         public string resolution;
+        public bool Developer;
         
         public List<Session> sessions = new();
-        
-        public UnityEvent<string> DataUpdated;
         
         string json => JsonUtility.ToJson(this);
 
@@ -99,11 +99,16 @@ namespace Capstone
             GPU = SystemInfo.graphicsDeviceName;
             RAM = SystemInfo.systemMemorySize;
             resolution = $"{Screen.width}x{Screen.height}";
+            
+#if UNITY_EDITOR //only update firebase if it's a build
+            Developer = true;
+#else 
+            Developer = false;
+#endif
 
             //DataManager.database.Child("users").Child(Environment.UserName).SetRawJsonValueAsync(json);
             
-            StartNewSession("Initialization");
-            UpdateData();
+            //StartNewSession("Initialization");
         }
 
         public void StartNewSession(string sessionName)
@@ -122,17 +127,8 @@ namespace Capstone
         
         public void Save()
         {
-            #if UNITY_EDITOR //only update firebase if it's a build
-            DataManager.database.Child("devUsers").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
-            #elif !UNITY_EDITOR
-            DataManager.database.Child("users").Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
-            #endif
-            UpdateData();
-        }
-        
-        public void UpdateData()
-        {
-            DataUpdated.Invoke(json);
+            DataManager.database.Child(SystemInfo.deviceUniqueIdentifier).SetRawJsonValueAsync(json);
+
         }
     }
 }

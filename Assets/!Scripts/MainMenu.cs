@@ -4,10 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
+using SceneSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+//using Scene = UnityEngine.SceneManagement.Scene;
 
 namespace Capstone
 {

@@ -78,7 +78,7 @@ namespace Capstone
 
         private void OnApplicationQuit()
         {
-            data.StartNewSession("Application Quit");
+            //data.StartNewSession("Application Quit");
             data.Save();
         }
 

@@ -8,7 +8,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Capstone
+namespace SceneSystem
 {
     [Serializable]
     public class SceneGroup
