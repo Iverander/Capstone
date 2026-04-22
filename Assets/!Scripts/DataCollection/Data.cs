@@ -17,16 +17,22 @@ namespace Capstone
         public struct Section
         {
             public string _name;
+            public string _date;
+            public string _time;
+            
             public int averageFramerate;
             public int round;
             public float cpuPercentage;
             public float gpuPercentage;
-            public long graphicsMemory;
-            public long usedRam;
+            public long usedVRAM; //MB
+            public long usedRam; //MB
 
             public Section(string name, int averageFramerate,  int round)
             {
                 this._name = name;
+                this._date = DateTime.Today.Date.ToString("MM/dd/yyyy");
+                this._time = DateTime.Now.ToString("hh:mm:ss");
+                
                 this.averageFramerate = averageFramerate;
                 this.round = round;
 
@@ -34,8 +40,8 @@ namespace Capstone
                 gpuPercentage = -1;
                 usedRam = -1;
                 
-                graphicsMemory = Profiler.GetAllocatedMemoryForGraphicsDriver();
-                usedRam = Profiler.GetTotalReservedMemoryLong();
+                usedVRAM = Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576;
+                usedRam = Profiler.GetTotalReservedMemoryLong() / 1048576;
                 
                 if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
                     cpuPercentage = DataManager.CPUPercentage;
@@ -48,7 +54,6 @@ namespace Capstone
         {
             
             public string _name;
-            public string dateTime;
             public List<Section> sections = new();
             public string levelSettings;
 
@@ -59,7 +64,6 @@ namespace Capstone
             public Session(string sessionName)
             {
                 _name = sessionName;
-                this.dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 this.levelSettings = Settings.ToString();
                 this.timeStart = Time.time;
                 this.frameStart = Time.frameCount;

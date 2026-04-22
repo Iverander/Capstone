@@ -85,11 +85,15 @@ namespace Capstone
         public static void StartNewSession(string sessionName)
         {
             if (instance == null) return;
+            
+            Debug.Log("Starting new session " + sessionName);
             instance.data.StartNewSession(sessionName);
         }
         public static void NewSection(string sectionName)
         {
             if (instance == null) return;
+            
+            Debug.Log("Starting new section " + sectionName);
             instance.data.NewSection(sectionName);
         }
     }
