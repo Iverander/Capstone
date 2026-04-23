@@ -6,7 +6,7 @@ namespace Capstone
     {
         void Start()
         {
-            Settings.Randomize();
+            Settings.active.Randomize();
         }
 
     }

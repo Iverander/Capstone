@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Profiling;
@@ -23,9 +24,8 @@ namespace Capstone
             public int averageFramerate;
             public int round;
             public float cpuPercentage;
-            public float gpuPercentage;
-            public long usedVRAM; //MB
-            public long usedRam; //MB
+            public float usedVramMB;
+            public float usedRamMB;
 
             public Section(string name, int averageFramerate,  int round)
             {
@@ -36,17 +36,13 @@ namespace Capstone
                 this.averageFramerate = averageFramerate;
                 this.round = round;
 
-                cpuPercentage = -1;
-                gpuPercentage = -1;
-                usedRam = -1;
-                
-                usedVRAM = Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576;
-                usedRam = Profiler.GetTotalReservedMemoryLong() / 1048576;
+                this.cpuPercentage = -1;
+
+                usedVramMB = Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576;
+                usedRamMB = Profiler.GetTotalAllocatedMemoryLong() / 1048576;
                 
                 if (DataManager.CPUPercentage > 0 && DataManager.CPUPercentage < 100)
                     cpuPercentage = DataManager.CPUPercentage;
-                
-                
             }
         }
         [Serializable]
@@ -55,7 +51,7 @@ namespace Capstone
             
             public string _name;
             public List<Section> sections = new();
-            public string levelSettings;
+            public Settings levelSettings;
 
             private float timeStart;
             private float frameStart;
@@ -64,7 +60,7 @@ namespace Capstone
             public Session(string sessionName)
             {
                 _name = sessionName;
-                this.levelSettings = Settings.ToString();
+                this.levelSettings = Settings.active;
                 this.timeStart = Time.time;
                 this.frameStart = Time.frameCount;
                 
@@ -78,8 +74,9 @@ namespace Capstone
                     averageFramerate: Time.frameCount > 0 ? Mathf.RoundToInt((Time.frameCount - frameStart) / (Time.time - timeStart)) : -1,
                     round: RoundManager.instance != null ? RoundManager.round : -1
                     )
-                    
                 );
+
+                timeStart = Time.time;
             }
         }
         
@@ -87,8 +84,8 @@ namespace Capstone
         public string OS;
         public string CPU;
         public string GPU;
-        public int RAM; //MB
-        public int VRAM;
+        public int RamMB;
+        public int VramMB;
         public string resolution;
         public bool Developer;
         
@@ -101,10 +98,11 @@ namespace Capstone
             OS = SystemInfo.operatingSystem;
             CPU = SystemInfo.processorType;
             GPU = SystemInfo.graphicsDeviceName;
-            RAM = SystemInfo.systemMemorySize;
+            RamMB = SystemInfo.systemMemorySize;
+            VramMB = SystemInfo.graphicsMemorySize;
             resolution = $"{Screen.width}x{Screen.height}";
             
-#if UNITY_EDITOR //only update firebase if it's a build
+#if UNITY_EDITOR
             Developer = true;
 #else 
             Developer = false;
