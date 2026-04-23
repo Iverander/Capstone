@@ -45,10 +45,10 @@ namespace Capstone
             obstacleToggle = root.Q<Toggle>("ObstacleToggle");
             randomizeButton = root.Q<Button>("Randomize");
 
-            weatherField.value = Settings.mapSettings.weatherType;
-            shaderField.value = Settings.shaderType;
-            mapField.value = Settings.mapSettings.map;
-            obstacleToggle.value = Settings.mapSettings.obstacles;
+            weatherField.value = Settings.active.mapSettings.weatherType;
+            shaderField.value = Settings.active.shaderType;
+            mapField.value = Settings.active.mapSettings.map;
+            obstacleToggle.value = Settings.active.mapSettings.obstacles;
 
             gameSceneButton.clicked += StartGame;
             quitButton.clicked += Application.Quit;
@@ -56,21 +56,21 @@ namespace Capstone
             
             weatherField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                Settings.mapSettings.SetWeather((WeatherType)changeEvent.newValue);
+                Settings.active.mapSettings.SetWeather((WeatherType)changeEvent.newValue);
             });
             shaderField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                Settings.shaderType = (ShaderType)changeEvent.newValue;
+                Settings.active.shaderType = (ShaderType)changeEvent.newValue;
                 //Debug.Log(LevelSettings.shaderType);
             });
             mapField.RegisterCallback<ChangeEvent<Enum>>(changeEvent =>
             {
-                Settings.mapSettings.map = (Map)changeEvent.newValue;
+                Settings.active.mapSettings.map = (Map)changeEvent.newValue;
             });
             
             obstacleToggle.RegisterCallback<ChangeEvent<bool>>(changeEvent =>
             {
-                Settings.mapSettings.ToggleObstacles(changeEvent.newValue);
+                Settings.active.mapSettings.ToggleObstacles(changeEvent.newValue);
             });
         }
 
@@ -93,24 +93,24 @@ namespace Capstone
 
         void RandomizeSettings()
         {
-            Settings.Randomize();
+            Settings.active.Randomize();
            
-            weatherField.value = Settings.mapSettings.weatherType;
-            shaderField.value = Settings.shaderType;
-            mapField.value = Settings.mapSettings.map;
-            obstacleToggle.value = Settings.mapSettings.obstacles;
+            weatherField.value = Settings.active.mapSettings.weatherType;
+            shaderField.value = Settings.active.shaderType;
+            mapField.value = Settings.active.mapSettings.map;
+            obstacleToggle.value = Settings.active.mapSettings.obstacles;
             
             randomizeButton.text = "Randomize Successful";
         }
 
         Scene GetMap()
         {
-            switch(Settings.shaderType)
+            switch(Settings.active.shaderType)
             {
                 case ShaderType.HLSL:   
-                    return HLSLMaps[Settings.mapSettings.map];
+                    return HLSLMaps[Settings.active.mapSettings.map];
                 case ShaderType.ShaderGraph:
-                    return SGMaps[Settings.mapSettings.map];
+                    return SGMaps[Settings.active.mapSettings.map];
             }
 
             return null;

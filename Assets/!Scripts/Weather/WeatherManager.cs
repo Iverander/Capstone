@@ -17,7 +17,7 @@ namespace Capstone
 
         void Start()
         {
-            Instantiate(weatherPrefabs[Settings.mapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
+            Instantiate(weatherPrefabs[Settings.active.mapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
         }
     }
 }

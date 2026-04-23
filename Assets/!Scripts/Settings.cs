@@ -50,19 +50,20 @@ namespace Capstone
             obstacles = Random.Range(0, 2) == 1;
         }
     }
-    public static class Settings
+    [Serializable]
+    public class Settings
     {
-        public static ShaderType shaderType; 
-        public static MapSettings mapSettings { get; private set; } = new();
+        public static Settings active = new(true);
+        public ShaderType shaderType; 
+        [field: SerializeField] public MapSettings mapSettings { get; private set; } = new();
 
-        public static string ToString()
+        public Settings(bool randomize)
         {
-            return 
-            $"[Shader type: {shaderType}]" +
-            $"[MapSettings: {mapSettings.ToString()}]";
+            if(randomize)
+                Randomize();
         }
 
-        public static void Randomize()
+        public void Randomize()
         {
             shaderType = (ShaderType)Random.Range(0, Enum.GetValues(typeof(ShaderType)).Length);
             mapSettings.Randomize();
