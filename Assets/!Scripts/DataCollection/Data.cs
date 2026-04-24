@@ -27,11 +27,15 @@ namespace Capstone
             public float usedVramMB;
             public float usedRamMB;
 
+            public int highestEnemyCount;
+
             public Section(string name, int averageFramerate,  int round)
             {
                 this._name = name;
                 this._date = DateTime.Today.Date.ToString("MM/dd/yyyy");
                 this._time = DateTime.Now.ToString("hh:mm:ss");
+
+                this.highestEnemyCount = RoundManager.highestEnemyCount;
                 
                 this.averageFramerate = averageFramerate;
                 this.round = round;
@@ -75,8 +79,6 @@ namespace Capstone
                     round: RoundManager.instance != null ? RoundManager.round : -1
                     )
                 );
-
-                timeStart = Time.time;
             }
         }
         

@@ -38,6 +38,8 @@ namespace Capstone
         public static UnityEvent onNewRound = new();
         public static UnityEvent onBetweenRound = new();
         public int enemiesAlive;
+
+        public static int highestEnemyCount { get; private set; }
  
 
         private IEnumerator Start()
@@ -55,6 +57,7 @@ namespace Capstone
 
         public void BetweenRounds()
         {
+            DataManager.NewSection($"Round {roundNr} End");
             onBetweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
@@ -64,13 +67,13 @@ namespace Capstone
         [ContextMenu("Start New Round")]
         public void NewRound()
         {
+            highestEnemyCount = 0;
             roundState = RoundState.DuringRound;
             roundNr++;
             //EnemySpawner, 
             onNewRound?.Invoke();
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
-            DataManager.NewSection($"New Round: {roundNr}");
         }
 
 
@@ -87,6 +90,10 @@ namespace Capstone
         public static void UpdateEnemyCount(int amount)
         {
             instance.enemiesAlive += amount;
+
+            if(instance.enemiesAlive > highestEnemyCount)
+                highestEnemyCount = instance.enemiesAlive;
+
             if(instance.enemiesAlive <= 0)
             {
                 instance.BetweenRounds();

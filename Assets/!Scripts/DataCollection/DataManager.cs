@@ -60,7 +60,7 @@ namespace Capstone
         private TimeSpan lastCpuTime;
         private int ProcessorCount;
         void RefreshCpuUsage()
-        {
+         {
             while (true)
             {
                 Process[] processes = Process.GetProcesses();
