@@ -69,7 +69,7 @@ Material:
     - _Rim_Position: 0
     - _Rim_Width: 0
     - _Smoothness: 1
-    - _Wetness: 1.95
+    - _Wetness: 1.25
     - _WetnessDarkening: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
