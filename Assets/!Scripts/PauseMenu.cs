@@ -1,3 +1,4 @@
+using Capstone.Datapoints;
 using SceneSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,7 +21,8 @@ namespace Capstone
         void ExitToMenu()
         {
             menuScene.Load();
-            DataManager.NewSection("Exit to menu");
+            
+            Session.active.NewSection("Exit to menu");
         }
     }
 }
