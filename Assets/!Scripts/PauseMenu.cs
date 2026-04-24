@@ -22,7 +22,7 @@ namespace Capstone
         {
             menuScene.Load();
             
-            Session.active.NewSection("Exit to menu");
+            //Session.active.NewSection("Exit to menu");
         }
     }
 }
