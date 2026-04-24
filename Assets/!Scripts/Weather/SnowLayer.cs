@@ -8,7 +8,7 @@ namespace Capstone
         private Material snowMat;
         private void Start()
         {
-            if (Settings.mapSettings.weatherType != WeatherType.Snowing) return;
+            if (Settings.active.mapSettings.weatherType != WeatherType.Snowing) return;
             
             snowMat = GetComponent<Renderer>().materials[1];
             snowMat.SetFloat("_SnowAmount", 1);

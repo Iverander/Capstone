@@ -14,7 +14,7 @@ namespace Capstone
             waterRenderer = GetComponent<Renderer>();
             SetRippleStrength(defaultRippleStrength);
             
-            if(Settings.mapSettings.weatherType == WeatherType.Raining)
+            if(Settings.active.mapSettings.weatherType == WeatherType.Raining)
                 SetRippleStrength(1);
         }
         public void SetRippleStrength(float value)

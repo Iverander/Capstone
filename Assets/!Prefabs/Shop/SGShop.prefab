@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6556021234806591011, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a256abba7457a4507af5333a4b6aae98, type: 2}
     - target: {fileID: 6711680963819314367, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.96
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6806784068832332746, guid: e1a07b9fcef23b845a83ac2190df2f5c, type: 3}
       propertyPath: m_Name
-      value: Shop Variant
+      value: SGShop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

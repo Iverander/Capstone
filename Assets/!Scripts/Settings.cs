@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Capstone
 {
@@ -41,17 +42,31 @@ namespace Capstone
             
             return result;
         }
-    }
-    public static class Settings
-    {
-        public static ShaderType shaderType; 
-        public static MapSettings mapSettings { get; private set; } = new();
 
-        public static string ToString()
+        public void Randomize()
         {
-            return 
-            $"[Shader type: {shaderType}]" +
-            $"[MapSettings: {mapSettings.ToString()}]";
+            map =  (Map)Random.Range(1, Enum.GetValues(typeof(Map)).Length);
+            weatherType = (WeatherType)Random.Range(0, Enum.GetValues(typeof(WeatherType)).Length);
+            obstacles = Random.Range(0, 2) == 1;
+        }
+    }
+    [Serializable]
+    public class Settings
+    {
+        public static Settings active = new(true);
+        public ShaderType shaderType; 
+        [field: SerializeField] public MapSettings mapSettings { get; private set; } = new();
+
+        public Settings(bool randomize)
+        {
+            if(randomize)
+                Randomize();
+        }
+
+        public void Randomize()
+        {
+            shaderType = (ShaderType)Random.Range(0, Enum.GetValues(typeof(ShaderType)).Length);
+            mapSettings.Randomize();
         }
     }
 }

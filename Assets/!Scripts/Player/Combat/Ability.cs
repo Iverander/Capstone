@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FMODUnity;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 namespace Capstone
 {
@@ -25,6 +26,7 @@ namespace Capstone
         [SerializeField] protected ParticleSystem effectPrefab;
 
         [SerializeField] private EventReference sfx;
+        [SerializeField] private string[] animationTriggers;
         
         
         public void Initialize(Creature origin)
@@ -34,7 +36,11 @@ namespace Capstone
         
         public void Perform() 
         {
-            if(onCooldown) return;
+            if(onCooldown || origin.isActing) return;
+
+            origin.StartCoroutine(origin.ActionCooldown());
+            if(animationTriggers.Length > 0)
+                origin.animator.SetTrigger(animationTriggers[UnityEngine.Random.Range(0, animationTriggers.Length)]);
             performed?.Invoke(cooldown);
             if(cooldown > 0)
                 origin.StartCoroutine(Cooldown());

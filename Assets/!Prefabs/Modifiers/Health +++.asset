@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Health +++
   m_EditorClassIdentifier: Capstone::Capstone.HealthMod
   <icon>k__BackingField: {fileID: 21300000, guid: 44c4b07db471ec545a701b735ebb312a, type: 3}
-  <cost>k__BackingField: 200
+  <cost>k__BackingField: 75
   active: 0
   maxHealth: 100

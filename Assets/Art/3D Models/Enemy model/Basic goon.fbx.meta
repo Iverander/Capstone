@@ -52,14 +52,275 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Backflip
+      takeName: Skinned Mesh 0|Backflip
+      internalID: -8137949164761756693
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Dance Charleston
+      takeName: Skinned Mesh 0|Dance Charleston
+      internalID: -1921231195021960337
+      firstFrame: 0
+      lastFrame: 55
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Death01
+      takeName: Skinned Mesh 0|Death01
+      internalID: -7583484622581245327
+      firstFrame: 0
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Dizzy
+      takeName: Skinned Mesh 0|Dizzy
+      internalID: 3458108599723091655
+      firstFrame: 0
+      lastFrame: 57
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Fighting Idle
+      takeName: Skinned Mesh 0|Fighting Idle
+      internalID: -3641749497056789525
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Hit_Chest
+      takeName: Skinned Mesh 0|Hit_Chest
+      internalID: 6690211067829737893
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Punch_Cross
+      takeName: Skinned Mesh 0|Punch_Cross
+      internalID: -6753042435317613703
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Punch_Jab
+      takeName: Skinned Mesh 0|Punch_Jab
+      internalID: -9139789036695370700
+      firstFrame: 0
+      lastFrame: 26
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Skinned Mesh 0|Walk_Loop
+      takeName: Skinned Mesh 0|Walk_Loop
+      internalID: -2817735544661317806
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -113,7 +374,192 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Basic goon(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Icosphere
+      parentName: Basic goon(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Mesh_0
+      parentName: Basic goon(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Skinned Mesh 0
+      parentName: Basic goon(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: root
+      parentName: Skinned Mesh 0
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.031075358, y: -0.0022451174, z: 0.0001227021, w: 0.9995146}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+    - name: pelvis
+      parentName: root
+      position: {x: 1.2607764e-11, y: 0.00053607015, z: 0.009577586}
+      rotation: {x: 0.26517695, y: 0.021398893, z: -0.004029983, w: 0.9639539}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000005}
+    - name: spine_01
+      parentName: pelvis
+      position: {x: -0.00000018004827, y: 0.00094414357, z: 0.0007949449}
+      rotation: {x: 0.5202844, y: -0.010853243, z: 0.016275499, w: 0.853769}
+      scale: {x: 0.9999999, y: 0.9999998, z: 0.9999998}
+    - name: spine_02
+      parentName: spine_01
+      position: {x: -1.4551915e-13, y: 0.001327173, z: -5.7491432e-11}
+      rotation: {x: -0.07727985, y: 0.00000005029141, z: 0.000000025145704, w: 0.99700946}
+      scale: {x: 1.0000002, y: 0.99999976, z: 0.99999994}
+    - name: spine_03
+      parentName: spine_02
+      position: {x: -5.820766e-13, y: 0.0015116074, z: -7.790277e-11}
+      rotation: {x: -0.27952302, y: 0.0000000042291495, z: 0.00000011053667, w: 0.960139}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: neck_01
+      parentName: spine_03
+      position: {x: 3.3178366e-10, y: 0.0017371718, z: 0.0006931946}
+      rotation: {x: 0.520145, y: -0.000000054222145, z: -0.00000017884113, w: 0.85407805}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.9999998}
+    - name: head
+      parentName: neck_01
+      position: {x: -8.1490726e-12, y: 0.001413088, z: 0.0000000012312376}
+      rotation: {x: -0.20303084, y: 0.000000042625143, z: 0.000000053428494, w: 0.9791724}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+    - name: head_leaf
+      parentName: head
+      position: {x: -1.1641532e-12, y: 0.00074696436, z: -1.9295839e-10}
+      rotation: {x: -0.047069795, y: -0.000000017108185, z: 0.000000005677328, w: 0.9988916}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+    - name: head_leaf_end
+      parentName: head_leaf
+      position: {x: -0, y: 0.00074696605, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clavicle_l
+      parentName: spine_03
+      position: {x: -0.00053984666, y: 0.0010420716, z: 0.0006085811}
+      rotation: {x: 0.41920546, y: -0.2728227, z: -0.64169097, w: -0.58143544}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000002}
+    - name: upperarm_l
+      parentName: clavicle_l
+      position: {x: 8.381903e-11, y: 0.0020056756, z: 7.706694e-10}
+      rotation: {x: -0.079056084, y: 0.71635795, z: 0.061163567, w: -0.69053644}
+      scale: {x: 1.0000004, y: 1, z: 0.9999997}
+    - name: lowerarm_l
+      parentName: upperarm_l
+      position: {x: -0.00000000115484, y: 0.0035475218, z: -5.2154064e-10}
+      rotation: {x: 0.0011045032, y: -0.017536812, z: 0.02852404, w: 0.99943876}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: hand_l
+      parentName: lowerarm_l
+      position: {x: 6.589107e-10, y: 0.0026260582, z: -9.778887e-11}
+      rotation: {x: 0.07287204, y: -0.0863392, z: -0.00475937, w: 0.9935857}
+      scale: {x: 0.9999997, y: 1.0000001, z: 1.0000004}
+    - name: middle_01_l
+      parentName: hand_l
+      position: {x: -0.000013345429, y: 0.0010871355, z: 0.00005016821}
+      rotation: {x: 0.5324881, y: 0.518299, z: 0.33880064, w: -0.5770935}
+      scale: {x: 0.99999976, y: 1.0000002, z: 1.0000005}
+    - name: middle_01_l_end
+      parentName: middle_01_l
+      position: {x: -0, y: 0.0010883731, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clavicle_r
+      parentName: spine_03
+      position: {x: 0.00053984666, y: 0.0010420703, z: 0.00060858094}
+      rotation: {x: 0.41920575, y: 0.2728225, z: 0.6416908, w: -0.5814356}
+      scale: {x: 0.9999998, y: 1.0000005, z: 1.0000002}
+    - name: upperarm_r
+      parentName: clavicle_r
+      position: {x: 3.7252902e-11, y: 0.002005676, z: 0.0000000022072344}
+      rotation: {x: 0.077283144, y: 0.71740645, z: 0.063098446, w: 0.6894737}
+      scale: {x: 0.99999994, y: 1.0000002, z: 1.0000005}
+    - name: lowerarm_r
+      parentName: upperarm_r
+      position: {x: 0.000000001527369, y: 0.003547521, z: -3.352761e-10}
+      rotation: {x: 0.001085072, y: 0.017537583, z: -0.028522616, w: 0.99943876}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000002}
+    - name: hand_r
+      parentName: lowerarm_r
+      position: {x: -8.381903e-11, y: 0.0026260556, z: -2.9802322e-10}
+      rotation: {x: 0.07287194, y: 0.08633904, z: 0.004761877, w: 0.99358577}
+      scale: {x: 1.0000005, y: 0.9999999, z: 0.9999997}
+    - name: middle_01_r
+      parentName: hand_r
+      position: {x: 0.000013346557, y: 0.0010871344, z: 0.000050168073}
+      rotation: {x: 0.5324865, y: -0.51830024, z: -0.33880022, w: -0.57709396}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000005}
+    - name: middle_01_r_end
+      parentName: middle_01_r
+      position: {x: -0, y: 0.0010883745, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thigh_l
+      parentName: pelvis
+      position: {x: -0.0012896133, y: -0.000050296778, z: -0.00016283206}
+      rotation: {x: 0.89560115, y: -0.033168092, z: -0.0119989095, w: -0.4434574}
+      scale: {x: 0.99999976, y: 1.0000001, z: 1.0000017}
+    - name: calf_l
+      parentName: thigh_l
+      position: {x: -2.3748725e-10, y: 0.003961968, z: -1.6763806e-10}
+      rotation: {x: 0.04991912, y: -0.006604689, z: -0.013502868, w: 0.9986402}
+      scale: {x: 0.99999994, y: 1.0000002, z: 0.9999996}
+    - name: foot_l
+      parentName: calf_l
+      position: {x: -3.5855918e-10, y: 0.004567182, z: 5.0291415e-10}
+      rotation: {x: -0.2386097, y: 0.015653305, z: -0.03212614, w: 0.97045785}
+      scale: {x: 1.0000005, y: 1.0000011, z: 0.9999996}
+    - name: ball_l
+      parentName: foot_l
+      position: {x: -2.537854e-10, y: 0.0010406104, z: -1.8626451e-11}
+      rotation: {x: 0.0504558, y: 0.844187, z: -0.533138, w: 0.023800595}
+      scale: {x: 1.0000005, y: 1.0000005, z: 0.99999994}
+    - name: ball_leaf_l
+      parentName: ball_l
+      position: {x: -5.459942e-10, y: 0.0012580636, z: 8.8475643e-11}
+      rotation: {x: 0.011720281, y: -0.0013799189, z: -0.050147694, w: 0.9986721}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000001}
+    - name: ball_leaf_l_end
+      parentName: ball_leaf_l
+      position: {x: -0, y: 0.001258063, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thigh_r
+      parentName: pelvis
+      position: {x: 0.0012898031, y: -0.000053060263, z: -0.0001604341}
+      rotation: {x: 0.8939723, y: 0.07629256, z: 0.042811386, w: -0.43949988}
+      scale: {x: 0.9999999, y: 1, z: 1.0000014}
+    - name: calf_r
+      parentName: thigh_r
+      position: {x: 2.3283064e-10, y: 0.0038766654, z: -1.2107193e-10}
+      rotation: {x: 0.052135162, y: 0.007345951, z: 0.027710836, w: 0.9982285}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000002}
+    - name: foot_r
+      parentName: calf_r
+      position: {x: -3.632158e-10, y: 0.0045671803, z: 4.796311e-10}
+      rotation: {x: -0.23860946, y: -0.015653323, z: 0.03212613, w: 0.9704579}
+      scale: {x: 1.0000002, y: 1.0000018, z: 0.99999905}
+    - name: ball_r
+      parentName: foot_r
+      position: {x: -1.3278623e-10, y: 0.0010406105, z: -1.11758706e-10}
+      rotation: {x: -0.050455872, y: 0.84418684, z: -0.5331382, w: -0.023800688}
+      scale: {x: 0.9999999, y: 1.0000005, z: 0.99999917}
+    - name: ball_leaf_r
+      parentName: ball_r
+      position: {x: -4.6084295e-10, y: 0.001258063, z: 5.5879353e-11}
+      rotation: {x: 0.01172002, y: 0.0013797501, z: 0.050147686, w: 0.99867207}
+      scale: {x: 1.0000008, y: 1.0000002, z: 1.0000004}
+    - name: ball_leaf_r_end
+      parentName: ball_leaf_r
+      position: {x: -0, y: 0.001258063, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -122,9 +568,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Mesh_0
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1

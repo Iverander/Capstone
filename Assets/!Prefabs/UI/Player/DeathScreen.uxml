@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-color: rgba(255, 0, 0, 0.16);">
+        <ui:Label text="You Died 💀" style="font-size: 100px; -unity-text-auto-size: best-fit 0 200px; -unity-text-generator: advanced; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(255, 255, 255); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 131px; margin-right: 131px; margin-bottom: 131px; margin-left: 131px;"/>
+
+        <ui:Button text="Back to menu" style="-unity-text-generator: advanced; -unity-text-auto-size: best-fit 0 100px; padding-top: 5%; padding-right: 10%; padding-bottom: 5%; padding-left: 10%;"/>
+    </ui:VisualElement>
+</ui:UXML>

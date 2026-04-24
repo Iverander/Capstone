@@ -9,8 +9,7 @@ namespace Capstone
     //[DisallowMultipleComponent]
     public abstract class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement")]
-        [SerializeField] protected Vector2 speed = new Vector2(4, 6);
+        [Header("Movement")] public Vector2 speed { get; protected set; } = new Vector2(4, 7);
         [field: SerializeField, ReadOnly] public Vector3 moveDirection { get; private set; }
         public abstract Vector3 ConvertedDirection { get; }
         protected bool sprinting => Player.state.HasFlag(State.Sprinting);
@@ -26,6 +25,7 @@ namespace Capstone
         
         protected Rigidbody rb => Player.instance.rb;
         protected Camera cam => Player.instance.cam;
+        protected Animator animator => Player.instance.animator;
         
         protected virtual void Start()
         {
@@ -44,6 +44,7 @@ namespace Capstone
 
         IEnumerator Jump()
         {
+            animator.SetTrigger("Jump");
             Player.AddState(State.Jumping);
             rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
             
@@ -57,7 +58,7 @@ namespace Capstone
             Player.RemoveState(State.Jumping);
         }
 
-         void ToggleSprint()
+        void ToggleSprint()
         {
             if (!sprinting)
             {
@@ -72,22 +73,34 @@ namespace Capstone
         {
             moveDirection = new Vector3(value.x, 0, value.y).normalized;
             
+            
+            //rb.linearVelocity = ConvertedDirection * currentSpeed;
+            
             if(moveDirection.magnitude > .1f)
+            {
                 Player.AddState(State.Walking);
+            }
             else
                 Player.RemoveState(State.Walking);
         }
 
+        bool WalkCondition => !(Player.instance.stunned || !Player.instance.playerState.HasFlag(State.Grounded));
+
         void FixedUpdate()
         {
-            if(Player.instance.stunned) return;
+            animator.SetFloat("Speed", rb.linearVelocity.magnitude / speed.y);
+            animator.SetFloat("DirectionX", moveDirection.x);
+            animator.SetFloat("DirectionY", moveDirection.z);
+            //Debug.Log(WalkCondition);
+            
+            if(!WalkCondition) return;
             Movement();
             //Player.instance.dash.direction = ConvertedDirection;
         }
 
         private void Update()
         {
-            if(Player.instance.stunned) return;
+            if(!WalkCondition) return;
             LimitSpeed();
         }
 
@@ -96,8 +109,8 @@ namespace Capstone
         
         void LimitSpeed()
         {
-            Vector3 maxVelocity = new(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-
+            Vector3 maxVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            
             if (maxVelocity.magnitude > currentSpeed)
             {
                 Vector3 newSpeed = maxVelocity.normalized * currentSpeed;
