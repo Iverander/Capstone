@@ -86,17 +86,9 @@ namespace Capstone
             Debug.Log("Starting round " + roundNr);
             
             if (Settings.active.shaderType == ShaderType.HLSL)
-            {
-                Settings.active.shaderType = ShaderType.ShaderGraph;
-                hlslScene.Unload();
-                sgScene.Load();
-            }
+                MapManager.LoadMap(ShaderType.ShaderGraph);
             else
-            {
-                Settings.active.shaderType = ShaderType.HLSL;
-                sgScene.Unload();
-                hlslScene.Load();
-            }
+                MapManager.LoadMap(ShaderType.HLSL);
  
         }
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1521087533684352551}
   - component: {fileID: 1086286896024508500}
+  - component: {fileID: 6278945370184330622}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -44,25 +45,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1be58c6ce85e1298ba60bb1e9f639d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.DataManager
-  data:
+  hardwareData:
     OS: 
     CPU: 
     GPU: 
-    RAM: 0
-    Sections:
-      _serializedList: []
-    DataUpdated:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-          m_MethodName: set_text
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    RamMB: 0
+    VramMB: 0
+    resolution: 
+    Developer: 0
+  sessions: []
+--- !u!114 &6278945370184330622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807925957073490696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0739ad4ba267f65954aa2e19b87b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  HLSLMaps:
+    _serializedList:
+    - Key: 0
+      Value:
+        name: ShowcaseScene
+        loadSceneMode: 1
+    - Key: 1
+      Value:
+        name: HLSLMountain
+        loadSceneMode: 1
+  SGMaps:
+    _serializedList:
+    - Key: 0
+      Value:
+        name: ShowcaseScene
+        loadSceneMode: 1
+    - Key: 1
+      Value:
+        name: SGMountain
+        loadSceneMode: 1

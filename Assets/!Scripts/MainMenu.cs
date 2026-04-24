@@ -21,9 +21,6 @@ namespace Capstone
         [SerializeField] SceneGroup gameScene;
         //[SerializeField] Scene playerScene;
 
-        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> HLSLMaps = new();
-        [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGMaps = new();  
-
         Button gameSceneButton;
         Button quitButton;
         EnumField weatherField;
@@ -87,7 +84,7 @@ namespace Capstone
             gameSceneButton.text = "Loading";
 
             gameScene.Load();
-            GetMap().Load();
+            MapManager.LoadMap();
             //playerScene.Load();
         }
 
@@ -101,19 +98,6 @@ namespace Capstone
             obstacleToggle.value = Settings.active.mapSettings.obstacles;
             
             randomizeButton.text = "Randomize Successful";
-        }
-
-        Scene GetMap()
-        {
-            switch(Settings.active.shaderType)
-            {
-                case ShaderType.HLSL:   
-                    return HLSLMaps[Settings.active.mapSettings.map];
-                case ShaderType.ShaderGraph:
-                    return SGMaps[Settings.active.mapSettings.map];
-            }
-
-            return null;
         }
     }
 }
