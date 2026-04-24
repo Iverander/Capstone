@@ -2430,7 +2430,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Smoothness",
     "m_StageCapability": 2,
-    "m_Value": 0.5,
+    "m_Value": 0.0,
     "m_DefaultValue": 0.5,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -2823,8 +2823,8 @@
     "m_ObjectId": "2d5961ec59a749ba9286b1736818e846",
     "m_Title": "Wetness calculation",
     "m_Position": {
-        "x": -4506.6669921875,
-        "y": 66.00001525878906
+        "x": -4506.66748046875,
+        "y": 65.99995422363281
     }
 }
 
@@ -4673,8 +4673,8 @@
     "m_ObjectId": "73e41db8263442eca215adc0cb1347f4",
     "m_Title": "Porosity",
     "m_Position": {
-        "x": -2615.333251953125,
-        "y": -1685.33349609375
+        "x": -2615.333740234375,
+        "y": -1685.3333740234375
     }
 }
 
@@ -6924,8 +6924,8 @@
     "m_ObjectId": "c4d57c4471ab46ac8d10c079ed200070",
     "m_Title": "Albedo",
     "m_Position": {
-        "x": -2528.0,
-        "y": -1134.6666259765625
+        "x": -2528.000244140625,
+        "y": -1134.666748046875
     }
 }
 
@@ -7071,8 +7071,8 @@
     "m_ObjectId": "cb6a7273a963411f99f03f949e7d5365",
     "m_Title": "Normal",
     "m_Position": {
-        "x": -2517.332763671875,
-        "y": 275.3332214355469
+        "x": -2517.333740234375,
+        "y": 275.33349609375
     }
 }
 
@@ -8539,7 +8539,7 @@
     "m_ObjectId": "ed1a942c9da146758032cb31c7be0c59",
     "m_Title": "Rim Calculation",
     "m_Position": {
-        "x": -2507.999755859375,
+        "x": -2508.000244140625,
         "y": -528.0
     }
 }
