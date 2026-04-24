@@ -1,5 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
+using Capstone.Datapoints;
+using SceneSystem;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -19,11 +21,12 @@ namespace Capstone
 
         public enum RoundState
         {
+            None,
             DuringRound,
             BetweenRounds
         }
 
-        public RoundState roundState;
+        public static RoundState roundState = RoundState.None;
 
         [SerializeField] UIDocument UIObject;
         Label UIText;
@@ -38,6 +41,11 @@ namespace Capstone
         public static UnityEvent onNewRound = new();
         public static UnityEvent onBetweenRound = new();
         public int enemiesAlive;
+        
+        [SerializeField] Scene hlslScene;
+        [SerializeField] Scene sgScene;
+
+        public static int highestEnemyCount { get; private set; }
  
 
         private IEnumerator Start()
@@ -45,16 +53,21 @@ namespace Capstone
             instance = this;
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
-
-            DataManager.StartNewSession("Started Game");
+            
+            DataManager.instance.StartNewSession();
 
             yield return new WaitForSeconds(firstRoundDelaySeconds);
 
             NewRound();
         }
+        void OnDestroy()
+        {
+            roundState = RoundState.None;
+        }
 
         public void BetweenRounds()
         {
+            Session.active.NewSection($"Round End");
             onBetweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
@@ -64,13 +77,27 @@ namespace Capstone
         [ContextMenu("Start New Round")]
         public void NewRound()
         {
+            highestEnemyCount = 0;
             roundState = RoundState.DuringRound;
             roundNr++;
             //EnemySpawner, 
             onNewRound?.Invoke();
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
-            DataManager.NewSection($"New Round: {roundNr}");
+            
+            if (Settings.active.shaderType == ShaderType.HLSL)
+            {
+                Settings.active.shaderType = ShaderType.ShaderGraph;
+                hlslScene.Unload();
+                sgScene.Load();
+            }
+            else
+            {
+                Settings.active.shaderType = ShaderType.HLSL;
+                sgScene.Unload();
+                hlslScene.Load();
+            }
+ 
         }
 
 
@@ -87,6 +114,10 @@ namespace Capstone
         public static void UpdateEnemyCount(int amount)
         {
             instance.enemiesAlive += amount;
+
+            if(instance.enemiesAlive > highestEnemyCount)
+                highestEnemyCount = instance.enemiesAlive;
+
             if(instance.enemiesAlive <= 0)
             {
                 instance.BetweenRounds();

@@ -35,7 +35,7 @@ namespace Capstone
 
         private void OnTriggerStay(Collider other)
         {
-            if (RoundManager.instance.roundState == RoundManager.RoundState.DuringRound)
+            if (RoundManager.roundState == RoundManager.RoundState.DuringRound)
             {
                 return;
             }

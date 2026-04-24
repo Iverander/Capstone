@@ -226,6 +226,22 @@ PrefabInstance:
       propertyPath: UIObject
       value: 
       objectReference: {fileID: 661410482}
+    - target: {fileID: 3960691288283501574, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: sgScene.name
+      value: SGMountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960691288283501574, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: hlslScene.name
+      value: HLSLMountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960691288283501574, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: sgScene.loadSceneMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960691288283501574, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
+      propertyPath: hlslScene.loadSceneMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5758461676757679321, guid: 593fe137601d1f9498afd0282eec7be9, type: 3}
       propertyPath: m_Name
       value: RoundManager
