@@ -31,6 +31,7 @@ namespace Capstone
         public static List<float> fpsValues = new();
         public static List<float> renderTimes = new();
         public static List<float> batches = new();
+        public static List<float> gpuFrameTiming = new();
         public static List<float> cpuTimes = new();
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -62,6 +63,7 @@ namespace Capstone
                 fpsValues.Add(Mathf.RoundToInt(1f / Time.deltaTime));
                 renderTimes.Add(UnityStats.renderTime);
                 batches.Add(UnityStats.batches);
+                //gpuFrameTiming = FrameTimingManager.
             }
 
             //if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)

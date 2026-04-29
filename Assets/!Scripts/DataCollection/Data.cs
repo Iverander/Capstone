@@ -37,6 +37,7 @@ namespace Capstone.Datapoints
         public LowsAvgHighs fps;
         public LowsAvgHighs renderTime;
         public LowsAvgHighs batches;
+        public LowsAvgHighs GPUFrameTiming;
         public LowsAvgHighs cpuTime;
         
         public int highestEnemyCount;
