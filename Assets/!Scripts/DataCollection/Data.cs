@@ -12,13 +12,13 @@ using Debug = UnityEngine.Debug;
 namespace Capstone.Datapoints
 {
     [Serializable]
-    public struct LowsAvgHighs
+    public struct LowsAvgHighs<T>
     {
-        public float Lows;
-        public float Average;
-        public float Highs;
+        public T Lows;
+        public T Average;
+        public T Highs;
         
-        public LowsAvgHighs(float lows, float average, float highs)
+        public LowsAvgHighs(T lows, T average, T highs)
         {
             Lows = lows;
             Average = average;
@@ -34,16 +34,16 @@ namespace Capstone.Datapoints
         public int _round;
         public Settings _levelSettings;
         
-        public LowsAvgHighs fps;
-        public LowsAvgHighs renderTime;
-        public LowsAvgHighs batches;
-        public LowsAvgHighs GPUFrameTiming;
-        public LowsAvgHighs cpuTime;
+        public LowsAvgHighs<float> fps;
+        public LowsAvgHighs<float> frameTiming;
+        public LowsAvgHighs<double> gpuFrameTiming;
+        public LowsAvgHighs<float> batches;
+        public LowsAvgHighs<float> usedVramMB; 
+        public LowsAvgHighs<float> usedRamMB;
         
         public int highestEnemyCount;
         
-        public float usedVramMB;
-        public float usedRamMB;
+
 
         public RoundData(string context, float duration)
         {
@@ -52,17 +52,36 @@ namespace Capstone.Datapoints
             this.highestEnemyCount = RoundManager.highestEnemyCount;
             
             this.fps = new(
-                lows: DataManager.Lows(DataManager.fpsValues), 
-                average: DataManager.Average(DataManager.fpsValues), 
-                highs: DataManager.Highs(DataManager.fpsValues));
-            this.renderTime = new(
-                lows: DataManager.Lows(DataManager.renderTimes), 
-                average: DataManager.Average(DataManager.renderTimes),
-                highs: DataManager.Highs(DataManager.renderTimes));
+                lows: Arithmetic.Lows(DataManager.fpsValues), 
+                average: Arithmetic.Average(DataManager.fpsValues), 
+                highs: Arithmetic.Highs(DataManager.fpsValues)
+                );
+            this.gpuFrameTiming = new(
+                lows: Arithmetic.Lows(DataManager.gpuFrameTimings), 
+                average: Arithmetic.Average(DataManager.gpuFrameTimings),
+                highs: Arithmetic.Highs(DataManager.gpuFrameTimings)
+                );
+            this.frameTiming = new(
+                lows: Arithmetic.Lows(DataManager.frameTimings), 
+                average: Arithmetic.Average(DataManager.frameTimings),
+                highs: Arithmetic.Highs(DataManager.frameTimings)
+            );
             this.batches = new(
-                lows: DataManager.Lows(DataManager.batches), 
-                average: DataManager.Average(DataManager.batches),
-                highs: DataManager.Highs(DataManager.batches));
+                lows: Arithmetic.Lows(DataManager.batches), 
+                average: Arithmetic.Average(DataManager.batches),
+                highs: Arithmetic.Highs(DataManager.batches)
+                );
+            this.usedVramMB = new(
+                lows: Arithmetic.Lows(DataManager.usedVRam),
+                average: Arithmetic.Average(DataManager.usedVRam),
+                highs: Arithmetic.Highs(DataManager.usedVRam)
+            );
+            this.usedRamMB = new(
+                lows: Arithmetic.Lows(DataManager.usedRam),
+                average: Arithmetic.Average(DataManager.usedRam),
+                highs: Arithmetic.Highs(DataManager.usedRam)
+            );            
+            
             /*
             this.cpuTime = new(
                 lows: DataManager.Lows(DataManager.cpuTimes), 
@@ -74,9 +93,6 @@ namespace Capstone.Datapoints
             this._durationSeconds = duration;
             
             this._round = RoundManager.round;
-
-            usedVramMB = Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576;
-            usedRamMB = Profiler.GetTotalAllocatedMemoryLong() / 1048576;
         }
     }
     [Serializable]
