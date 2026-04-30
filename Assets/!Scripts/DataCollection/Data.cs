@@ -35,8 +35,8 @@ namespace Capstone.Datapoints
         public Settings _levelSettings;
         
         public LowsAvgHighs<float> fps;
-        public LowsAvgHighs<float> frameTiming;
-        public LowsAvgHighs<double> gpuFrameTiming;
+        public LowsAvgHighs<float> frameTimingMS;
+        public LowsAvgHighs<double> gpuFrameTimingMS;
         public LowsAvgHighs<float> batches;
         public LowsAvgHighs<float> usedVramMB; 
         public LowsAvgHighs<float> usedRamMB;
@@ -56,12 +56,12 @@ namespace Capstone.Datapoints
                 average: Arithmetic.Average(DataManager.fpsValues), 
                 highs: Arithmetic.Highs(DataManager.fpsValues)
                 );
-            this.gpuFrameTiming = new(
+            this.gpuFrameTimingMS = new(
                 lows: Arithmetic.Lows(DataManager.gpuFrameTimings), 
                 average: Arithmetic.Average(DataManager.gpuFrameTimings),
                 highs: Arithmetic.Highs(DataManager.gpuFrameTimings)
                 );
-            this.frameTiming = new(
+            this.frameTimingMS = new(
                 lows: Arithmetic.Lows(DataManager.frameTimings), 
                 average: Arithmetic.Average(DataManager.frameTimings),
                 highs: Arithmetic.Highs(DataManager.frameTimings)

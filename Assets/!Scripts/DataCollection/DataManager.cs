@@ -25,10 +25,7 @@ namespace Capstone
         public static DatabaseReference database;
         
         public static DataManager instance;
-
-        private Thread cpuThread;
-
-        private ProfilerRecorder recorder;
+        
         private FrameTiming[] captureData;
 
         public static bool collectData;
@@ -71,12 +68,6 @@ namespace Capstone
 
             //if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)
             //    Debug.Log("GPU%: " + new PerformanceCounter("GPU Engine", "Utilization Percentage"));
-        }
-
-        private void OnDestroy()
-        {
-           cpuThread.Abort(); 
-           recorder.Dispose();
         }
 
         public static void ResetData()
