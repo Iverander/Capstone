@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using Unity.Profiling;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Profiling;
@@ -11,6 +12,10 @@ using Debug = UnityEngine.Debug;
 
 namespace Capstone.Datapoints
 {
+    /// <summary>
+    /// Low1%, average and High1%
+    /// </summary>
+    /// <typeparam name="T">accuracy</typeparam>
     [Serializable]
     public struct LowsAvgHighs<T>
     {
@@ -30,7 +35,8 @@ namespace Capstone.Datapoints
     public class RoundData
     {
         public string _context;
-        public float _durationSeconds;
+        public float _durationS;
+        public float _afkDurationS;
         public int _round;
         public Settings _levelSettings;
         
@@ -89,9 +95,7 @@ namespace Capstone.Datapoints
                 highs:-1);*/
             
             this._levelSettings = Settings.active;
-
-            this._durationSeconds = duration;
-            
+            this._durationS = duration;
             this._round = RoundManager.round;
         }
     }
@@ -135,10 +139,11 @@ namespace Capstone.Datapoints
         public string OS;
         public string CPU;
         public string GPU;
-        public int RamMB;
-        public int VramMB;
+        public int ramMB;
+        public int vramMB;
         public string resolution;
-        public bool Developer;
+        public string graphicsAPI;
+        public bool developer;
         
         string json => JsonUtility.ToJson(this);
 
@@ -147,12 +152,15 @@ namespace Capstone.Datapoints
             OS = SystemInfo.operatingSystem;
             CPU = SystemInfo.processorType;
             GPU = SystemInfo.graphicsDeviceName;
-            RamMB = SystemInfo.systemMemorySize;
-            VramMB = SystemInfo.graphicsMemorySize;
+            ramMB = SystemInfo.systemMemorySize;
+            vramMB = SystemInfo.graphicsMemorySize;
             resolution = $"{Screen.width}x{Screen.height}";
             
+            //if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)
+            //    graphicsAPI = PlayerSettings.GetUseDefaultGraphicsAPIs(BuildTarget.StandaloneWindows64);
+            
 #if UNITY_EDITOR
-            Developer = true;
+            developer = true;
 #else 
             Developer = false;
 #endif
