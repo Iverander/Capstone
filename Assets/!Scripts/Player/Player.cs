@@ -41,7 +41,7 @@ namespace Capstone
     public PlayerCombat combat { get; private set; }
     public PlayerModifier modifier { get; private set; }
 
-
+    public float afkTime; 
 
     void Start()
     {
@@ -92,6 +92,11 @@ namespace Capstone
       {
         if (rb.linearVelocity.y > -.5)
           RemoveState(State.Falling);
+      }
+
+      if ((state & (~State.Sprinting & ~State.Grounded) ) == State.None)
+      {
+        afkTime += Time.fixedDeltaTime;
       }
     }
 

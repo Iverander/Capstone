@@ -30,6 +30,8 @@ namespace Capstone
         Button randomizeButton;
         private void Start()
         {
+            MapManager.Instance.currentMap =null;
+            
             Time.timeScale = 1;
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             root = mainMenu.rootVisualElement;

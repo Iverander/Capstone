@@ -49,10 +49,11 @@ MonoBehaviour:
     OS: 
     CPU: 
     GPU: 
-    RamMB: 0
-    VramMB: 0
+    ramMB: 0
+    vramMB: 0
     resolution: 
-    Developer: 0
+    graphicsAPI: 
+    developer: 0
   sessions: []
 --- !u!114 &6278945370184330622
 MonoBehaviour:
@@ -69,20 +70,13 @@ MonoBehaviour:
   HLSLMaps:
     _serializedList:
     - Key: 0
-      Value:
-        name: ShowcaseScene
-        loadSceneMode: 1
+      Value: {fileID: 11400000, guid: 24adddfc860c43086ba0ac5ad4c80821, type: 2}
     - Key: 1
-      Value:
-        name: HLSLMountain
-        loadSceneMode: 1
+      Value: {fileID: 11400000, guid: 410d145194eeeed1f8ac54a118a80de0, type: 2}
   SGMaps:
     _serializedList:
     - Key: 0
-      Value:
-        name: ShowcaseScene
-        loadSceneMode: 1
+      Value: {fileID: 11400000, guid: 24adddfc860c43086ba0ac5ad4c80821, type: 2}
     - Key: 1
-      Value:
-        name: SGMountain
-        loadSceneMode: 1
+      Value: {fileID: 11400000, guid: b2e8c3ce9da2d8e0890aec11b8019579, type: 2}
+  currentMap: {fileID: 0}

@@ -188,9 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pauseDocument: {fileID: 1426080946}
-  menuScene:
-    name: Menu
-    loadSceneMode: 0
+  menuScene: {fileID: 11400000, guid: 6cc67aab3d032ede89f12a2b8889c817, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

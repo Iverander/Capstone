@@ -96,6 +96,7 @@ namespace Capstone.Datapoints
             
             this._levelSettings = Settings.active;
             this._durationS = duration;
+            this._afkDurationS = Player.instance.afkTime;
             this._round = RoundManager.round;
         }
     }

@@ -41,9 +41,6 @@ namespace Capstone
         public static UnityEvent onNewRound = new();
         public static UnityEvent onBetweenRound = new();
         public int enemiesAlive;
-        
-        [SerializeField] Scene hlslScene;
-        [SerializeField] Scene sgScene;
 
         public static int highestEnemyCount { get; private set; }
  
@@ -85,11 +82,14 @@ namespace Capstone
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
             
+            Player.instance.afkTime = 0;
+            
             if (Settings.active.shaderType == ShaderType.HLSL)
                 MapManager.LoadMap(ShaderType.ShaderGraph);
             else
                 MapManager.LoadMap(ShaderType.HLSL);
  
+
         }
 
 

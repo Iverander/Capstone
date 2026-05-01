@@ -189,35 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   mainMenu: {fileID: 1831338785}
-  gameScene:
-    scenes:
-    - name: GameScene
-      loadSceneMode: 0
-    - name: PlayerScene
-      loadSceneMode: 1
-  playerScene:
-    name: PlayerScene
-    loadSceneMode: 1
-  HLSLMaps:
-    _serializedList:
-    - Key: 0
-      Value:
-        name: ShowcaseScene
-        loadSceneMode: 1
-    - Key: 1
-      Value:
-        name: HLSLMountain
-        loadSceneMode: 1
-  SGMaps:
-    _serializedList:
-    - Key: 0
-      Value:
-        name: ShowcaseScene
-        loadSceneMode: 1
-    - Key: 1
-      Value:
-        name: SGMountain
-        loadSceneMode: 1
+  gameScene: {fileID: 11400000, guid: 9d5c0825cfb329cf5a165f8f69c37126, type: 2}
 --- !u!114 &1831338788
 MonoBehaviour:
   m_ObjectHideFlags: 0

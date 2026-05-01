@@ -61,7 +61,7 @@ namespace Capstone
                 captureData = new FrameTiming[1];//FrameTimingManager.GetGpuTimerFrequency();
                 FrameTimingManager.GetLatestTimings(1, captureData);
                 
-                Debug.Log(captureData[0].gpuFrameTime);
+                //Debug.Log(captureData[0].gpuFrameTime);
                 
                 gpuFrameTimings.Add(captureData[0].gpuFrameTime);
             }

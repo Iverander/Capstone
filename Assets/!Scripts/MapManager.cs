@@ -12,7 +12,7 @@ namespace Capstone
         [SerializeField, SerializedDictionary] SerializedDictionary<Map, Scene> SGMaps = new();  
         public static MapManager Instance;
 
-        public static Scene currentMap;
+        public Scene currentMap;
 
         private void Start()
         {
@@ -33,8 +33,10 @@ namespace Capstone
         }
         public static void LoadMap(Map map, ShaderType shaderType)
         {
-            if (currentMap != null)
-                currentMap.Unload();
+            Debug.Log("Load map");
+            
+            if (Instance.currentMap != null)
+                Instance.currentMap.Unload();
 
             
             Settings.active.mapSettings.map = map;
@@ -44,11 +46,11 @@ namespace Capstone
             {
                 case ShaderType.HLSL:   
                     Instance.HLSLMaps[Settings.active.mapSettings.map].Load();
-                    currentMap = Instance.HLSLMaps[Settings.active.mapSettings.map];
+                    Instance.currentMap = Instance.HLSLMaps[Settings.active.mapSettings.map];
                     break;
                 case ShaderType.ShaderGraph:
                     Instance.SGMaps[Settings.active.mapSettings.map].Load();
-                    currentMap = Instance.HLSLMaps[Settings.active.mapSettings.map];
+                    Instance.currentMap = Instance.SGMaps[Settings.active.mapSettings.map];
                     break;
             }
         }
