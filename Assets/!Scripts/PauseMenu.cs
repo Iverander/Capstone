@@ -15,7 +15,7 @@ namespace Capstone
         }
         void OnDestroy()
         {
-            pauseDocument.rootVisualElement.Q<Button>("Menu").clicked -= ExitToMenu;
+            //pauseDocument.rootVisualElement.Q<Button>("Menu").clicked -= ExitToMenu;
         }
 
         void ExitToMenu()

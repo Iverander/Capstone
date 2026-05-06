@@ -429,7 +429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -438,7 +438,7 @@ PrefabInstance:
     - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: f7aa63e6a9e0dd476911e6bf76d6a40d, type: 2}
+      objectReference: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
     - target: {fileID: 7004341427424733921, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -454,7 +454,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 509285505436395755, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1297519432}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3969489660220313165, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2078620539}
   m_SourcePrefab: {fileID: 100100000, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
 --- !u!114 &2078620537 stripped
 MonoBehaviour:
@@ -467,6 +470,32 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+--- !u!1 &2078620538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3969489660220313165, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+  m_PrefabInstance: {fileID: 2078620536}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2078620539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078620538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c520b9a25ea1ef0f933453003c2b8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Capstone::Capstone.WeatherMaterial
+  materials:
+  - material: {fileID: 2100000, guid: b2f03ed08ace02947bfbf128a8bdd85a, type: 2}
+    variableName: WetStrength
+    minMax: {x: 0.1, y: 0.7}
+    weatherCondition: 1
+  - material: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
+    variableName: SnowAmount
+    minMax: {x: 0.1, y: 1}
+    weatherCondition: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

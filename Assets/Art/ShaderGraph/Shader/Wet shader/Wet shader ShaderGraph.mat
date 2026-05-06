@@ -69,10 +69,10 @@ Material:
     - _Rim_Position: 0
     - _Rim_Width: 0
     - _Smoothness: 0.5
-    - _Wetness: 1
+    - _Wetness: 0.1
     - _WetnessDarkening: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Range: {r: 0, g: 0.35, b: 0, a: 0}
     - _Range2: {r: 0.6, g: 0.9, b: 0, a: 0}
     - _Rin_Color: {r: 0, g: 0, b: 0, a: 1}

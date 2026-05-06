@@ -232,6 +232,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46945879}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &310749067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3969489660220313165, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+  m_PrefabInstance: {fileID: 583190893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &310749069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310749067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c520b9a25ea1ef0f933453003c2b8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  materials:
+  - material: {fileID: 2100000, guid: 432e6a9dde43b714283882e9564a7fe3, type: 2}
+    variableName: Wetness
+    minMax: {x: 0.1, y: 1.5}
+    weatherCondition: 1
+  - material: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
+    variableName: SnowAmount
+    minMax: {x: 0.1, y: 1}
+    weatherCondition: 2
 --- !u!1001 &583190893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,42 +319,35 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 432e6a9dde43b714283882e9564a7fe3, type: 2}
+    - target: {fileID: 6120885765183976725, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 3108d640d4797c699af585c60dbd64b0, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 7300880287530800982, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+      propertyPath: wetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 432e6a9dde43b714283882e9564a7fe3, type: 2}
+    m_RemovedComponents:
+    - {fileID: 7300880287530800982, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+    - {fileID: 5770982962327759357, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 509285505436395755, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 46945880}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5760452864906794176, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3969489660220313165, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 583190896}
+      addedObject: {fileID: 310749069}
   m_SourcePrefab: {fileID: 100100000, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
 --- !u!4 &583190894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 509285505436395755, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
   m_PrefabInstance: {fileID: 583190893}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &583190895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5760452864906794176, guid: 94da438aa89842048a26d4e28fd19297, type: 3}
-  m_PrefabInstance: {fileID: 583190893}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &583190896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583190895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c520b9a25ea1ef0f933453003c2b8b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &663650245
 PrefabInstance:
   m_ObjectHideFlags: 0
