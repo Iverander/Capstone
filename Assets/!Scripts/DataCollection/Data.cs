@@ -41,9 +41,9 @@ namespace Capstone.Datapoints
         public Settings _levelSettings;
         
         public LowsAvgHighs<float> fps;
-        public LowsAvgHighs<float> frameTimingS;
+        //public LowsAvgHighs<float> frameTimingS;
         public LowsAvgHighs<double> gpuFrameTimingMS;
-        public LowsAvgHighs<float> batches;
+        //public LowsAvgHighs<float> batches;
         public LowsAvgHighs<float> usedVramMB; 
         public LowsAvgHighs<float> usedRamMB;
         
