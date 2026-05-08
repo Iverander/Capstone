@@ -8,6 +8,7 @@ namespace Capstone
         [SerializeField] private float additionalDamage;
         public override void onGained()
         {
+            base.onGained();
             Player.instance.stats.ModifyDamageMultiplier(additionalDamage);
         }
     }

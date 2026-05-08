@@ -33,7 +33,7 @@ namespace Capstone
 
             Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;
-            instance.Menus[menu].Load(true);
+            instance.Menus[menu].Load();
             instance.currentMenu = menu;
         } 
         public void CloseMenu()
