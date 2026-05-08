@@ -13,13 +13,15 @@ namespace Capstone
 
         void Start()
         {
-            uiDocument = GetComponent<UIDocument>();
-            uiDocument.rootVisualElement.style.display =  DisplayStyle.None;
+            uiDocument = GetComponent<UIDocument>();            
             uiDocument.rootVisualElement.Q<Button>().clicked += ReturnToMenu;
+            uiDocument.rootVisualElement.style.display =  DisplayStyle.None;
+
         }
 
         private void ReturnToMenu()
         {
+            Debug.Log("hi");
             menuScene.Load();
         }
 

@@ -1,0 +1,21 @@
+:root {
+}
+
+.backButton {
+    -unity-text-generator: advanced;
+    -unity-text-auto-size: best-fit 0 100px;
+    padding-top: 5%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+}
+
+.backButton:hover {
+    -unity-text-generator: advanced;
+    -unity-text-auto-size: best-fit 0 100px;
+    padding-top: 5%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    background-color: rgb(103, 255, 99);
+}
