@@ -30,9 +30,9 @@ namespace Capstone
 
         public static bool collectData;
         public static List<float> fpsValues = new();
-        public static List<float> batches = new();
+        //public static List<float> batches = new();
         public static List<double> gpuFrameTimings = new();
-        public static List<float> frameTimings = new();
+        //public static List<float> frameTimings = new();
         public static List<float> usedVRam = new();
         public static List<float> usedRam = new();
     
@@ -52,8 +52,8 @@ namespace Capstone
             if (collectData)
             {
                 fpsValues.Add(Mathf.RoundToInt(1f / Time.deltaTime));
-                batches.Add(UnityStats.batches);
-                frameTimings.Add(UnityStats.frameTime);
+                //batches.Add(UnityStats.batches);
+                //frameTimings.Add(UnityStats.frameTime);
                 usedVRam.Add(Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576);
                 usedRam.Add(Profiler.GetTotalAllocatedMemoryLong() / 1048576);
                 

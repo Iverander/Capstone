@@ -17,7 +17,7 @@ namespace Capstone
         protected float currentSpeed => sprinting ? speed.y : speed.x;
         
         [Header("Jumping")]
-        [SerializeField] protected float jumpForce = 4;
+        [SerializeField] protected float jumpForce = 6;
         
         [Header("Turning")]
         [SerializeField] protected float rotationSpeed = 7;

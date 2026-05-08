@@ -67,6 +67,7 @@ namespace Capstone.Datapoints
                 average: Arithmetic.Average(DataManager.gpuFrameTimings),
                 highs: Arithmetic.Highs(DataManager.gpuFrameTimings)
                 );
+            /*
             this.frameTimingS = new(
                 lows: Arithmetic.Lows(DataManager.frameTimings), 
                 average: Arithmetic.Average(DataManager.frameTimings),
@@ -77,6 +78,7 @@ namespace Capstone.Datapoints
                 average: Arithmetic.Average(DataManager.batches),
                 highs: Arithmetic.Highs(DataManager.batches)
                 );
+                */
             this.usedVramMB = new(
                 lows: Arithmetic.Lows(DataManager.usedVRam),
                 average: Arithmetic.Average(DataManager.usedVRam),
@@ -163,7 +165,7 @@ namespace Capstone.Datapoints
 #if UNITY_EDITOR
             developer = true;
 #else 
-            Developer = false;
+            developer = false;
 #endif
             Save();
         }
