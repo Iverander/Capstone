@@ -20,6 +20,7 @@ namespace Capstone
 
         void ExitToMenu()
         {
+            Modifier.reset?.Invoke();
             menuScene.Load();
             
             //Session.active.NewSection("Exit to menu");
