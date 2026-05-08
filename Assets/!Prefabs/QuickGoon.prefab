@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5360483366724408332}
   - component: {fileID: 1623346721436681438}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: QuickGoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -166,7 +166,7 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 8
         includeSelf: 0
-        damage: 20
+        damage: 10
         knockbackForce: 0
         duration: 0
 --- !u!114 &2031065405232868160
@@ -234,7 +234,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 1.588
       objectReference: {fileID: 0}
     - target: {fileID: 7012193194829924103, guid: 261987ffb1e7fff25b633170be42cc7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -489,6 +489,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 2334260274710485370}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -528,10 +540,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
       propertyPath: m_Name
       value: Art
       objectReference: {fileID: 0}
+    - target: {fileID: 2664098864995057252, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 255991bf18609038ba291dfc8cb47cee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -5117700066308340382, guid: 8b386eaebb79b004da82429ee15963fb, type: 3}

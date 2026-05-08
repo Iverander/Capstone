@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Capstone::Capstone.EnemySpawner
   normalGoon: {fileID: 1075573937082332685, guid: 9be0500d06037bc4b90e303af6e36e5b, type: 3}
   bigGoon: {fileID: 1075573937082332685, guid: 97739337c113839408c1d460aa0ec25c, type: 3}
+  quickGoon: {fileID: 1075573937082332685, guid: 04d16b3e96d03412597760980ac0e02d, type: 3}
   amountToSpawn: 2
   spawnCalc: 0
 --- !u!114 &3960691288283501574
@@ -61,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a9c85a610e6114b913d14ef024b50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Capstone::Capstone.RoundManager
-  roundState: 0
   UIObject: {fileID: 0}
   firstRoundDelaySeconds: 3
   roundNr: 0

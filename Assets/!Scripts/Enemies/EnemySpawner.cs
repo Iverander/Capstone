@@ -7,6 +7,7 @@ namespace Capstone
     {
         [SerializeField] Enemy normalGoon;
         [SerializeField] Enemy bigGoon;
+        [SerializeField] Enemy quickGoon;
         [SerializeField] int amountToSpawn = 2;
         int bigGoonsToSpawn = 1;
 
@@ -27,13 +28,14 @@ namespace Capstone
             oneSpawn = SpawnManager.instance == null;
 
             SpawnGoons();
+            SpawnQuickGoons();
             SpawnBigGoon();
         }
 
         async void SpawnGoons()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < RoundManager.round*2; i++)
+            for (int i = 0; i < 1+((RoundManager.round-1)*3); i++)
             {
                 Debug.Log(CalculateSpawnPoint());
                 Instantiate(normalGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
@@ -42,10 +44,22 @@ namespace Capstone
             }
             //CalculateAmount(ref amountToSpawn);
         }
+        async void SpawnQuickGoons()
+        {
+            //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
+            for (int i = 0; i < (RoundManager.round/3)*2; i++)
+            {
+                Debug.Log(CalculateSpawnPoint());
+                Instantiate(quickGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
+
+                await Task.Delay(1000);
+            }
+            //CalculateAmount(ref amountToSpawn);
+        }
         async void SpawnBigGoon()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < RoundManager.round/5; i++)
+            for (int i = 0; i < (RoundManager.round/7) * 2; i++)
             {
                 Instantiate(bigGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
 
