@@ -47,7 +47,7 @@ namespace Capstone
         async void SpawnQuickGoons()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < (RoundManager.round/3)*2; i++)
+            for (int i = 0; i < (RoundManager.round/3)*4; i++)
             {
                 Debug.Log(CalculateSpawnPoint());
                 Instantiate(quickGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);

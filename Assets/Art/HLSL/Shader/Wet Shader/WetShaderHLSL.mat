@@ -44,7 +44,7 @@ Material:
     - _Distortion: 0.1551
     - _Gloss: 0.108
     - _NormalSpeed: 0.5
-    - _WetStrength: 0.7
+    - _WetStrength: 0.1
     m_Colors:
     - _PuddleColor: {r: 0.29999995, g: 0.39999995, b: 0.6, a: 0.5058824}
   m_BuildTextureStacks: []
