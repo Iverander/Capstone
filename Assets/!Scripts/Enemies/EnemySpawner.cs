@@ -5,25 +5,25 @@ namespace Capstone
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] Enemy normalGoon;
-        [SerializeField] Enemy bigGoon;
-        [SerializeField] Enemy quickGoon;
-        [SerializeField] int amountToSpawn = 2;
-        int bigGoonsToSpawn = 1;
+        [SerializeField] private Enemy normalGoon;
+        [SerializeField] private Enemy bigGoon;
+        [SerializeField] private Enemy quickGoon;
+        //[SerializeField] private int amountToSpawn = 2;
 
-        int spawnPlace;
-        bool oneSpawn = false;
-        Transform currentSpawn;
+        [SerializeField] private int spawnCalc;
+       // private int bigGoonsToSpawn = 1;
+        private Transform currentSpawn;
+        private bool oneSpawn;
 
-        [SerializeField] int spawnCalc;
+        private int spawnPlace;
 
-        void Start()
+        private void Start()
         {
             RoundManager.onNewRound.AddListener(SpawnEnemies);
         }
 
         //called from RoundManager
-        void SpawnEnemies()
+        private void SpawnEnemies()
         {
             oneSpawn = SpawnManager.instance == null;
 
@@ -32,10 +32,10 @@ namespace Capstone
             SpawnBigGoon();
         }
 
-        async void SpawnGoons()
+        private async void SpawnGoons()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < 1+((RoundManager.round-1)*3); i++)
+            for (var i = 0; i < 1 + (RoundManager.round - 1) * 3; i++)
             {
                 Debug.Log(CalculateSpawnPoint());
                 Instantiate(normalGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
@@ -44,10 +44,11 @@ namespace Capstone
             }
             //CalculateAmount(ref amountToSpawn);
         }
-        async void SpawnQuickGoons()
+
+        private async void SpawnQuickGoons()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < (RoundManager.round/3)*4; i++)
+            for (var i = 0; i < RoundManager.round / 3 * 4; i++)
             {
                 Debug.Log(CalculateSpawnPoint());
                 Instantiate(quickGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
@@ -56,10 +57,11 @@ namespace Capstone
             }
             //CalculateAmount(ref amountToSpawn);
         }
-        async void SpawnBigGoon()
+
+        private async void SpawnBigGoon()
         {
             //spawns amountToSpawn at spawnpoints, to add more spawn points add more under spawnPoints (unity), with a delay
-            for (int i = 0; i < (RoundManager.round/7) * 2; i++)
+            for (var i = 0; i < RoundManager.round / 7 * 2; i++)
             {
                 Instantiate(bigGoon.gameObject, CalculateSpawnPoint(), Quaternion.identity, transform);
 
@@ -77,7 +79,7 @@ namespace Capstone
         //    else { amount++; }
         //}
 
-        Vector3 CalculateSpawnPoint()
+        private Vector3 CalculateSpawnPoint()
         {
             spawnPlace = Random.Range(0, SpawnManager.instance.spawnPoints.Count);
             return SpawnManager.instance.spawnPoints[spawnPlace].position;

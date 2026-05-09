@@ -6,7 +6,8 @@ namespace Capstone
     public enum WeatherType
     {
         Sunny,
-        Raining,
+
+        Raining
         //Snowing
     }
 

@@ -6,8 +6,8 @@ namespace Capstone
     public class NewRoundTrigger : MonoBehaviour
     {
         [SerializeField] private UIDocument UIObject;
-        private float countdown;
         private readonly float timeToWait = 3;
+        private float countdown;
         private Label UIText;
 
         private void Start()

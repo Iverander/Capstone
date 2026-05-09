@@ -1,19 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using AYellowpaper.SerializedCollections;
-using Unity.Profiling;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Profiling;
-using Debug = UnityEngine.Debug;
 
 namespace Capstone.Datapoints
 {
     /// <summary>
-    /// Low1%, average and High1%
+    ///     Low1%, average and High1%
     /// </summary>
     /// <typeparam name="T">accuracy</typeparam>
     [Serializable]
@@ -22,7 +14,7 @@ namespace Capstone.Datapoints
         public T Lows;
         public T Average;
         public T Highs;
-        
+
         public LowsAvgHighs(T lows, T average, T highs)
         {
             Lows = lows;
@@ -30,7 +22,7 @@ namespace Capstone.Datapoints
             Highs = highs;
         }
     }
-    
+
     [Serializable]
     public class RoundData
     {
@@ -39,103 +31,105 @@ namespace Capstone.Datapoints
         public float _afkDurationS;
         public int _round;
         public Settings _levelSettings;
-        
+
         public LowsAvgHighs<float> fps;
+
         //public LowsAvgHighs<float> frameTimingS;
         public LowsAvgHighs<double> gpuFrameTimingMS;
+
         //public LowsAvgHighs<float> batches;
-        public LowsAvgHighs<float> usedVramMB; 
+        public LowsAvgHighs<float> usedVramMB;
         public LowsAvgHighs<float> usedRamMB;
-        
+
         public int highestEnemyCount;
-        
 
 
         public RoundData(string context, float duration)
         {
-            this._context = context;
+            _context = context;
 
-            this.highestEnemyCount = RoundManager.highestEnemyCount;
-            
-            this.fps = new(
-                lows: Arithmetic.Lows(DataManager.fpsValues), 
-                average: Arithmetic.Average(DataManager.fpsValues), 
-                highs: Arithmetic.Highs(DataManager.fpsValues)
-                );
-            this.gpuFrameTimingMS = new(
-                lows: Arithmetic.Lows(DataManager.gpuFrameTimings), 
-                average: Arithmetic.Average(DataManager.gpuFrameTimings),
-                highs: Arithmetic.Highs(DataManager.gpuFrameTimings)
-                );
+            highestEnemyCount = RoundManager.highestEnemyCount;
+
+            fps = new LowsAvgHighs<float>(
+                Arithmetic.Lows(DataManager.fpsValues),
+                Arithmetic.Average(DataManager.fpsValues),
+                Arithmetic.Highs(DataManager.fpsValues)
+            );
+            gpuFrameTimingMS = new LowsAvgHighs<double>(
+                Arithmetic.Lows(DataManager.gpuFrameTimings),
+                Arithmetic.Average(DataManager.gpuFrameTimings),
+                Arithmetic.Highs(DataManager.gpuFrameTimings)
+            );
             /*
             this.frameTimingS = new(
-                lows: Arithmetic.Lows(DataManager.frameTimings), 
+                lows: Arithmetic.Lows(DataManager.frameTimings),
                 average: Arithmetic.Average(DataManager.frameTimings),
                 highs: Arithmetic.Highs(DataManager.frameTimings)
             );
             this.batches = new(
-                lows: Arithmetic.Lows(DataManager.batches), 
+                lows: Arithmetic.Lows(DataManager.batches),
                 average: Arithmetic.Average(DataManager.batches),
                 highs: Arithmetic.Highs(DataManager.batches)
                 );
                 */
-            this.usedVramMB = new(
-                lows: Arithmetic.Lows(DataManager.usedVRam),
-                average: Arithmetic.Average(DataManager.usedVRam),
-                highs: Arithmetic.Highs(DataManager.usedVRam)
+            usedVramMB = new LowsAvgHighs<float>(
+                Arithmetic.Lows(DataManager.usedVRam),
+                Arithmetic.Average(DataManager.usedVRam),
+                Arithmetic.Highs(DataManager.usedVRam)
             );
-            this.usedRamMB = new(
-                lows: Arithmetic.Lows(DataManager.usedRam),
-                average: Arithmetic.Average(DataManager.usedRam),
-                highs: Arithmetic.Highs(DataManager.usedRam)
-            );            
-            
+            usedRamMB = new LowsAvgHighs<float>(
+                Arithmetic.Lows(DataManager.usedRam),
+                Arithmetic.Average(DataManager.usedRam),
+                Arithmetic.Highs(DataManager.usedRam)
+            );
+
             /*
             this.cpuTime = new(
-                lows: DataManager.Lows(DataManager.cpuTimes), 
+                lows: DataManager.Lows(DataManager.cpuTimes),
                 average: DataManager.Average(DataManager.cpuTimes),
                 highs:-1);*/
-            
-            this._levelSettings = Settings.active;
-            this._durationS = duration;
-            this._afkDurationS = Player.instance.afkTime;
-            this._round = RoundManager.round;
+
+            _levelSettings = Settings.active;
+            _durationS = duration;
+            _afkDurationS = Player.instance.afkTime;
+            _round = RoundManager.round;
         }
     }
+
     [Serializable]
     public class Session
     {
         public static Session active;
-        
-        string _name;
         public List<RoundData> rounds = new();
+
+        private string _name;
         private float sectionStart;
-        
-        string json => JsonUtility.ToJson(this);
-            
+
 
         public Session(string sessionName)
         {
             _name = sessionName;
             DataManager.collectData = true;
             DataManager.ResetData();
-            this.sectionStart = Time.time;
+            sectionStart = Time.time;
             active = this;
         }
+
+        private string json => JsonUtility.ToJson(this);
 
         public void NewSection(string context)
         {
             rounds.Add(new RoundData(context, Mathf.RoundToInt(Time.time - sectionStart)));
-            this.sectionStart = Time.time;
+            sectionStart = Time.time;
             DataManager.ResetData();
         }
-        
+
         public void Save()
         {
             DataManager.database.Child(SystemInfo.deviceUniqueIdentifier).Child(_name).SetRawJsonValueAsync(json);
         }
     }
-   
+
     [Serializable]
     public class HardwareData
     {
@@ -147,8 +141,8 @@ namespace Capstone.Datapoints
         public string resolution;
         public string graphicsAPI;
         public bool developer;
-        
-        string json => JsonUtility.ToJson(this);
+
+        private string json => JsonUtility.ToJson(this);
 
         public void Initialize()
         {
@@ -158,18 +152,18 @@ namespace Capstone.Datapoints
             ramMB = SystemInfo.systemMemorySize;
             vramMB = SystemInfo.graphicsMemorySize;
             resolution = $"{Screen.width}x{Screen.height}";
-            
+
             //if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)
             //    graphicsAPI = PlayerSettings.GetUseDefaultGraphicsAPIs(BuildTarget.StandaloneWindows64);
-            
+
 #if UNITY_EDITOR
             developer = true;
-#else 
+#else
             developer = false;
 #endif
             Save();
         }
-        
+
         public void Save()
         {
             DataManager.database.Child(SystemInfo.deviceUniqueIdentifier).Child("Hardware").SetRawJsonValueAsync(json);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FMOD;
+using System.Runtime.InteropServices;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -36,22 +36,10 @@ namespace FMODUnity
             Settings.AddPlatformTemplate<PlatformIOS>("0f8eb3f400726694eb47beb1a9f94ce8");
         }
 
-        internal override string DisplayName => "iOS";
-
+        internal override string DisplayName { get { return "iOS"; } }
         internal override void DeclareRuntimePlatforms(Settings settings)
         {
             settings.DeclareRuntimePlatform(RuntimePlatform.IPhonePlayer, this);
-        }
-
-        internal override void LoadPlugins(FMOD.System coreSystem, Action<RESULT, string> reportResult)
-        {
-            StaticLoadPlugins(this, coreSystem, reportResult);
-        }
-
-        public static void StaticLoadPlugins(Platform platform, FMOD.System coreSystem,
-            Action<RESULT, string> reportResult)
-        {
-            platform.LoadStaticPlugins(coreSystem, reportResult);
         }
 
 #if UNITY_EDITOR
@@ -60,21 +48,24 @@ namespace FMODUnity
             yield return BuildTarget.iOS;
         }
 
-        internal override Legacy.Platform LegacyIdentifier => Legacy.Platform.iOS;
+        internal override Legacy.Platform LegacyIdentifier { get { return Legacy.Platform.iOS; } }
 
         protected override BinaryAssetFolderInfo GetBinaryAssetFolder(BuildTarget buildTarget)
         {
             return new BinaryAssetFolderInfo("ios", "Plugins/iOS");
         }
 
-        protected override IEnumerable<FileRecord> GetBinaryFiles(BuildTarget buildTarget, bool allVariants,
-            string suffix)
+        protected override IEnumerable<FileRecord> GetBinaryFiles(BuildTarget buildTarget, bool allVariants, string suffix)
         {
             if (allVariants || PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK)
+            {
                 yield return new FileRecord(string.Format("libfmodstudiounityplugin{0}.a", suffix));
+            }
 
             if (allVariants || PlayerSettings.iOS.sdkVersion == iOSSdkVersion.SimulatorSDK)
+            {
                 yield return new FileRecord(string.Format("libfmodstudiounitypluginsimulator{0}.a", suffix));
+            }
         }
 
         protected override IEnumerable<FileRecord> GetOptionalBinaryFiles(BuildTarget buildTarget, bool allVariants)
@@ -86,10 +77,12 @@ namespace FMODUnity
             }
 
             if (allVariants || PlayerSettings.iOS.sdkVersion == iOSSdkVersion.SimulatorSDK)
+            {
                 yield return new FileRecord("libresonanceaudiosimulator.a");
+            }
         }
 
-        internal override bool IsFMODStaticallyLinked => true;
+        internal override bool IsFMODStaticallyLinked { get { return true; } }
 
         internal override bool SupportsAdditionalCPP(BuildTarget target)
         {
@@ -102,12 +95,29 @@ namespace FMODUnity
         }
 #endif
 
-#if UNITY_EDITOR
-        internal override OutputType[] ValidOutputTypes => sValidOutputTypes;
-
-        private static readonly OutputType[] sValidOutputTypes =
+        internal override void LoadPlugins(FMOD.System coreSystem, Action<FMOD.RESULT, string> reportResult)
         {
-            new() { displayName = "Core Audio", outputType = OUTPUTTYPE.COREAUDIO }
+            StaticLoadPlugins(this, coreSystem, reportResult);
+        }
+
+        public static void StaticLoadPlugins(Platform platform, FMOD.System coreSystem,
+            Action<FMOD.RESULT, string> reportResult)
+        {
+            platform.LoadStaticPlugins(coreSystem, reportResult);
+
+        }
+
+#if UNITY_EDITOR
+        internal override OutputType[] ValidOutputTypes
+        {
+            get
+            {
+                return sValidOutputTypes;
+            }
+        }
+
+        private static OutputType[] sValidOutputTypes = {
+           new OutputType() { displayName = "Core Audio", outputType = FMOD.OUTPUTTYPE.COREAUDIO },
         };
 #endif
     }

@@ -34,7 +34,7 @@ namespace Capstone
             //Cursor.lockState = CursorLockMode.Confined;            
             foreach (var mod in Sellable)
             {
-                if(mod.gained) continue;
+                if (mod.gained) continue;
                 VisualElement product = productAsset.Instantiate();
                 shopUI.rootVisualElement.Q("ProductShelf").Add(product);
                 product.Q<Label>().text = mod.name;

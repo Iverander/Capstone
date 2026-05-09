@@ -5,18 +5,27 @@ namespace Capstone
 {
     public abstract class Modifier : ScriptableObject
     {
+        public static Action reset;
         [field: SerializeField] public Sprite icon { get; private set; }
         [field: SerializeField] public int cost { get; private set; }
         public bool active;
-        public bool gained { get; private set; } = false;
+        public bool gained { get; private set; }
 
-        public static Action reset;
-        
-        public virtual void onGained(){ gained = true; reset += ResetMod; }
-        public virtual void onActive(){}
-        public virtual void onRemoved(){}
+        public virtual void onGained()
+        {
+            gained = true;
+            reset += ResetMod;
+        }
 
-        void ResetMod()
+        public virtual void onActive()
+        {
+        }
+
+        public virtual void onRemoved()
+        {
+        }
+
+        private void ResetMod()
         {
             gained = false;
             reset -= ResetMod;

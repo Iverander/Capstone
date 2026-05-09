@@ -14,7 +14,7 @@ namespace FMODUnity
 
         public override TrackDrawOptions GetTrackOptions(TrackAsset track, Object binding)
         {
-            var options = base.GetTrackOptions(track, binding);
+            TrackDrawOptions options = base.GetTrackOptions(track, binding);
             options.icon = icon;
 
             return options;
@@ -28,7 +28,7 @@ namespace FMODUnity
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var volumeProperty = property.FindPropertyRelative("volume");
+            SerializedProperty volumeProperty = property.FindPropertyRelative("volume");
 
             EditorGUI.PropertyField(position, volumeProperty);
         }

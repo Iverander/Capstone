@@ -7,23 +7,37 @@ namespace FMODUnity
 {
     public class EventCache : ScriptableObject, ISerializationCallbackReceiver
     {
-        [SerializeField] public List<EditorBankRef> EditorBanks;
-
-        [SerializeField] public List<EditorEventRef> EditorEvents;
-
-        [SerializeField] public List<EditorParamRef> EditorParameters;
-
-        [SerializeField] public List<EditorBankRef> MasterBanks;
-
-        [SerializeField] public List<EditorBankRef> StringsBanks;
-
-        [SerializeField] public int cacheVersion;
-
-        [SerializeField] private long cacheTime;
-
-        [SerializeField] private List<DictionaryEntry> SerializableEventsDict;
-
+        [SerializeField]
+        public List<EditorBankRef> EditorBanks;
+        [SerializeField]
+        public List<EditorEventRef> EditorEvents;
         public Dictionary<string, int> EditorEventsDict;
+        [SerializeField]
+        public List<EditorParamRef> EditorParameters;
+        [SerializeField]
+        public List<EditorBankRef> MasterBanks;
+        [SerializeField]
+        public List<EditorBankRef> StringsBanks;
+        [SerializeField]
+        public int cacheVersion;
+        [SerializeField]
+        private Int64 cacheTime;
+        [SerializeField]
+        private List<DictionaryEntry> SerializableEventsDict;
+        [Serializable]
+        private struct DictionaryEntry
+        {
+            [SerializeField]
+            public string key;
+            [SerializeField]
+            public int index;
+        }
+
+        public DateTime CacheTime
+        {
+            get { return new DateTime(cacheTime); }
+            set { cacheTime = value.Ticks; }
+        }
 
         public EventCache()
         {
@@ -37,24 +51,22 @@ namespace FMODUnity
             cacheTime = 0;
         }
 
-        public DateTime CacheTime
-        {
-            get => new(cacheTime);
-            set => cacheTime = value.Ticks;
-        }
-
         public void OnBeforeSerialize()
         {
             if (SerializableEventsDict.Count == 0)
-                SerializableEventsDict = EditorEventsDict
-                    .Select(item => new DictionaryEntry { key = item.Key, index = item.Value }).ToList();
+            {
+                SerializableEventsDict = EditorEventsDict.Select(item => new DictionaryEntry { key = item.Key, index = item.Value}).ToList();
+            }
         }
 
         public void OnAfterDeserialize()
         {
             if (SerializableEventsDict.Count > 0)
             {
-                SerializableEventsDict.ForEach(item => { EditorEventsDict.Add(item.key, item.index); });
+                SerializableEventsDict.ForEach((item) =>
+                {
+                    EditorEventsDict.Add(item.key, item.index);
+                });
                 SerializableEventsDict.Clear();
             }
         }
@@ -62,20 +74,15 @@ namespace FMODUnity
         public void BuildDictionary()
         {
             EditorEventsDict.Clear();
-            var index = 0;
+            int index = 0;
 
-            EditorEvents.ForEach(eventRef =>
-            {
-                if (!EditorEventsDict.ContainsKey(eventRef.Path)) EditorEventsDict.Add(eventRef.Path, index);
+            EditorEvents.ForEach((eventRef) => {
+                if (!EditorEventsDict.ContainsKey(eventRef.Path))
+                {
+                    EditorEventsDict.Add(eventRef.Path, index);
+                }
                 index++;
             });
-        }
-
-        [Serializable]
-        private struct DictionaryEntry
-        {
-            [SerializeField] public string key;
-            [SerializeField] public int index;
         }
     }
 }

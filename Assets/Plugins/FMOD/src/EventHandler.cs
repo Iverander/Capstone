@@ -7,7 +7,7 @@ namespace FMODUnity
 {
     public abstract class EventHandler : MonoBehaviour
 #if UNITY_UI_EXIST
-        , IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+    , IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 #endif
     {
         public string CollisionTag = "";
@@ -15,6 +15,11 @@ namespace FMODUnity
         protected virtual void Start()
         {
             HandleGameEvent(EmitterGameEvent.ObjectStart);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            HandleGameEvent(EmitterGameEvent.ObjectDestroy);
         }
 
         private void OnEnable()
@@ -27,46 +32,21 @@ namespace FMODUnity
             HandleGameEvent(EmitterGameEvent.ObjectDisable);
         }
 
-        protected virtual void OnDestroy()
-        {
-            HandleGameEvent(EmitterGameEvent.ObjectDestroy);
-        }
-
-        private void OnCollisionEnter()
-        {
-            HandleGameEvent(EmitterGameEvent.CollisionEnter);
-        }
-
-        private void OnCollisionEnter2D()
-        {
-            HandleGameEvent(EmitterGameEvent.CollisionEnter2D);
-        }
-
-        private void OnCollisionExit()
-        {
-            HandleGameEvent(EmitterGameEvent.CollisionExit);
-        }
-
-        private void OnCollisionExit2D()
-        {
-            HandleGameEvent(EmitterGameEvent.CollisionExit2D);
-        }
-
-        protected abstract void HandleGameEvent(EmitterGameEvent gameEvent);
-
 #if UNITY_PHYSICS_EXIST
         private void OnTriggerEnter(Collider other)
         {
-            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) ||
-                (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
+            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) || (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
+            {
                 HandleGameEvent(EmitterGameEvent.TriggerEnter);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) ||
-                (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
+            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) || (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
+            {
                 HandleGameEvent(EmitterGameEvent.TriggerExit);
+            }
         }
 #endif
 
@@ -74,15 +54,39 @@ namespace FMODUnity
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag))
+            {
                 HandleGameEvent(EmitterGameEvent.TriggerEnter2D);
+            }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag))
+            {
                 HandleGameEvent(EmitterGameEvent.TriggerExit2D);
+            }
         }
 #endif
+
+        private void OnCollisionEnter()
+        {
+            HandleGameEvent(EmitterGameEvent.CollisionEnter);
+        }
+
+        private void OnCollisionExit()
+        {
+            HandleGameEvent(EmitterGameEvent.CollisionExit);
+        }
+
+        private void OnCollisionEnter2D()
+        {
+            HandleGameEvent(EmitterGameEvent.CollisionEnter2D);
+        }
+
+        private void OnCollisionExit2D()
+        {
+            HandleGameEvent(EmitterGameEvent.CollisionExit2D);
+        }
 
 #if UNITY_UI_EXIST
         private void OnMouseEnter()
@@ -114,7 +118,6 @@ namespace FMODUnity
         {
             HandleGameEvent(EmitterGameEvent.UIMouseExit);
         }
-
         public void OnPointerDown(PointerEventData eventData)
         {
             HandleGameEvent(EmitterGameEvent.UIMouseDown);
@@ -125,5 +128,6 @@ namespace FMODUnity
             HandleGameEvent(EmitterGameEvent.UIMouseUp);
         }
 #endif
+        protected abstract void HandleGameEvent(EmitterGameEvent gameEvent);
     }
 }

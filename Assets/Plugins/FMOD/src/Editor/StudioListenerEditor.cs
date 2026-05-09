@@ -1,5 +1,4 @@
-﻿using FMOD;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace FMODUnity
@@ -21,8 +20,8 @@ namespace FMODUnity
         {
             serializedObject.Update();
             EditorGUI.BeginDisabledGroup(true);
-            var index = ((StudioListener)serializedObject.targetObject).ListenerNumber;
-            EditorGUILayout.IntSlider(L10n.Tr("Listener Index"), index, 0, CONSTANTS.MAX_LISTENERS - 1);
+            int index = ((StudioListener)serializedObject.targetObject).ListenerNumber;
+            EditorGUILayout.IntSlider(L10n.Tr("Listener Index"), index, 0, FMOD.CONSTANTS.MAX_LISTENERS - 1);
             EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.PropertyField(attenuationObject, new GUIContent(L10n.Tr("Attenuation Object")));

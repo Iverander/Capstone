@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using FMOD;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -31,32 +30,15 @@ namespace FMODUnity
 #endif
     public class PlatformMac : Platform
     {
-        private static readonly List<CodecChannelCount> staticCodecChannels = new()
-        {
-            new CodecChannelCount { format = CodecType.FADPCM, channels = 0 },
-            new CodecChannelCount { format = CodecType.Vorbis, channels = 32 }
-        };
-
         static PlatformMac()
         {
             Settings.AddPlatformTemplate<PlatformMac>("52eb9df5db46521439908db3a29a1bbb");
         }
 
-        internal override string DisplayName => "macOS";
-
-        internal override List<CodecChannelCount> DefaultCodecChannels => staticCodecChannels;
-
+        internal override string DisplayName { get { return "macOS"; } }
         internal override void DeclareRuntimePlatforms(Settings settings)
         {
             settings.DeclareRuntimePlatform(RuntimePlatform.OSXPlayer, this);
-        }
-
-        internal override string GetPluginPath(string pluginName)
-        {
-            var pluginPath = string.Format("{0}/{1}.bundle", GetPluginBasePath(), pluginName);
-            if (Directory.Exists(pluginPath)) return pluginPath;
-
-            return string.Format("{0}/{1}.dylib", GetPluginBasePath(), pluginName);
         }
 
 #if UNITY_EDITOR
@@ -65,15 +47,14 @@ namespace FMODUnity
             yield return BuildTarget.StandaloneOSX;
         }
 
-        internal override Legacy.Platform LegacyIdentifier => Legacy.Platform.Mac;
+        internal override Legacy.Platform LegacyIdentifier { get { return Legacy.Platform.Mac; } }
 
         protected override BinaryAssetFolderInfo GetBinaryAssetFolder(BuildTarget buildTarget)
         {
             return new BinaryAssetFolderInfo("mac", "Plugins");
         }
 
-        protected override IEnumerable<FileRecord> GetBinaryFiles(BuildTarget buildTarget, bool allVariants,
-            string suffix)
+        protected override IEnumerable<FileRecord> GetBinaryFiles(BuildTarget buildTarget, bool allVariants, string suffix)
         {
             yield return new FileRecord(string.Format("fmodstudio{0}.bundle", suffix));
         }
@@ -89,13 +70,39 @@ namespace FMODUnity
             return false;
         }
 #endif
-#if UNITY_EDITOR
-        internal override OutputType[] ValidOutputTypes => sValidOutputTypes;
 
-        private static readonly OutputType[] sValidOutputTypes =
+        internal override string GetPluginPath(string pluginName)
         {
-            new() { displayName = "Core Audio", outputType = OUTPUTTYPE.COREAUDIO }
+            string pluginPath = string.Format("{0}/{1}.bundle", GetPluginBasePath(), pluginName);
+            if (System.IO.Directory.Exists((pluginPath)))
+            {
+                return pluginPath;
+            }
+            else
+            {
+                return string.Format("{0}/{1}.dylib", GetPluginBasePath(), pluginName);
+            }
+        }
+#if UNITY_EDITOR
+        internal override OutputType[] ValidOutputTypes
+        {
+            get
+            {
+                return sValidOutputTypes;
+            }
+        }
+
+        private static OutputType[] sValidOutputTypes = {
+           new OutputType() { displayName = "Core Audio", outputType = FMOD.OUTPUTTYPE.COREAUDIO },
         };
 #endif
+
+        internal override List<CodecChannelCount> DefaultCodecChannels { get { return staticCodecChannels; } }
+
+        private static List<CodecChannelCount> staticCodecChannels = new List<CodecChannelCount>()
+        {
+            new CodecChannelCount { format = CodecType.FADPCM, channels = 0 },
+            new CodecChannelCount { format = CodecType.Vorbis, channels = 32 },
+        };
     }
 }

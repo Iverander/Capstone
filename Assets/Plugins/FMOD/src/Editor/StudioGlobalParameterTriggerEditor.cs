@@ -1,4 +1,8 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 namespace FMODUnity
@@ -6,17 +10,19 @@ namespace FMODUnity
     [CustomEditor(typeof(StudioGlobalParameterTrigger))]
     public class StudioGlobalParameterTriggerEditor : Editor
     {
-        private static GUIContent NotFoundWarning;
+        private SerializedProperty param;
+        private SerializedProperty trigger;
+        private SerializedProperty tag;
+        private SerializedProperty value;
 
-        [SerializeField] private EditorParamRef editorParamRef;
+        private SerializedProperty data1, data2;
+
+        private static GUIContent NotFoundWarning;
 
         private string currentPath;
 
-        private SerializedProperty data1, data2;
-        private SerializedProperty param;
-        private SerializedProperty tag;
-        private SerializedProperty trigger;
-        private SerializedProperty value;
+        [SerializeField]
+        private EditorParamRef editorParamRef;
 
         private void OnEnable()
         {
@@ -35,9 +41,10 @@ namespace FMODUnity
             }
 
             EditorGUILayout.PropertyField(trigger, new GUIContent(L10n.Tr("Trigger")));
-            if (trigger.enumValueIndex >= (int)EmitterGameEvent.TriggerEnter &&
-                trigger.enumValueIndex <= (int)EmitterGameEvent.TriggerExit2D)
+            if (trigger.enumValueIndex >= (int)EmitterGameEvent.TriggerEnter && trigger.enumValueIndex <= (int)EmitterGameEvent.TriggerExit2D)
+            {
                 tag.stringValue = EditorGUILayout.TagField("Collision Tag", tag.stringValue);
+            }
 
             EditorGUILayout.PropertyField(param, new GUIContent(L10n.Tr("Parameter")));
 
@@ -66,7 +73,7 @@ namespace FMODUnity
             }
             else
             {
-                var rect = EditorGUILayout.GetControlRect();
+                Rect rect = EditorGUILayout.GetControlRect();
                 rect.xMin += EditorGUIUtility.labelWidth;
 
                 GUI.Label(rect, NotFoundWarning);

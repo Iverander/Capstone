@@ -7,13 +7,14 @@ namespace FMODUnity
 {
     public class BankRefresher
     {
-        private const int FilePollPeriod = 5;
         private static string currentWatchPath;
         private static FileSystemWatcher sourceFileWatcher;
-        private static bool sourceFilesChanged;
+        private static bool sourceFilesChanged = false;
         private static float lastSourceFileChange = float.MaxValue;
         private static bool autoRefresh = true;
         private static float nextFilePollTime = float.MinValue;
+
+        private const int FilePollPeriod = 5;
 
         public static void DisableAutoRefresh()
         {
@@ -48,21 +49,24 @@ namespace FMODUnity
 
         private static void UpdateFileWatcherPath()
         {
-            var sourceBankPath = Settings.Instance.SourceBankPath;
+            string sourceBankPath = Settings.Instance.SourceBankPath;
 
             string pathToWatch;
 
             if (Path.IsPathRooted(sourceBankPath))
+            {
                 pathToWatch = Path.GetFullPath(sourceBankPath);
+            }
             else
+            {
                 pathToWatch = Path.GetFullPath(Environment.CurrentDirectory + "/" + sourceBankPath);
+            }
 
             if (currentWatchPath != pathToWatch)
             {
                 currentWatchPath = pathToWatch;
 
-                try
-                {
+                try {
                     sourceFileWatcher.EnableRaisingEvents = false;
                     sourceFilesChanged = false;
 
@@ -86,9 +90,15 @@ namespace FMODUnity
                 lastSourceFileChange = Time.realtimeSinceStartup;
                 sourceFilesChanged = false;
 
-                if (!BankRefreshWindow.IsVisible) autoRefresh = true;
+                if (!BankRefreshWindow.IsVisible)
+                {
+                    autoRefresh = true;
+                }
 
-                if (IsWindowEnabled()) BankRefreshWindow.ShowWindow();
+                if (IsWindowEnabled())
+                {
+                    BankRefreshWindow.ShowWindow();
+                }
             }
         }
 
@@ -96,7 +106,10 @@ namespace FMODUnity
         {
             if (Time.realtimeSinceStartup >= nextFilePollTime)
             {
-                if (!File.Exists(EventManager.CacheAssetFullName)) EventManager.RefreshBanks();
+                if (!File.Exists(EventManager.CacheAssetFullName))
+                {
+                    EventManager.RefreshBanks();
+                }
 
                 nextFilePollTime = Time.realtimeSinceStartup + FilePollPeriod;
             }
@@ -104,7 +117,10 @@ namespace FMODUnity
 
         private static void RefreshBanksIfReady()
         {
-            if (TimeUntilBankRefresh() == 0 && BankRefreshWindow.ReadyToRefreshBanks) EventManager.RefreshBanks();
+            if (TimeUntilBankRefresh() == 0 && BankRefreshWindow.ReadyToRefreshBanks)
+            {
+                EventManager.RefreshBanks();
+            }
         }
 
         public static void HandleBankRefresh(string result)
@@ -115,17 +131,22 @@ namespace FMODUnity
 
         private static bool IsWindowEnabled()
         {
-            var settings = Settings.Instance;
+            Settings settings = Settings.Instance;
 
             return settings.BankRefreshCooldown == Settings.BankRefreshPrompt
-                   || (settings.BankRefreshCooldown >= 0 && settings.ShowBankRefreshWindow);
+                || (settings.BankRefreshCooldown >= 0 && settings.ShowBankRefreshWindow);
         }
 
         public static float TimeSinceSourceFileChange()
         {
-            if (lastSourceFileChange == float.MaxValue) return float.MaxValue;
-
-            return Mathf.Max(0, Time.realtimeSinceStartup - lastSourceFileChange);
+            if (lastSourceFileChange == float.MaxValue)
+            {
+                return float.MaxValue;
+            }
+            else
+            {
+                return Mathf.Max(0, Time.realtimeSinceStartup - lastSourceFileChange);
+            }
         }
 
         public static float TimeUntilBankRefresh()
@@ -133,10 +154,14 @@ namespace FMODUnity
             if (!autoRefresh
                 || lastSourceFileChange == float.MaxValue
                 || Settings.Instance.BankRefreshCooldown < 0)
+            {
                 return float.MaxValue;
-
-            var nextRefreshTime = lastSourceFileChange + Settings.Instance.BankRefreshCooldown;
-            return Mathf.Max(0, nextRefreshTime - Time.realtimeSinceStartup);
+            }
+            else
+            {
+                float nextRefreshTime = lastSourceFileChange + Settings.Instance.BankRefreshCooldown;
+                return Mathf.Max(0, nextRefreshTime - Time.realtimeSinceStartup);
+            }
         }
     }
 }

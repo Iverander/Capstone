@@ -1,14 +1,12 @@
-using NaughtyAttributes;
 using System.Collections;
 using Capstone.Datapoints;
-using SceneSystem;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 namespace Capstone
 {
-
     [DefaultExecutionOrder(100)]
     public class RoundManager : MonoBehaviour //this is actually the gamemanager hidden under a secret name...
     {
@@ -28,43 +26,44 @@ namespace Capstone
 
         public static RoundState roundState = RoundState.None;
 
-        [SerializeField] UIDocument UIObject;
-        Label UIText;
-
         public static RoundManager instance; //makes it accessible from everywhere
-
-        [SerializeField] float firstRoundDelaySeconds = 3;
-
-        [ReadOnly] public int roundNr = 0;
-        public static int round => instance.roundNr; //shortcut for the round number
 
         public static UnityEvent onNewRound = new();
         public static UnityEvent onBetweenRound = new();
+
+        [SerializeField] private UIDocument UIObject;
+
+        [SerializeField] private float firstRoundDelaySeconds = 3;
+
+        [ReadOnly] public int roundNr;
         public int enemiesAlive;
+        private Label UIText;
+        public static int round => instance.roundNr; //shortcut for the round number
 
         public static int highestEnemyCount { get; private set; }
- 
+
 
         private IEnumerator Start()
         {
             instance = this;
             UIText = UIObject.rootVisualElement.Q<Label>();
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
-            
+
             DataManager.instance.StartNewSession();
 
             yield return new WaitForSeconds(firstRoundDelaySeconds);
 
             NewRound();
         }
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             roundState = RoundState.None;
         }
 
         public void BetweenRounds()
         {
-            Session.active.NewSection($"Round End");
+            Session.active.NewSection("Round End");
             onBetweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
@@ -81,24 +80,22 @@ namespace Capstone
             onNewRound?.Invoke();
             StartCoroutine(UserInterfaceNewRound());
             Debug.Log("Starting round " + roundNr);
-            
+
             Player.instance.afkTime = 0;
-            
+
             if (Settings.active.shaderType == ShaderType.HLSL)
                 MapManager.LoadMap(ShaderType.ShaderGraph);
             else
                 MapManager.LoadMap(ShaderType.HLSL);
- 
-
         }
 
 
         //Handles screenUI for game phases
-        IEnumerator UserInterfaceNewRound()
+        private IEnumerator UserInterfaceNewRound()
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             //Should update UI with text like roundNr Spawning enemies..
-            UIText.text = "Starting round " + (roundNr);
+            UIText.text = "Starting round " + roundNr;
             yield return new WaitForSeconds(3f);
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }
@@ -107,13 +104,10 @@ namespace Capstone
         {
             instance.enemiesAlive += amount;
 
-            if(instance.enemiesAlive > highestEnemyCount)
+            if (instance.enemiesAlive > highestEnemyCount)
                 highestEnemyCount = instance.enemiesAlive;
 
-            if(instance.enemiesAlive <= 0)
-            {
-                instance.BetweenRounds();
-            }
+            if (instance.enemiesAlive <= 0) instance.BetweenRounds();
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Build;
+
 #if (UNITY_VISUALSCRIPTING_EXIST)
 using Unity.VisualScripting;
-
 #elif (UNITY_BOLT_EXIST)
 using Ludiq;
 using Bolt;
@@ -65,33 +67,41 @@ namespace FMODUnity
         private static void BuildBoltUnitOptions()
         {
 #if (UNITY_BOLT_EXIST)
-            DictionaryAsset projectSettings =
- AssetDatabase.LoadAssetAtPath(PathUtility.FromProject(LudiqCore.Paths.projectSettings), typeof(DictionaryAsset)) as DictionaryAsset;
-            List<LooseAssemblyName> assemblyOptions =
- projectSettings.dictionary["assemblyOptions"] as List<LooseAssemblyName>;
+            DictionaryAsset projectSettings = AssetDatabase.LoadAssetAtPath(PathUtility.FromProject(LudiqCore.Paths.projectSettings), typeof(DictionaryAsset)) as DictionaryAsset;
+            List<LooseAssemblyName> assemblyOptions = projectSettings.dictionary["assemblyOptions"] as List<LooseAssemblyName>;
 #else
-            var assemblyOptions = BoltCore.Configuration.assemblyOptions;
+            List<LooseAssemblyName> assemblyOptions = BoltCore.Configuration.assemblyOptions;
 #endif
 
-            if (!assemblyOptions.Contains("FMODUnity")) assemblyOptions.Add("FMODUnity");
+            if (!assemblyOptions.Contains("FMODUnity"))
+            {
+                assemblyOptions.Add("FMODUnity");
+            }
 
-            if (!assemblyOptions.Contains("FMODUnityResonance")) assemblyOptions.Add("FMODUnityResonance");
+            if (!assemblyOptions.Contains("FMODUnityResonance"))
+            {
+                assemblyOptions.Add("FMODUnityResonance");
+            }
 #if (UNITY_BOLT_EXIST)
             List<Type> typeOptions = projectSettings.dictionary["typeOptions"] as List<Type>;
 #else
-            var typeOptions = BoltCore.Configuration.typeOptions;
+            List<Type> typeOptions = BoltCore.Configuration.typeOptions;
 #endif
-            var fmodUnityAssembly = Assembly.Load("FMODUnity");
-            var fmodUnityResonanceAssembly = Assembly.Load("FMODUnityResonance");
+            Assembly fmodUnityAssembly = Assembly.Load("FMODUnity");
+            Assembly fmodUnityResonanceAssembly = Assembly.Load("FMODUnityResonance");
 
-            var allTypes = new List<Type>(GetTypesForNamespace(fmodUnityAssembly, "FMOD"));
+            List<Type> allTypes = new List<Type>(GetTypesForNamespace(fmodUnityAssembly, "FMOD"));
             allTypes.AddRange(GetTypesForNamespace(fmodUnityAssembly, "FMOD.Studio"));
             allTypes.AddRange(GetTypesForNamespace(fmodUnityAssembly, "FMODUnity"));
             allTypes.AddRange(GetTypesForNamespace(fmodUnityResonanceAssembly, "FMODUnityResonance"));
 
-            foreach (var type in allTypes)
+            foreach (Type type in allTypes)
+            {
                 if (!typeOptions.Contains(type))
+                {
                     typeOptions.Add(type);
+                }
+            }
 
             Codebase.UpdateSettings();
 #if (UNITY_BOLT_EXIST)
@@ -105,7 +115,7 @@ namespace FMODUnity
         private static IEnumerable<Type> GetTypesForNamespace(Assembly assembly, string requestedNamespace)
         {
             return assembly.GetTypes()
-                .Where(t => string.Equals(t.Namespace, requestedNamespace, StringComparison.Ordinal));
+                    .Where(t => string.Equals(t.Namespace, requestedNamespace, StringComparison.Ordinal));
         }
 #endif
 

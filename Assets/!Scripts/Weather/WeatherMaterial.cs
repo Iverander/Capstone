@@ -6,21 +6,14 @@ namespace Capstone
     public class WeatherMaterial : MonoBehaviour
     {
         [SerializeField] private EvolvingMaterial[] materials;
+
         private void Start()
         {
-            foreach (EvolvingMaterial material in materials)
-            {
+            foreach (var material in materials)
                 if (Settings.active.mapSettings.weatherType != material.weatherCondition)
-                {
-                    material.material.SetFloat("_"+material.variableName, material.minMax.x);
-                }
+                    material.material.SetFloat("_" + material.variableName, material.minMax.x);
                 else
-                {
                     material.material.SetFloat("_" + material.variableName, material.minMax.y);
-                }
-            }
-            
-
         }
 
         [Serializable]

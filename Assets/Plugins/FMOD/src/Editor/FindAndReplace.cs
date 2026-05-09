@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
 
 namespace FMODUnity
 {
@@ -35,16 +35,21 @@ namespace FMODUnity
         {
             emitters = new List<StudioEventEmitter>(Resources.FindObjectsOfTypeAll<StudioEventEmitter>());
 
-            if (!levelScope) emitters.RemoveAll(x => PrefabUtility.GetPrefabAssetType(x) == PrefabAssetType.NotAPrefab);
+            if (!levelScope)
+            {
+                emitters.RemoveAll(x => PrefabUtility.GetPrefabAssetType(x) == PrefabAssetType.NotAPrefab);
+            }
 
             if (!prefabScope)
+            {
                 emitters.RemoveAll(x => PrefabUtility.GetPrefabAssetType(x) != PrefabAssetType.NotAPrefab);
+            }
         }
 
         private void OnGUI()
         {
-            var doFind = false;
-            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
+            bool doFind = false;
+            if ((Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
             {
                 Event.current.Use();
                 doFind = true;
@@ -59,7 +64,6 @@ namespace FMODUnity
                 lastMatch = -1;
                 message = null;
             }
-
             EditorGUILayout.PrefixLabel(L10n.Tr("Replace:"));
             replaceText = EditorGUILayout.TextField(replaceText);
 
@@ -67,7 +71,10 @@ namespace FMODUnity
             EditorGUI.BeginChangeCheck();
             levelScope = EditorGUILayout.ToggleLeft(L10n.Tr("Current Level"), levelScope, GUILayout.ExpandWidth(false));
             prefabScope = EditorGUILayout.ToggleLeft(L10n.Tr("Prefabs"), prefabScope, GUILayout.ExpandWidth(false));
-            if (EditorGUI.EndChangeCheck()) OnHierarchyChange();
+            if (EditorGUI.EndChangeCheck())
+            {
+                OnHierarchyChange();
+            }
             EditorGUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -83,32 +90,39 @@ namespace FMODUnity
                     messageType = MessageType.Warning;
                 }
             }
-
             if (GUILayout.Button(L10n.Tr("Replace")))
             {
                 message = "";
                 if (lastMatch == -1)
+                {
                     FindNext();
+                }
                 else
+                {
                     Replace();
+                }
                 if (lastMatch == -1)
                 {
                     message = L10n.Tr("Finished Search");
                     messageType = MessageType.Warning;
                 }
             }
-
             if (GUILayout.Button(L10n.Tr("Replace All")))
-                if (EditorUtility.DisplayDialog(L10n.Tr("Replace All"),
-                        L10n.Tr("Are you sure you wish to replace all in the current hierachy?"), L10n.Tr("yes"),
-                        L10n.Tr("no")))
+            {
+                if (EditorUtility.DisplayDialog(L10n.Tr("Replace All"), L10n.Tr("Are you sure you wish to replace all in the current hierachy?"), L10n.Tr("yes"), L10n.Tr("no")))
+                {
                     ReplaceAll();
-
+                }
+            }
             GUILayout.EndHorizontal();
             if (!string.IsNullOrEmpty(message))
+            {
                 EditorGUILayout.HelpBox(message, messageType);
+            }
             else
+            {
                 EditorGUILayout.HelpBox("\n\n", MessageType.None);
+            }
 
             if (first)
             {
@@ -119,9 +133,9 @@ namespace FMODUnity
 
         private void FindNext()
         {
-            for (var i = lastMatch + 1; i < emitters.Count; i++)
-                if (emitters[i].EventReference.Path.IndexOf(findText, 0, StringComparison.CurrentCultureIgnoreCase) >=
-                    0)
+            for (int i = lastMatch + 1; i < emitters.Count; i++)
+            {
+                if (emitters[i].EventReference.Path.IndexOf(findText, 0, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 {
                     lastMatch = i;
                     EditorGUIUtility.PingObject(emitters[i]);
@@ -130,16 +144,20 @@ namespace FMODUnity
                     messageType = MessageType.Info;
                     return;
                 }
-
+            }
             lastMatch = -1;
         }
 
         private void ReplaceAll()
         {
-            var replaced = 0;
-            for (var i = 0; i < emitters.Count; i++)
+            int replaced = 0;
+            for (int i = 0; i < emitters.Count; i++)
+            {
                 if (ReplaceText(emitters[i]))
+                {
                     replaced++;
+                }
+            }
 
             message = string.Format(L10n.Tr("{0} replaced"), replaced);
             messageType = MessageType.Info;
@@ -147,13 +165,13 @@ namespace FMODUnity
 
         private bool ReplaceText(StudioEventEmitter emitter)
         {
-            var findLength = findText.Length;
-            var replaceLength = replaceText.Length;
-            var position = 0;
+            int findLength = findText.Length;
+            int replaceLength = replaceText.Length;
+            int position = 0;
             var serializedObject = new SerializedObject(emitter);
             var eventReferenceProperty = serializedObject.FindProperty("EventReference");
             var pathProperty = eventReferenceProperty.FindPropertyRelative("Path");
-            var path = pathProperty.stringValue;
+            string path = pathProperty.stringValue;
             position = path.IndexOf(findText, position, StringComparison.CurrentCultureIgnoreCase);
             while (position >= 0)
             {
@@ -161,8 +179,7 @@ namespace FMODUnity
                 position += replaceLength;
                 position = path.IndexOf(findText, position, StringComparison.CurrentCultureIgnoreCase);
             }
-
-            var newEventReference = EventReference.Find(path);
+            EventReference newEventReference = EventReference.Find(path);
             eventReferenceProperty.SetEventReference(newEventReference.Guid, newEventReference.Path);
             return serializedObject.ApplyModifiedProperties();
         }
