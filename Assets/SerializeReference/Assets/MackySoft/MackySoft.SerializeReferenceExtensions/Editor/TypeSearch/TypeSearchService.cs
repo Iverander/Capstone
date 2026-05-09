@@ -2,7 +2,6 @@
 {
     public static class TypeSearchService
     {
-
         public static readonly IIntrinsicTypePolicy IntrinsicTypePolicy;
         public static readonly ITypeCompatibilityPolicy TypeCompatibilityPolicy;
         public static readonly ITypeCandiateProvider TypeCandiateProvider;
@@ -20,7 +19,8 @@
             TypeCandiateProvider = DefaultTypeCandiateProvider.Instance;
 #endif
 
-            TypeCandiateService = new TypeCandiateService(TypeCandiateProvider, IntrinsicTypePolicy, TypeCompatibilityPolicy);
+            TypeCandiateService =
+                new TypeCandiateService(TypeCandiateProvider, IntrinsicTypePolicy, TypeCompatibilityPolicy);
         }
     }
 }

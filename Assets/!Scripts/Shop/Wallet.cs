@@ -5,6 +5,7 @@ namespace Capstone
 {
     public class Wallet : MonoBehaviour
     {
+        public static Action<float> cashUpdated;
         [field: SerializeField] public int _cash { get; private set; }
 
         public static int Cash
@@ -13,15 +14,14 @@ namespace Capstone
             set => Instance._cash = value;
         }
 
-        public static Action<float> cashUpdated;
         public static Wallet Instance { get; private set; }
 
         private void Start()
         {
             Instance = this;
 
-#if  !UNITY_EDITOR
-      _cash = 0;      
+#if !UNITY_EDITOR
+      _cash = 0;
 #endif
         }
 

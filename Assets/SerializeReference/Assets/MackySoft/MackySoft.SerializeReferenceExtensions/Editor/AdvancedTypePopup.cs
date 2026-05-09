@@ -7,36 +7,39 @@ using UnityEngine;
 
 namespace MackySoft.SerializeReferenceExtensions.Editor
 {
-
     public class AdvancedTypePopupItem : AdvancedDropdownItem
     {
-
-        public Type Type { get; }
-
         public AdvancedTypePopupItem (Type type, string name) : base(name)
         {
             Type = type;
         }
 
+        public Type Type { get; }
     }
 
     /// <summary>
-    /// A type popup with a fuzzy finder.
+    ///     A type popup with a fuzzy finder.
     /// </summary>
     public class AdvancedTypePopup : AdvancedDropdown
     {
-
         private const int MaxNamespaceNestCount = 16;
+
+        private static readonly float HeaderHeight = EditorGUIUtility.singleLineHeight * 2f;
+
+        private Type[] types;
+
+        public AdvancedTypePopup (IEnumerable<Type> types, int maxLineCount, AdvancedDropdownState state) : base(state)
+        {
+            SetTypes(types);
+            minimumSize = new Vector2(minimumSize.x, (EditorGUIUtility.singleLineHeight * maxLineCount) + HeaderHeight);
+        }
 
         public static void AddTo (AdvancedDropdownItem root, IEnumerable<Type> types)
         {
             int itemCount = 0;
 
             // Add null item.
-            var nullItem = new AdvancedTypePopupItem(null, TypeMenuUtility.NullDisplayName)
-            {
-                id = itemCount++
-            };
+            AdvancedTypePopupItem nullItem = new(null, TypeMenuUtility.NullDisplayName) { id = itemCount++ };
             root.AddChild(nullItem);
 
             Type[] typeArray = types.OrderByType().ToArray();
@@ -51,13 +54,15 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     continue;
                 }
+
                 // If they explicitly want sub category, let them do.
                 if (TypeMenuUtility.GetAttribute(type) != null)
                 {
                     isSingleNamespace = false;
                     break;
                 }
-                for (int k = 0; (splittedTypePath.Length - 1) > k; k++)
+
+                for (int k = 0; splittedTypePath.Length - 1 > k; k++)
                 {
                     string ns = namespaces[k];
                     if (ns == null)
@@ -91,7 +96,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 // Add namespace items.
                 if (!isSingleNamespace)
                 {
-                    for (int k = 0; (splittedTypePath.Length - 1) > k; k++)
+                    for (int k = 0; splittedTypePath.Length - 1 > k; k++)
                     {
                         AdvancedDropdownItem foundItem = GetItem(parent, splittedTypePath[k]);
                         if (foundItem != null)
@@ -100,10 +105,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                         }
                         else
                         {
-                            var newItem = new AdvancedDropdownItem(splittedTypePath[k])
-                            {
-                                id = itemCount++,
-                            };
+                            AdvancedDropdownItem newItem = new(splittedTypePath[k]) { id = itemCount++ };
                             parent.AddChild(newItem);
                             parent = newItem;
                         }
@@ -111,10 +113,11 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 }
 
                 // Add type item.
-                var item = new AdvancedTypePopupItem(type, ObjectNames.NicifyVariableName(splittedTypePath[splittedTypePath.Length - 1]))
-                {
-                    id = itemCount++
-                };
+                AdvancedTypePopupItem item =
+                    new(type, ObjectNames.NicifyVariableName(splittedTypePath[splittedTypePath.Length - 1]))
+                    {
+                        id = itemCount++
+                    };
                 parent.AddChild(item);
             }
         }
@@ -128,20 +131,11 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                     return item;
                 }
             }
+
             return null;
         }
 
-        private static readonly float HeaderHeight = EditorGUIUtility.singleLineHeight * 2f;
-
-        private Type[] types;
-
         public event Action<AdvancedTypePopupItem> OnItemSelected;
-
-        public AdvancedTypePopup (IEnumerable<Type> types, int maxLineCount, AdvancedDropdownState state) : base(state)
-        {
-            SetTypes(types);
-            minimumSize = new Vector2(minimumSize.x, EditorGUIUtility.singleLineHeight * maxLineCount + HeaderHeight);
-        }
 
         public void SetTypes (IEnumerable<Type> types)
         {
@@ -150,7 +144,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 
         protected override AdvancedDropdownItem BuildRoot ()
         {
-            var root = new AdvancedDropdownItem("Select Type");
+            AdvancedDropdownItem root = new("Select Type");
             AddTo(root, types);
             return root;
         }
@@ -163,6 +157,5 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 OnItemSelected?.Invoke(typePopupItem);
             }
         }
-
     }
 }

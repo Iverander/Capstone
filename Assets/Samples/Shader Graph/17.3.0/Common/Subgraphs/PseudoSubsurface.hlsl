@@ -1,25 +1,25 @@
-void PseudoSubsurface_half (half3 WorldPosition, half3 WorldNormal, half SSRadius, half ShadowResponse, out half3 ssAmount)
+void PseudoSubsurface_half(half3 WorldPosition, half3 WorldNormal, half SSRadius, half ShadowResponse,
+                           out half3 ssAmount)
 {
+    #ifdef SHADERGRAPH_PREVIEW
+    half3 color = half3(0, 0, 0);
+    half atten = 1;
+    half3 dir = half3(0.707, 0, 0.707);
 
-#ifdef SHADERGRAPH_PREVIEW 
-	half3 color = half3(0,0,0);
-	half atten = 1;
-	half3 dir = half3 (0.707, 0, 0.707);
-	
-#else
-	#if defined(UNIVERSAL_PIPELINE_CORE_INCLUDED)
-		half4 shadowCoord = TransformWorldToShadowCoord(WorldPosition);
-		Light mainLight = GetMainLight(shadowCoord);
-		half3 color = mainLight.color;
-		half atten = mainLight.shadowAttenuation;
-		half3 dir = mainLight.direction;
-	#else
-		half3 color = half3(0, 0, 0);
-		half atten = 1;
-		half3 dir = half3 (0.707, 0, 0.707);
-	#endif
-	
-#endif
+    #else
+    #if defined(UNIVERSAL_PIPELINE_CORE_INCLUDED)
+    half4 shadowCoord = TransformWorldToShadowCoord(WorldPosition);
+    Light mainLight = GetMainLight(shadowCoord);
+    half3 color = mainLight.color;
+    half atten = mainLight.shadowAttenuation;
+    half3 dir = mainLight.direction;
+    #else
+    half3 color = half3(0, 0, 0);
+    half atten = 1;
+    half3 dir = half3(0.707, 0, 0.707);
+    #endif
+
+    #endif
 
     half NdotL = dot(WorldNormal, -1 * dir);
     half alpha = SSRadius;
@@ -27,8 +27,7 @@ void PseudoSubsurface_half (half3 WorldPosition, half3 WorldNormal, half SSRadiu
 
     half theta = max(0, NdotL + alpha) - alpha;
     half normalizer = (2 + alpha) / (2 * (1 + alpha));
-    half wrapped  = (pow(abs((theta + alpha) / (1 + alpha)), 1 + alpha)) * normalizer;
-	half shadow = lerp (1, atten, ShadowResponse);
-    ssAmount = abs(color * shadow  * wrapped);
-
+    half wrapped = (pow(abs((theta + alpha) / (1 + alpha)), 1 + alpha)) * normalizer;
+    half shadow = lerp(1, atten, ShadowResponse);
+    ssAmount = abs(color * shadow * wrapped);
 }

@@ -1,20 +1,16 @@
 using System;
-using System.Collections.Generic;
-using Capstone.Utility;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
 
 namespace Capstone
 {
     public class Shop : MonoBehaviour
     {
         [SerializeField] private UIDocument keyIndicator;
-        [SerializeField] GameObject shopCurtain;
+        [SerializeField] private GameObject shopCurtain;
 
-        public Action<bool> onShopToggle; 
-        bool shopOpen;
+        public Action<bool> onShopToggle;
+        private bool shopOpen;
 
         private void Start()
         {
@@ -38,21 +34,21 @@ namespace Capstone
             Player.input.onShop.RemoveListener(OpenStorefront);
         }
 
-        void OpenStorefront()
+        private void OpenStorefront()
         {
             MenuManager.OpenMenu(MenuManager.Menu.Store);
             Player.input.onShop.RemoveListener(OpenStorefront);
             Player.input.onShop.AddListener(CloseStorefront);
         }
 
-        void CloseStorefront()
+        private void CloseStorefront()
         {
             MenuManager.instance.CloseMenu();
             Player.input.onShop.AddListener(OpenStorefront);
-            Player.input.onShop.RemoveListener(CloseStorefront); 
+            Player.input.onShop.RemoveListener(CloseStorefront);
         }
 
-        void OpenShop()
+        private void OpenShop()
         {
             shopOpen = true;
             onShopToggle?.Invoke(true);
@@ -60,7 +56,7 @@ namespace Capstone
 
         public void CloseShop()
         {
-            shopOpen=false;
+            shopOpen = false;
             onShopToggle?.Invoke(false);
         }
     }

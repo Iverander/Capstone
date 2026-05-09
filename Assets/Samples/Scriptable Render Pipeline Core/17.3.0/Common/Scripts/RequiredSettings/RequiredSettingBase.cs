@@ -1,26 +1,18 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Rendering;
 using System.Reflection;
+using UnityEditor;
 
 namespace UnityEngine.Rendering
 {
-    [System.Serializable]
+    [Serializable]
     public class RequiredSettingBase : IRequiredSetting
     {
-        [SerializeField]
-        private string m_name = "Property Name";
-        [SerializeField]
-        private string m_description = "";
-        [SerializeField]
-        public string propertyPath;
-        public string name => m_name;
-        public string description => m_description;
+        [SerializeField] private string m_name = "Property Name";
+
+        [SerializeField] private string m_description = "";
+
+        [SerializeField] public string propertyPath;
 
         public string globalSettingsType;
 
@@ -30,6 +22,7 @@ namespace UnityEngine.Rendering
 
         private string m_propertyPath;
         private string[] m_propertyPathHierarchyCache;
+
         private string[] m_propertyPathHierarchy
         {
             get
@@ -42,14 +35,16 @@ namespace UnityEngine.Rendering
 
                     var temp = propertyPath.Split("."[0]);
                     m_propertyPathHierarchyCache[0] = temp[0];
-                    m_propertyPathHierarchyCache[1] = propertyPath.Remove(0, m_propertyPathHierarchyCache[0].Length + 1);
+                    m_propertyPathHierarchyCache[1] =
+                        propertyPath.Remove(0, m_propertyPathHierarchyCache[0].Length + 1);
                 }
+
                 return m_propertyPathHierarchyCache;
             }
         }
 
         public virtual string projectSettingsPath { get; }
-        
+
         public static Action<RequiredSettingBase> showSettingCallback { get; set; } = null;
 
         public virtual SerializedProperty property
@@ -66,30 +61,33 @@ namespace UnityEngine.Rendering
 
                 var rootProperty = serializedRPAsset.FindProperty(m_propertyPathHierarchy[0]);
                 return rootProperty.FindPropertyRelative(m_propertyPathHierarchy[1]);
-
             }
         }
+
+        public string name => m_name;
+        public string description => m_description;
 
         public virtual bool state
         {
             get
             {
                 if (!string.IsNullOrEmpty(globalSettingsType))
-				{
+                {
                     var type = Type.GetType(globalSettingsType);
                     var field = type.GetField(propertyPath, BindingFlags.NonPublic | BindingFlags.Instance);
-                    var getSettings = typeof(GraphicsSettings).GetMethod("GetRenderPipelineSettings").MakeGenericMethod(type);
-                    object settings = getSettings.Invoke(null, null);
+                    var getSettings = typeof(GraphicsSettings).GetMethod("GetRenderPipelineSettings")
+                        .MakeGenericMethod(type);
+                    var settings = getSettings.Invoke(null, null);
                     return (bool)field.GetValue(settings);
-				}
+                }
 
                 if (property == null)
                     return false;
 
                 float floatValue;
-                float comparedValue = targetValue;
+                var comparedValue = targetValue;
 
-                switch(valueType)
+                switch (valueType)
                 {
                     case ValueType.Float:
                         floatValue = property.floatValue;
@@ -99,7 +97,7 @@ namespace UnityEngine.Rendering
                         comparedValue = (int)targetValue;
                         break;
                     default:
-                            return property.boolValue == (targetValue > 0f);
+                        return property.boolValue == targetValue > 0f;
                 }
 
                 switch (validationType)
@@ -130,7 +128,7 @@ namespace UnityEngine.Rendering
         Bool,
         Int,
         Float
-    };
+    }
 
     public enum ValidationType
     {
@@ -141,6 +139,6 @@ namespace UnityEngine.Rendering
         LowerEqual,
         Different,
         LayermaskContains
-    };
+    }
 }
 #endif

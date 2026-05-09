@@ -4,16 +4,15 @@ namespace Capstone
 {
     public class CameraLock : MonoBehaviour
     {
-        
-        void Start()
+        private void Start()
         {
             transform.parent = null;
             transform.eulerAngles = Vector3.zero;
         }
 
-        void Update()
+        private void Update()
         {
-            if(Player.instance != null)
+            if (Player.instance != null)
                 transform.localPosition = Player.instance.cam.transform.position;
         }
     }

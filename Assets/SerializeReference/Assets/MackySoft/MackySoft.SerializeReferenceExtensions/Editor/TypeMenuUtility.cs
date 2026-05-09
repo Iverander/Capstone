@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 
 namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public static class TypeMenuUtility
     {
-
         public const string NullDisplayName = "<null>";
 
         public static AddTypeMenuAttribute GetAttribute (Type type)
@@ -22,18 +20,14 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 return typeMenu.GetSplittedMenuName();
             }
-            else
+
+            int splitIndex = type.FullName.LastIndexOf('.');
+            if (splitIndex >= 0)
             {
-                int splitIndex = type.FullName.LastIndexOf('.');
-                if (splitIndex >= 0)
-                {
-                    return new string[] { type.FullName.Substring(0, splitIndex), type.FullName.Substring(splitIndex + 1) };
-                }
-                else
-                {
-                    return new string[] { type.Name };
-                }
+                return new[] { type.FullName.Substring(0, splitIndex), type.FullName.Substring(splitIndex + 1) };
             }
+
+            return new[] { type.Name };
         }
 
         public static IEnumerable<Type> OrderByType (this IEnumerable<Type> source)
@@ -44,6 +38,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     return -999;
                 }
+
                 return GetAttribute(type)?.Order ?? 0;
             }).ThenBy(type =>
             {
@@ -51,9 +46,9 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     return null;
                 }
+
                 return GetAttribute(type)?.MenuName ?? type.Name;
             });
         }
-
     }
 }

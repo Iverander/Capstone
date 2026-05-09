@@ -4,8 +4,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class DefaultTypeCompatibilityPolicy : ITypeCompatibilityPolicy
     {
-
-        public static readonly DefaultTypeCompatibilityPolicy Instance = new DefaultTypeCompatibilityPolicy();
+        public static readonly DefaultTypeCompatibilityPolicy Instance = new();
 
         public bool IsCompatible (Type baseType, Type candiateType)
         {
@@ -13,6 +12,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 throw new ArgumentNullException(nameof(baseType));
             }
+
             if (candiateType == null)
             {
                 throw new ArgumentNullException(nameof(candiateType));

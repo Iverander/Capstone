@@ -6,18 +6,22 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class TypeCandiateService
     {
+        private readonly IIntrinsicTypePolicy intrinsicTypePolicy;
+
+        private readonly Dictionary<Type, Type[]> typeCache = new();
 
         private readonly ITypeCandiateProvider typeCandiateProvider;
-        private readonly IIntrinsicTypePolicy intrinsicTypePolicy;
         private readonly ITypeCompatibilityPolicy typeCompatibilityPolicy;
 
-        private readonly Dictionary<Type, Type[]> typeCache = new Dictionary<Type, Type[]>();
-
-        public TypeCandiateService (ITypeCandiateProvider typeCandiateProvider, IIntrinsicTypePolicy intrinsicTypePolicy, ITypeCompatibilityPolicy typeCompatibilityPolicy)
+        public TypeCandiateService (ITypeCandiateProvider typeCandiateProvider,
+            IIntrinsicTypePolicy intrinsicTypePolicy, ITypeCompatibilityPolicy typeCompatibilityPolicy)
         {
-            this.typeCandiateProvider = typeCandiateProvider ?? throw new ArgumentNullException(nameof(typeCandiateProvider));
-            this.intrinsicTypePolicy = intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
-            this.typeCompatibilityPolicy = typeCompatibilityPolicy ?? throw new ArgumentNullException(nameof(typeCompatibilityPolicy));
+            this.typeCandiateProvider =
+                typeCandiateProvider ?? throw new ArgumentNullException(nameof(typeCandiateProvider));
+            this.intrinsicTypePolicy =
+                intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
+            this.typeCompatibilityPolicy = typeCompatibilityPolicy ??
+                                           throw new ArgumentNullException(nameof(typeCompatibilityPolicy));
         }
 
         public IReadOnlyList<Type> GetDisplayableTypes (Type baseType)
@@ -26,13 +30,14 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 throw new ArgumentNullException(nameof(baseType));
             }
+
             if (typeCache.TryGetValue(baseType, out Type[] cachedTypes))
             {
                 return cachedTypes;
             }
 
-            var candiateTypes = typeCandiateProvider.GetTypeCandidates(baseType);
-            var result = candiateTypes
+            IEnumerable<Type> candiateTypes = typeCandiateProvider.GetTypeCandidates(baseType);
+            Type[] result = candiateTypes
                 .Where(intrinsicTypePolicy.IsAllowed)
                 .Where(t => typeCompatibilityPolicy.IsCompatible(baseType, t))
                 .Distinct()

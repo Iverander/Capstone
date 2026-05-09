@@ -14,7 +14,10 @@ Shader "Custom/WetPuddleShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
+        Tags
+        {
+            "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline"
+        }
         Pass
         {
             HLSLPROGRAM
@@ -48,12 +51,16 @@ Shader "Custom/WetPuddleShader"
                 float _NormalSpeed;
             CBUFFER_END
 
-            TEXTURE2D(_MainTex);        SAMPLER(sampler_MainTex);
-            TEXTURE2D(_WetMask);        SAMPLER(sampler_WetMask);
-            TEXTURE2D(_WaterNormal);    SAMPLER(sampler_WaterNormal);
-            TEXTURECUBE(_Cubemap);      SAMPLER(sampler_Cubemap);
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            TEXTURE2D(_WetMask);
+            SAMPLER(sampler_WetMask);
+            TEXTURE2D(_WaterNormal);
+            SAMPLER(sampler_WaterNormal);
+            TEXTURECUBE(_Cubemap);
+            SAMPLER(sampler_Cubemap);
 
-            Varyings vert (Attributes IN)
+            Varyings vert(Attributes IN)
             {
                 Varyings OUT = (Varyings)0;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
@@ -71,7 +78,7 @@ Shader "Custom/WetPuddleShader"
 
                 // Animated normal
                 float2 nUV = IN.uv + float2(_Time.y * _NormalSpeed, _Time.y * _NormalSpeed * 0.8);
-                float3 wNormal = UnpackNormal( SAMPLE_TEXTURE2D(_WaterNormal, sampler_WaterNormal, nUV) );
+                float3 wNormal = UnpackNormal(SAMPLE_TEXTURE2D(_WaterNormal, sampler_WaterNormal, nUV));
 
                 float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - IN.worldPos);
                 float3 surfaceNormal = normalize(IN.worldNormal + float3(wNormal.xy * _Distortion, 0));

@@ -7,14 +7,14 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class DefaultTypeCandiateProvider : ITypeCandiateProvider
     {
-
-        public static readonly DefaultTypeCandiateProvider Instance = new DefaultTypeCandiateProvider(DefaultIntrinsicTypePolicy.Instance);
+        public static readonly DefaultTypeCandiateProvider Instance = new(DefaultIntrinsicTypePolicy.Instance);
 
         private readonly IIntrinsicTypePolicy intrinsicTypePolicy;
 
         public DefaultTypeCandiateProvider (IIntrinsicTypePolicy intrinsicTypePolicy)
         {
-            this.intrinsicTypePolicy = intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
+            this.intrinsicTypePolicy =
+                intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
         }
 
         public IEnumerable<Type> GetTypeCandidates (Type baseType)

@@ -5,7 +5,8 @@ namespace Capstone
     [CreateAssetMenu(fileName = "MaxHealthModifier", menuName = "Scriptable Objects/Modifier/MaxHealth")]
     public class HealthMod : Modifier
     {
-        [SerializeField] float maxHealth;
+        [SerializeField] private float maxHealth;
+
         public override void onGained()
         {
             base.onGained();

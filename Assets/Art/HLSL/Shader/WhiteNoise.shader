@@ -9,12 +9,14 @@ Shader "Custom/Noise/WhiteNoise"
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"
+        }
 
         Pass
         {
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
 
@@ -41,7 +43,7 @@ Shader "Custom/Noise/WhiteNoise"
                 float3 _CellSize;
                 float4 _BaseMap_ST;
             CBUFFER_END
-            
+
 
             Varyings vert(Attributes IN)
             {

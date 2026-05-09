@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 
 namespace Capstone
 {
     public class ParticleSpin : MonoBehaviour
     {
-        ParticleSystem particles;
         [SerializeField] private Vector3 spin;
         [SerializeField] private float speed;
+        private ParticleSystem particles;
 
         private void Start()
         {
@@ -15,9 +14,9 @@ namespace Capstone
             transform.eulerAngles = Vector3.zero;
         }
 
-        void Update()
+        private void Update()
         {
-             //particles.shape.rotation += spin * (Time.deltaTime * speed);
+            //particles.shape.rotation += spin * (Time.deltaTime * speed);
         }
 
         private void OnDrawGizmosSelected()

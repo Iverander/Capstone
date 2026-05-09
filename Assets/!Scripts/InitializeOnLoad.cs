@@ -1,36 +1,27 @@
-#if UNITY_EDITOR 
+#if UNITY_EDITOR
 
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System;
 
 namespace Capstone
 {
     [InitializeOnLoad]
-    public static class InitializeOnLoad 
+    public static class InitializeOnLoad
     {
-    static InitializeOnLoad()
-    {
-        EditorApplication.playModeStateChanged += LoadStartUp;
-    }
-
-    private static void LoadStartUp(PlayModeStateChange change)
-    {
-        if (change == PlayModeStateChange.ExitingEditMode)
+        static InitializeOnLoad()
         {
-            EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+            EditorApplication.playModeStateChanged += LoadStartUp;
         }
 
-        if (change == PlayModeStateChange.EnteredPlayMode)
+        private static void LoadStartUp(PlayModeStateChange change)
         {
-            if(EditorSceneManager.GetActiveScene().buildIndex != 0)
-            {
-                EditorSceneManager.LoadScene(0);
-            }
+            if (change == PlayModeStateChange.ExitingEditMode)
+                EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+
+            if (change == PlayModeStateChange.EnteredPlayMode)
+                if (EditorSceneManager.GetActiveScene().buildIndex != 0)
+                    EditorSceneManager.LoadScene(0);
         }
-    }
     }
 }
 #endif
-

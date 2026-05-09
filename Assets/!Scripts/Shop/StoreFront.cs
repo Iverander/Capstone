@@ -4,17 +4,16 @@ using Capstone.Utility;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Cursor = UnityEngine.Cursor;
 
 namespace Capstone
 {
     public class StoreFront : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private List<Modifier> Sellable;
-        private UIDocument shopUI;
+        [SerializeField] [ReadOnly] private List<Modifier> Sellable;
         [SerializeField] private VisualTreeAsset productAsset;
+        private UIDocument shopUI;
 
-        async void Start()
+        private async void Start()
         {
             shopUI = GetComponent<UIDocument>();
             shopUI.rootVisualElement.Q<Label>("PlayerCash").text = Wallet.Cash.ToString();
@@ -24,11 +23,16 @@ namespace Capstone
             Open();
         }
 
+        public void OnDestroy()
+        {
+            Wallet.cashUpdated -= RefreshCash;
+        }
+
         public void Open()
         {
             //Time.timeScale = 0;
             //Cursor.lockState = CursorLockMode.Confined;            
-            foreach (Modifier mod in Sellable)
+            foreach (var mod in Sellable)
             {
                 if(mod.gained) continue;
                 VisualElement product = productAsset.Instantiate();
@@ -45,7 +49,7 @@ namespace Capstone
                         product.Q<Label>("Cost").text = mod.cost.ToString();
                         return;
                     }
-                    
+
                     Wallet.TakeCash(mod.cost);
                     Player.instance.modifier.AddModifier(mod);
                     Sellable.Remove(mod);
@@ -57,11 +61,6 @@ namespace Capstone
         private void RefreshCash(float amount)
         {
             shopUI.rootVisualElement.Q<Label>("PlayerCash").text = amount.ToString();
-        }
-
-        public void OnDestroy()
-        {
-            Wallet.cashUpdated -= RefreshCash;
         }
     }
 }

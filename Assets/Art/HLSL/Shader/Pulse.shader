@@ -9,7 +9,10 @@ Shader "Custom/Pulse"
 
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderType"="Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline"
+        }
         LOD 2000
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
@@ -17,7 +20,6 @@ Shader "Custom/Pulse"
         Pass
         {
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
 
@@ -43,7 +45,7 @@ Shader "Custom/Pulse"
                 float4 _BaseMap_ST;
                 float _Glow;
             CBUFFER_END
-            
+
 
             Varyings vert(Attributes IN)
             {
@@ -62,8 +64,8 @@ Shader "Custom/Pulse"
                 float outer = 1 - step(.5, dist);
                 float fract = frac(dist);
 
-                color *= fract * outer * _Glow;// * _SinTime.w; 
-                
+                color *= fract * outer * _Glow; // * _SinTime.w; 
+
                 return color;
             }
             ENDHLSL

@@ -11,8 +11,8 @@ namespace SceneSystem
         public AsyncOperation operation { get; protected set; }
         public abstract void Load(bool autoActivate = true);
         public abstract void Unload();
-    } 
-    
+    }
+
     [CreateAssetMenu(fileName = "Scene", menuName = "Scriptable Objects/SceneSystem/Scene")]
     [Serializable]
     public class Scene : SceneObject

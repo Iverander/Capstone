@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 
 namespace MackySoft.SerializeReferenceExtensions.Editor
@@ -10,7 +11,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             parent = parent.Copy();
 
             int depthOfParent = parent.depth;
-            var enumerator = parent.GetEnumerator();
+            IEnumerator enumerator = parent.GetEnumerator();
 
             while (enumerator.MoveNext())
             {
@@ -18,10 +19,12 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     continue;
                 }
-                if (childProperty.depth > (depthOfParent + depth))
+
+                if (childProperty.depth > depthOfParent + depth)
                 {
                     continue;
                 }
+
                 yield return childProperty.Copy();
             }
         }

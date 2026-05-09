@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using UnityEngine;
 
 namespace Capstone
 {
@@ -10,14 +10,11 @@ namespace Capstone
 
         [ReadOnly] public List<Transform> spawnPoints = new();
 
-        void Start()
+        private void Start()
         {
             instance = this;
 
-            foreach (Transform child in transform)
-            {
-                spawnPoints.Add(child);
-            }
+            foreach (Transform child in transform) spawnPoints.Add(child);
         }
     }
 }

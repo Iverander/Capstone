@@ -9,12 +9,14 @@ Shader "Custom/Noise/VornoiNoise"
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"
+        }
 
         Pass
         {
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
 
@@ -53,7 +55,7 @@ Shader "Custom/Noise/VornoiNoise"
             float4 frag(Varyings IN) : SV_Target
             {
                 float4 color = voronoiNoise(IN.uv / _CellSize);
-                return color;//SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * color;
+                return color; //SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * color;
             }
             ENDHLSL
         }

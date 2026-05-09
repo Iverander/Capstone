@@ -8,28 +8,37 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
 {
     public class KeyListGeneratorSelectorWindow : EditorWindow
     {
-        [SerializeField]
-        private int _selectedIndex;
-        [SerializeField]
-        private ModificationType _modificationType;
+        [SerializeField] private int _selectedIndex;
+
+        [SerializeField] private ModificationType _modificationType;
+
+        private string _detailsText;
+        private UnityEditor.Editor _editor;
 
         private KeyListGenerator _generator;
-        private UnityEditor.Editor _editor;
         private List<KeyListGeneratorData> _generatorsData;
+        private readonly Dictionary<Type, KeyListGenerator> _keysGenerators = new();
         private Type _targetType;
         private int _undoStart;
-        private Dictionary<Type, KeyListGenerator> _keysGenerators = new Dictionary<Type, KeyListGenerator>();
-        private string _detailsText;
-
-        public event Action<KeyListGenerator, ModificationType> OnApply;
 
         private void OnEnable()
         {
-            VisualTreeAsset document = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Plugins/SerializedCollections/Editor/Assets/KeysGeneratorSelectorWindow.uxml");
+            var document = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                "Assets/Plugins/SerializedCollections/Editor/Assets/KeysGeneratorSelectorWindow.uxml");
             var element = document.CloneTree();
             element.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
             rootVisualElement.Add(element);
         }
+
+        private void OnDestroy()
+        {
+            Undo.undoRedoPerformed -= HandleUndoCallback;
+            Undo.RevertAllDownToGroup(_undoStart);
+            foreach (var keyGenerator in _keysGenerators)
+                DestroyImmediate(keyGenerator.Value);
+        }
+
+        public event Action<KeyListGenerator, ModificationType> OnApply;
 
         public void Initialize(IEnumerable<KeyListGeneratorData> generatorsData, Type type)
         {
@@ -59,7 +68,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             radioButtonGroup.AddToClassList("sc-radio-button-group");
             generatorsContent.Add(radioButtonGroup);
 
-            for (int i = 0; i < _generatorsData.Count; i++)
+            for (var i = 0; i < _generatorsData.Count; i++)
             {
                 var generatorData = _generatorsData[i];
 
@@ -84,10 +93,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             EditorGUI.BeginChangeCheck();
             _editor.OnInspectorGUI();
-            if (EditorGUI.EndChangeCheck())
-            {
-                UpdateDetailsText();
-            }
+            if (EditorGUI.EndChangeCheck()) UpdateDetailsText();
         }
 
         private void InitializeModificationToggle(RadioButton obj)
@@ -109,7 +115,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         private void UpdateDetailsText()
         {
             var enumerable = _generator.GetKeys(_targetType);
-            int count = 0;
+            var count = 0;
             var enumerator = enumerable.GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -120,17 +126,10 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
                     return;
                 }
             }
+
             _detailsText = $"{count} Elements";
 
             rootVisualElement.Q<Label>(name = "generated-count-label").text = _detailsText;
-        }
-
-        private void OnDestroy()
-        {
-            Undo.undoRedoPerformed -= HandleUndoCallback;
-            Undo.RevertAllDownToGroup(_undoStart);
-            foreach (var keyGenerator in _keysGenerators)
-                DestroyImmediate(keyGenerator.Value);
         }
 
         private void OnGeneratorClicked(ChangeEvent<bool> evt)
@@ -176,6 +175,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
                 so.hideFlags = HideFlags.DontSave;
                 _keysGenerators.Add(type, so);
             }
+
             return _keysGenerators[type];
         }
     }

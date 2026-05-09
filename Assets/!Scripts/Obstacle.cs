@@ -5,15 +5,14 @@ namespace Capstone
     public class Obstacle : MonoBehaviour
     {
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        private void Start()
         {
             gameObject.SetActive(Settings.active.mapSettings.obstacles);
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-        
         }
     }
 }

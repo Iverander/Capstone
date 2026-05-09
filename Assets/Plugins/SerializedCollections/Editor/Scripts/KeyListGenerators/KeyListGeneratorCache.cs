@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections.KeysGenerators
 {
     public static class KeyListGeneratorCache
     {
-        private static List<KeyListGeneratorData> _populators;
-        private static Dictionary<Type, List<KeyListGeneratorData>> _populatorsByType;
+        private static readonly List<KeyListGeneratorData> _populators;
+        private static readonly Dictionary<Type, List<KeyListGeneratorData>> _populatorsByType;
 
         static KeyListGeneratorCache()
         {
@@ -22,14 +20,16 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             {
                 var attributes = populatorType.GetCustomAttributes<KeyListGeneratorAttribute>();
                 foreach (var attribute in attributes)
-                    _populators.Add(new KeyListGeneratorData(attribute.Name, attribute.TargetType, populatorType, attribute.NeedsWindow));
+                    _populators.Add(new KeyListGeneratorData(attribute.Name, attribute.TargetType, populatorType,
+                        attribute.NeedsWindow));
             }
         }
 
         public static IReadOnlyList<KeyListGeneratorData> GetPopulatorsForType(Type type)
         {
             if (!_populatorsByType.ContainsKey(type))
-                _populatorsByType.Add(type, new List<KeyListGeneratorData>(_populators.Where(x => x.TargetType.IsAssignableFrom(type))));
+                _populatorsByType.Add(type,
+                    new List<KeyListGeneratorData>(_populators.Where(x => x.TargetType.IsAssignableFrom(type))));
             return _populatorsByType[type];
         }
     }

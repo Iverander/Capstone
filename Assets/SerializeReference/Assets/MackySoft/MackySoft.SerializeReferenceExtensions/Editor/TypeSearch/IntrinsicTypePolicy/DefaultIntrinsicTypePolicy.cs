@@ -1,11 +1,11 @@
 ﻿using System;
+using Object = UnityEngine.Object;
 
 namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class DefaultIntrinsicTypePolicy : IIntrinsicTypePolicy
     {
-
-        public static readonly DefaultIntrinsicTypePolicy Instance = new DefaultIntrinsicTypePolicy();
+        public static readonly DefaultIntrinsicTypePolicy Instance = new();
 
         public bool IsAllowed (Type candiateType)
         {
@@ -15,7 +15,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 !candiateType.IsGenericType &&
                 !candiateType.IsPrimitive &&
                 !candiateType.IsEnum &&
-                !typeof(UnityEngine.Object).IsAssignableFrom(candiateType) &&
+                !typeof(Object).IsAssignableFrom(candiateType) &&
                 Attribute.IsDefined(candiateType, typeof(SerializableAttribute)) &&
                 !Attribute.IsDefined(candiateType, typeof(HideInTypeMenuAttribute));
         }

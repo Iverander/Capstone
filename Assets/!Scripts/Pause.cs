@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace Capstone
 {
     public class Pause : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             Player.input.onMenu.AddListener(OpenMenu);
         }
 
         private void OpenMenu()
-        { 
+        {
             MenuManager.OpenMenu(MenuManager.Menu.Pause);
         }
-        
     }
 }

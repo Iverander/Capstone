@@ -5,13 +5,12 @@ namespace Capstone
 {
     public class NewRoundTrigger : MonoBehaviour
     {
-        float countdown;
-        float timeToWait = 3;
+        [SerializeField] private UIDocument UIObject;
+        private float countdown;
+        private readonly float timeToWait = 3;
+        private Label UIText;
 
-        [SerializeField] UIDocument UIObject;
-        Label UIText;
-
-        void Start()
+        private void Start()
         {
             RoundManager.onBetweenRound.AddListener(Enable);
             RoundManager.onNewRound.AddListener(Disable);
@@ -22,23 +21,15 @@ namespace Capstone
             Disable();
         }
 
-        void Enable()
+        private void OnTriggerExit(Collider other)
         {
-            gameObject.SetActive(true);
             countdown = timeToWait;
-        }
-        void Disable()
-        {
-            UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
-            gameObject.SetActive(false);
+            endCountDownUI();
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (RoundManager.roundState == RoundManager.RoundState.DuringRound)
-            {
-                return;
-            }
+            if (RoundManager.roundState == RoundManager.RoundState.DuringRound) return;
             countdown -= Time.deltaTime;
             CountDownUI();
 
@@ -50,20 +41,26 @@ namespace Capstone
             //countdown = 0;
         }
 
-        private void OnTriggerExit(Collider other)
+        private void Enable()
         {
+            gameObject.SetActive(true);
             countdown = timeToWait;
-            endCountDownUI();
         }
 
-        void CountDownUI()
+        private void Disable()
+        {
+            UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
+            gameObject.SetActive(false);
+        }
+
+        private void CountDownUI()
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Visible);
             UIText.text = countdown.ToString("0.0");
             //Should update UI with text like roundNr Spawning enemies..
         }
 
-        void endCountDownUI()
+        private void endCountDownUI()
         {
             UIText.style.visibility = new StyleEnum<Visibility>(Visibility.Hidden);
         }

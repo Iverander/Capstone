@@ -6,12 +6,11 @@ namespace Capstone
 {
     public class PlayerLoader : MonoBehaviour
     {
-        [Scene,SerializeField] private string playerScene;
-        
-        void Start()
-        {
-           SceneManager.LoadScene(playerScene, LoadSceneMode.Additive); 
-        }
+        [Scene] [SerializeField] private string playerScene;
 
+        private void Start()
+        {
+            SceneManager.LoadScene(playerScene, LoadSceneMode.Additive);
+        }
     }
 }

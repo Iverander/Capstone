@@ -6,45 +6,46 @@
 using UnityEngine.InputSystem;
 #endif
 
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace UnityEngine.Rendering
 {
     /// <summary>
-    /// Utility Free Camera component.
+    ///     Utility Free Camera component.
     /// </summary>
     [CoreRPHelpURLAttribute("Free-Camera")]
     public class SamplesFreeCamera : MonoBehaviour
     {
-        const float k_MouseSensitivityMultiplier = 0.01f;
+        private const float k_MouseSensitivityMultiplier = 0.01f;
 
         /// <summary>
-        /// Rotation speed when using a controller.
+        ///     Rotation speed when using a controller.
         /// </summary>
         public float m_LookSpeedController = 120f;
+
         /// <summary>
-        /// Rotation speed when using the mouse.
+        ///     Rotation speed when using the mouse.
         /// </summary>
         public float m_LookSpeedMouse = 4.0f;
+
         /// <summary>
-        /// Movement speed.
+        ///     Movement speed.
         /// </summary>
         public float m_MoveSpeed = 10.0f;
+
         /// <summary>
-        /// Value added to the speed when incrementing.
+        ///     Value added to the speed when incrementing.
         /// </summary>
         public float m_MoveSpeedIncrement = 2.5f;
+
         /// <summary>
-        /// Scale factor of the turbo mode.
+        ///     Scale factor of the turbo mode.
         /// </summary>
         public float m_Turbo = 10.0f;
 
 #if USE_INPUT_SYSTEM
-        InputAction lookAction;
-        InputAction moveAction;
-        InputAction speedAction;
-        InputAction yMoveAction;
+        private InputAction lookAction;
+        private InputAction moveAction;
+        private InputAction speedAction;
+        private InputAction yMoveAction;
 #elif ENABLE_LEGACY_INPUT_MANAGER
         private static string kMouseX = "Mouse X";
         private static string kMouseY = "Mouse Y";
@@ -57,12 +58,12 @@ namespace UnityEngine.Rendering
         private static string kSpeedAxis = "Speed Axis";
 #endif
 
-        void OnEnable()
+        private void OnEnable()
         {
             RegisterInputs();
         }
 
-        void RegisterInputs()
+        private void RegisterInputs()
         {
 #if USE_INPUT_SYSTEM
             var map = new InputActionMap("Free Camera");
@@ -81,7 +82,7 @@ namespace UnityEngine.Rendering
                 .With("Left", "<Keyboard>/a")
                 //.With("Left", "<Keyboard>/leftArrow") //Used to switch Samples in the SamplesShowcase script
                 .With("Right", "<Keyboard>/d");
-                //.With("Right", "<Keyboard>/rightArrow"); //Used to switch Samples in the SamplesShowcase script
+            //.With("Right", "<Keyboard>/rightArrow"); //Used to switch Samples in the SamplesShowcase script
             speedAction.AddCompositeBinding("Dpad")
                 .With("Up", "<Keyboard>/home")
                 .With("Down", "<Keyboard>/end");
@@ -101,25 +102,34 @@ namespace UnityEngine.Rendering
             List<InputManagerEntry> inputEntries = new List<InputManagerEntry>();
 
             // Add new bindings
-            inputEntries.Add(new InputManagerEntry { name = kRightStickX, kind = InputManagerEntry.Kind.Axis, axis = InputManagerEntry.Axis.Fourth, sensitivity = 1.0f, gravity = 1.0f, deadZone = 0.2f });
-            inputEntries.Add(new InputManagerEntry { name = kRightStickY, kind = InputManagerEntry.Kind.Axis, axis = InputManagerEntry.Axis.Fifth, sensitivity = 1.0f, gravity = 1.0f, deadZone = 0.2f, invert = true });
+            inputEntries.Add(new InputManagerEntry { name = kRightStickX, kind = InputManagerEntry.Kind.Axis, axis =
+ InputManagerEntry.Axis.Fourth, sensitivity = 1.0f, gravity = 1.0f, deadZone = 0.2f });
+            inputEntries.Add(new InputManagerEntry { name = kRightStickY, kind = InputManagerEntry.Kind.Axis, axis =
+ InputManagerEntry.Axis.Fifth, sensitivity = 1.0f, gravity = 1.0f, deadZone = 0.2f, invert = true });
 
-            inputEntries.Add(new InputManagerEntry { name = kYAxis, kind = InputManagerEntry.Kind.KeyOrButton, btnPositive = "page up", altBtnPositive = "joystick button 5", btnNegative = "page down", altBtnNegative = "joystick button 4", gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
-            inputEntries.Add(new InputManagerEntry { name = kYAxis, kind = InputManagerEntry.Kind.KeyOrButton, btnPositive = "q", btnNegative = "e", gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
+            inputEntries.Add(new InputManagerEntry { name = kYAxis, kind =
+ InputManagerEntry.Kind.KeyOrButton, btnPositive = "page up", altBtnPositive = "joystick button 5", btnNegative =
+ "page down", altBtnNegative = "joystick button 4", gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
+            inputEntries.Add(new InputManagerEntry { name = kYAxis, kind =
+ InputManagerEntry.Kind.KeyOrButton, btnPositive = "q", btnNegative = "e", gravity = 1000.0f, deadZone =
+ 0.001f, sensitivity = 1000.0f });
 
-            inputEntries.Add(new InputManagerEntry { name = kSpeedAxis, kind = InputManagerEntry.Kind.KeyOrButton, btnPositive = "home", btnNegative = "end", gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
-            inputEntries.Add(new InputManagerEntry { name = kSpeedAxis, kind = InputManagerEntry.Kind.Axis, axis = InputManagerEntry.Axis.Seventh, gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
+            inputEntries.Add(new InputManagerEntry { name = kSpeedAxis, kind =
+ InputManagerEntry.Kind.KeyOrButton, btnPositive = "home", btnNegative = "end", gravity = 1000.0f, deadZone =
+ 0.001f, sensitivity = 1000.0f });
+            inputEntries.Add(new InputManagerEntry { name = kSpeedAxis, kind = InputManagerEntry.Kind.Axis, axis =
+ InputManagerEntry.Axis.Seventh, gravity = 1000.0f, deadZone = 0.001f, sensitivity = 1000.0f });
 
             InputRegistering.RegisterInputs(inputEntries);
 #endif
         }
 
-        float inputRotateAxisX, inputRotateAxisY;
-        float inputChangeSpeed;
-        float inputVertical, inputHorizontal, inputYAxis;
-        bool leftShiftBoost, leftShift, fire1;
+        private float inputRotateAxisX, inputRotateAxisY;
+        private float inputChangeSpeed;
+        private float inputVertical, inputHorizontal, inputYAxis;
+        private bool leftShiftBoost, leftShift, fire1;
 
-        void UpdateInputs()
+        private void UpdateInputs()
         {
             inputRotateAxisX = 0.0f;
             inputRotateAxisY = 0.0f;
@@ -165,9 +175,8 @@ namespace UnityEngine.Rendering
 #endif
         }
 
-        void Update()
+        private void Update()
         {
-
             // If the debug menu is running, we don't want to conflict with its inputs.
             if (DebugManager.instance.displayRuntimeUI)
                 return;
@@ -180,14 +189,15 @@ namespace UnityEngine.Rendering
                 if (m_MoveSpeed < m_MoveSpeedIncrement) m_MoveSpeed = m_MoveSpeedIncrement;
             }
 
-            bool moved = inputRotateAxisX != 0.0f || inputRotateAxisY != 0.0f || inputVertical != 0.0f || inputHorizontal != 0.0f || inputYAxis != 0.0f;
+            var moved = inputRotateAxisX != 0.0f || inputRotateAxisY != 0.0f || inputVertical != 0.0f ||
+                        inputHorizontal != 0.0f || inputYAxis != 0.0f;
             if (moved)
             {
-                float rotationX = transform.localEulerAngles.x;
-                float newRotationY = transform.localEulerAngles.y + inputRotateAxisX;
+                var rotationX = transform.localEulerAngles.x;
+                var newRotationY = transform.localEulerAngles.y + inputRotateAxisX;
 
                 // Weird clamping code due to weird Euler angle mapping...
-                float newRotationX = (rotationX - inputRotateAxisY);
+                var newRotationX = rotationX - inputRotateAxisY;
                 if (rotationX <= 90.0f && newRotationX >= 0.0f)
                     newRotationX = Mathf.Clamp(newRotationX, 0.0f, 90.0f);
                 if (rotationX >= 270.0f)
@@ -195,8 +205,8 @@ namespace UnityEngine.Rendering
 
                 transform.localRotation = Quaternion.Euler(newRotationX, newRotationY, transform.localEulerAngles.z);
 
-                float moveSpeed = Time.deltaTime * m_MoveSpeed;
-                if (fire1 || leftShiftBoost && leftShift)
+                var moveSpeed = Time.deltaTime * m_MoveSpeed;
+                if (fire1 || (leftShiftBoost && leftShift))
                     moveSpeed *= m_Turbo;
                 transform.position += transform.forward * moveSpeed * inputVertical;
                 transform.position += transform.right * moveSpeed * inputHorizontal;

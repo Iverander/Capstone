@@ -7,26 +7,23 @@ namespace Capstone
 {
     public class PlayerModifier : MonoBehaviour
     {
-        [Expandable]public List<Modifier> modifiers = new List<Modifier>();
+        [Expandable] public List<Modifier> modifiers = new();
 
         private void Start()
         {
-            foreach (var modifier in modifiers)
-            {
-                modifier.onGained();
-            }
+            foreach (var modifier in modifiers) modifier.onGained();
         }
 
         public void AddModifier(Modifier modifier)
         {
-            if(modifiers.Contains(modifier)) throw new System.Exception("modifier already exists!");
+            if (modifiers.Contains(modifier)) throw new Exception("modifier already exists!");
             modifiers.Add(modifier);
             modifier.onGained();
         }
 
         public void RemoveModifier(Modifier modifier)
         {
-            if(!modifiers.Contains(modifier)) throw new System.Exception("modifier doesn't exist!");
+            if (!modifiers.Contains(modifier)) throw new Exception("modifier doesn't exist!");
             modifiers.Remove(modifier);
         }
     }

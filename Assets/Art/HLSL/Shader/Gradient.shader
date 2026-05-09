@@ -9,7 +9,10 @@ Shader "HLSLTesting/Gradient"
 
     SubShader
     {
-        Tags { "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline"
+        }
 
         Pass
         {
@@ -17,7 +20,7 @@ Shader "HLSLTesting/Gradient"
             #pragma vertex vert
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            
+
 
             struct MeshData
             {
@@ -30,20 +33,20 @@ Shader "HLSLTesting/Gradient"
                 float4 position : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
-            
+
             CBUFFER_START(UnityPerMaterial)
                 half4 _Color;
                 half4 _TransitionColor;
                 float _TransitionSpeed;
             CBUFFER_END
-            
+
             Varyings vert(MeshData IN)
             {
                 Varyings OUT;
-                
+
                 OUT.position = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = IN.uv;
-                
+
                 /*
                 OUT.color = _Color;
                 

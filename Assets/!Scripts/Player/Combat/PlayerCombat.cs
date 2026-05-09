@@ -1,6 +1,5 @@
-using AYellowpaper.SerializedCollections;
 using System;
-using NaughtyAttributes;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 namespace Capstone
@@ -16,15 +15,7 @@ namespace Capstone
 
     public class PlayerCombat : MonoBehaviour
     {
-        [Serializable]
-        public class workaround
-        {
-            [SerializeReference, SubclassSelector] 
-            public Ability ability;
-        }
-
-        [SerializedDictionary] 
-        public SerializedDictionary<AbilityKeys, workaround> abilities;
+        [SerializedDictionary] public SerializedDictionary<AbilityKeys, workaround> abilities;
 
         private void Start()
         {
@@ -48,10 +39,17 @@ namespace Capstone
             }
         }
 
-        void UseAbility(int abilityIndex)
+        private void UseAbility(int abilityIndex)
         {
             //Debug.Log("Preforming ability " + abilities[(AbilityKeys)abilityIndex]);
             abilities[(AbilityKeys)abilityIndex].ability.Perform();
+        }
+
+        [Serializable]
+        public class workaround
+        {
+            [SerializeReference] [SubclassSelector]
+            public Ability ability;
         }
     }
 }

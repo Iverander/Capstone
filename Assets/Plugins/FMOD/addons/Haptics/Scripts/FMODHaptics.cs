@@ -124,7 +124,8 @@ namespace FMODUnityHaptics
                 }
 
                 // This works for both controllers, not just the RightHand. We just need 'a' haptic action.
-                hapticAction = new InputAction(type: InputActionType.PassThrough, binding: "<XRController>{RightHand}/{Haptic}");
+                hapticAction =
+ new InputAction(type: InputActionType.PassThrough, binding: "<XRController>{RightHand}/{Haptic}");
                 hapticAction.Enable();
 
                 XrAction = GetAction(hapticAction);

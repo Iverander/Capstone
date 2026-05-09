@@ -1,25 +1,24 @@
 #if UNITY_EDITOR
-using UnityEditor.PackageManager.Requests;
-using UnityEditor.PackageManager;
 using UnityEditor;
+using UnityEditor.PackageManager;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 [CustomEditor(typeof(InstallPackage))]
 public class InstallPackageEditor : Editor
 {
-
     private static ListRequest listRequest;
     private static AddRequest addRequest;
-    private static InstallPackage mb = null;
+    private static InstallPackage mb;
+
     public override void OnInspectorGUI()
     {
         //base.DrawDefaultInspector();
 
-        mb = (target as InstallPackage);
+        mb = target as InstallPackage;
 
         if (GUILayout.Button($"Check and Install {mb.packageName} Package"))
             CheckAndInstallSplinePackage();
-
     }
 
     private static void CheckAndInstallSplinePackage()
@@ -36,16 +35,14 @@ public class InstallPackageEditor : Editor
 
             if (listRequest.Status == StatusCode.Success)
             {
-                bool isPackageInstalled = false;
+                var isPackageInstalled = false;
                 foreach (var package in listRequest.Result)
-                {
                     if (package.name == mb.packageName)
                     {
                         isPackageInstalled = true;
                         Debug.Log($"Package is already installed (version: {package.version}).");
                         break;
                     }
-                }
 
                 if (!isPackageInstalled)
                 {
@@ -68,13 +65,10 @@ public class InstallPackageEditor : Editor
             EditorApplication.update -= OnAddRequestProgress;
 
             if (addRequest.Status == StatusCode.Success)
-            {
-                Debug.Log($"Successfully installed {addRequest.Result.displayName} (version: {addRequest.Result.version}).");
-            }
+                Debug.Log(
+                    $"Successfully installed {addRequest.Result.displayName} (version: {addRequest.Result.version}).");
             else if (addRequest.Status >= StatusCode.Failure)
-            {
                 Debug.LogError($"Failed to install package: {addRequest.Error.message}");
-            }
         }
     }
 }

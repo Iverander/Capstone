@@ -1,17 +1,13 @@
 # if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
-using UnityEngine;
 
 namespace UnityEngine.Rendering
 {
     public class RequiredSettingsSOT<T> : RequiredSettingsSO where T : RequiredSettingBase
     {
-        [SerializeField]
-        public List<T> m_requiredSettings;
+        [SerializeField] public List<T> m_requiredSettings;
 
-        public override List<RequiredSettingBase> requiredSettings => new List<RequiredSettingBase>(m_requiredSettings);
+        public override List<RequiredSettingBase> requiredSettings => new(m_requiredSettings);
 
 
         public bool allGood
@@ -21,11 +17,9 @@ namespace UnityEngine.Rendering
                 if (requiredSettings == null || requiredSettings.Count == 0)
                     return true;
 
-                foreach(var setting in requiredSettings)
-                {
+                foreach (var setting in requiredSettings)
                     if (!setting.state)
                         return false;
-                }
                 return true;
             }
         }

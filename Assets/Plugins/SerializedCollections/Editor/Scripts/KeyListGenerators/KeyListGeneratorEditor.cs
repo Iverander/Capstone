@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 
 namespace AYellowpaper.SerializedCollections.KeysGenerators
 {
@@ -15,11 +12,9 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             {
                 // skip script name
                 iterator.NextVisible(true);
-                while (iterator.NextVisible(true))
-                {
-                    EditorGUILayout.PropertyField(iterator);
-                }
+                while (iterator.NextVisible(true)) EditorGUILayout.PropertyField(iterator);
             }
+
             serializedObject.ApplyModifiedProperties();
         }
     }

@@ -54,47 +54,31 @@ public class Banana : Food
 
 public class Example : MonoBehaviour
 {
+    [SerializeReference] public Food food1 = new Apple();
 
-    [SerializeReference]
-    public Food food1 = new Apple();
+    [SerializeReference] public Food food2 = new Peach();
 
-    [SerializeReference]
-    public Food food2 = new Peach();
+    [SerializeReference] public Food food3 = new Grape();
 
-    [SerializeReference]
-    public Food food3 = new Grape();
-
-    [SerializeReference, SubclassSelector]
+    [SerializeReference] [SubclassSelector]
     public Food foodOne = new Apple();
 
-    [SerializeReference, SubclassSelector]
+    [SerializeReference] [SubclassSelector]
     public Food foodTwo = new Peach();
 
     // UseToStringAsLabel support on UNITY_2021_3_OR_NEWER
-    [SerializeReference, SubclassSelector(UseToStringAsLabel = true)]
+    [SerializeReference] [SubclassSelector(UseToStringAsLabel = true)]
     public Food foodThree = new Grape();
 
-    [SerializeReference]
-    public List<Food> foodsOne = new List<Food>
-    {
-        new Apple(),
-        new Peach(),
-        new Grape()
-    };
+    [SerializeReference] public List<Food> foodsOne = new() { new Apple(), new Peach(), new Grape() };
 
-    [SerializeReference, SubclassSelector]
-    public List<Food> foodsTwo = new List<Food>
-    {
-        new Apple(),
-        new Peach(),
-        new Grape()
-    };
+    [SerializeReference] [SubclassSelector]
+    public List<Food> foodsTwo = new() { new Apple(), new Peach(), new Grape() };
 }
 
 #if UNITY_EDITOR
 
 /// These classes are in a folder named "Editor" in the project
-
 [CustomPropertyDrawer(typeof(Peach), true)]
 public class PeachDrawer : PropertyDrawer
 {
@@ -109,7 +93,7 @@ public class PeachDrawer : PropertyDrawer
 
     public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
     {
-        return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 1;
+        return (EditorGUIUtility.singleLineHeight * 2) + (EditorGUIUtility.standardVerticalSpacing * 1);
     }
 }
 

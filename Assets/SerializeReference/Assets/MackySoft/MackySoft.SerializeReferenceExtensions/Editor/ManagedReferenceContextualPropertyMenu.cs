@@ -1,4 +1,5 @@
 ﻿// NOTE: managedReferenceValue getter is available only in Unity 2021.3 or later.
+
 #if UNITY_2021_3_OR_NEWER
 using System;
 using UnityEditor;
@@ -8,13 +9,12 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public static class ManagedReferenceContextualPropertyMenu
     {
-
         private const string CopiedPropertyPathKey = "SerializeReferenceExtensions.CopiedPropertyPath";
         private const string ClipboardKey = "SerializeReferenceExtensions.CopyAndPasteProperty";
 
-        private static readonly GUIContent PasteContent = new GUIContent("Paste Property");
-        private static readonly GUIContent NewInstanceContent = new GUIContent("New Instance");
-        private static readonly GUIContent ResetAndNewInstanceContent = new GUIContent("Reset and New Instance");
+        private static readonly GUIContent PasteContent = new("Paste Property");
+        private static readonly GUIContent NewInstanceContent = new("New Instance");
+        private static readonly GUIContent ResetAndNewInstanceContent = new("Reset and New Instance");
 
         [InitializeOnLoadMethod]
         private static void Initialize ()
@@ -35,7 +35,8 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 string copiedPropertyPath = SessionState.GetString(CopiedPropertyPathKey, string.Empty);
                 if (!string.IsNullOrEmpty(copiedPropertyPath))
                 {
-                    menu.AddItem(new GUIContent($"Paste \"{copiedPropertyPath}\" property"), false, Paste, clonedProperty);
+                    menu.AddItem(new GUIContent($"Paste \"{copiedPropertyPath}\" property"), false, Paste,
+                        clonedProperty);
                 }
                 else
                 {

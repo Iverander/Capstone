@@ -1,39 +1,39 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using UnityEditor;
+using UnityEditor.Inspector.GraphicsSettingsInspectors;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
-using System.Collections;
-using System.Reflection;
-using UnityEngine.Rendering;
-using UnityEditor.Inspector.GraphicsSettingsInspectors;
 
-[InitializeOnLoad]
 [CustomEditor(typeof(SamplesShowcase))]
 public class SamplesShowcaseEditor : Editor
 {
     private static readonly string UXMLPath = "SamplesSelectionUXML";
-    public static readonly string[] supportedExtensions = {".shadergraph", ".vfx", ".cs", ".hlsl", ".shader", ".asset",".mat",".fbx",".prefab", ".png", ".compute"};
 
-    SerializedProperty currentIndex;
-    Color headlineColor;
-    Color openColor;
-    Color highlightColor;
-    Color codeColor;
+    public static readonly string[] supportedExtensions =
+        { ".shadergraph", ".vfx", ".cs", ".hlsl", ".shader", ".asset", ".mat", ".fbx", ".prefab", ".png", ".compute" };
 
-    DropdownField dropdownField;
-    List<string> choices;
+    private List<string> choices;
+    private Color codeColor;
+
+    private SerializedProperty currentIndex;
+
+    private DropdownField dropdownField;
+    private Color headlineColor;
+    private Color highlightColor;
 
 
-    int indexSelected;
+    private int indexSelected;
+    private Color openColor;
 
 
     private VisualElement requiredSettingsBox;
-    private Dictionary<RequiredSettingBase, VisualElement> requiredSettingsVE = new Dictionary<RequiredSettingBase, VisualElement>();
+    private readonly Dictionary<RequiredSettingBase, VisualElement> requiredSettingsVE = new();
 
 
     private void OnEnable()
@@ -49,7 +49,7 @@ public class SamplesShowcaseEditor : Editor
         SamplesShowcase.OnUpdateSamplesInspector -= UpdateSamplesInspector;
     }
 
-        public void UpdateSamplesInspector()
+    public void UpdateSamplesInspector()
     {
         SamplesShowcase self;
         try
@@ -61,11 +61,10 @@ public class SamplesShowcaseEditor : Editor
             return;
         }
 
-        if (dropdownField !=null && self != null)
-        {
-            dropdownField.value = choices[self.currentIndex]; //make sure samples description is updated from what the scene is showing, even during runtime input or inspector duplication
-        }
-
+        if (dropdownField != null && self != null)
+            dropdownField.value =
+                choices
+                    [self.currentIndex]; //make sure samples description is updated from what the scene is showing, even during runtime input or inspector duplication
     }
 
     public override VisualElement CreateInspectorGUI()
@@ -78,25 +77,25 @@ public class SamplesShowcaseEditor : Editor
         var self = (SamplesShowcase)target;
 
         //colors
-        headlineColor =  EditorGUIUtility.isProSkin ? self.headlineDarkColor : self.headlineLightColor;
+        headlineColor = EditorGUIUtility.isProSkin ? self.headlineDarkColor : self.headlineLightColor;
         openColor = EditorGUIUtility.isProSkin ? self.openDarkColor : self.openLightColor;
         highlightColor = EditorGUIUtility.isProSkin ? self.highlightDarkColor : self.highlightLightColor;
         codeColor = EditorGUIUtility.isProSkin ? self.codeDarkColor : self.codeLightColor;
         root.Q<Label>("headline").style.color = headlineColor;
 
-        bool isTextOnly = self.PresentationMode == SamplesShowcase.Mode.TextOnly ? true : false;
-        root.Q<VisualElement>("SamplesSelection").style.display = isTextOnly ? UnityEngine.UIElements.DisplayStyle.None : UnityEngine.UIElements.DisplayStyle.Flex;
+        var isTextOnly = self.PresentationMode == SamplesShowcase.Mode.TextOnly ? true : false;
+        root.Q<VisualElement>("SamplesSelection").style.display = isTextOnly ? DisplayStyle.None : DisplayStyle.Flex;
 
         // JSon data of the samples
         if (self.SamplesDescriptionsJson != null)
         {
-            string jsonText = SamplesShowcase.CleanupJson(self.SamplesDescriptionsJson.text);
+            var jsonText = SamplesShowcase.CleanupJson(self.SamplesDescriptionsJson.text);
 
-            Samples sampleJsonObject = Samples.CreateFromJSON(jsonText, self.samplesPrefabs);
+            var sampleJsonObject = Samples.CreateFromJSON(jsonText, self.samplesPrefabs);
 
             //Introduction, it's the first part of the Samples Description text asset
             var introElement = root.Q<VisualElement>("intro");
-            string introText = sampleJsonObject.introduction;
+            var introText = sampleJsonObject.introduction;
             SamplesShowcase.SanitizedIntroduction = SamplesShowcase.SanitizeText(introText);
 
 
@@ -104,13 +103,13 @@ public class SamplesShowcaseEditor : Editor
 
             SamplesShowcase.SanitizedDescriptions = new Dictionary<string, string>();
             SamplesShowcase.SanitizedTitles = new Dictionary<string, string>();
-            foreach(GameObject prefab in self.samplesPrefabs)
+            foreach (var prefab in self.samplesPrefabs)
             {
-                Sample currentSample = sampleJsonObject.FindSampleWithPrefab(prefab);
+                var currentSample = sampleJsonObject.FindSampleWithPrefab(prefab);
                 if (currentSample == null)
                     continue;
 
-                string description = SamplesShowcase.SanitizeText(currentSample.description);
+                var description = SamplesShowcase.SanitizeText(currentSample.description);
                 SamplesShowcase.SanitizedDescriptions.Add(prefab.name, description);
                 SamplesShowcase.SanitizedTitles.Add(prefab.name, currentSample.title);
             }
@@ -122,39 +121,42 @@ public class SamplesShowcaseEditor : Editor
             {
                 dropdownField = root.Q<DropdownField>("SampleDropDown");
                 choices = new List<string>();
-                foreach (GameObject prefab in self.samplesPrefabs)
+                foreach (var prefab in self.samplesPrefabs)
                 {
-                    Sample sample = sampleJsonObject.FindSampleWithPrefab(prefab);
-                    if (sample != null)
-                    {
-                        choices.Add(sample.title);
-                    }
+                    var sample = sampleJsonObject.FindSampleWithPrefab(prefab);
+                    if (sample != null) choices.Add(sample.title);
                 }
+
                 if (currentIndex.intValue >= choices.Count)
                     currentIndex.intValue = choices.Count - 1;
 
                 dropdownField.value = choices[currentIndex.intValue];
                 dropdownField.choices = choices;
                 GoToSample(self, root, currentIndex.intValue, sampleJsonObject);
-                dropdownField.RegisterValueChangedCallback(v => GoToSample(self, root, choices.IndexOf(dropdownField.value), sampleJsonObject));  //Dropdown function call
-                root.Q<Button>("SelectSampleBtn").style.display = self.enableSelectButton ? UnityEngine.UIElements.DisplayStyle.Flex : UnityEngine.UIElements.DisplayStyle.None;
+                dropdownField.RegisterValueChangedCallback(v =>
+                    GoToSample(self, root, choices.IndexOf(dropdownField.value),
+                        sampleJsonObject)); //Dropdown function call
+                root.Q<Button>("SelectSampleBtn").style.display =
+                    self.enableSelectButton ? DisplayStyle.Flex : DisplayStyle.None;
                 root.Q<Button>("SelectSampleBtn").clicked += () => { Selection.activeGameObject = self.currentPrefab; };
 
                 //Arrow Button Switch
                 root.Q<Button>("switchBack").clicked += () =>
                 {
-                    currentIndex.intValue = currentIndex.intValue == 0 ? self.samplesPrefabs.Length - 1 : currentIndex.intValue - 1;
+                    currentIndex.intValue = currentIndex.intValue == 0
+                        ? self.samplesPrefabs.Length - 1
+                        : currentIndex.intValue - 1;
                     dropdownField.value = choices[currentIndex.intValue];
                 };
 
                 root.Q<Button>("switchForward").clicked += () =>
                 {
-                    currentIndex.intValue = currentIndex.intValue == self.samplesPrefabs.Length - 1 ? 0 : currentIndex.intValue + 1;
+                    currentIndex.intValue = currentIndex.intValue == self.samplesPrefabs.Length - 1
+                        ? 0
+                        : currentIndex.intValue + 1;
                     dropdownField.value = choices[currentIndex.intValue];
                 };
-
             }
-
         }
 
         requiredSettingsBox = root.Q(name = "RequiredSettingsBox");
@@ -164,33 +166,33 @@ public class SamplesShowcaseEditor : Editor
         requiredSettingsList.Q(name = null, "requiredSettingButton").style.display = DisplayStyle.None;
 
         var requiredSettingsSO = (target as SamplesShowcase).requiredSettingsSO;
-        if (requiredSettingsSO != null && requiredSettingsSO.requiredSettings != null && requiredSettingsSO.requiredSettings.Count > 0)
-        {
+        if (requiredSettingsSO != null && requiredSettingsSO.requiredSettings != null &&
+            requiredSettingsSO.requiredSettings.Count > 0)
             foreach (var setting in requiredSettingsSO.requiredSettings)
             {
-                var settingButton = new Button(
-                () =>
+                var settingButton = new Button(() =>
                 {
                     if (RequiredSettingBase.showSettingCallback != null)
                     {
                         RequiredSettingBase.showSettingCallback(setting);
                     }
                     else if (!string.IsNullOrEmpty(setting.globalSettingsType))
-					{
+                    {
                         var type = Type.GetType(setting.globalSettingsType);
                         GraphicsSettingsInspectorUtility.OpenAndScrollTo(type);
-					}
+                    }
                     else
                     {
                         SettingsService.OpenProjectSettings(setting.projectSettingsPath);
-                        CoreEditorUtils.Highlight("Project Settings", setting.propertyPath, HighlightSearchMode.Identifier);
+                        CoreEditorUtils.Highlight("Project Settings", setting.propertyPath,
+                            HighlightSearchMode.Identifier);
                     }
                 })
                 {
                     text = setting.name
                 };
 
-                string description = setting.description;
+                var description = setting.description;
                 if (string.IsNullOrEmpty(description))
                     description = setting.property.tooltip;
 
@@ -201,20 +203,25 @@ public class SamplesShowcaseEditor : Editor
                     requiredSettingsVE.Add(setting, settingButton);
                 requiredSettingsList.Add(settingButton);
             }
-        }
+
         UpdateRequiredSettingsDisplay();
 
         // Add open window behaviour
-        root.Q<Button>(name = "OpenInWindowButton").clicked += () => {EditorWindow.GetWindow<SamplesWindow>("Samples Showcase", true, System.Type.GetType("UnityEditor.InspectorWindow,UnityEditor.dll"));};
+        root.Q<Button>(name = "OpenInWindowButton").clicked += () =>
+        {
+            EditorWindow.GetWindow<SamplesWindow>("Samples Showcase", true,
+                Type.GetType("UnityEditor.InspectorWindow,UnityEditor.dll"));
+        };
 
 
         return root;
     }
-    void LinkOnPointerUp(PointerUpLinkTagEvent evt)
+
+    private void LinkOnPointerUp(PointerUpLinkTagEvent evt)
     {
         if (IsLinkFile(evt.linkID))
         {
-            string finalPath = GetAssetFinalPath(evt.linkID);
+            var finalPath = GetAssetFinalPath(evt.linkID);
             var assetpath = AssetDatabase.LoadMainAssetAtPath(finalPath);
             AssetDatabase.OpenAsset(assetpath);
         }
@@ -224,12 +231,13 @@ public class SamplesShowcaseEditor : Editor
         }
     }
 
-    void LinkOnPointerOver(PointerOverLinkTagEvent evt)
+    private void LinkOnPointerOver(PointerOverLinkTagEvent evt)
     {
         var targetVE = (VisualElement)evt.currentTarget;
         targetVE.AddToClassList("link-cursor");
     }
-    void LinkOnPointerOut(PointerOutLinkTagEvent evt)
+
+    private void LinkOnPointerOut(PointerOutLinkTagEvent evt)
     {
         var targetVE = (VisualElement)evt.currentTarget;
         targetVE.RemoveFromClassList("link-cursor");
@@ -241,19 +249,19 @@ public class SamplesShowcaseEditor : Editor
         if (samplesShowcase == null)
             return;
 
-        if (samplesShowcase.requiredSettingsSO == null || samplesShowcase.requiredSettingsSO.requiredSettings == null || samplesShowcase.requiredSettingsSO.requiredSettings.Count == 0)
-        {
+        if (samplesShowcase.requiredSettingsSO == null || samplesShowcase.requiredSettingsSO.requiredSettings == null ||
+            samplesShowcase.requiredSettingsSO.requiredSettings.Count == 0)
             requiredSettingsBox.style.display = DisplayStyle.None;
-        }
 
-        bool displayBox = false;
-        foreach(var settingVEPair in requiredSettingsVE)
+        var displayBox = false;
+        foreach (var settingVEPair in requiredSettingsVE)
         {
             var state = settingVEPair.Key.state;
             displayBox |= !state;
-            settingVEPair.Value.style.display = (state)? DisplayStyle.None : DisplayStyle.Flex;
+            settingVEPair.Value.style.display = state ? DisplayStyle.None : DisplayStyle.Flex;
         }
-        requiredSettingsBox.style.display = (displayBox) ? DisplayStyle.Flex : DisplayStyle.None;
+
+        requiredSettingsBox.style.display = displayBox ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     private void GoToSample(SamplesShowcase self, VisualElement root, int index, Samples sampleJsonObject)
@@ -263,24 +271,17 @@ public class SamplesShowcaseEditor : Editor
         var sampleInfosElement = root.Q<VisualElement>("sampleInfosContainer");
 
         // Finding the sample in question
-        Sample currentSample = sampleJsonObject.FindSampleWithPrefab(self.samplesPrefabs[index]);
+        var currentSample = sampleJsonObject.FindSampleWithPrefab(self.samplesPrefabs[index]);
 
-        string currentSampleText = currentSample.description;
-        if (self.gameobjectSamplesName != null)
-        {
-            self.gameobjectSamplesName.text = currentSample.title;
-        }
+        var currentSampleText = currentSample.description;
+        if (self.gameobjectSamplesName != null) self.gameobjectSamplesName.text = currentSample.title;
 
-        if (self.gameobjectSamplesDescription != null)
-        {
-            self.gameobjectSamplesDescription.text = currentSampleText;
-        }
+        if (self.gameobjectSamplesDescription != null) self.gameobjectSamplesDescription.text = currentSampleText;
 
         CreateMarkdown(sampleInfosElement, currentSampleText);
         serializedObject.ApplyModifiedProperties();
     }
 
-    
 
     private string CreateMarkdown(VisualElement element, string text)
     {
@@ -293,9 +294,11 @@ public class SamplesShowcaseEditor : Editor
 
         // Format tags
         // Links
-        parsedText = Regex.Replace(parsedText, @"<(link=\""([\s\S]+?)\""[\s\S]*?)>", m =>
-        {
-            return $"<{m.Groups[1].Value}><color=#{ColorUtility.ToHtmlStringRGBA( IsLinkFile(m.Groups[2].Value)? openColor : highlightColor)}>";
+        parsedText = Regex.Replace(parsedText, @"<(link=\""([\s\S]+?)\""[\s\S]*?)>",
+            m =>
+            {
+                return
+                    $"<{m.Groups[1].Value}><color=#{ColorUtility.ToHtmlStringRGBA(IsLinkFile(m.Groups[2].Value) ? openColor : highlightColor)}>";
             });
         parsedText = parsedText.Replace("</link>", "</color></link>");
 
@@ -329,33 +332,28 @@ public class SamplesShowcaseEditor : Editor
         return parsedText;
     }
 
-    
 
-    public static bool IsLinkFile( string linkID )
+    public static bool IsLinkFile(string linkID)
     {
-        foreach (string extension in supportedExtensions)
-        {
+        foreach (var extension in supportedExtensions)
             if (linkID.EndsWith(extension))
                 return true;
-        }
         return false;
     }
 
     private static string GetAssetFinalPath(string filename)
     {
         // Splitting the name
-        string filenameOnly = System.IO.Path.GetFileNameWithoutExtension(filename);
+        var filenameOnly = Path.GetFileNameWithoutExtension(filename);
 
         // Searching for asset with the filename
-        string[] results = AssetDatabase.FindAssets($"{filenameOnly}",  null);
-        foreach (string result in results)
+        var results = AssetDatabase.FindAssets($"{filenameOnly}", null);
+        foreach (var result in results)
         {
-            string path = AssetDatabase.GUIDToAssetPath(result);
+            var path = AssetDatabase.GUIDToAssetPath(result);
             // Making sure everything matches.
             // /!\ will return the first if there's duplicate
-            if(path.EndsWith(filename)){
-                return path;
-            }
+            if (path.EndsWith(filename)) return path;
         }
 
         // If the asset hasn't been found display error on opening inspector (easy to spot mistakes all at once)
@@ -366,7 +364,7 @@ public class SamplesShowcaseEditor : Editor
 
     private static void Ping(string gameObjectName)
     {
-        GameObject go = GameObject.Find(gameObjectName);
-        UnityEditor.EditorGUIUtility.PingObject(go);
+        var go = GameObject.Find(gameObjectName);
+        EditorGUIUtility.PingObject(go);
     }
 }

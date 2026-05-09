@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Capstone
@@ -6,8 +5,8 @@ namespace Capstone
     [DefaultExecutionOrder(-100)]
     public class ToggleOnShopOpen : MonoBehaviour
     {
-        Shop shop;
         [SerializeField] private bool reverse;
+        private Shop shop;
 
         private void Start()
         {
@@ -17,12 +16,12 @@ namespace Capstone
 
         private void OnDestroy()
         {
-           shop.onShopToggle -= Toggle; 
+            shop.onShopToggle -= Toggle;
         }
 
-        void Toggle(bool open)
+        private void Toggle(bool open)
         {
-            bool toggle = reverse ? open : !open;
+            var toggle = reverse ? open : !open;
             gameObject.SetActive(toggle);
         }
     }

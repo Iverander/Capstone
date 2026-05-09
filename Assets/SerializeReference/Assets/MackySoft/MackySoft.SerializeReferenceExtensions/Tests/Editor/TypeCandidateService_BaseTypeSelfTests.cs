@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using MackySoft.SerializeReferenceExtensions.Editor;
 using NUnit.Framework;
@@ -10,7 +12,8 @@ namespace MackySoft.SerializeReferenceExtensions.Tests
         [Test]
         public void ConcreteBaseType_IsIncluded ()
         {
-            var set = TypeSearchService.TypeCandiateService.GetDisplayableTypes(typeof(ConcreteBaseType)).ToHashSet();
+            HashSet<Type> set = TypeSearchService.TypeCandiateService.GetDisplayableTypes(typeof(ConcreteBaseType))
+                .ToHashSet();
 
             Assert.That(set, Does.Contain(typeof(ConcreteBaseType)));
             Assert.That(set, Does.Contain(typeof(ConcreteDerivedType)));

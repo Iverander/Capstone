@@ -4,10 +4,9 @@ namespace Capstone
 {
     public class SettingsRandomizer : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             Settings.active.Randomize();
         }
-
     }
 }

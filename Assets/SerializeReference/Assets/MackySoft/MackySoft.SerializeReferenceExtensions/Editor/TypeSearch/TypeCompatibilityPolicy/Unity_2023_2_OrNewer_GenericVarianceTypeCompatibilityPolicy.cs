@@ -6,8 +6,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class Unity_2023_2_OrNewer_GenericVarianceTypeCompatibilityPolicy : ITypeCompatibilityPolicy
     {
-
-        public static readonly Unity_2023_2_OrNewer_GenericVarianceTypeCompatibilityPolicy Instance = new Unity_2023_2_OrNewer_GenericVarianceTypeCompatibilityPolicy();
+        public static readonly Unity_2023_2_OrNewer_GenericVarianceTypeCompatibilityPolicy Instance = new();
 
         public bool IsCompatible (Type baseType, Type candiateType)
         {
@@ -15,6 +14,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 throw new ArgumentNullException(nameof(baseType));
             }
+
             if (candiateType == null)
             {
                 throw new ArgumentNullException(nameof(candiateType));
@@ -43,6 +43,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     continue;
                 }
+
                 if (interfaceType.GetGenericTypeDefinition() != genericTypeDefinition)
                 {
                     continue;
@@ -62,6 +63,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     continue;
                 }
+
                 if (t.GetGenericTypeDefinition() != genericTypeDefinition)
                 {
                     continue;
@@ -77,12 +79,14 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             return false;
         }
 
-        private static bool AreAllGenericArgumentsCompatible (Type[] genericTypeParameters, Type[] targetTypeArguments, Type[] sourceTypeArguments)
+        private static bool AreAllGenericArgumentsCompatible (Type[] genericTypeParameters, Type[] targetTypeArguments,
+            Type[] sourceTypeArguments)
         {
             if (genericTypeParameters.Length != targetTypeArguments.Length)
             {
                 return false;
             }
+
             if (sourceTypeArguments.Length != targetTypeArguments.Length)
             {
                 return false;
@@ -90,7 +94,8 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 
             for (int i = 0; i < genericTypeParameters.Length; i++)
             {
-                var variance = genericTypeParameters[i].GenericParameterAttributes & GenericParameterAttributes.VarianceMask;
+                GenericParameterAttributes variance = genericTypeParameters[i].GenericParameterAttributes &
+                                                      GenericParameterAttributes.VarianceMask;
 
                 Type sourceTypeArgument = sourceTypeArguments[i];
                 Type targetTypeArgument = targetTypeArguments[i];

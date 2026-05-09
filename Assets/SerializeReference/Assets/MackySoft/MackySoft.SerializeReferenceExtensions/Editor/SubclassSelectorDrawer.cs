@@ -3,33 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MackySoft.SerializeReferenceExtensions.Editor
 {
-
     [CustomPropertyDrawer(typeof(SubclassSelectorAttribute))]
     public class SubclassSelectorDrawer : PropertyDrawer
     {
-
-        private struct TypePopupCache
-        {
-            public AdvancedTypePopup TypePopup { get; }
-            public AdvancedDropdownState State { get; }
-            public TypePopupCache (AdvancedTypePopup typePopup, AdvancedDropdownState state)
-            {
-                TypePopup = typePopup;
-                State = state;
-            }
-        }
-
         private const int MaxTypePopupLineCount = 13;
 
-        private static readonly GUIContent NullDisplayName = new GUIContent(TypeMenuUtility.NullDisplayName);
-        private static readonly GUIContent IsNotManagedReferenceLabel = new GUIContent("The property type is not manage reference.");
-        private static readonly GUIContent TempChildLabel = new GUIContent();
+        private static readonly GUIContent NullDisplayName = new(TypeMenuUtility.NullDisplayName);
 
-        private readonly Dictionary<string, TypePopupCache> typePopups = new Dictionary<string, TypePopupCache>();
-        private readonly Dictionary<string, GUIContent> typeNameCaches = new Dictionary<string, GUIContent>();
+        private static readonly GUIContent IsNotManagedReferenceLabel =
+            new("The property type is not manage reference.");
+
+        private static readonly GUIContent TempChildLabel = new();
+        private readonly Dictionary<string, GUIContent> typeNameCaches = new();
+
+        private readonly Dictionary<string, TypePopupCache> typePopups = new();
 
         private SerializedProperty targetProperty;
 
@@ -40,7 +31,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             if (property.propertyType == SerializedPropertyType.ManagedReference)
             {
                 // Render label first to avoid label overlap for lists
-                Rect foldoutLabelRect = new Rect(position);
+                Rect foldoutLabelRect = new(position);
                 foldoutLabelRect.height = EditorGUIUtility.singleLineHeight;
 
                 // NOTE: IndentedRect should be disabled as it causes extra indentation.
@@ -49,7 +40,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 
 #if UNITY_2021_3_OR_NEWER
                 // Override the label text with the ToString() of the managed reference.
-                var subclassSelectorAttribute = (SubclassSelectorAttribute)attribute;
+                SubclassSelectorAttribute subclassSelectorAttribute = (SubclassSelectorAttribute)attribute;
                 if (subclassSelectorAttribute.UseToStringAsLabel && !property.hasMultipleDifferentValues)
                 {
                     object managedReferenceValue = property.managedReferenceValue;
@@ -71,7 +62,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 // Draw the foldout.
                 if (!string.IsNullOrEmpty(property.managedReferenceFullTypename))
                 {
-                    Rect foldoutRect = new Rect(position);
+                    Rect foldoutRect = new(position);
                     foldoutRect.height = EditorGUIUtility.singleLineHeight;
 
 #if UNITY_2022_2_OR_NEWER && !UNITY_6000_0_OR_NEWER && !UNITY_2022_3
@@ -102,7 +93,8 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                         {
                             // Draw the property with custom property drawer.
                             Rect indentedRect = position;
-                            float foldoutDifference = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                            float foldoutDifference = EditorGUIUtility.singleLineHeight +
+                                                      EditorGUIUtility.standardVerticalSpacing;
                             indentedRect.height = customDrawer.GetPropertyHeight(property, label);
                             indentedRect.y += foldoutDifference;
                             customDrawer.OnGUI(indentedRect, property, label);
@@ -114,10 +106,12 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                             // EditorGUI.PropertyField(position, property, GUIContent.none, true);
 
                             Rect childPosition = position;
-                            childPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                            childPosition.y += EditorGUIUtility.singleLineHeight +
+                                               EditorGUIUtility.standardVerticalSpacing;
                             foreach (SerializedProperty childProperty in property.GetChildProperties())
                             {
-                                float height = EditorGUI.GetPropertyHeight(childProperty, new GUIContent(childProperty.displayName, childProperty.tooltip), true);
+                                float height = EditorGUI.GetPropertyHeight(childProperty,
+                                    new GUIContent(childProperty.displayName, childProperty.tooltip), true);
                                 childPosition.height = height;
                                 EditorGUI.PropertyField(childPosition, childProperty, true);
 
@@ -138,10 +132,12 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
         private PropertyDrawer GetCustomPropertyDrawer (SerializedProperty property)
         {
             Type propertyType = ManagedReferenceUtility.GetType(property.managedReferenceFullTypename);
-            if (propertyType != null && PropertyDrawerCache.TryGetPropertyDrawer(propertyType, out PropertyDrawer drawer))
+            if (propertyType != null &&
+                PropertyDrawerCache.TryGetPropertyDrawer(propertyType, out PropertyDrawer drawer))
             {
                 return drawer;
             }
+
             return null;
         }
 
@@ -152,11 +148,11 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 
             if (!typePopups.TryGetValue(managedReferenceFieldTypename, out TypePopupCache result))
             {
-                var state = new AdvancedDropdownState();
+                AdvancedDropdownState state = new();
 
                 Type baseType = ManagedReferenceUtility.GetType(managedReferenceFieldTypename);
-                var types = TypeSearchService.TypeCandiateService.GetDisplayableTypes(baseType);
-                var popup = new AdvancedTypePopup(
+                IReadOnlyList<Type> types = TypeSearchService.TypeCandiateService.GetDisplayableTypes(baseType);
+                AdvancedTypePopup popup = new(
                     types,
                     MaxTypePopupLineCount,
                     state
@@ -166,12 +162,13 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                     Type type = item.Type;
 
                     // Apply changes to individual serialized objects.
-                    foreach (var targetObject in targetProperty.serializedObject.targetObjects)
+                    foreach (Object targetObject in targetProperty.serializedObject.targetObjects)
                     {
-                        SerializedObject individualObject = new SerializedObject(targetObject);
-                        SerializedProperty individualProperty = individualObject.FindProperty(targetProperty.propertyPath);
+                        SerializedObject individualObject = new(targetObject);
+                        SerializedProperty individualProperty =
+                            individualObject.FindProperty(targetProperty.propertyPath);
                         object obj = individualProperty.SetManagedReference(type);
-                        individualProperty.isExpanded = (obj != null);
+                        individualProperty.isExpanded = obj != null;
 
                         individualObject.ApplyModifiedProperties();
                         individualObject.Update();
@@ -181,6 +178,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 result = new TypePopupCache(popup, state);
                 typePopups.Add(managedReferenceFieldTypename, result);
             }
+
             return result;
         }
 
@@ -193,6 +191,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 return NullDisplayName;
             }
+
             if (typeNameCaches.TryGetValue(managedReferenceFullTypename, out GUIContent cachedTypeName))
             {
                 return cachedTypeName;
@@ -216,7 +215,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 typeName = ObjectNames.NicifyVariableName(type.Name);
             }
 
-            GUIContent result = new GUIContent(typeName);
+            GUIContent result = new(typeName);
             typeNameCaches.Add(managedReferenceFullTypename, result);
             return result;
         }
@@ -227,6 +226,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             {
                 return EditorGUIUtility.singleLineHeight;
             }
+
             if (!property.isExpanded || string.IsNullOrEmpty(property.managedReferenceFullTypename))
             {
                 return EditorGUIUtility.singleLineHeight;
@@ -258,6 +258,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     height += EditorGUIUtility.standardVerticalSpacing;
                 }
+
                 first = false;
 
                 TempChildLabel.text = child.displayName;
@@ -269,5 +270,16 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             return height;
         }
 
+        private struct TypePopupCache
+        {
+            public AdvancedTypePopup TypePopup { get; }
+            public AdvancedDropdownState State { get; }
+
+            public TypePopupCache (AdvancedTypePopup typePopup, AdvancedDropdownState state)
+            {
+                TypePopup = typePopup;
+                State = state;
+            }
+        }
     }
 }

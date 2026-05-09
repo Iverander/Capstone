@@ -1,14 +1,5 @@
-﻿using AYellowpaper.SerializedCollections.Editor.Data;
-using AYellowpaper.SerializedCollections.Editor.States;
-using AYellowpaper.SerializedCollections.KeysGenerators;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections.Editor
@@ -30,23 +21,28 @@ namespace AYellowpaper.SerializedCollections.Editor
         public const int KeyValueHeaderHeight = 18;
         public const bool KeyFlag = true;
         public const bool ValueFlag = false;
-        public static readonly Color BorderColor = new Color(36 / 255f, 36 / 255f, 36 / 255f);
-        public static readonly List<int> NoEntriesList = new List<int>();
+        public static readonly Color BorderColor = new(36 / 255f, 36 / 255f, 36 / 255f);
+        public static readonly List<int> NoEntriesList = new();
+        private static GUIContent _displayTypeToggleContent;
+
+        private readonly Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new();
+
         internal static GUIContent DisplayTypeToggleContent
         {
             get
             {
                 if (_displayTypeToggleContent == null)
                 {
-                    var texture = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Plugins/SerializedCollections/Editor/Assets/BurgerMenu@2x.png");
-                    _displayTypeToggleContent = new GUIContent(texture, "Toggle to either draw existing editor or draw properties manually.");
+                    var texture =
+                        AssetDatabase.LoadAssetAtPath<Texture>(
+                            "Assets/Plugins/SerializedCollections/Editor/Assets/BurgerMenu@2x.png");
+                    _displayTypeToggleContent = new GUIContent(texture,
+                        "Toggle to either draw existing editor or draw properties manually.");
                 }
+
                 return _displayTypeToggleContent;
             }
         }
-        private static GUIContent _displayTypeToggleContent;
-
-        private Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

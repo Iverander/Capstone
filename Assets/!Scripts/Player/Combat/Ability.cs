@@ -1,55 +1,52 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
 using FMODUnity;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace Capstone
 {
     [Serializable]
     public abstract class Ability
     {
-        [field: SerializeField]public string name { get; private set; }
-        protected Creature origin;
-        
-        [Space, SerializeField] public float cooldown = .2f;
-        [field:SerializeField]public bool onCooldown { get; private set; }
+        [field: SerializeField] public string name { get; private set; }
+
+        [Space] [SerializeField] public float cooldown = .2f;
+        [field: SerializeField] public bool onCooldown { get; private set; }
         [field: SerializeField] public Color color { get; private set; } = Color.red;
-        public Action<float> performed;
-        
-        [Header("Gizmos")]
-        public bool ShowGizmos;
-        
-        [Header("Art")]
-        [SerializeField] protected ParticleSystem effectPrefab;
+
+        [Header("Gizmos")] public bool ShowGizmos;
+
+        [Header("Art")] [SerializeField] protected ParticleSystem effectPrefab;
 
         [SerializeField] private EventReference sfx;
         [SerializeField] private string[] animationTriggers;
-        
-        
+        protected Creature origin;
+        public Action<float> performed;
+
+
         public void Initialize(Creature origin)
         {
             this.origin = origin;
         }
-        
-        public void Perform() 
+
+        public void Perform()
         {
-            if(onCooldown || origin.isActing) return;
+            if (onCooldown || origin.isActing) return;
 
             origin.StartCoroutine(origin.ActionCooldown());
-            if(animationTriggers.Length > 0)
-                origin.animator.SetTrigger(animationTriggers[UnityEngine.Random.Range(0, animationTriggers.Length)]);
+            if (animationTriggers.Length > 0)
+                origin.animator.SetTrigger(animationTriggers[Random.Range(0, animationTriggers.Length)]);
             performed?.Invoke(cooldown);
-            if(cooldown > 0)
+            if (cooldown > 0)
                 origin.StartCoroutine(Cooldown());
-            
+
             Action();
-            if(effectPrefab)
+            if (effectPrefab)
                 Effect(Vector3.zero);
         }
-        
+
 
         protected abstract void Action();
 
@@ -67,21 +64,21 @@ namespace Capstone
         protected IEnumerator Cooldown()
         {
             onCooldown = true;
-            
+
             float timer = 0;
-            while(timer < cooldown)
+            while (timer < cooldown)
             {
                 timer += Time.deltaTime * Time.timeScale;
-                yield return null;   
+                yield return null;
             }
-            
+
             onCooldown = false;
         }
-        
-        
+
+
         public virtual void Gizmos(Transform origin)
         {
-            if(origin == null) return;
+            if (origin == null) return;
             UnityEngine.Gizmos.matrix = origin.localToWorldMatrix;
             UnityEngine.Gizmos.color = color;
         }

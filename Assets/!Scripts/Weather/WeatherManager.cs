@@ -1,6 +1,5 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Capstone
 {
@@ -10,14 +9,16 @@ namespace Capstone
         Raining,
         //Snowing
     }
-    
+
     public class WeatherManager : MonoBehaviour
     {
-        [SerializedDictionary, SerializeField] SerializedDictionary<WeatherType, Weather> weatherPrefabs;
+        [SerializedDictionary] [SerializeField]
+        private SerializedDictionary<WeatherType, Weather> weatherPrefabs;
 
-        void Start()
+        private void Start()
         {
-            Instantiate(weatherPrefabs[Settings.active.mapSettings.weatherType].gameObject, Vector3.zero, Quaternion.identity);
+            Instantiate(weatherPrefabs[Settings.active.mapSettings.weatherType].gameObject, Vector3.zero,
+                Quaternion.identity);
         }
     }
 }

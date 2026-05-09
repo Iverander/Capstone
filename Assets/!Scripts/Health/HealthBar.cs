@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,14 +5,14 @@ namespace Capstone
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] Health health;
-        
-        ProgressBar progressBar;
+        [SerializeField] private Health health;
+
+        private ProgressBar progressBar;
 
         private void Start()
         {
             health.healthChanged += UpdateProgress;
-            health.maxHealthChanged += (f) => //changes the max of the progress bar when max hp is changed
+            health.maxHealthChanged += f => //changes the max of the progress bar when max hp is changed
             {
                 progressBar.highValue = f;
             };
@@ -32,6 +31,5 @@ namespace Capstone
         {
             progressBar.value = health;
         }
-
     }
 }

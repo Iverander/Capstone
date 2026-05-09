@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections
 {
     public class SerializedDictionarySampleTwo : MonoBehaviour
     {
-        [SerializedDictionary("ID", "Person")]
-        public SerializedDictionary<int, Person> People;
+        [SerializedDictionary("ID", "Person")] public SerializedDictionary<int, Person> People;
 
-        [System.Serializable]
+        [Serializable]
         public class Person
         {
             public string FirstName;

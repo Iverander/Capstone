@@ -7,15 +7,14 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 {
     public sealed class Unity_2023_2_OrNewer_TypeCandiateProvider : ITypeCandiateProvider
     {
-
-        public static readonly Unity_2023_2_OrNewer_TypeCandiateProvider Instance = new Unity_2023_2_OrNewer_TypeCandiateProvider(
+        public static readonly Unity_2023_2_OrNewer_TypeCandiateProvider Instance = new(
             DefaultIntrinsicTypePolicy.Instance,
             Unity_2023_2_OrNewer_GenericVarianceTypeCompatibilityPolicy.Instance
         );
 
-        private readonly Dictionary<Type, List<Type>> typeCache = new Dictionary<Type, List<Type>>();
-
         private readonly IIntrinsicTypePolicy intrinsicTypePolicy;
+
+        private readonly Dictionary<Type, List<Type>> typeCache = new();
         private readonly ITypeCompatibilityPolicy typeCompatibilityPolicy;
 
         private Unity_2023_2_OrNewer_TypeCandiateProvider (
@@ -23,8 +22,10 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
             ITypeCompatibilityPolicy typeCompatibilityPolicy
         )
         {
-            this.intrinsicTypePolicy = intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
-            this.typeCompatibilityPolicy = typeCompatibilityPolicy ?? throw new ArgumentNullException(nameof(typeCompatibilityPolicy));
+            this.intrinsicTypePolicy =
+                intrinsicTypePolicy ?? throw new ArgumentNullException(nameof(intrinsicTypePolicy));
+            this.typeCompatibilityPolicy = typeCompatibilityPolicy ??
+                                           throw new ArgumentNullException(nameof(typeCompatibilityPolicy));
         }
 
         public IEnumerable<Type> GetTypeCandidates (Type baseType)
@@ -53,6 +54,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                 {
                     continue;
                 }
+
                 if (!typeCompatibilityPolicy.IsCompatible(baseType, type))
                 {
                     continue;
@@ -73,7 +75,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
 
         private static IEnumerable<Type> EnumerateAllTypesSafely ()
         {
-            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
             {
                 Type[] types;
                 try
@@ -90,7 +92,7 @@ namespace MackySoft.SerializeReferenceExtensions.Editor
                     continue;
                 }
 
-                foreach (var t in types)
+                foreach (Type t in types)
                 {
                     if (t != null)
                     {

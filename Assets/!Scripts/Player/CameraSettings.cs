@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -9,23 +7,25 @@ namespace Capstone
     public enum CameraType
     {
         ThirdPerson,
-        Isometric,
+        Isometric
     }
+
     public class CameraSettings : MonoBehaviour
     {
         public CameraType cameraType;
 
-        private GameObject current;
-        
-        [HideInInspector] public Camera activeCamera; 
-        
-        [Header("ThirdPerson Settings")]
-        [SerializeField, ShowIf(nameof(cameraType), CameraType.ThirdPerson)] GameObject thirdPersonCamera;
-        [Header("Isometric Settings")]
-        [SerializeField, ShowIf(nameof(cameraType), CameraType.Isometric)] GameObject isometricCamera;
+        [HideInInspector] public Camera activeCamera;
+
+        [Header("ThirdPerson Settings")] [SerializeField] [ShowIf(nameof(cameraType), CameraType.ThirdPerson)]
+        private GameObject thirdPersonCamera;
+
+        [Header("Isometric Settings")] [SerializeField] [ShowIf(nameof(cameraType), CameraType.Isometric)]
+        private GameObject isometricCamera;
 
         public Action CameraChanged;
-        
+
+        private GameObject current;
+
         private void Start()
         {
             ChangeCamera(cameraType);
@@ -35,13 +35,10 @@ namespace Capstone
 
         private void SwapCamera()
         {
-            CameraType newCameraType = cameraType + 1;
+            var newCameraType = cameraType + 1;
 
-            if ((int)newCameraType > Enum.GetValues(typeof(CameraType)).Length - 1)
-            {
-                newCameraType = 0;
-            }
-            
+            if ((int)newCameraType > Enum.GetValues(typeof(CameraType)).Length - 1) newCameraType = 0;
+
             ChangeCamera(newCameraType);
         }
         /*
@@ -55,11 +52,8 @@ namespace Capstone
         {
             cameraType = type;
 
-            if (current != null)
-            {
-                DestroyImmediate(current);
-            }
-            
+            if (current != null) DestroyImmediate(current);
+
             switch (cameraType)
             {
                 case CameraType.ThirdPerson:
@@ -71,7 +65,7 @@ namespace Capstone
                     activeCamera = current.GetComponentInChildren<Camera>();
                     break;
             }
-            
+
             CameraChanged?.Invoke();
         }
     }

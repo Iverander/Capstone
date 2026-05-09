@@ -8,12 +8,14 @@ Shader "Custom/WetShader"
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"
+        }
 
         Pass
         {
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
 

@@ -6,6 +6,7 @@ namespace Capstone
     public class AttackMod : Modifier
     {
         [SerializeField] private float additionalDamage;
+
         public override void onGained()
         {
             base.onGained();
