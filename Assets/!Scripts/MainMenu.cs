@@ -27,6 +27,7 @@ namespace Capstone
 
         private void Start()
         {
+            DataManager.SaveSessions();
             MapManager.Instance.currentMap = null;
 
             Time.timeScale = 1;

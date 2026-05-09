@@ -67,7 +67,7 @@ namespace Capstone
             //data.StartNewSession("Application Quit");
             hardwareData.Save();
 
-            foreach (var session in sessions) session.Save();
+            SaveSessions();
         }
 
         public static void ResetData()
@@ -78,7 +78,13 @@ namespace Capstone
         public void StartNewSession()
         {
             Debug.Log("Starting new session");
+            SaveSessions();
             sessions.Add(new Session($"Session {sessions.Count + 1}"));
+        }
+
+        public static void SaveSessions()
+        {
+            foreach (var session in instance.sessions) session.Save();
         }
     }
 }
