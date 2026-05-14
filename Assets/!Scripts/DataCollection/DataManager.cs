@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Capstone.Datapoints;
 using Firebase.Database;
@@ -21,7 +22,7 @@ namespace Capstone
         public static List<double> gpuFrameTimings = new();
 
         //public static List<float> frameTimings = new();
-        public static List<float> usedVRam = new();
+        //public static List<float> usedVRam = new();
         public static List<float> usedRam = new();
         public HardwareData hardwareData = new();
         public List<Session> sessions = new();
@@ -41,12 +42,17 @@ namespace Capstone
 
         private void Update()
         {
-            if (collectData)
+            if (RoundManager.roundState == RoundManager.RoundState.DuringRound)
             {
-                fpsValues.Add(Mathf.RoundToInt(1f / Time.deltaTime));
+                if (1f / Time.deltaTime > 0 && 1/Time.deltaTime < Mathf.Infinity)
+                {
+                    fpsValues.Add(1f / Time.deltaTime);
+                    //Debug.Log("FPS: " + 1/Time.deltaTime);
+                }
+                    
                 //batches.Add(UnityStats.batches);
                 //frameTimings.Add(UnityStats.frameTime);
-                usedVRam.Add(Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576);
+                //usedVRam.Add(Profiler.GetAllocatedMemoryForGraphicsDriver() / 1048576);
                 usedRam.Add(Profiler.GetTotalAllocatedMemoryLong() / 1048576);
 
                 FrameTimingManager.CaptureFrameTimings();
@@ -55,7 +61,8 @@ namespace Capstone
 
                 //Debug.Log(captureData[0].gpuFrameTime);
 
-                gpuFrameTimings.Add(captureData[0].gpuFrameTime);
+                if(captureData[0].gpuFrameTime > 0)
+                    gpuFrameTimings.Add(captureData[0].gpuFrameTime);
             }
 
             //if(SystemInfo.operatingSystemFamily == OperatingSystemFamily.Windows)
@@ -73,13 +80,15 @@ namespace Capstone
         public static void ResetData()
         {
             fpsValues.Clear();
+            gpuFrameTimings.Clear();
         }
 
         public void StartNewSession()
         {
-            Debug.Log("Starting new session");
+
             SaveSessions();
-            sessions.Add(new Session($"Session {sessions.Count + 1}"));
+            sessions.Add(new Session($"Session {sessions.Count + 1}"));            
+            Debug.Log($"Starting new Session {sessions.Count}");
         }
 
         public static void SaveSessions()

@@ -63,7 +63,8 @@ namespace Capstone
 
         public void BetweenRounds()
         {
-            Session.active.NewSection("Round End");
+            if(round != 0)
+                Session.active.NewSection();
             onBetweenRound?.Invoke();
             roundState = RoundState.BetweenRounds;
         }
@@ -102,6 +103,7 @@ namespace Capstone
 
         public static void UpdateEnemyCount(int amount)
         {
+            if(roundState == RoundState.None) return;
             instance.enemiesAlive += amount;
 
             if (instance.enemiesAlive > highestEnemyCount)

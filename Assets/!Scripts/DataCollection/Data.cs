@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Google.MiniJSON;
 using UnityEngine;
 
 namespace Capstone.Datapoints
@@ -26,34 +27,32 @@ namespace Capstone.Datapoints
     [Serializable]
     public class RoundData
     {
-        public string _context;
         public float _durationS;
         public float _afkDurationS;
         public int _round;
-        public Settings _levelSettings;
-
+        //public Settings _levelSettings;
+        public string _shader;
+        
         public LowsAvgHighs<float> fps;
 
         //public LowsAvgHighs<float> frameTimingS;
         public LowsAvgHighs<double> gpuFrameTimingMS;
 
         //public LowsAvgHighs<float> batches;
-        public LowsAvgHighs<float> usedVramMB;
+        //public LowsAvgHighs<float> usedVramMB;
         public LowsAvgHighs<float> usedRamMB;
 
         public int highestEnemyCount;
 
 
-        public RoundData(string context, float duration)
+        public RoundData(float duration)
         {
-            _context = context;
-
             highestEnemyCount = RoundManager.highestEnemyCount;
 
             fps = new LowsAvgHighs<float>(
-                Arithmetic.Lows(DataManager.fpsValues),
-                Arithmetic.Average(DataManager.fpsValues),
-                Arithmetic.Highs(DataManager.fpsValues)
+                Mathf.RoundToInt(Arithmetic.Lows(DataManager.fpsValues)),
+                Mathf.RoundToInt(Arithmetic.Average(DataManager.fpsValues)),
+                Mathf.RoundToInt(Arithmetic.Highs(DataManager.fpsValues))
             );
             gpuFrameTimingMS = new LowsAvgHighs<double>(
                 Arithmetic.Lows(DataManager.gpuFrameTimings),
@@ -70,13 +69,14 @@ namespace Capstone.Datapoints
                 lows: Arithmetic.Lows(DataManager.batches),
                 average: Arithmetic.Average(DataManager.batches),
                 highs: Arithmetic.Highs(DataManager.batches)
-                );
-                */
-            usedVramMB = new LowsAvgHighs<float>(
+                );*/
+            /*usedVramMB = new LowsAvgHighs<float>(
                 Arithmetic.Lows(DataManager.usedVRam),
                 Arithmetic.Average(DataManager.usedVRam),
                 Arithmetic.Highs(DataManager.usedVRam)
-            );
+            );*/
+            
+            Debug.Log("GPU Lows: " + Arithmetic.Lows(DataManager.gpuFrameTimings));
             usedRamMB = new LowsAvgHighs<float>(
                 Arithmetic.Lows(DataManager.usedRam),
                 Arithmetic.Average(DataManager.usedRam),
@@ -89,7 +89,9 @@ namespace Capstone.Datapoints
                 average: DataManager.Average(DataManager.cpuTimes),
                 highs:-1);*/
 
-            _levelSettings = Settings.active;
+            //_levelSettings = Settings.active;
+            _shader = Settings.active.shaderType.ToString();
+            
             _durationS = duration;
             _afkDurationS = Player.instance.afkTime;
             _round = RoundManager.round;
@@ -103,6 +105,11 @@ namespace Capstone.Datapoints
         public List<RoundData> rounds = new();
 
         private string _name;
+        
+        public string _weather;
+        public string _map;
+        public string _obstacles;
+        
         private float sectionStart;
 
 
@@ -113,13 +120,17 @@ namespace Capstone.Datapoints
             DataManager.ResetData();
             sectionStart = Time.time;
             active = this;
+            
+            _map = Settings.active.mapSettings.map.ToString();
+            _obstacles = Settings.active.mapSettings.obstacles.ToString();
+            _weather = Settings.active.mapSettings.weatherType.ToString();
         }
 
         private string json => JsonUtility.ToJson(this);
 
-        public void NewSection(string context)
+        public void NewSection()
         {
-            rounds.Add(new RoundData(context, Mathf.RoundToInt(Time.time - sectionStart)));
+            rounds.Add(new RoundData(Mathf.RoundToInt(Time.time - sectionStart)));
             sectionStart = Time.time;
             DataManager.ResetData();
         }
@@ -139,7 +150,7 @@ namespace Capstone.Datapoints
         public int ramMB;
         public int vramMB;
         public string resolution;
-        public string graphicsAPI;
+        //public string graphicsAPI;
         public bool developer;
 
         private string json => JsonUtility.ToJson(this);

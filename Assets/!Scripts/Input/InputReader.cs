@@ -34,6 +34,7 @@ namespace Capstone
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            Debug.Log("Key Pressed: " + context.ReadValue<Vector2>());
             onMove?.Invoke(context.ReadValue<Vector2>());
         }
 
